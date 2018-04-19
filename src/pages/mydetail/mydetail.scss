@@ -1,0 +1,70 @@
+page-mydetail {
+
+    .header_class{
+        background-color: white;
+        box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.3)
+    }
+    .header_row{
+        margin: auto;
+        height: 40px;
+    }
+    .header_span{
+        text-align: center;
+        margin: auto;
+        font-size: 1.8rem;
+        color: #3982a3;
+        font-weight: bold;
+    }
+    .header_icon{
+        margin: auto;
+        font-size: 2.5rem;
+    }
+
+    .main_body{
+        margin-top: 15%;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .title_span{
+        width: 100%;
+        color: #3982a3;
+        font-size: 1.8rem;
+        font-weight: bold;
+    }
+    .detail_span{
+        width: 100%;
+        margin-top: 5px;
+        color: #414141;
+        font-size: 1.8rem;
+        font-weight: bold;
+    }
+    .change_span{
+        width: 100%;
+        color: #3982a3;
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin: auto;
+        background: transparent !important;
+        text-align: center;
+    }
+    .pencil_class{
+        width:16px;
+        height: 16px;
+        margin: auto;
+    }
+
+    .border_row{
+        border: 1px solid #ddd;
+        // margin-top: 5px;
+        // margin-bottom: 5px;
+    }
+    .normal_row{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    form, input, optgroup, select{
+        width: 100%;
+    }
+}

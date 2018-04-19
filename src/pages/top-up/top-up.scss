@@ -1,0 +1,100 @@
+page-top-up {
+
+    .header_class{
+        background-color: white;
+        box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.3);
+    }
+    .header_row{
+        height: 60px !important;
+    }
+    .header_span{
+        color: black;
+        font-weight: bold;
+    }
+    .header_back_icon{
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 5px;
+        font-size: 2.5rem;
+    }
+    .payment_id{
+        text-align: center;
+        width: 100%;
+        margin: auto;
+    }
+
+    .payment_row{
+        margin-top: 5%;
+    }
+    .payment_title_span{
+        width: 100%;
+        font-size: 1.7rem;
+        color: #3982a3;
+        font-weight: bold;
+    }
+    .select_class{
+        width: 100%;
+        max-width: 100%;
+        border-bottom: 1px solid #ddd;
+        font-size: 1.6rem;
+    }
+    .payment_input{
+        // border-bottom: 1px solid #ddd;
+        width: 100%;
+    }
+    .mat-form-field{
+        width: 100%;
+    }
+    .expire_select{
+        max-width: 100%;
+        border-bottom: 1px solid #ddd;
+    }
+    .button_row{
+        width: 100%;
+    }
+    .button_style1{
+        border-radius: 25px;
+        width: 100%;
+        font-weight: bold;  
+        background-color: #3982a3;
+        height: 40px;
+        // font-size: 1.6rem;
+    }
+    .button_style2{
+        border-radius: 25px;
+        width: 100%;
+        font-weight: bold;  
+        background-color: #3ba464;
+        height: 40px;
+        // font-size: 1.4rem;
+        // font-size: 1.6rem;
+    }
+    .add_button{
+        width: 50%;
+        margin: auto;
+        text-transform: initial;
+        margin-top: 5%;
+    }
+    .add_cancel{
+        margin-top: 10%;
+    }
+    .mat-icon-button{
+        width: 4rem !important;
+        height: 4rem !important;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-prefix .mat-datepicker-toggle-default-icon, .mat-form-field-appearance-legacy .mat-form-field-suffix .mat-datepicker-toggle-default-icon{
+
+        width: 2rem !important;
+        height: 2rem !important;
+    }
+
+    .topup_calender .mat-input-flex.mat-form-field-flex{
+        border-bottom: 1px solid #ddd;
+    }
+
+    .mat-form-field-infix{
+        border: unset !important;
+    }
+
+}

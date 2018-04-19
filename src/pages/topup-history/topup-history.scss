@@ -1,0 +1,105 @@
+page-topup-history {
+
+    .header_class{
+        box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.3);
+        background-color: white;
+    }
+    .header_row{
+        height: 80px !important;
+    }
+    .header_span{
+        color: black;
+        font-weight: bold;
+    }
+    .header_back_icon{
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 5px;
+        font-size: 2.5rem;
+    }
+    .payment_id{
+        text-align: center;
+        width: 100%;
+        margin: auto;
+    }
+
+    .bill_content{
+        background-color: #fafafa;
+    }
+
+    .main_row{
+        margin-top: 0%;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 5px;
+        background-color: white;
+    }
+    .other_row{
+        margin-top: 5%;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 5px;
+        margin-bottom: 5%;
+        background-color: white;
+    }
+    .left_col{
+        text-align: left;
+    }
+    .right_col{
+        text-align: right;
+    }
+    .name_span{
+        width: 100%;
+        font-size: 1.4rem;
+        color: #3982a3;
+        font-weight: bold;
+    }
+    .detail_span{
+        width: 100%;
+        font-size: 1.3rem;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+    .receipt_span{
+        text-align: right;
+        font-size: 1.3rem;
+        font-weight: bold;
+        width: 100%;
+    }
+    .right_col .detail_span{
+        font-size: 1.3rem;
+    }
+    .down_button_class{
+        background-color: #3881a2;
+        color: white;
+        border-radius: 10px;
+        text-transform: initial;
+        width: 80%;
+        margin-left: auto;
+        height: 30px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    .download_image{
+        width: 20px;
+        height: 20px;
+        margin: auto;
+        margin-right: auto;
+    }
+    .button_span_name{
+        margin: auto;
+        font-size: 1.3rem;
+    }
+    .non_padding{
+        padding: 0px;
+    }
+    .button_name{
+        margin-left: -15px;
+    }
+    .center_text{
+        width: 100%;
+        text-align: center;
+    }
+
+}

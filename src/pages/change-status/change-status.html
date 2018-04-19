@@ -1,0 +1,139 @@
+<!--
+  Generated template for the ChangeStatusPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="header_class">
+
+  <ion-row class="header_row">
+    <ion-col col-2>
+      <ion-row class="full_height">
+        <ion-icon name="ios-arrow-back" (click)="goback()" class="header_back_icon"></ion-icon>
+      </ion-row>
+    </ion-col>
+    <ion-col col-1></ion-col>
+    <ion-col col-6>
+      <ion-row class="full_height">
+        <p class="header_span">
+          {{ 'change_state' | translate }}
+        </p>
+        <p class="payment_id">[0415518882]</p>
+      </ion-row>
+    </ion-col>
+    <ion-col col-3>
+    </ion-col>
+  </ion-row>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form #comProfileForm="ngForm" id="comProfileForm" (ngSubmit)="completeAddCompany(comProfileForm)" novalidate>
+    <ion-row class="payment_row">
+      <span class="payment_title_span">
+        {{ 'new_status' | translate }}
+      </span>
+    </ion-row>
+
+    <ion-row class="payment_row">
+      <ion-col>
+        <mat-select placeholder="{{ 'select' | translate }}" [formControl]="newState" [(ngModel)]="change_state.new_state" class="select_class"
+          required>
+          <mat-option value="Visa">
+            {{ 'visa' | translate }}
+          </mat-option>
+          <mat-option value="Paypal">
+            {{ 'paypal' | translate }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="newState.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="payment_row">
+      <span class="payment_title_span">
+        {{ 'reason' | translate }}
+      </span>
+    </ion-row>
+
+    <ion-row class="payment_row">
+      <ion-col>
+        <mat-select placeholder="{{ 'select' | translate }}" [formControl]="Reason" [(ngModel)]="change_state.reason" class="select_class"
+          required>
+          <mat-option value="Visa">
+            {{ 'visa' | translate }}
+          </mat-option>
+          <mat-option value="Paypal">
+            {{ 'paypal' | translate }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="Reason.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="payment_row">
+      <span class="payment_title_span">
+        {{ 'effective_date' | translate }}
+      </span>
+    </ion-row>
+
+    <ion-row class="payment_row">
+      <ion-col>
+        <mat-form-field>
+          <input matInput [matDatepicker]="myDatepicker" [formControl]="changeDate">
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker></mat-datepicker>
+
+          <mat-error *ngIf="changeDate.hasError('required')">
+            <span>{{ 'effective_date_required' | translate }}</span>
+          </mat-error>
+
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="payment_row">
+      <span class="payment_title_span">
+        {{ 'note' | translate }}
+      </span>
+    </ion-row>
+
+    <ion-row class="payment_row">
+      <ion-col>
+        <mat-form-field class="example-full-width">
+          <input matInput class="payment_input" type="text" #title="ngModel" [(ngModel)]="change_state.note" placeholder="{{ 'type_here' | translate }}."
+            name="Note" />
+
+          <!-- <mat-error id="matLoginError2">
+            <span>Creadit Card Number is required</span>
+          </mat-error> -->
+
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="add_cancel">
+      <ion-col col-1>
+      </ion-col>
+      <ion-col col-5>
+        <ion-row class="button_row">
+          <button ion-button class="button_style1">
+            {{ 'change_UP' | translate }}
+          </button>
+        </ion-row>
+      </ion-col>
+      <ion-col col-5>
+        <ion-row class="button_row">
+          <button ion-button class="button_style2" (click)="goback()">
+            {{ 'cancel_UP' | translate }}
+          </button>
+        </ion-row>
+      </ion-col>
+      <ion-col col-1>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>

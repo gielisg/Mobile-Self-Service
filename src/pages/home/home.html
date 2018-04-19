@@ -1,0 +1,105 @@
+<ion-header class="header_class">
+  <ion-row class="header_row">
+    <span class="header_span">
+      {{ 'home' | translate }}
+    </span>
+  </ion-row>
+</ion-header>
+
+<ion-content padding>
+  <ion-row class="first_row">
+    <ion-row class="normal_margin">
+      <span class="amount_span">
+        {{ 'amount_owing' | translate }}
+      </span>
+    </ion-row>
+    <ion-row class="normal_margin">
+      <span class="dollar_amount_span">
+        $120.20
+      </span>
+    </ion-row>
+    <ion-row class="normal_margin">
+      <span class="dollar_date_span">
+        {{ 'due' | translate }} 12-12-2015
+      </span>
+    </ion-row>
+  </ion-row>
+  <ion-row class="download_pay">
+    <!-- <ion-col col-1>
+    </ion-col> -->
+    <ion-col col-6>
+      <ion-row class="button_row">
+        <button mat-button class="button_style1" (click)="click_download()">
+          {{ 'download_bill' | translate }} 
+        </button>
+      </ion-row>
+    </ion-col>
+    <ion-col col-6>
+      <ion-row class="button_row">
+        <button mat-button class="button_style2" (click)="goto_paynow()">
+          {{ 'pay_now' | translate }} 
+        </button>
+      </ion-row>
+    </ion-col>
+    <!-- <ion-col col-1>
+    </ion-col> -->
+  </ion-row>
+
+  <ion-row class="my_detail">
+    <ion-col col-1>
+    </ion-col>
+    <ion-col col-10>
+      <ion-row class="button_row">
+        <button mat-button class="button_style1" (click)="goto_mydetail()">
+          {{ 'my_details' | translate }} 
+        </button>
+      </ion-row>
+    </ion-col>
+    <ion-col col-1>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="my_normal">
+    <ion-col col-1>
+    </ion-col>
+    <ion-col col-10>
+      <ion-row class="button_row">
+        <button mat-button class="button_style1" (click)="goto_myaccount()">
+          {{ 'my_account' | translate }} 
+        </button>
+      </ion-row>
+    </ion-col>
+    <ion-col col-1>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="my_normal">
+    <ion-col col-1>
+    </ion-col>
+    <ion-col col-10>
+      <ion-row class="button_row">
+        <button mat-button class="button_style1" (click)="goto_myservice()">
+          {{ 'my_services' | translate }} 
+        </button>
+      </ion-row>
+    </ion-col>
+    <ion-col col-1>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="my_normal">
+    <ion-col col-1>
+    </ion-col>
+    <ion-col col-10>
+      <ion-row class="button_row">
+        <button mat-button class="button_style1" (click)="goto_mydevice()">
+          {{ 'my_devices' | translate }} 
+        </button>
+      </ion-row>
+    </ion-col>
+    <ion-col col-1>
+    </ion-col>
+  </ion-row>
+
+
+</ion-content>
