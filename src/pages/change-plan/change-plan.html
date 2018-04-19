@@ -33,7 +33,7 @@
   <form #comProfileForm="ngForm" id="comProfileForm" (ngSubmit)="completeAddCompany(comProfileForm)" novalidate>
     <ion-row class="payment_row">
       <span class="payment_title_span">
-        {{ 'new_status' | translate }}
+        {{ 'new_plan' | translate }}
       </span>
     </ion-row>
 
@@ -41,15 +41,18 @@
       <ion-col>
         <mat-select placeholder="{{ 'select' | translate }}" [formControl]="newState" [(ngModel)]="change_state.new_state" class="select_class"
           required>
-          
-
-          <mat-option value="open">
-            {{ 'open' | translate }}
+          <mat-option value="saver1">
+            {{ 'saver1' | translate }}
           </mat-option>
-          <mat-option value="close">
-            {{ 'close' | translate }}
+          <mat-option value="saver2">
+            {{ 'saver2' | translate }}
           </mat-option>
-          
+          <mat-option value="saver3">
+            {{ 'saver3' | translate }}
+          </mat-option>
+          <mat-option value="saver4">
+            {{ 'saver4' | translate }}
+          </mat-option>
         </mat-select>
         <mat-error *ngIf="newState.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
       </ion-col>

@@ -1,0 +1,80 @@
+page-change-plan {
+    
+    .header_class{
+        background-color: white;
+        box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.3);
+    }
+
+    .header_row{
+        height: 60px !important;
+    }
+
+    .header_span{
+        color: black;
+        font-weight: bold;
+    }
+
+    .header_back_icon{
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 5px;
+        font-size: 2.5rem;
+    }
+
+    .payment_id{
+        text-align: center;
+        width: 100%;
+        margin: auto;
+    }
+
+    .select_class{
+        width: 100%;
+        max-width: 100%;
+        border-bottom: 1px solid #ddd;
+        font-size: 1.6rem;
+    }
+
+    .mat-form-field{
+        width: 100%;
+    }
+
+    .payment_row{
+        margin-top: 5%;
+    }
+
+    .payment_title_span{
+        width: 100%;
+        font-size: 1.7rem;
+        color: #3982a3;
+        font-weight: bold;
+    }
+    
+    .button_row{
+        width: 100%;
+    }
+
+    .button_style1{
+        border-radius: 25px;
+        width: 100%;
+        font-weight: bold;  
+        background-color: #3982a3;
+        height: 40px;
+        font-size: 1.6rem;
+    }
+
+    .button_style2{
+        border-radius: 25px;
+        width: 100%;
+        font-weight: bold;  
+        background-color: #3ba464;
+        height: 40px;
+        // font-size: 1.4rem;
+    }
+    
+    .add_cancel{
+        margin-top: 5%;
+    }
+
+
+}

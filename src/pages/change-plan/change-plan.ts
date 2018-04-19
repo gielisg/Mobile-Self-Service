@@ -7,7 +7,7 @@ import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
 import { TranslateService } from '@ngx-translate/core';
 
 /**
- * Generated class for the ChangeStatusPage page.
+ * Generated class for the ChangePlanPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -15,10 +15,10 @@ import { TranslateService } from '@ngx-translate/core';
 
 @IonicPage()
 @Component({
-  selector: 'page-change-status',
-  templateUrl: 'change-status.html',
+  selector: 'page-change-plan',
+  templateUrl: 'change-plan.html',
 })
-export class ChangeStatusPage {
+export class ChangePlanPage {
 
   public change_state = { "new_state": "", "reason": "", "effect_date": "", "note": "" };
 
@@ -33,7 +33,7 @@ export class ChangeStatusPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChangeStatusPage');
+    console.log('ionViewDidLoad ChangePlanPage');
     this.ionicInit();
   }
 
@@ -49,12 +49,10 @@ export class ChangeStatusPage {
   }
 
   ionicInit() {
+    let current_state = JSON.parse(localStorage.getItem("ChangePlanPage"));
 
-    // localStorage.setItem("ChangeStatusPage", index);
-    let current_state = JSON.parse(localStorage.getItem("ChangeStatusPage"));
+    this.change_state.new_state = current_state.plan;
 
-    this.change_state.new_state = current_state.status;
-    
     console.log(localStorage.getItem("set_lng"));
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');

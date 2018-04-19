@@ -60,12 +60,12 @@
       </ion-col>
     </ion-row>
     <ion-row class="type_number_date">
-      <ion-col col-3 *ngIf="!list.change_state">
+      <ion-col col-3 >
         <ion-row class="full_height">
           <span class="name_span">
             {{ 'status' | translate }}
           </span>
-          <span class="detail_span" *ngIf="!list.change_state">
+          <span class="detail_span" >
             {{list.status}}
           </span>
         </ion-row>
@@ -91,18 +91,15 @@
         </ion-row>
       </ion-col>
 
-      <ion-col col-4 *ngIf="!list.change_state">
+      <ion-col col-4 >
       </ion-col>
 
       <ion-col col-1 *ngIf="list.change_state">
       </ion-col>
       <ion-col col-5 class="right_col">
         <ion-row class="full_height">
-          <button ion-button class="mat-button change_button" *ngIf="!list.change_state" (click)="change_state(i)">
+          <button ion-button class="mat-button change_button"  (click)="change_state(i)">
             {{ 'change_UP' | translate }}
-          </button>
-          <button ion-button class="mat-button change_button" *ngIf="list.change_state" (click)="save_state(i)">
-            {{ 'save' | translate }}
           </button>
 
         </ion-row>
@@ -151,10 +148,6 @@
         <ion-row class="full_height">
           <button ion-button class="mat-button change_button" *ngIf="!list.change_plan" (click)="change_plan(i)">
             {{ 'change_UP' | translate }}
-          </button>
-
-          <button ion-button class="mat-button change_button" *ngIf="list.change_plan" (click)="save_plan(i)">
-            {{ 'save' | translate }}
           </button>
 
         </ion-row>

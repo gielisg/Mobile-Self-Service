@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController, ModalController } from 'ionic-angular';
 import { TransactionHistoryPage } from '../transaction-history/transaction-history';
 import { TopupHistoryPage } from '../topup-history/topup-history';
 import { ServiceDetailPage } from '../service-detail/service-detail';
@@ -9,6 +9,8 @@ import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
 
 import { TranslateService } from '@ngx-translate/core';
 import { TopUpPage } from '../top-up/top-up';
+import { ChangePlanPage } from '../change-plan/change-plan';
+import { ChangeStatusPage } from '../change-status/change-status';
 
 
 /**
@@ -33,7 +35,7 @@ export class MyDevicesPage {
   ];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
-    public apiprovider: ApiproviderProvider, public translate: TranslateService) {
+    public apiprovider: ApiproviderProvider, public translate: TranslateService, public modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
@@ -68,20 +70,18 @@ export class MyDevicesPage {
   }
 
   change_state(index) {
-
-    let temp_state = false;
-    for (let list of this.device_Data) {
-      if (list.change_state) {
-        temp_state = true;
+    let change_data = { "index": "", "status": "" };
+    change_data.index = index;
+    change_data.status = this.device_Data[index].status;
+    localStorage.setItem("ChangeStatusPage", JSON.stringify(change_data));
+    let profileModal = this.modalCtrl.create(ChangeStatusPage);
+    profileModal.onDidDismiss(data => {
+      console.log(data);
+      if (typeof (data) != "undefined") {
+        this.device_Data[index].status = data;
       }
-    }
-
-    if (!this.device_Data[index].change_state && !temp_state) {
-      for (let list of this.device_Data) {
-        list.change_state = false;
-      }
-      this.device_Data[index].change_state = true;
-    }
+    });
+    profileModal.present();
   }
 
   save_state(index) {
@@ -89,20 +89,18 @@ export class MyDevicesPage {
   }
 
   change_plan(index) {
-
-    let temp_state = false;
-    for (let list of this.device_Data) {
-      if (list.change_plan) {
-        temp_state = true;
+    let change_data = { "index": "", "plan": "" };
+    change_data.index = index;
+    change_data.plan = this.device_Data[index].plan;
+    localStorage.setItem("ChangePlanPage", JSON.stringify(change_data));
+    let profileModal = this.modalCtrl.create(ChangePlanPage);
+    profileModal.onDidDismiss(data => {
+      console.log(data);
+      if (typeof (data) != "undefined") {
+        this.device_Data[index].plan = data;
       }
-    }
-
-    if (!this.device_Data[index].change_plan && !temp_state) {
-      for (let list of this.device_Data) {
-        list.change_plan = false;
-      }
-      this.device_Data[index].change_plan = true;
-    }
+    });
+    profileModal.present();
   }
 
   save_plan(index) {
