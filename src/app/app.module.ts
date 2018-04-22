@@ -24,6 +24,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { TopUpPage } from '../pages/top-up/top-up';
 import { TopupHistoryPage } from '../pages/topup-history/topup-history';
 import { TransactionHistoryPage } from '../pages/transaction-history/transaction-history';
+import { APP_CONFIG, AppConfig } from '../model';
 
 
 ////////api and other part.
@@ -53,6 +54,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { PaynowCheckPage } from '../pages/paynow-check/paynow-check';
 import { NewpaymentCheckPage } from '../pages/newpayment-check/newpayment-check';
 import { ChangePlanPage } from '../pages/change-plan/change-plan';
+import { AuthserviceProvider } from '../providers/authservice/authservice';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -136,7 +138,9 @@ export function createTranslateLoader(http: HttpClient) {
     FileTransfer,
     File,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    ApiproviderProvider
+    ApiproviderProvider,
+    AuthserviceProvider,
+    { provide: APP_CONFIG, useValue: AppConfig }
   ]
 })
 export class AppModule { }

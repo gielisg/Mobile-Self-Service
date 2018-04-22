@@ -10,6 +10,7 @@ import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
 
 
 import { TranslateService } from '@ngx-translate/core';
+import { AuthserviceProvider } from '../../providers/authservice/authservice';
 
 
 /**
@@ -41,7 +42,7 @@ export class SigninPage {
   public send_data: any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
-    public apiprovider: ApiproviderProvider, public translate: TranslateService, public menu: MenuController) {
+    public apiprovider: ApiproviderProvider, public translate: TranslateService, public menu: MenuController, public authservice: AuthserviceProvider) {
 
     // translate.use('ru');
 
@@ -77,29 +78,48 @@ export class SigninPage {
       loading.present();
       let status = "login";
       this.user_Data.status = status;
-      this.apiprovider.postData(this.user_Data).then((result) => {
-        console.log(Object(result));
-        loading.dismiss();
-        if (Object(result).status == "success") {
-          console.log(result);
-          localStorage.setItem("user_email", Object(result).userid);
-          this.navCtrl.push(HomePage);
-        } else {
-          let toast = this.toastCtrl.create({
-            message: Object(result).detail,
-            duration: 2000
-          })
-          toast.present();
-        };
 
-      }, (err) => {
-        let toast = this.toastCtrl.create({
-          message: "No Network",
-          duration: 2000
-        })
-        toast.present();
-        loading.dismiss();
-      });
+      this.authservice.login(this.user_Data.username, this.user_Data.password)
+
+        .subscribe(
+          data => {
+            if (data) {
+              console.log(data);
+              this.navCtrl.push(HomePage);
+            }
+            loading.dismiss();
+
+          },
+          error => {
+
+            this.user_Data.username = "";
+            this.user_Data.password = "";
+            loading.dismiss();
+          });
+
+      // this.apiprovider.postData(this.user_Data).then((result) => {
+      //   console.log(Object(result));
+      //   loading.dismiss();
+      //   if (Object(result).status == "success") {
+      //     console.log(result);
+      //     localStorage.setItem("user_email", Object(result).userid);
+      //     this.navCtrl.push(HomePage);
+      //   } else {
+      //     let toast = this.toastCtrl.create({
+      //       message: Object(result).detail,
+      //       duration: 2000
+      //     })
+      //     toast.present();
+      //   };
+
+      // }, (err) => {
+      //   let toast = this.toastCtrl.create({
+      //     message: "No Network",
+      //     duration: 2000
+      //   })
+      //   toast.present();
+      //   loading.dismiss();
+      // });
     }
   }
 
