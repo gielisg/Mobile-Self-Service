@@ -199,33 +199,33 @@ export class MydetailPage {
     this.temp_Data.email = localStorage.getItem("user_email");
     let status = "change_userinfo";
     this.temp_Data.status = status;
-    this.apiprovider.postData(this.temp_Data).then((result) => {
-      console.log(Object(result));
-      if (Object(result).status == "success") {
+    // this.apiprovider.postData(this.temp_Data).then((result) => {
+    //   console.log(Object(result));
+    //   if (Object(result).status == "success") {
 
-        localStorage.setItem("user_email", this.user_Data.email);
+    //     localStorage.setItem("user_email", this.user_Data.email);
 
-        let toast = this.toastCtrl.create({
-          message: Object(result).detail,
-          duration: 2000
-        })
-        toast.present();
+    //     let toast = this.toastCtrl.create({
+    //       message: Object(result).detail,
+    //       duration: 2000
+    //     })
+    //     toast.present();
 
-      } else {
-        let toast = this.toastCtrl.create({
-          message: Object(result).detail,
-          duration: 2000
-        })
-        toast.present();
-      };
+    //   } else {
+    //     let toast = this.toastCtrl.create({
+    //       message: Object(result).detail,
+    //       duration: 2000
+    //     })
+    //     toast.present();
+    //   };
 
-    }, (err) => {
-      let toast = this.toastCtrl.create({
-        message: "No Network",
-        duration: 2000
-      })
-      toast.present();
-    });
+    // }, (err) => {
+    //   let toast = this.toastCtrl.create({
+    //     message: "No Network",
+    //     duration: 2000
+    //   })
+    //   toast.present();
+    // });
   }
 
   current_state(value) {

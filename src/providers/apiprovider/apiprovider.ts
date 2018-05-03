@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
   and Angular DI.
 */
 
-let apiurl: string = "http://192.168.2.124/test_php/";
+let apiurl: string = "http://192.168.2.111/test_php/";
 
 
 @Injectable()

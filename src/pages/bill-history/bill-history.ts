@@ -27,6 +27,41 @@ export class BillHistoryPage {
   public user_Data = { "username": "", "address": "", "email": "", "phone": "", "status": "" };
   public send_data: any[];
 
+  public hand_code = [
+    { "ID": "1", "user_id": "1", "bill_num": "12345", "due_date": "2018-03-30", "bill_amount": "250.8" },
+    { "ID": "2", "user_id": "1", "bill_num": "45615", "due_date": "2018-03-19", "bill_amount": "365.65" },
+    { "ID": "3", "user_id": "1", "bill_num": "25482", "due_date": "2018-03-29", "bill_amount": "253.64" },
+    { "ID": "4", "user_id": "1", "bill_num": "38651", "due_date": "2018-03-01", "bill_amount": "254.36" },
+    { "ID": "5", "user_id": "1", "bill_num": "21846", "due_date": "2018-03-31", "bill_amount": "365.6" },
+    { "ID": "6", "user_id": "1", "bill_num": "21987", "due_date": "2018-03-22", "bill_amount": "965.36" },
+    { "ID": "7", "user_id": "1", "bill_num": "29879", "due_date": "2018-04-07", "bill_amount": "864.24" },
+    { "ID": "8", "user_id": "1", "bill_num": "24987", "due_date": "2018-04-05", "bill_amount": "349.63" },
+    { "ID": "9", "user_id": "1", "bill_num": "35468", "due_date": "2018-04-25", "bill_amount": "325.5" },
+    { "ID": "10", "user_id": "2", "bill_num": "32465", "due_date": "2018-03-30", "bill_amount": "453.45" },
+    { "ID": "11", "user_id": "3", "bill_num": "46547", "due_date": "2018-03-30", "bill_amount": "453.45" },
+    { "ID": "12", "user_id": "3", "bill_num": "46874", "due_date": "2018-03-30", "bill_amount": "349.63" },
+    { "ID": "13", "user_id": "4", "bill_num": "54562", "due_date": "2018-03-30", "bill_amount": "864.24" },
+    { "ID": "14", "user_id": "3", "bill_num": "48484", "due_date": "2018-03-28", "bill_amount": "253.64" },
+    { "ID": "15", "user_id": "23", "bill_num": "16161", "due_date": "2018-03-30", "bill_amount": "453.45" },
+    { "ID": "16", "user_id": "2", "bill_num": "46464", "due_date": "2018-03-30", "bill_amount": "349.63" },
+    { "ID": "17", "user_id": "3", "bill_num": "28644", "due_date": "2018-03-30", "bill_amount": "864.24" },
+    { "ID": "18", "user_id": "2", "bill_num": "56248", "due_date": "2018-03-30", "bill_amount": "253.64" },
+    { "ID": "19", "user_id": "2", "bill_num": "56284", "due_date": "2018-03-30", "bill_amount": "453.45" },
+    { "ID": "20", "user_id": "2", "bill_num": "64848", "due_date": "2018-03-19", "bill_amount": "349.63" },
+    { "ID": "21", "user_id": "3", "bill_num": "64896", "due_date": "2018-04-25", "bill_amount": "864.24" },
+    { "ID": "22", "user_id": "22", "bill_num": "54896", "due_date": "2018-03-19", "bill_amount": "253.64" },
+    { "ID": "23", "user_id": "3", "bill_num": "18161", "due_date": "2018-04-25", "bill_amount": "453.45" },
+    { "ID": "24", "user_id": "2", "bill_num": "64789", "due_date": "2018-04-25", "bill_amount": "349.63" },
+    { "ID": "25", "user_id": "2", "bill_num": "51684", "due_date": "2018-04-25", "bill_amount": "864.24" },
+    { "ID": "26", "user_id": "2", "bill_num": "16841", "due_date": "2018-03-19", "bill_amount": "253.64" },
+    { "ID": "27", "user_id": "3", "bill_num": "16681", "due_date": "2018-04-25", "bill_amount": "453.45" },
+    { "ID": "28", "user_id": "3", "bill_num": "18916", "due_date": "2018-03-01", "bill_amount": "349.63" },
+    { "ID": "29", "user_id": "3", "bill_num": "61861", "due_date": "2018-03-19", "bill_amount": "864.24" },
+    { "ID": "30", "user_id": "2", "bill_num": "16181", "due_date": "2018-03-01", "bill_amount": "864.24" },
+    { "ID": "31", "user_id": "2", "bill_num": "16816", "due_date": "2018-03-01", "bill_amount": "253.64" },
+    { "ID": "32", "user_id": "3", "bill_num": "", "due_date": "2018-03-19", "bill_amount": "453.45" }
+  ];
+
 
   public detail_Data = [];
 
@@ -57,41 +92,51 @@ export class BillHistoryPage {
     this.user_Data.email = localStorage.getItem("user_email");
     this.detail_Data = Array();
 
-    let loading = this.loadingCtrl.create({
-      content: "Please Wait..."
-    });
-    loading.present();
-    let status = "get_bill_history";
-    this.user_Data.status = status;
-    this.apiprovider.postData(this.user_Data).then((result) => {
-      console.log(Object(result));
-      loading.dismiss();
-      if (Object(result).status == "success") {
-        for (let list of Object(result).detail) {
-          let array_data = { "bill_num": "", "due_date": "", "amount_owin": "" };
-          array_data.bill_num = list.bill_num;
-          array_data.amount_owin = list.bill_amount;
-          array_data.due_date = list.due_date;
-          this.detail_Data.push(array_data);
 
-        }
-        console.log(this.user_Data);
-      } else {
-        let toast = this.toastCtrl.create({
-          message: Object(result).detail,
-          duration: 2000
-        })
-        toast.present();
-      };
+    for (let list of this.hand_code) {
+      let array_data = { "bill_num": "", "due_date": "", "amount_owin": "" };
+      array_data.bill_num = list.bill_num;
+      array_data.amount_owin = list.bill_amount;
+      array_data.due_date = list.due_date;
+      this.detail_Data.push(array_data);
 
-    }, (err) => {
-      let toast = this.toastCtrl.create({
-        message: "No Network",
-        duration: 2000
-      })
-      toast.present();
-      loading.dismiss();
-    });
+    }
+
+    // let loading = this.loadingCtrl.create({
+    //   content: "Please Wait..."
+    // });
+    // loading.present();
+    // let status = "get_bill_history";
+    // this.user_Data.status = status;
+    // this.apiprovider.postData(this.user_Data).then((result) => {
+    //   console.log(Object(result));
+    //   loading.dismiss();
+    //   if (Object(result).status == "success") {
+    //     for (let list of Object(result).detail) {
+    //       let array_data = { "bill_num": "", "due_date": "", "amount_owin": "" };
+    //       array_data.bill_num = list.bill_num;
+    //       array_data.amount_owin = list.bill_amount;
+    //       array_data.due_date = list.due_date;
+    //       this.detail_Data.push(array_data);
+
+    //     }
+    //     console.log(this.user_Data);
+    //   } else {
+    //     let toast = this.toastCtrl.create({
+    //       message: Object(result).detail,
+    //       duration: 2000
+    //     })
+    //     toast.present();
+    //   };
+
+    // }, (err) => {
+    //   let toast = this.toastCtrl.create({
+    //     message: "No Network",
+    //     duration: 2000
+    //   })
+    //   toast.present();
+    //   loading.dismiss();
+    // });
 
   }
 
