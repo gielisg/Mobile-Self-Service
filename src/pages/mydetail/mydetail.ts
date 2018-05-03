@@ -54,39 +54,39 @@ export class MydetailPage {
 
     this.user_Data.email = localStorage.getItem("user_email");
 
-    let loading = this.loadingCtrl.create({
-      content: "Please Wait..."
-    });
-    loading.present();
-    let status = "get_detail";
-    this.user_Data.status = status;
-    console.log(this.user_Data);
-    this.apiprovider.postData(this.user_Data).then((result) => {
-      console.log(Object(result));
-      loading.dismiss();
-      if (Object(result).status == "success") {
-        this.user_Data.address = Object(result).detail.address;
-        this.user_Data.phone = Object(result).detail.phone;
-        this.user_Data.username = Object(result).detail.username;
-        console.log(this.user_Data);
+    // let loading = this.loadingCtrl.create({
+    //   content: "Please Wait..."
+    // });
+    // loading.present();
+    // let status = "get_detail";
+    // this.user_Data.status = status;
+    // console.log(this.user_Data);
+    // this.apiprovider.postData(this.user_Data).then((result) => {
+    //   console.log(Object(result));
+    //   loading.dismiss();
+    //   if (Object(result).status == "success") {
+    //     this.user_Data.address = Object(result).detail.address;
+    //     this.user_Data.phone = Object(result).detail.phone;
+    //     this.user_Data.username = Object(result).detail.username;
+    //     console.log(this.user_Data);
 
-        // this.navCtrl.push(HomePage);
-      } else {
-        let toast = this.toastCtrl.create({
-          message: Object(result).detail,
-          duration: 2000
-        })
-        toast.present();
-      };
+    //     // this.navCtrl.push(HomePage);
+    //   } else {
+    //     let toast = this.toastCtrl.create({
+    //       message: Object(result).detail,
+    //       duration: 2000
+    //     })
+    //     toast.present();
+    //   };
 
-    }, (err) => {
-      let toast = this.toastCtrl.create({
-        message: "No Network",
-        duration: 2000
-      })
-      toast.present();
-      loading.dismiss();
-    });
+    // }, (err) => {
+    //   let toast = this.toastCtrl.create({
+    //     message: "No Network",
+    //     duration: 2000
+    //   })
+    //   toast.present();
+    //   loading.dismiss();
+    // });
   }
 
   change_user(name) {

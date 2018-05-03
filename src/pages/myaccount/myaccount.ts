@@ -54,21 +54,21 @@ export class MyaccountPage {
     let bill_download = { "email": "", "due_date": "", "amount_owin": "", "status": "download_bill_total", "index": "" };
     bill_download.email = localStorage.getItem("user_email");
 
-    this.apiprovider.postData(bill_download).then((result) => {
-      console.log(Object(result));
-      if (Object(result).status == "success") {
-        this.download_bill();
-      } else {
+    // this.apiprovider.postData(bill_download).then((result) => {
+    //   console.log(Object(result));
+    //   if (Object(result).status == "success") {
+    //     this.download_bill();
+    //   } else {
 
-      };
+    //   };
 
-    }, (err) => {
-      let toast = this.toastCtrl.create({
-        message: "No Network",
-        duration: 2000
-      })
-      toast.present();
-    });
+    // }, (err) => {
+    //   let toast = this.toastCtrl.create({
+    //     message: "No Network",
+    //     duration: 2000
+    //   })
+    //   toast.present();
+    // });
   }
   download_bill() {
 

@@ -150,21 +150,21 @@ export class BillHistoryPage {
     bill_download.index = index;
     // this.user_Data.status = status;
     // this.apiprovider.downloadData(bill_download);
-    this.apiprovider.postData(bill_download).then((result) => {
-      console.log(Object(result));
-      if (Object(result).status == "success") {
-        this.download_pdf(index);
-      } else {
+    // this.apiprovider.postData(bill_download).then((result) => {
+    //   console.log(Object(result));
+    //   if (Object(result).status == "success") {
+    //     this.download_pdf(index);
+    //   } else {
 
-      };
+    //   };
 
-    }, (err) => {
-      let toast = this.toastCtrl.create({
-        message: "No Network",
-        duration: 2000
-      })
-      toast.present();
-    });
+    // }, (err) => {
+    //   let toast = this.toastCtrl.create({
+    //     message: "No Network",
+    //     duration: 2000
+    //   })
+    //   toast.present();
+    // });
   }
 
   download_pdf(index) {
