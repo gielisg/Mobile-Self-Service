@@ -53,6 +53,12 @@ export class SigninPage {
     this.ionicInit();
 
 
+    if (localStorage.getItem("login_infor") != null && localStorage.getItem("login_infor") != "") {
+      this.navCtrl.push(HomePage);
+    } else {
+      this.ionicInit();
+    }
+
   }
   goto_home() {
     if (this.user_Data.username == "" || this.user_Data.password == "") {
@@ -85,7 +91,9 @@ export class SigninPage {
           data => {
             if (data) {
               console.log(data);
+              localStorage.setItem("login_infor", JSON.stringify(this.user_Data));
               this.navCtrl.push(HomePage);
+
             }
             loading.dismiss();
 
@@ -135,6 +143,7 @@ export class SigninPage {
     } else {
       this.translate.use(localStorage.getItem("set_lng"));
     }
+
   }
 
 

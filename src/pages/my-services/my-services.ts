@@ -83,7 +83,7 @@ export class MyServicesPage {
     let profileModal = this.modalCtrl.create(ChangeStatusPage);
     profileModal.onDidDismiss(data => {
       console.log(data);
-      if (typeof (data) != "undefined") {
+      if (typeof (data) != "undefined" || data != "") {
         this.service_Data[index].status = data;
       }
     });

@@ -38,11 +38,14 @@ export class ChangePlanPage {
   }
 
   goback() {
-    this.navCtrl.pop();
+    // this.navCtrl.pop();
+    console.log("faild");
+    this.viewCtrl.dismiss("");
   }
 
   completeAddCompany(comProfileForm) {
-    if (comProfileForm.valid){
+    console.log(comProfileForm.valid);
+    if (this.changeDate.valid && this.Reason.valid && this.newState.valid){
       let data = this.change_state.new_state;
       this.viewCtrl.dismiss(data);
     }
@@ -50,6 +53,8 @@ export class ChangePlanPage {
 
   ionicInit() {
     let current_state = JSON.parse(localStorage.getItem("ChangePlanPage"));
+    
+    console.log(JSON.parse(localStorage.getItem("ChangePlanPage")));
 
     this.change_state.new_state = current_state.plan;
 

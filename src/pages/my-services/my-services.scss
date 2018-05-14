@@ -104,12 +104,15 @@ page-my-services {
     }
     .servicespan_rpw{
         // height: 30px;
-        margin-top: 8px;
+        padding-top: 8px;
     }
     .serviceDetail_span{
         margin: auto;
         color: white;
-        padding-bottom: 15px;
+        text-align: center;
+        padding-bottom: 12px;
+        width: 100%;
+        font-size: 12px;
     }
 
 }

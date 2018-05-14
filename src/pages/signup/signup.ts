@@ -49,7 +49,7 @@ export class SignupPage {
 
   completeAddCompany(comProfileForm) {
     if (comProfileForm.valid && this.emailFormControl.valid) {
-      localStorage.setItem("login_infor", JSON.stringify(this.user_Data));
+      localStorage.setItem("signup_infor", JSON.stringify(this.user_Data));
       // let loading = this.loadingCtrl.create({
       //   content: "Please Wait..."
       // });

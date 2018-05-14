@@ -42,14 +42,18 @@ page-myaccount {
         font-size: 1.7rem;
         font-weight: bold;
     }
-    .download_pay{
+    .download_pay {
         margin-top: 15%;
-    }
-    .download_pay .button_style1{
         font-size: 1.3rem !important;
     }
-    .download_pay .button_style2{
+    .rus_pay {
+        margin-top: 15%;
         font-size: 1.3rem !important;
+    }
+    .rus_pay ion-col{
+        width: 100% !important;
+        max-width: 100%;
+        flex: unset !important;
     }
     .button_row{
         width: 100%;

@@ -66,6 +66,7 @@
     "my_service": "МОЙ СЕРВИС",
     "account_number": "Номер Aккаунта",
     "transaction_history": "ИСТОРИЯ ТРАНЗАКЦИЙ",
+    "transaction_down": "История Транзакций",
     "payment_method": "СПОСОБЫ ОПЛАТЫ",
     "my_detail": "МОЯ ДЕТАЛИ",
     "name": "Имя",

@@ -70,7 +70,7 @@ export class MyApp {
         value => {
 
           if (page.title == value) {
-            localStorage.setItem("user_email", "");
+            localStorage.setItem("login_infor", "");
             this.nav.setRoot(SigninPage);
           } else {
             this.nav.push(page.component);

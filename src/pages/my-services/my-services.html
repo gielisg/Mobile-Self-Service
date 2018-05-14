@@ -163,54 +163,75 @@
     </ion-row>
     <ion-row class="bottom_image_row">
       <ion-row class="image_button_row">
-        <ion-col col-3>
-          <ion-row class="full_height" (click)="goto_callHistory()">
-            <ion-row class="service_iconRow">
-              <ion-icon class="serviceDetail_icon" name="ios-call-outline"></ion-icon>
+        <ion-row class="">
+          <ion-col col-3 (click)="goto_callHistory()">
+            <ion-row class="full_height">
+              <ion-row class="service_iconRow">
+                <ion-icon class="serviceDetail_icon" name="ios-git-network-outline"></ion-icon>
+              </ion-row>
             </ion-row>
-            <ion-row class="servicespan_rpw">
-              <span class="serviceDetail_span">
-                {{ 'call' | translate }}
-              </span>
+          </ion-col>
+          <ion-col col-3 (click)="goto_topupHistory()">
+            <ion-row class="full_height">
+              <ion-row class="service_iconRow">
+                <ion-icon class="serviceDetail_icon" name="ios-list-box-outline"></ion-icon>
+              </ion-row>
             </ion-row>
-          </ion-row>
-        </ion-col>
-        <ion-col col-3>
-          <ion-row class="full_height" (click)="goto_topupHistory()">
-            <ion-row class="service_iconRow">
-              <ion-icon class="serviceDetail_icon" name="ios-git-network-outline"></ion-icon>
+          </ion-col>
+          <ion-col col-3 (click)="goto_serviceDetail()">
+            <ion-row class="full_height">
+              <ion-row class="service_iconRow">
+                <ion-icon class="serviceDetail_icon" name="ios-list-box-outline"></ion-icon>
+              </ion-row>
             </ion-row>
-            <ion-row class="servicespan_rpw">
-              <span class="serviceDetail_span">
-                {{ 'topup' | translate }}
-              </span>
+          </ion-col>
+          <ion-col col-3 (click)="goto_serviceBundle()">
+            <ion-row class="full_height">
+              <ion-row class="service_iconRow">
+                <ion-icon class="serviceDetail_icon" name="ios-bug-outline"></ion-icon>
+              </ion-row>
             </ion-row>
-          </ion-row>
-        </ion-col>
-        <ion-col col-3>
-          <ion-row class="full_height" (click)="goto_serviceDetail()">
-            <ion-row class="service_iconRow">
-              <ion-icon class="serviceDetail_icon" name="ios-list-box-outline"></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="">
+          <ion-col col-3 (click)="goto_callHistory()">
+            <ion-row class="full_height">
+              <ion-row class="servicespan_rpw">
+                <span class="serviceDetail_span">
+                  {{ 'call' | translate }}
+                </span>
+              </ion-row>
             </ion-row>
-            <ion-row class="servicespan_rpw">
-              <span class="serviceDetail_span">
-                {{ 'details' | translate }}
-              </span>
+          </ion-col>
+          <ion-col col-3 (click)="goto_topupHistory()">
+            <ion-row class="full_height">
+              <ion-row class="servicespan_rpw">
+                <span class="serviceDetail_span">
+                  {{ 'topup' | translate }}
+                </span>
+              </ion-row>
             </ion-row>
-          </ion-row>
-        </ion-col>
-        <ion-col col-3>
-          <ion-row class="full_height" (click)="goto_serviceBundle()">
-            <ion-row class="service_iconRow">
-              <ion-icon class="serviceDetail_icon" name="ios-bug-outline"></ion-icon>
+          </ion-col>
+          <ion-col col-3 (click)="goto_serviceDetail()">
+            <ion-row class="full_height">
+              <ion-row class="servicespan_rpw">
+                <span class="serviceDetail_span">
+                  {{ 'details' | translate }}
+                </span>
+              </ion-row>
             </ion-row>
-            <ion-row class="servicespan_rpw">
-              <span class="serviceDetail_span">
-                {{ 'bundles' | translate }}
-              </span>
+          </ion-col>
+          <ion-col col-3 (click)="goto_serviceBundle()">
+            <ion-row class="full_height">
+              <ion-row class="servicespan_rpw">
+                <span class="serviceDetail_span">
+                  {{ 'bundles' | translate }}
+                </span>
+              </ion-row>
             </ion-row>
-          </ion-row>
-        </ion-col>
+          </ion-col>
+        </ion-row>
       </ion-row>
     </ion-row>
   </ion-row>

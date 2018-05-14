@@ -19,6 +19,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class HomePage {
 
   fileTransfer: FileTransferObject = this.transfer.create();
+  public switch_mode: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController
     , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public transfer: FileTransfer
@@ -28,7 +29,10 @@ export class HomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
+    this.switch_mode = false;
     this.ionicInit();
+
+    console.log(this.switch_mode);
   }
   goto_mydetail() {
     this.navCtrl.push(MydetailPage);
@@ -92,21 +96,21 @@ export class HomePage {
     let bill_download = { "email": "", "due_date": "", "amount_owin": "", "status": "download_bill_total", "index": "" };
     bill_download.email = localStorage.getItem("user_email");
 
-    this.apiprovider.postData(bill_download).then((result) => {
-      console.log(Object(result));
-      if (Object(result).status == "success") {
-        this.download_bill();
-      } else {
+    // this.apiprovider.postData(bill_download).then((result) => {
+    //   console.log(Object(result));
+    //   if (Object(result).status == "success") {
+    //     this.download_bill();
+    //   } else {
 
-      };
+    //   };
 
-    }, (err) => {
-      let toast = this.toastCtrl.create({
-        message: "No Network",
-        duration: 2000
-      })
-      toast.present();
-    });
+    // }, (err) => {
+    //   let toast = this.toastCtrl.create({
+    //     message: "No Network",
+    //     duration: 2000
+    //   })
+    //   toast.present();
+    // });
 
   }
 
@@ -117,6 +121,11 @@ export class HomePage {
       this.translate.use('en');
     } else {
       this.translate.use(localStorage.getItem("set_lng"));
+      if (localStorage.getItem("set_lng") == "en") {
+        this.switch_mode = true;
+      } else {
+        this.switch_mode = false;
+      }
     }
   }
 

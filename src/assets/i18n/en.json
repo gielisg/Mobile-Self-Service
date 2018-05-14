@@ -66,6 +66,7 @@
     "my_service": "MY SERVICE",
     "account_number": "Account Number",
     "transaction_history": "TRANSACTION HISTORY",
+    "transaction_down": "Transaction History",
     "payment_method": "PAYMENT METHODS",
     "my_detail": "MY DETAIL",
     "name": "Name",

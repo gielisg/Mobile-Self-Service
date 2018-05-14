@@ -66,7 +66,7 @@
     </ion-row>
   </ion-row>
 
-  <ion-row class="download_pay">
+  <ion-row [ngClass]="{'download_pay':switch_mode == true, 'rus_pay':switch_mode == false}">
     <!-- <ion-col col-1>
     </ion-col> -->
     <ion-col col-6>

@@ -26,6 +26,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class MyaccountPage {
 
   fileTransfer: FileTransferObject = this.transfer.create();
+  public switch_mode: boolean;
 
   constructor(public navCtrl: NavController, public translate: TranslateService, public navParams: NavParams, public loadingCtrl: LoadingController
     , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public transfer: FileTransfer
@@ -118,6 +119,11 @@ export class MyaccountPage {
       this.translate.use('en');
     } else {
       this.translate.use(localStorage.getItem("set_lng"));
+      if (localStorage.getItem("set_lng") == "en") {
+        this.switch_mode = true;
+      } else {
+        this.switch_mode = false;
+      }
     }
   }
 

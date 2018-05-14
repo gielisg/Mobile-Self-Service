@@ -60,12 +60,12 @@
       </ion-col>
     </ion-row>
     <ion-row class="type_number_date">
-      <ion-col col-3 >
+      <ion-col col-3>
         <ion-row class="full_height">
           <span class="name_span">
             {{ 'status' | translate }}
           </span>
-          <span class="detail_span" >
+          <span class="detail_span">
             {{list.status}}
           </span>
         </ion-row>
@@ -91,14 +91,14 @@
         </ion-row>
       </ion-col>
 
-      <ion-col col-4 >
+      <ion-col col-4>
       </ion-col>
 
       <ion-col col-1 *ngIf="list.change_state">
       </ion-col>
       <ion-col col-5 class="right_col">
         <ion-row class="full_height">
-          <button ion-button class="mat-button change_button"  (click)="change_state(i)">
+          <button ion-button class="mat-button change_button" (click)="change_state(i)">
             {{ 'change_UP' | translate }}
           </button>
 
@@ -156,29 +156,29 @@
     <ion-row class="bottom_image_row">
       <ion-row class="image_button_row">
         <ion-row class="">
-          <ion-col col-3>
-            <ion-row class="full_height" (click)="goto_topupHistory()">
+          <ion-col col-3 (click)="goto_topupHistory()">
+            <ion-row class="full_height">
               <ion-row class="service_iconRow">
                 <ion-icon class="serviceDetail_icon" name="ios-git-network-outline"></ion-icon>
               </ion-row>
             </ion-row>
           </ion-col>
-          <ion-col col-3>
-            <ion-row class="full_height" (click)="goto_transactionHistory()">
+          <ion-col col-3 (click)="goto_transactionHistory()">
+            <ion-row class="full_height">
               <ion-row class="service_iconRow">
                 <ion-icon class="serviceDetail_icon" name="ios-list-box-outline"></ion-icon>
               </ion-row>
             </ion-row>
           </ion-col>
-          <ion-col col-3>
-            <ion-row class="full_height" (click)="goto_serviceDetail()">
+          <ion-col col-3 (click)="goto_serviceDetail()">
+            <ion-row class="full_height">
               <ion-row class="service_iconRow">
                 <ion-icon class="serviceDetail_icon" name="ios-list-box-outline"></ion-icon>
               </ion-row>
             </ion-row>
           </ion-col>
-          <ion-col col-3>
-            <ion-row class="full_height" (click)="goto_serviceBundle()">
+          <ion-col col-3 (click)="goto_serviceBundle()">
+            <ion-row class="full_height">
               <ion-row class="service_iconRow">
                 <ion-icon class="serviceDetail_icon" name="ios-bug-outline"></ion-icon>
               </ion-row>
@@ -187,38 +187,38 @@
         </ion-row>
 
         <ion-row class="">
-          <ion-col col-3>
-            <ion-row class="full_height" (click)="goto_topupHistory()">
+          <ion-col col-3 (click)="goto_topupHistory()">
+            <ion-row class="full_height">
               <ion-row class="servicespan_rpw">
                 <span class="serviceDetail_span">
-                  TopUp
+                  {{ 'topup' | translate }}
                 </span>
               </ion-row>
             </ion-row>
           </ion-col>
-          <ion-col col-3>
-            <ion-row class="full_height" (click)="goto_transactionHistory()">
+          <ion-col col-3 (click)="goto_transactionHistory()">
+            <ion-row class="full_height">
               <ion-row class="servicespan_rpw">
                 <span class="serviceDetail_span">
-                  Transaction History
+                  {{ 'transaction_down' | translate }}
                 </span>
               </ion-row>
             </ion-row>
           </ion-col>
-          <ion-col col-3>
-            <ion-row class="full_height" (click)="goto_serviceDetail()">
+          <ion-col col-3 (click)="goto_serviceDetail()">
+            <ion-row class="full_height">
               <ion-row class="servicespan_rpw">
                 <span class="serviceDetail_span">
-                  Details
+                  {{ 'details' | translate }}
                 </span>
               </ion-row>
             </ion-row>
           </ion-col>
-          <ion-col col-3>
-            <ion-row class="full_height" (click)="goto_serviceBundle()">
+          <ion-col col-3 (click)="goto_serviceBundle()">
+            <ion-row class="full_height">
               <ion-row class="servicespan_rpw">
                 <span class="serviceDetail_span">
-                  Bundles
+                  {{ 'bundles' | translate }}
                 </span>
               </ion-row>
             </ion-row>
