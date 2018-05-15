@@ -56,6 +56,13 @@ import { NewpaymentCheckPage } from '../pages/newpayment-check/newpayment-check'
 import { ChangePlanPage } from '../pages/change-plan/change-plan';
 import { AuthserviceProvider } from '../providers/authservice/authservice';
 
+
+import * as FusionCharts from 'fusioncharts';
+import * as Charts from 'fusioncharts/fusioncharts.charts';
+import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
+import { FusionChartsModule } from 'angular4-fusioncharts';
+FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -95,6 +102,7 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserAnimationsModule,
     HttpModule,
     HttpClientModule,
+    FusionChartsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

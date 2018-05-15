@@ -27,8 +27,9 @@
 <ion-content>
 
   <ion-row>
-    <canvas class="pie_chart_class" width=250 height=200 #barCanvas>
-    </canvas>
+    <!-- <canvas class="pie_chart_class" width=250 height=200 #barCanvas>
+    </canvas> -->
+    <fusioncharts class="pie_class" [id]="id" [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat" [dataSource]="dataSource"></fusioncharts>
   </ion-row>
 
   <ion-row class="other_row">
@@ -119,7 +120,7 @@
       <ion-col col-3>
         <ion-row class="full_height">
           <span class="other_body_col right_align">
-            1GB
+            400MB
           </span>
         </ion-row>
       </ion-col>

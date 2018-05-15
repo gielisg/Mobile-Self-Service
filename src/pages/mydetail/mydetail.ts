@@ -44,7 +44,7 @@ export class MydetailPage {
 
   ionicInit() {
 
-    
+
     console.log(localStorage.getItem("set_lng"));
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
@@ -53,6 +53,12 @@ export class MydetailPage {
     }
 
     this.user_Data.email = localStorage.getItem("user_email");
+
+    this.user_Data.email = "veerhunter127@gmail.com";
+    this.user_Data.phone = "123456789";
+    this.user_Data.username = "VeeRHunter";
+    this.user_Data.address = "XX street, YY city, ZZ country";
+
 
     // let loading = this.loadingCtrl.create({
     //   content: "Please Wait..."
