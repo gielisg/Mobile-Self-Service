@@ -39,22 +39,26 @@
 
     <ion-row class="payment_row">
       <ion-col>
-        <mat-select placeholder="{{ 'select' | translate }}" [formControl]="newState" [(ngModel)]="change_state.new_state" class="select_class"
-          required>
-          <mat-option value="saver1">
-            {{ 'saver1' | translate }}
-          </mat-option>
-          <mat-option value="saver2">
-            {{ 'saver2' | translate }}
-          </mat-option>
-          <mat-option value="saver3">
-            {{ 'saver3' | translate }}
-          </mat-option>
-          <mat-option value="saver4">
-            {{ 'saver4' | translate }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="newState.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
+        <mat-form-field>
+          <mat-select placeholder="{{ 'select' | translate }}" [formControl]="newState" [(ngModel)]="change_state.new_state" class="select_class"
+            required>
+            <mat-option value="saver1">
+              {{ 'saver1' | translate }}
+            </mat-option>
+            <mat-option value="saver2">
+              {{ 'saver2' | translate }}
+            </mat-option>
+            <mat-option value="saver3">
+              {{ 'saver3' | translate }}
+            </mat-option>
+            <mat-option value="saver4">
+              {{ 'saver4' | translate }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="newState.hasError('required')">
+            {{ 'choose_type_of_payment' | translate }}
+          </mat-error>
+        </mat-form-field>
       </ion-col>
     </ion-row>
 
@@ -66,16 +70,18 @@
 
     <ion-row class="payment_row">
       <ion-col>
-        <mat-select placeholder="{{ 'select' | translate }}" [formControl]="Reason" [(ngModel)]="change_state.reason" class="select_class"
-          required>
-          <mat-option value="Visa">
-            {{ 'visa' | translate }}
-          </mat-option>
-          <mat-option value="Paypal">
-            {{ 'paypal' | translate }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="Reason.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
+        <mat-form-field>
+          <mat-select placeholder="{{ 'select' | translate }}" [formControl]="Reason" [(ngModel)]="change_state.reason" class="select_class"
+            required>
+            <mat-option value="Visa">
+              {{ 'visa' | translate }}
+            </mat-option>
+            <mat-option value="Paypal">
+              {{ 'paypal' | translate }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="Reason.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
+        </mat-form-field>
       </ion-col>
     </ion-row>
 

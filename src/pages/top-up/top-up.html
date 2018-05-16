@@ -36,16 +36,20 @@
 
     <ion-row class="payment_row">
       <ion-col>
-        <mat-select placeholder="{{ 'select' | translate }}" [formControl]="selType" [(ngModel)]="top_Data.topup" class="select_class"
-          required>
-          <mat-option value="unlimited1">
-            3GB {{ 'unlimited' | translate }}
-          </mat-option>
-          <mat-option value="unlimited2">
-            4GB {{ 'unlimited' | translate }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="selType.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
+        <mat-form-field>
+          <mat-select placeholder="{{ 'select' | translate }}" [formControl]="selType" [(ngModel)]="top_Data.topup" class="select_class"
+            required>
+            <mat-option value="unlimited1">
+              3GB {{ 'unlimited' | translate }}
+            </mat-option>
+            <mat-option value="unlimited2">
+              4GB {{ 'unlimited' | translate }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="selType.hasError('required')">
+            {{ 'choose_type_of_payment' | translate }}
+          </mat-error>
+        </mat-form-field>
       </ion-col>
     </ion-row>
 
@@ -76,16 +80,20 @@
 
     <ion-row class="payment_row">
       <ion-col>
-        <mat-select placeholder="{{ 'debit_card' | translate }}" [formControl]="setMethod" [(ngModel)]="top_Data.method" class="select_class"
-          required>
-          <mat-option value="Visa">
-            {{ 'visa' | translate }}
-          </mat-option>
-          <mat-option value="Paypal">
-            {{ 'paypal' | translate }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="setMethod.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
+        <mat-form-field>
+          <mat-select placeholder="{{ 'debit_card' | translate }}" [formControl]="setMethod" [(ngModel)]="top_Data.method" class="select_class"
+            required>
+            <mat-option value="Visa">
+              {{ 'visa' | translate }}
+            </mat-option>
+            <mat-option value="Paypal">
+              {{ 'paypal' | translate }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="setMethod.hasError('required')">
+            {{ 'choose_type_of_payment' | translate }}
+          </mat-error>
+        </mat-form-field>
       </ion-col>
     </ion-row>
 

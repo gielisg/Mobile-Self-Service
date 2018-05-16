@@ -60,42 +60,20 @@
       </ion-col>
     </ion-row>
     <ion-row class="type_number_date">
-      <ion-col col-3>
+      <ion-col col-6>
         <ion-row class="full_height">
           <span class="name_span">
             {{ 'status' | translate }}
           </span>
           <span class="detail_span">
-            {{list.status}}
+            {{ list.status | translate}}
           </span>
         </ion-row>
       </ion-col>
 
-      <ion-col col-6 *ngIf="list.change_state">
-        <ion-row class="full_height">
-          <span class="name_span">
-            {{ 'status' | translate }}
-          </span>
-          <mat-form-field class="matchange_state">
-            <mat-select [(ngModel)]="list.status">
-
-              <mat-option value="open">
-                {{ 'open' | translate }}
-              </mat-option>
-              <mat-option value="close">
-                {{ 'close' | translate }}
-              </mat-option>
-            </mat-select>
-
-          </mat-form-field>
-        </ion-row>
+      <ion-col col-1>
       </ion-col>
 
-      <ion-col col-4>
-      </ion-col>
-
-      <ion-col col-1 *ngIf="list.change_state">
-      </ion-col>
       <ion-col col-5 class="right_col">
         <ion-row class="full_height">
           <button ion-button class="mat-button change_button" (click)="change_state(i)">
@@ -117,31 +95,6 @@
         </ion-row>
       </ion-col>
 
-      <ion-col col-6 *ngIf="list.change_plan">
-        <ion-row class="full_height">
-          <span class="name_span">
-            {{ 'plan' | translate }}
-          </span>
-          <mat-form-field class="matchange_plan">
-
-            <mat-select [(ngModel)]="list.plan" class="select_class" required>
-              <mat-option value="saver1">
-                {{ 'saver1' | translate }}
-              </mat-option>
-              <mat-option value="saver2">
-                {{ 'saver2' | translate }}
-              </mat-option>
-              <mat-option value="saver3">
-                {{ 'saver3' | translate }}
-              </mat-option>
-              <mat-option value="saver4">
-                {{ 'saver4' | translate }}
-              </mat-option>
-            </mat-select>
-
-          </mat-form-field>
-        </ion-row>
-      </ion-col>
       <ion-col col-1>
       </ion-col>
       <ion-col col-5 class="right_col">

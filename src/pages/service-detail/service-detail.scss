@@ -1,59 +1,56 @@
 page-service-detail {
-
-    .header_class{
+    .header_class {
         background-color: white;
-        box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.3);
+        box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    .header_span{
+    .header_span {
         color: black;
         font-weight: bold;
     }
-    .header_row{
+    .header_row {
         height: 60px !important;
     }
-    .header_back_icon{
+    .header_back_icon {
         margin-right: auto;
         margin-top: auto;
         margin-bottom: auto;
         margin-left: 5px;
         font-size: 2.5rem;
     }
-    .payment_id{
+    .payment_id {
         text-align: center;
         width: 100%;
         margin: auto;
     }
-
-    .bill_content{
+    .bill_content {
         background-color: #fafafa;
     }
-    .main_row{
+    .main_row {
         margin-top: 0%;
         border: 1px solid #ddd;
         border-radius: 10px;
         padding: 10px;
         background-color: white;
     }
-    .name_span{
+    .name_span {
         width: 100%;
         font-size: 1.4rem;
         color: #3982a3;
         font-weight: bold;
     }
-    .detail_span{
+    .detail_span {
         width: 100%;
         font-size: 1.3rem;
         margin-top: 5px;
         font-weight: bold;
     }
-    .first_row{
+    .first_row {
         margin-top: 5px;
         border-bottom: 2px solid #ddd;
         margin-bottom: 5px;
         padding-bottom: 3px;
     }
-    .last_row{
+    .last_row {
         border: none;
     }
-
 }

@@ -36,15 +36,20 @@
 
     <ion-row class="payment_row">
       <ion-col>
-        <mat-select placeholder="{{ 'select' | translate }}" [formControl]="selType" [(ngModel)]="pay_Data.method" class="select_class" required>
-          <mat-option value="Visa">
-            {{ 'visa' | translate }}
-          </mat-option>
-          <mat-option value="Paypal">
-            {{ 'paypal' | translate }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="selType.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
+        <mat-form-field>
+          <mat-select placeholder="{{ 'select' | translate }}" [formControl]="selType" [(ngModel)]="pay_Data.method" class="select_class"
+            required>
+            <mat-option value="Visa">
+              {{ 'visa' | translate }}
+            </mat-option>
+            <mat-option value="Paypal">
+              {{ 'paypal' | translate }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="selType.hasError('required')">
+            {{ 'choose_type_of_payment' | translate }}
+          </mat-error>
+        </mat-form-field>
       </ion-col>
     </ion-row>
 
@@ -96,12 +101,16 @@
     <ion-row class="payment_row">
       <ion-col col-4>
         <ion-row class="full_height">
-          <mat-select placeholder="--" [formControl]="selExm" [(ngModel)]="pay_Data.exm" class="expire_select" required>
-            <mat-option *ngFor="let list of expireMonth" value="{{list}}">
-              {{list}}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="selExm.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
+          <mat-form-field>
+            <mat-select placeholder="--" [formControl]="selExm" [(ngModel)]="pay_Data.exm" class="expire_select" required>
+              <mat-option *ngFor="let list of expireMonth" value="{{list}}">
+                {{list}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="selExm.hasError('required')">
+              {{ 'choose_type_of_payment' | translate }}
+            </mat-error>
+          </mat-form-field>
 
           <!-- <ion-select [(ngModel)]="pay_Data.exm" class="expire_select">
           <ion-option value="none">--</ion-option>
@@ -112,7 +121,8 @@
       </ion-col>
       <ion-col col-4>
         <ion-row class="full_height">
-          <mat-select placeholder="{{ 'select' | translate }}" [formControl]="selExy" [(ngModel)]="pay_Data.exy" class="expire_select" required>
+          <mat-select placeholder="{{ 'select' | translate }}" [formControl]="selExy" [(ngModel)]="pay_Data.exy" class="expire_select"
+            required>
             <mat-option *ngFor="let list of expireYear" value="{{list}}">
               {{list}}
             </mat-option>

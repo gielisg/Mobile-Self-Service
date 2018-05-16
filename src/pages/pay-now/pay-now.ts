@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { FormControl, Validators } from '@angular/forms';
 import { PaynowCheckPage } from '../paynow-check/paynow-check';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the PayNowPage page.
@@ -26,6 +27,7 @@ export class PayNowPage {
   animalControl = new FormControl('', [Validators.required]);
 
   public pay_Data = { "name": "", "method": "", "cardnum": "", "exm": "none", "exy": "2018" };
+  public cancen_enable: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
     public apiprovider: ApiproviderProvider, public translate: TranslateService, public modalCtrl: ModalController) {
@@ -34,9 +36,11 @@ export class PayNowPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PayNowPage');
     this.ionicInit();
+    this.cancen_enable = false;
   }
 
   goback() {
+    this.cancen_enable = true;
     this.navCtrl.pop();
   }
 
@@ -54,8 +58,26 @@ export class PayNowPage {
     profileModal.onDidDismiss(data => {
       console.log(data);
       console.log("finish payment");
+      this.navCtrl.push(HomePage);
     });
     profileModal.present();
+  }
+
+  completeAddCompany(comProfileForm) {
+
+    console.log(comProfileForm.valid);
+    console.log(comProfileForm);
+
+    if (comProfileForm.valid && !this.cancen_enable) {
+      let profileModal = this.modalCtrl.create(PaynowCheckPage);
+      profileModal.onDidDismiss(data => {
+        console.log(data);
+        console.log("finish payment");
+        this.navCtrl.push(HomePage);
+      });
+      profileModal.present();
+    }
+
   }
 
 }

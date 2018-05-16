@@ -32,51 +32,58 @@
     </span>
   </ion-row>
 
-  <ion-row class="payment_row">
-    <ion-col>
-      <mat-select placeholder="{{ 'select' | translate }}" [(ngModel)]="pay_Data.method" class="select_class" [formControl]="animalControl" required>
-        <mat-option value="Visa">
-          {{ 'visa' | translate }}
-        </mat-option>
-        <mat-option value="Paypal">
-          {{ 'paypal' | translate }}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="animalControl.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
-    </ion-col>
-  </ion-row>
+  <form #comProfileForm="ngForm" id="comProfileForm" (ngSubmit)="completeAddCompany(comProfileForm)" novalidate>
+    <ion-row class="payment_row">
+      <ion-col col-12>
+        <mat-form-field>
+          <mat-select placeholder="{{ 'select' | translate }}" [(ngModel)]="pay_Data.method" class="select_class" required name="select_paymode">
+            <mat-option value="Visa">
+              {{ 'visa' | translate }}
+            </mat-option>
+            <mat-option value="Paypal">
+              {{ 'paypal' | translate }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            {{ 'choose_type_of_payment' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </ion-col>
+    </ion-row>
 
-  <ion-row class="payment_row">
-    <span class="payment_title_span">
-      {{ 'amount' | translate }}
-    </span>
-  </ion-row>
+    <ion-row class="payment_row">
+      <span class="payment_title_span">
+        {{ 'amount' | translate }}
+      </span>
+    </ion-row>
 
-  <ion-row class="payment_row">
-    <span class="payment_amount_span">
-      $45.456
-    </span>
-  </ion-row>
+    <ion-row class="payment_row">
+      <span class="payment_amount_span">
+        $45.456
+      </span>
+    </ion-row>
 
-  <ion-row class="add_cancel">
-    <ion-col col-1>
-    </ion-col>
-    <ion-col col-5>
-      <ion-row class="button_row">
-        <button ion-button class="button_style2" (click)="goback()">
-          {{ 'cancel_UP' | translate }}
-        </button>
-      </ion-row>
-    </ion-col>
-    <ion-col col-5>
-      <ion-row class="button_row">
-        <button ion-button class="button_style1" (click)="pay_now()">
-          {{ 'pay' | translate }}
-        </button>
-      </ion-row>
-    </ion-col>
-    <ion-col col-1>
-    </ion-col>
-  </ion-row>
+    <ion-row class="add_cancel">
+      <ion-col col-1>
+      </ion-col>
+      <ion-col col-5>
+        <ion-row class="button_row">
+          <button ion-button class="button_style2" (click)="goback()">
+            {{ 'cancel_UP' | translate }}
+          </button>
+        </ion-row>
+      </ion-col>
+      <ion-col col-5>
+        <ion-row class="button_row">
+          <button ion-button class="button_style1">
+            {{ 'pay' | translate }}
+          </button>
+        </ion-row>
+      </ion-col>
+      <ion-col col-1>
+      </ion-col>
+    </ion-row>
+
+  </form>
 
 </ion-content>

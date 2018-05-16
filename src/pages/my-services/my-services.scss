@@ -1,56 +1,54 @@
 page-my-services {
-
-    .header_class{
+    .header_class {
         background-color: white;
-        box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.3);
+        box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    .header_row{
+    .header_row {
         margin: auto;
         height: 40px;
     }
-    .header_span{
+    .header_span {
         text-align: center;
         margin: auto;
         font-size: 1.8rem;
         color: #3982a3;
         font-weight: bold;
     }
-    .header_icon{
+    .header_icon {
         margin: auto;
         font-size: 2.5rem;
     }
-
-    .myservice_content{
+    .myservice_content {
         background-color: #fafafa;
     }
-    .main_row{
+    .main_row {
         background-color: white;
         border: 1px solid #ddd;
         border-radius: 5px;
         padding: 2px;
         background-color: white;
     }
-    .left_col{
+    .left_col {
         text-align: left;
     }
-    .right_col{
+    .right_col {
         text-align: right;
     }
-    .center_col{
+    .center_col {
         text-align: center
     }
-    .name_span{
+    .name_span {
         width: 100%;
         font-size: 1.7rem;
         color: #3982a3;
         font-weight: bold;
     }
-    .detail_span{
+    .detail_span {
         width: 100%;
         font-size: 1.7rem;
         margin-top: 5px;
     }
-    .change_button{
+    .change_button {
         height: 25px;
         color: white;
         font-weight: bold;
@@ -61,28 +59,28 @@ page-my-services {
         border-radius: 5px;
         width: 100%;
     }
-    .type_number_date{
+    .type_number_date {
         margin-top: 3px;
         margin-bottom: 3px;
     }
-    .service_back_style{
+    .service_back_style {
         width: 100%;
         height: 100%;
         margin: auto;
     }
-    .margin_top{
+    .margin_top {
         margin-top: 5%;
         margin-bottom: 3%;
     }
-    .image_button_row{
+    .image_button_row {
         // position: absolute;
         height: 100%;
         background-color: #3c82a3;
     }
-    .image_button_row ion-col{
+    .image_button_row ion-col {
         height: 100% !important;
     }
-    .clear_button{
+    .clear_button {
         margin-top: auto;
         margin-bottom: auto;
         margin-right: auto;
@@ -90,23 +88,22 @@ page-my-services {
         height: 100%;
         padding: 0px;
     }
-    .bottom_image_row{
+    .bottom_image_row {
         position: relative;
     }
-
-    .service_iconRow{
+    .service_iconRow {
         // height: 30px;
     }
-    .serviceDetail_icon{
+    .serviceDetail_icon {
         padding-top: 15px;
         margin: auto;
         color: white;
     }
-    .servicespan_rpw{
+    .servicespan_rpw {
         // height: 30px;
         padding-top: 8px;
     }
-    .serviceDetail_span{
+    .serviceDetail_span {
         margin: auto;
         color: white;
         text-align: center;
@@ -114,5 +111,4 @@ page-my-services {
         width: 100%;
         font-size: 12px;
     }
-
 }

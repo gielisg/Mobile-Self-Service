@@ -1,35 +1,34 @@
 page-signin {
-
-    .logo_row{
+    .logo_row {
         margin-top: 10%;
     }
-    .margin_content{
+    .margin_content {
         background-color: #fafafa;
     }
-    .logo_class{
+    .logo_class {
         width: 70%;
         height: 100%;
         margin: auto;
     }
-    .username_row{
+    .username_row {
         margin-top: 20%;
         width: 90%;
         margin-left: 5%;
     }
-    .input_class{
+    .input_class {
         border-bottom: 1px solid #2e2e2e;
         margin-left: auto;
         margin-right: auto;
     }
-    .password_row{
+    .password_row {
         margin-top: 5%;
         width: 90%;
         margin-left: 5%;
     }
-    .login_row{
+    .login_row {
         margin-top: 20%;
     }
-    .button_class{
+    .button_class {
         width: 90%;
         margin: auto;
         text-transform: initial;
@@ -45,20 +44,18 @@ page-signin {
         max-width: 500px;
         width: 100%;
     }
-      
     .example-full-width {
         width: 100%;
     }
-    .signup_row{
+    .signup_row {
         margin-top: 10%;
     }
-    .sign_up_span{
+    .sign_up_span {
         margin: auto;
         font-size: 1.5rem;
     }
-    .sign_up_page{
+    .sign_up_page {
         color: blue;
         cursor: pointer;
     }
-
 }

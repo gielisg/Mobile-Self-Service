@@ -28,7 +28,7 @@ export class ServiceBundlePage {
 
   id = 'AngularChart2';
   width = "100%";
-  height = 350;
+  height = 300;
   type = 'pie2d';
   dataFormat = 'json';
   dataSource;
