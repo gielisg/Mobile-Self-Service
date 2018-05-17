@@ -10,6 +10,7 @@ import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file'
 
 import { TranslateService } from '@ngx-translate/core';
+import { AuthserviceProvider } from '../../providers/authservice/authservice';
 
 
 @Component({
@@ -23,13 +24,13 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController
     , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public transfer: FileTransfer
-    , public file: File, public translate: TranslateService, public menu: MenuController) {
+    , public file: File, public translate: TranslateService, public menu: MenuController, public authservice: AuthserviceProvider) {
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
-    this.switch_mode = false;
+    // this.switch_mode = true;
     this.ionicInit();
 
     console.log(this.switch_mode);
@@ -95,6 +96,27 @@ export class HomePage {
     let status = "download_bill_total";
     let bill_download = { "email": "", "due_date": "", "amount_owin": "", "status": "download_bill_total", "index": "" };
     bill_download.email = localStorage.getItem("user_email");
+    let loading = this.loadingCtrl.create({
+      content: "Please Wait..."
+    });
+    loading.present();
+
+    this.authservice.get_billList()
+
+      .subscribe(
+        data => {
+          if (data) {
+            console.log(data);
+            // localStorage.setItem("login_infor", JSON.stringify(this.user_Data));
+            // this.navCtrl.push(HomePage);
+
+          }
+          loading.dismiss();
+
+        },
+        error => {
+          loading.dismiss();
+        });
 
     // this.apiprovider.postData(bill_download).then((result) => {
     //   console.log(Object(result));
@@ -119,6 +141,7 @@ export class HomePage {
     console.log(localStorage.getItem("set_lng"));
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
+      this.switch_mode = true;
     } else {
       this.translate.use(localStorage.getItem("set_lng"));
       if (localStorage.getItem("set_lng") == "en") {

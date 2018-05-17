@@ -60,16 +60,26 @@
     </ion-row>
 
     <ion-row class="payment_row topup_calender">
-      <mat-form-field>
-        <input matInput [(ngModel)]="top_Data.start_date" [matDatepicker]="myDatepicker" [formControl]="changeDate">
-        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-        <mat-datepicker #myDatepicker></mat-datepicker>
+      <ion-col>
+        <!-- <mat-form-field>
+          <input matInput [(ngModel)]="top_Data.start_date" [matDatepicker]="myDatepicker" [formControl]="changeDate"> -->
 
-        <mat-error *ngIf="changeDate.hasError('required')">
-          <span>{{ 'start_date_required' | translate }}</span>
-        </mat-error>
+        <ion-datetime [ngClass]="{'error_border':show_error == true, 'normal_border':show_error == false}" displayFormat="MM/DD/YYYY hh:mm a" (ionChange)="ionchange_date()" [(ngModel)]="top_Data.start_date" name="start_date"></ion-datetime>
+        <!-- <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker></mat-datepicker>
 
-      </mat-form-field>
+          <mat-error *ngIf="changeDate.hasError('required')">
+            <span>{{ 'start_date_required' | translate }}</span>
+          </mat-error>
+
+        </mat-form-field> -->
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="cal_error" *ngIf="show_error">
+      <span>
+        {{ 'start_date_required' | translate }}
+      </span>
     </ion-row>
 
     <ion-row class="payment_row">
