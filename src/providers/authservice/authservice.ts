@@ -28,6 +28,9 @@ export class AuthserviceProvider {
       UserCode: username, Password: password
     }))
       .map(token => {
+        console.log(token);
+        console.log(JSON.parse(JSON.stringify(token))._body.replace(/"/g, ''));
+        localStorage.setItem("auth_token", JSON.parse(JSON.stringify(token))._body.replace(/"/g, ''));
         this.fillLoggedUser(username, password, token);
         return true;
 
@@ -37,16 +40,10 @@ export class AuthserviceProvider {
       );
   }
 
-  get_billList() {
-    console.log(JSON.stringify({
-      PrivateKey: this.config.WebPrivateKey, DatabaseUserCode: this.config.DatabaseUserCode, DatabasePassword: this.config.DatabasePassword,
-
-    }));
-
+  get_bill() {
     // M7BeGsamuKVwMQg5|pOw2K41uggDNKHxtCUKuXw==|c7BxGR9Oq4+a/aYM8xm7/JhnVe4YhUa5sAGP8kclkLeffXWse6A=
-
     let request_param = {
-      "SessionKey": "M7BeGsamuKVwMQg5|pOw2K41uggDNKHxtCUKuXw==|c7BxGR9Oq4+a/aYM8xm7/JhnVe4YhUa5sAGP8kclkLeffXWse6A=",
+      "SessionKey": localStorage.getItem("auth_token"),
       "PagingSortsAndFilters": {
         "SkipRecords": 0,
         "PropertyName": {},
@@ -57,35 +54,42 @@ export class AuthserviceProvider {
         "TakeRecords": 1,
       }
     };
-    let PagingSortsAndFilters = {
-      "SkipRecords": 0, "PropertyName": {}, "Sort": {
-        "Direction": "Descending",
-        "TargetProperty": "Id",
-      },
-      "TakeRecords": 1,
-    };
-    return this.http.post('https://ua.selcomm.com/SelcommWS/1.0263/Bill.svc/rest/BillList', (request_param))
+    console.log((request_param));
+    return this.http.post('https://ua.selcomm.com/SelcommWS/1.0267/Bill.svc/rest/BillList', JSON.stringify(request_param))
       .map(token => {
-        console.log(token);
-        return true;
+        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return return_data;
 
       })
       .pipe(
 
       );
+  }
 
+  get_billList() {
+    // M7BeGsamuKVwMQg5|pOw2K41uggDNKHxtCUKuXw==|c7BxGR9Oq4+a/aYM8xm7/JhnVe4YhUa5sAGP8kclkLeffXWse6A=
+    let request_param = {
+      "SessionKey": localStorage.getItem("auth_token"),
+      "PagingSortsAndFilters": {
+        "SkipRecords": 0,
+        "PropertyName": {},
+        "Sort": {
+          "Direction": "Descending",
+          "TargetProperty": "Id",
+        },
+        "TakeRecords": 50,
+      }
+    };
+    console.log((request_param));
+    return this.http.post('https://ua.selcomm.com/SelcommWS/1.0267/Bill.svc/rest/BillList', JSON.stringify(request_param))
+      .map(token => {
+        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return return_data;
 
-    // return this.http.post('https://ua.selcomm.com/SelcommWS/1.0263/Bill.svc/rest/BillList', JSON.stringify({
-    //   "SessionKey": "bmpu2k9+VF4FXwM5|Xs0tz6kyAYykTKUOf4k+iw==|qCJNBy/is5n/2hgfU678/FsoovMgLCCrZ41v9XqHFsX+U6LGVPA=", "PagingSortsAndFilters": PagingSortsAndFilters
-    // }))
-    //   .map(token => {
-    //     console.log(token);
-    //     return true;
+      })
+      .pipe(
 
-    //   })
-    //   .pipe(
-
-    //   );
+      );
   }
 
 

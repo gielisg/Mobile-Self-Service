@@ -15,12 +15,12 @@
     </ion-row>
     <ion-row class="normal_margin">
       <span class="dollar_amount_span">
-        $120.20
+        ${{bill_data.bill_amount}}
       </span>
     </ion-row>
     <ion-row class="normal_margin">
       <span class="dollar_date_span">
-        {{ 'due' | translate }} 12-12-2015
+        {{ 'due' | translate }} {{bill_data.bill_date}}
       </span>
     </ion-row>
   </ion-row>

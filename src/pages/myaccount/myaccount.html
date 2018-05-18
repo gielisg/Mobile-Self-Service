@@ -35,7 +35,7 @@
       </ion-row>
       <ion-row class="normal_margin">
         <span class="dollar_amount_span">
-          40000560
+          {{bill_data.account_number}}
         </span>
       </ion-row>
     </ion-col>
@@ -47,7 +47,7 @@
       </ion-row>
       <ion-row class="normal_margin">
         <span class="dollar_amount_span">
-          $120.20
+          ${{bill_data.bill_amount}}
         </span>
       </ion-row>
     </ion-col>
@@ -61,7 +61,7 @@
     </ion-row>
     <ion-row class="normal_margin">
       <span class="dollar_amount_span">
-        12 March 2017
+        {{bill_data.bill_date}}
       </span>
     </ion-row>
   </ion-row>

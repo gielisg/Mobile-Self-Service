@@ -29,6 +29,8 @@ export class PayNowPage {
   public pay_Data = { "name": "", "method": "", "cardnum": "", "exm": "none", "exy": "2018" };
   public cancen_enable: boolean;
 
+  public pay_amount: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
     public apiprovider: ApiproviderProvider, public translate: TranslateService, public modalCtrl: ModalController) {
   }
@@ -37,6 +39,7 @@ export class PayNowPage {
     console.log('ionViewDidLoad PayNowPage');
     this.ionicInit();
     this.cancen_enable = false;
+    this.pay_amount = this.navParams.data.navParams;
   }
 
   goback() {

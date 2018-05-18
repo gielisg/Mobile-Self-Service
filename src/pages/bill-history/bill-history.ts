@@ -6,6 +6,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file'
 
 import { TranslateService } from '@ngx-translate/core';
+import { AuthserviceProvider } from '../../providers/authservice/authservice';
 
 
 /**
@@ -67,7 +68,7 @@ export class BillHistoryPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController
     , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public transfer: FileTransfer, public file: File
-    , public translate: TranslateService) {
+    , public translate: TranslateService, public authservice: AuthserviceProvider) {
   }
 
   ionViewDidLoad() {
@@ -81,64 +82,56 @@ export class BillHistoryPage {
   }
 
   ionicInit() {
+    let loading = this.loadingCtrl.create({
+      content: "Please Wait..."
+    });
+    loading.present();
 
-    console.log(localStorage.getItem("set_lng"));
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-      this.translate.use('en');
-    } else {
-      this.translate.use(localStorage.getItem("set_lng"));
-    }
+    this.authservice.get_billList()
 
-    this.user_Data.email = localStorage.getItem("user_email");
-    this.detail_Data = Array();
+      .subscribe(
+        data => {
+          if (data) {
+
+            console.log(localStorage.getItem("set_lng"));
+            if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
+              this.translate.use('en');
+            } else {
+              this.translate.use(localStorage.getItem("set_lng"));
+            }
+
+            this.user_Data.email = localStorage.getItem("user_email");
+            this.detail_Data = Array();
 
 
-    for (let list of this.hand_code) {
-      let array_data = { "bill_num": "", "due_date": "", "amount_owin": "" };
-      array_data.bill_num = list.bill_num;
-      array_data.amount_owin = list.bill_amount;
-      array_data.due_date = list.due_date;
-      this.detail_Data.push(array_data);
+            for (let list of data.Items) {
+              let array_data = { "bill_num": "", "due_date": "", "amount_owin": "" };
+              array_data.bill_num = list.Number;
+              array_data.amount_owin = list.AmountDue;
+              array_data.due_date = (list.DueDate.split("T")[0]);
+              this.detail_Data.push(array_data);
 
-    }
+            }
 
-    // let loading = this.loadingCtrl.create({
-    //   content: "Please Wait..."
-    // });
-    // loading.present();
-    // let status = "get_bill_history";
-    // this.user_Data.status = status;
-    // this.apiprovider.postData(this.user_Data).then((result) => {
-    //   console.log(Object(result));
-    //   loading.dismiss();
-    //   if (Object(result).status == "success") {
-    //     for (let list of Object(result).detail) {
-    //       let array_data = { "bill_num": "", "due_date": "", "amount_owin": "" };
-    //       array_data.bill_num = list.bill_num;
-    //       array_data.amount_owin = list.bill_amount;
-    //       array_data.due_date = list.due_date;
-    //       this.detail_Data.push(array_data);
+            console.log(data);
+            // console.log(this.bill_data);
 
-    //     }
-    //     console.log(this.user_Data);
-    //   } else {
-    //     let toast = this.toastCtrl.create({
-    //       message: Object(result).detail,
-    //       duration: 2000
-    //     })
-    //     toast.present();
-    //   };
+          }
+          loading.dismiss();
 
-    // }, (err) => {
-    //   let toast = this.toastCtrl.create({
-    //     message: "No Network",
-    //     duration: 2000
-    //   })
-    //   toast.present();
-    //   loading.dismiss();
-    // });
+        },
+        error => {
+          loading.dismiss();
+        });
 
   }
+
+  set_date(value) {
+    let array_sam = value.split("-");
+    console.log(array_sam);
+    return array_sam[1] + "-" + array_sam[2] + "-" + array_sam[0];
+  }
+
 
   download(index) {
     console.log(this.detail_Data[index]);
@@ -148,23 +141,6 @@ export class BillHistoryPage {
     bill_download.due_date = this.detail_Data[index].due_date;
     bill_download.amount_owin = this.detail_Data[index].amount_owin;
     bill_download.index = index;
-    // this.user_Data.status = status;
-    // this.apiprovider.downloadData(bill_download);
-    // this.apiprovider.postData(bill_download).then((result) => {
-    //   console.log(Object(result));
-    //   if (Object(result).status == "success") {
-    //     this.download_pdf(index);
-    //   } else {
-
-    //   };
-
-    // }, (err) => {
-    //   let toast = this.toastCtrl.create({
-    //     message: "No Network",
-    //     duration: 2000
-    //   })
-    //   toast.present();
-    // });
   }
 
   download_pdf(index) {
@@ -208,20 +184,6 @@ export class BillHistoryPage {
       });
 
     });
-
-
-    // this.fileTransfer.download(url, 'file:///storage/emulated/0/Android/data/com.self.serviceapp/files/' + 'MyPDF' + index + '.pdf').then((entry) => {
-    //   console.log(this.file.externalDataDirectory);
-    //   this.file.moveFile('file:///storage/emulated/0/Android/data/com.self.serviceapp/files/', 'MyPDF' + index + '.pdf', 'file:///storage/emulated/0/Self_Service/', 'MyPDF' + index + '.pdf').then((entry_val) => {
-    //     console.log('move complete: ' + entry_val.toURL());
-    //   }, (error) => {
-    //     console.log("move failed");
-    //   })
-    //   console.log('download complete: ' + entry.toURL());
-    // }, (error) => {
-    //   console.log('download failed');
-    // });
-
   }
 
 }

@@ -10,6 +10,7 @@ import { File } from '@ionic-native/file'
 
 
 import { TranslateService } from '@ngx-translate/core';
+import { AuthserviceProvider } from '../../providers/authservice/authservice';
 
 /**
  * Generated class for the MyaccountPage page.
@@ -28,8 +29,10 @@ export class MyaccountPage {
   fileTransfer: FileTransferObject = this.transfer.create();
   public switch_mode: boolean;
 
+  public bill_data = { "bill_amount": "", "bill_date": "", "account_number": "" };
+
   constructor(public navCtrl: NavController, public translate: TranslateService, public navParams: NavParams, public loadingCtrl: LoadingController
-    , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public transfer: FileTransfer
+    , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public transfer: FileTransfer, public authservice: AuthserviceProvider
     , public file: File) {
   }
 
@@ -47,29 +50,13 @@ export class MyaccountPage {
     this.navCtrl.push(PaymentMethodPage);
   }
   goto_payNow() {
-    this.navCtrl.push(PayNowPage);
+    this.navCtrl.push(PayNowPage, {navParams: this.bill_data.bill_amount});
   }
 
   click_download() {
     let status = "download_bill_total";
     let bill_download = { "email": "", "due_date": "", "amount_owin": "", "status": "download_bill_total", "index": "" };
     bill_download.email = localStorage.getItem("user_email");
-
-    // this.apiprovider.postData(bill_download).then((result) => {
-    //   console.log(Object(result));
-    //   if (Object(result).status == "success") {
-    //     this.download_bill();
-    //   } else {
-
-    //   };
-
-    // }, (err) => {
-    //   let toast = this.toastCtrl.create({
-    //     message: "No Network",
-    //     duration: 2000
-    //   })
-    //   toast.present();
-    // });
   }
   download_bill() {
 
@@ -113,18 +100,47 @@ export class MyaccountPage {
     });
   }
 
+  set_date(value) {
+    let array_sam = value.split("-");
+    console.log(array_sam);
+    return array_sam[1] + "-" + array_sam[2] + "-" + array_sam[0];
+  }
+
   ionicInit() {
-    console.log(localStorage.getItem("set_lng"));
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-      this.translate.use('en');
-    } else {
-      this.translate.use(localStorage.getItem("set_lng"));
-      if (localStorage.getItem("set_lng") == "en") {
-        this.switch_mode = true;
-      } else {
-        this.switch_mode = false;
-      }
-    }
+    let loading = this.loadingCtrl.create({
+      content: "Please Wait..."
+    });
+    loading.present();
+
+    this.authservice.get_billList()
+
+      .subscribe(
+        data => {
+          if (data) {
+            console.log(data);
+            this.bill_data.bill_amount = data.Items[0].AmountDue;
+            this.bill_data.bill_date = this.set_date(data.Items[0].DueDate.split("T")[0]);
+            this.bill_data.account_number = data.Items[0].ContactCode;
+            console.log(this.bill_data);
+            console.log(localStorage.getItem("set_lng"));
+            if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
+              this.translate.use('en');
+            } else {
+              this.translate.use(localStorage.getItem("set_lng"));
+              if (localStorage.getItem("set_lng") == "en") {
+                this.switch_mode = true;
+              } else {
+                this.switch_mode = false;
+              }
+            }
+
+          }
+          loading.dismiss();
+
+        },
+        error => {
+          loading.dismiss();
+        });
   }
 
 }

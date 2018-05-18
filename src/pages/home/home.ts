@@ -22,6 +22,8 @@ export class HomePage {
   fileTransfer: FileTransferObject = this.transfer.create();
   public switch_mode: boolean;
 
+  public bill_data = { "bill_amount": "", "bill_date": "" };
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController
     , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public transfer: FileTransfer
     , public file: File, public translate: TranslateService, public menu: MenuController, public authservice: AuthserviceProvider) {
@@ -48,7 +50,7 @@ export class HomePage {
     this.navCtrl.push(MyDevicesPage);
   }
   goto_paynow() {
-    this.navCtrl.push(PayNowPage);
+    this.navCtrl.push(PayNowPage, {navParams: this.bill_data.bill_amount});
   }
   download_bill() {
 
@@ -107,8 +109,56 @@ export class HomePage {
         data => {
           if (data) {
             console.log(data);
-            // localStorage.setItem("login_infor", JSON.stringify(this.user_Data));
-            // this.navCtrl.push(HomePage);
+            this.bill_data.bill_amount = data.Items[0].AmountDue;
+            this.bill_data.bill_date = this.set_date(data.Items[0].DueDate.split("T")[0]);
+            console.log(this.bill_data);
+
+          }
+          loading.dismiss();
+
+        },
+        error => {
+          loading.dismiss();
+        });
+  }
+
+
+  set_date(value) {
+    let array_sam = value.split("-");
+    console.log(array_sam);
+    return array_sam[1] + "-" + array_sam[2] + "-" + array_sam[0];
+  }
+
+  ionicInit() {
+    let loading = this.loadingCtrl.create({
+      content: "Please Wait..."
+    });
+    loading.present();
+
+    this.authservice.get_bill()
+
+      .subscribe(
+        data => {
+          if (data) {
+
+            this.menu.swipeEnable(true);
+            console.log(localStorage.getItem("set_lng"));
+            if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
+              this.translate.use('en');
+              this.switch_mode = true;
+            } else {
+              this.translate.use(localStorage.getItem("set_lng"));
+              if (localStorage.getItem("set_lng") == "en") {
+                this.switch_mode = true;
+              } else {
+                this.switch_mode = false;
+              }
+            }
+
+            // console.log(data);
+            this.bill_data.bill_amount = data.Items[0].AmountDue;
+            this.bill_data.bill_date = this.set_date(data.Items[0].DueDate.split("T")[0]);
+            // console.log(this.bill_data);
 
           }
           loading.dismiss();
@@ -118,38 +168,6 @@ export class HomePage {
           loading.dismiss();
         });
 
-    // this.apiprovider.postData(bill_download).then((result) => {
-    //   console.log(Object(result));
-    //   if (Object(result).status == "success") {
-    //     this.download_bill();
-    //   } else {
-
-    //   };
-
-    // }, (err) => {
-    //   let toast = this.toastCtrl.create({
-    //     message: "No Network",
-    //     duration: 2000
-    //   })
-    //   toast.present();
-    // });
-
-  }
-
-  ionicInit() {
-    this.menu.swipeEnable(true);
-    console.log(localStorage.getItem("set_lng"));
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-      this.translate.use('en');
-      this.switch_mode = true;
-    } else {
-      this.translate.use(localStorage.getItem("set_lng"));
-      if (localStorage.getItem("set_lng") == "en") {
-        this.switch_mode = true;
-      } else {
-        this.switch_mode = false;
-      }
-    }
   }
 
 }
