@@ -30,9 +30,100 @@ export class AuthserviceProvider {
       .map(token => {
         console.log(token);
         console.log(JSON.parse(JSON.stringify(token))._body.replace(/"/g, ''));
-        localStorage.setItem("auth_token", JSON.parse(JSON.stringify(token))._body.replace(/"/g, ''));
+        localStorage.setItem("session_key", JSON.parse(JSON.stringify(token))._body.replace(/"/g, ''));
         this.fillLoggedUser(username, password, token);
         return true;
+      })
+      .pipe(
+
+      );
+  }
+
+  account_balance() {
+    return this.http.get('https://ua.selcomm.com/SelcommWS/1.0267/Account.svc/rest/AccountBalance?SessionKey=' + localStorage.getItem("session_key") + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&IncludeUnbilledUsage=true&IncludeOneOffAndRecurringCharges=true')
+      .map(token => {
+        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return return_data;
+
+      })
+      .pipe(
+
+      );
+  }
+
+  get_accountDetail() {
+    return this.http.get('https://ua.selcomm.com/SelcommWS/1.0267/Account.svc/rest/Account?SessionKey=' + localStorage.getItem("session_key") + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&RefreshCache=true')
+      .map(token => {
+        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return return_data;
+
+      })
+      .pipe(
+
+      );
+  }
+
+  update_email() {
+    return this.http.get('https://ua.selcomm.com/SelcommWS/1.0267/Account.svc/rest/Account?SessionKey=' + localStorage.getItem("session_key") + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&RefreshCache=true')
+      .map(token => {
+        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return return_data;
+
+      })
+      .pipe(
+
+      );
+  }
+
+  update_address(new_address) {
+    let param = {
+      "SessionKey": localStorage.getItem("session_key"),
+      "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
+      "Address": {
+        "Address1": " 100 Rose Street",
+        "AddressType": {
+          "Code": "BA",
+        },
+        "Country": {
+          "Code": "AU"
+        },
+        "PostCode": {
+          "Code": "2609"
+        },
+        "State": {
+          "Code": "NSW",
+        },
+        "Suburb": "TEST",
+      }
+    };
+    return this.http.put('https://ua.selcomm.com/SelcommWS/1.0267/Address.svc/rest/AddressUpdateByContact', (param))
+      .map(token => {
+        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return return_data;
+
+      })
+      .pipe(
+
+      );
+  }
+
+  update_phone() {
+    return this.http.get('https://ua.selcomm.com/SelcommWS/1.0267/Account.svc/rest/Account?SessionKey=' + localStorage.getItem("session_key") + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&RefreshCache=true')
+      .map(token => {
+        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return return_data;
+
+      })
+      .pipe(
+
+      );
+  }
+
+  update_name() {
+    return this.http.get('https://ua.selcomm.com/SelcommWS/1.0267/Account.svc/rest/Account?SessionKey=' + localStorage.getItem("session_key") + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&RefreshCache=true')
+      .map(token => {
+        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return return_data;
 
       })
       .pipe(
@@ -41,9 +132,8 @@ export class AuthserviceProvider {
   }
 
   get_bill() {
-    // M7BeGsamuKVwMQg5|pOw2K41uggDNKHxtCUKuXw==|c7BxGR9Oq4+a/aYM8xm7/JhnVe4YhUa5sAGP8kclkLeffXWse6A=
     let request_param = {
-      "SessionKey": localStorage.getItem("auth_token"),
+      "SessionKey": localStorage.getItem("session_key"),
       "PagingSortsAndFilters": {
         "SkipRecords": 0,
         "PropertyName": {},
@@ -67,9 +157,8 @@ export class AuthserviceProvider {
   }
 
   get_billList() {
-    // M7BeGsamuKVwMQg5|pOw2K41uggDNKHxtCUKuXw==|c7BxGR9Oq4+a/aYM8xm7/JhnVe4YhUa5sAGP8kclkLeffXWse6A=
     let request_param = {
-      "SessionKey": localStorage.getItem("auth_token"),
+      "SessionKey": localStorage.getItem("session_key"),
       "PagingSortsAndFilters": {
         "SkipRecords": 0,
         "PropertyName": {},

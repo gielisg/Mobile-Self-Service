@@ -35,6 +35,8 @@ export class HomePage {
     // this.switch_mode = true;
     this.ionicInit();
 
+    console.log(localStorage.getItem('currentUser'));
+
     console.log(this.switch_mode);
   }
   goto_mydetail() {
@@ -50,7 +52,7 @@ export class HomePage {
     this.navCtrl.push(MyDevicesPage);
   }
   goto_paynow() {
-    this.navCtrl.push(PayNowPage, {navParams: this.bill_data.bill_amount});
+    this.navCtrl.push(PayNowPage, { navParams: this.bill_data.bill_amount });
   }
   download_bill() {
 
@@ -135,39 +137,37 @@ export class HomePage {
     });
     loading.present();
 
-    this.authservice.get_bill()
+    this.authservice.get_bill().subscribe(data => {
+      if (data) {
 
-      .subscribe(
-        data => {
-          if (data) {
-
-            this.menu.swipeEnable(true);
-            console.log(localStorage.getItem("set_lng"));
-            if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-              this.translate.use('en');
-              this.switch_mode = true;
-            } else {
-              this.translate.use(localStorage.getItem("set_lng"));
-              if (localStorage.getItem("set_lng") == "en") {
-                this.switch_mode = true;
-              } else {
-                this.switch_mode = false;
-              }
-            }
-
-            // console.log(data);
-            this.bill_data.bill_amount = data.Items[0].AmountDue;
-            this.bill_data.bill_date = this.set_date(data.Items[0].DueDate.split("T")[0]);
-            // console.log(this.bill_data);
-
+        this.menu.swipeEnable(true);
+        console.log(localStorage.getItem("set_lng"));
+        if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
+          this.translate.use('en');
+          this.switch_mode = true;
+        } else {
+          this.translate.use(localStorage.getItem("set_lng"));
+          if (localStorage.getItem("set_lng") == "en") {
+            this.switch_mode = true;
+          } else {
+            this.switch_mode = false;
           }
-          loading.dismiss();
+        }
+        this.bill_data.bill_amount = data.Items[0].AmountDue;
+        this.bill_data.bill_date = this.set_date(data.Items[0].DueDate.split("T")[0]);
+      }
+      loading.dismiss();
 
-        },
-        error => {
-          loading.dismiss();
-        });
-
+    },
+      error => {
+        loading.dismiss();
+      });
+    // this.authservice.account_balance().subscribe(result => {
+    //   console.log(result);
+    // }
+    //   , error => {
+    //     console.log("error");
+    //   });
   }
 
 }

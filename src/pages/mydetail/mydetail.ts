@@ -5,6 +5,7 @@ import { FormControl, Validators } from '@angular/forms';
 
 
 import { TranslateService } from '@ngx-translate/core';
+import { AuthserviceProvider } from '../../providers/authservice/authservice';
 
 /**
  * Generated class for the MydetailPage page.
@@ -34,7 +35,8 @@ export class MydetailPage {
   ]);
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController
-    , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public translate: TranslateService) {
+    , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public translate: TranslateService
+    , public accountServer: AuthserviceProvider) {
   }
 
   ionViewDidLoad() {
@@ -54,45 +56,30 @@ export class MydetailPage {
 
     this.user_Data.email = localStorage.getItem("user_email");
 
-    this.user_Data.email = "veerhunter127@gmail.com";
-    this.user_Data.phone = "123456789";
-    this.user_Data.username = "VeeRHunter";
-    this.user_Data.address = "XX street, YY city, ZZ country";
+    // this.user_Data.email = "veerhunter127@gmail.com";
+    // this.user_Data.phone = "123456789";
+    // this.user_Data.username = "VeeRHunter";
+    // this.user_Data.address = "XX street, YY city, ZZ country";
 
 
-    // let loading = this.loadingCtrl.create({
-    //   content: "Please Wait..."
-    // });
-    // loading.present();
-    // let status = "get_detail";
-    // this.user_Data.status = status;
-    // console.log(this.user_Data);
-    // this.apiprovider.postData(this.user_Data).then((result) => {
-    //   console.log(Object(result));
-    //   loading.dismiss();
-    //   if (Object(result).status == "success") {
-    //     this.user_Data.address = Object(result).detail.address;
-    //     this.user_Data.phone = Object(result).detail.phone;
-    //     this.user_Data.username = Object(result).detail.username;
-    //     console.log(this.user_Data);
-
-    //     // this.navCtrl.push(HomePage);
-    //   } else {
-    //     let toast = this.toastCtrl.create({
-    //       message: Object(result).detail,
-    //       duration: 2000
-    //     })
-    //     toast.present();
-    //   };
-
-    // }, (err) => {
-    //   let toast = this.toastCtrl.create({
-    //     message: "No Network",
-    //     duration: 2000
-    //   })
-    //   toast.present();
-    //   loading.dismiss();
-    // });
+    let loading = this.loadingCtrl.create({
+      content: "Please Wait..."
+    });
+    loading.present();
+    let status = "get_detail";
+    this.user_Data.status = status;
+    console.log(this.user_Data);
+    this.accountServer.get_accountDetail().subscribe(result => {
+      console.log(result);
+      this.user_Data.username = result.FullName;
+      this.user_Data.email = result.ContactEmailAddressList[0].EmailAddress;
+      this.user_Data.address = result.AddressList;
+      this.user_Data.phone = result.ContactPhoneList;
+      loading.dismiss();
+    }, error => {
+      console.log("error");
+      loading.dismiss();
+    });
   }
 
   change_user(name) {
@@ -198,6 +185,27 @@ export class MydetailPage {
         this.change_state.email = !this.change_state.email;
       }
     }
+  }
+
+  update_address() {
+    let loading = this.loadingCtrl.create({
+      content: "Please Wait..."
+    });
+    loading.present();
+    let status = "get_detail";
+    this.user_Data.status = status;
+    console.log(this.user_Data);
+    this.accountServer.update_address(this.user_Data.address).subscribe(result => {
+      console.log(result);
+      // this.user_Data.username = result.FullName;
+      // this.user_Data.email = result.ContactEmailAddressList[0].EmailAddress;
+      // this.user_Data.address = result.AddressList;
+      // this.user_Data.phone = result.ContactPhoneList;
+      loading.dismiss();
+    }, error => {
+      console.log("error");
+      loading.dismiss();
+    });
   }
 
   change_userState() {
