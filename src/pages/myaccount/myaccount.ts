@@ -11,6 +11,7 @@ import { File } from '@ionic-native/file'
 
 import { TranslateService } from '@ngx-translate/core';
 import { AuthserviceProvider } from '../../providers/authservice/authservice';
+import { ServiceProvider } from '../../providers/service/service';
 
 /**
  * Generated class for the MyaccountPage page.
@@ -33,7 +34,7 @@ export class MyaccountPage {
 
   constructor(public navCtrl: NavController, public translate: TranslateService, public navParams: NavParams, public loadingCtrl: LoadingController
     , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public transfer: FileTransfer, public authservice: AuthserviceProvider
-    , public file: File) {
+    , public file: File, public bill_service: ServiceProvider) {
   }
 
   ionViewDidLoad() {
@@ -50,7 +51,7 @@ export class MyaccountPage {
     this.navCtrl.push(PaymentMethodPage);
   }
   goto_payNow() {
-    this.navCtrl.push(PayNowPage, {navParams: this.bill_data.bill_amount});
+    this.navCtrl.push(PayNowPage, { navParams: this.bill_data.bill_amount });
   }
 
   click_download() {
@@ -112,7 +113,7 @@ export class MyaccountPage {
     });
     loading.present();
 
-    this.authservice.get_billList()
+    this.bill_service.get_billList()
 
       .subscribe(
         data => {

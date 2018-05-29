@@ -11,6 +11,7 @@ import { File } from '@ionic-native/file'
 
 import { TranslateService } from '@ngx-translate/core';
 import { AuthserviceProvider } from '../../providers/authservice/authservice';
+import { ServiceProvider } from '../../providers/service/service';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController
     , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public transfer: FileTransfer
-    , public file: File, public translate: TranslateService, public menu: MenuController, public authservice: AuthserviceProvider) {
+    , public file: File, public translate: TranslateService, public menu: MenuController, public authservice: AuthserviceProvider,
+    public bill_service: ServiceProvider) {
 
   }
 
@@ -105,7 +107,7 @@ export class HomePage {
     });
     loading.present();
 
-    this.authservice.get_billList()
+    this.bill_service.get_billList()
 
       .subscribe(
         data => {
@@ -137,7 +139,7 @@ export class HomePage {
     });
     loading.present();
 
-    this.authservice.get_bill().subscribe(data => {
+    this.bill_service.get_bill().subscribe(data => {
       if (data) {
 
         this.menu.swipeEnable(true);

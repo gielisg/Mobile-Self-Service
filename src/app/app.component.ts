@@ -88,7 +88,7 @@ export class MyApp {
       { title: 'my_details', component: MydetailPage, image: "list" },
       { title: 'my_account', component: MyaccountPage, image: "person_icon" },
       { title: 'my_services', component: MyServicesPage, image: "visa_card" },
-      { title: 'my_devices', component: MyDevicesPage, image: "devices" }
+      // { title: 'my_devices', component: MyDevicesPage, image: "devices" }
     ];
 
     this.bottom_pages = [

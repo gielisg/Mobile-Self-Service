@@ -52,26 +52,16 @@ export class AuthserviceProvider {
   }
 
   get_accountDetail() {
-    return this.http.get('https://ua.selcomm.com/SelcommWS/1.0267/Account.svc/rest/Account?SessionKey=' + localStorage.getItem("session_key") + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&RefreshCache=true')
+    let get_param = this.convert_getParam(localStorage.getItem("session_key"), "", "", "");
+    console.log(get_param);
+    // console.log(this.http.get('https://ua.selcomm.com/SelcommWS/1.0267/Account.svc/rest/Account?SessionKey=' + get_param + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&RefreshCache=true'));
+    return this.http.get('https://ua.selcomm.com/SelcommWS/1.0267/Account.svc/rest/Account?SessionKey=' + get_param + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&RefreshCache=true')
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
 
       })
       .pipe(
-
-      );
-  }
-
-  update_email() {
-    return this.http.get('https://ua.selcomm.com/SelcommWS/1.0267/Account.svc/rest/Account?SessionKey=' + localStorage.getItem("session_key") + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&RefreshCache=true')
-      .map(token => {
-        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-        return return_data;
-
-      })
-      .pipe(
-
       );
   }
 
@@ -80,7 +70,7 @@ export class AuthserviceProvider {
       "SessionKey": localStorage.getItem("session_key"),
       "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
       "Address": {
-        "Address1": " 100 Rose Street",
+        "Address1": new_address,
         "AddressType": {
           "Code": "BA",
         },
@@ -96,7 +86,10 @@ export class AuthserviceProvider {
         "Suburb": "TEST",
       }
     };
-    return this.http.put('https://ua.selcomm.com/SelcommWS/1.0267/Address.svc/rest/AddressUpdateByContact', (param))
+
+    console.log(param);
+    console.log(JSON.stringify(param));
+    return this.http.put('https://ua.selcomm.com/SelcommWS/1.0267/Address.svc/rest/AddressUpdateByContact', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
@@ -107,45 +100,40 @@ export class AuthserviceProvider {
       );
   }
 
-  update_phone() {
-    return this.http.get('https://ua.selcomm.com/SelcommWS/1.0267/Account.svc/rest/Account?SessionKey=' + localStorage.getItem("session_key") + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&RefreshCache=true')
-      .map(token => {
-        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-        return return_data;
-
-      })
-      .pipe(
-
-      );
-  }
-
-  update_name() {
-    return this.http.get('https://ua.selcomm.com/SelcommWS/1.0267/Account.svc/rest/Account?SessionKey=' + localStorage.getItem("session_key") + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&RefreshCache=true')
-      .map(token => {
-        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-        return return_data;
-
-      })
-      .pipe(
-
-      );
-  }
-
-  get_bill() {
-    let request_param = {
+  update_email(email_address) {
+    let param = {
       "SessionKey": localStorage.getItem("session_key"),
-      "PagingSortsAndFilters": {
-        "SkipRecords": 0,
-        "PropertyName": {},
-        "Sort": {
-          "Direction": "Descending",
-          "TargetProperty": "Id",
-        },
-        "TakeRecords": 1,
+      "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
+      "EmailAddress": {
+        "EmailAddress": email_address
       }
-    };
-    console.log((request_param));
-    return this.http.post('https://ua.selcomm.com/SelcommWS/1.0267/Bill.svc/rest/BillList', JSON.stringify(request_param))
+    }
+    console.log(param);
+    return this.http.put('https://ua.selcomm.com/SelcommWS/1.0267/Email.svc/rest/EmailAddressUpdate ', JSON.stringify(param))
+      .map(token => {
+        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return return_data;
+      })
+      .pipe(
+
+      );
+  }
+
+  update_phone(phone_number) {
+    let param =
+      {
+        "SessionKey": localStorage.getItem("session_key"),
+        "ContactPhone": {
+          "AreaCode": 2,
+          "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
+          "ContactPhoneType": {
+            "Code": "HP",
+          },
+          "Number": phone_number,
+          "Reference": 3594,
+        }
+      }
+    return this.http.put('https://ua.selcomm.com/SelcommWS/1.0267/ContactPhone.svc/rest/ContactPhoneUpdate', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
@@ -156,21 +144,21 @@ export class AuthserviceProvider {
       );
   }
 
-  get_billList() {
-    let request_param = {
-      "SessionKey": localStorage.getItem("session_key"),
-      "PagingSortsAndFilters": {
-        "SkipRecords": 0,
-        "PropertyName": {},
-        "Sort": {
-          "Direction": "Descending",
-          "TargetProperty": "Id",
-        },
-        "TakeRecords": 50,
+  update_name(user_name) {
+    let param =
+      {
+        "SessionKey": localStorage.getItem("session_key"),
+        "ContactPhone": {
+          "AreaCode": 2,
+          "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
+          "ContactPhoneType": {
+            "Code": "HP",
+          },
+          "Number": user_name,
+          "Reference": 3594,
+        }
       }
-    };
-    console.log((request_param));
-    return this.http.post('https://ua.selcomm.com/SelcommWS/1.0267/Bill.svc/rest/BillList', JSON.stringify(request_param))
+    return this.http.put('https://ua.selcomm.com/SelcommWS/1.0267/Account.svc/rest/Account?SessionKey=', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
@@ -195,5 +183,69 @@ export class AuthserviceProvider {
     this.config.Password = password;
   }
 
+  convert_getParam(string, quoteStyle, charset, doubleEncode) {
+
+
+    return string
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+
+
+
+    // var optTemp = 0
+    // var i = 0
+    // var noquotes = false
+    // if (typeof quoteStyle === 'undefined' || quoteStyle === null) {
+    //   quoteStyle = 2
+    // }
+    // string = string || ''
+    // string = string.toString()
+
+    // if (doubleEncode !== false) {
+    //   // Put this first to avoid double-encoding
+    //   string = string.replace(/&/g, '&amp;')
+    // }
+
+    // string = string
+    //   .replace(/</g, '&lt;')
+    //   .replace(/>/g, '&gt;')
+
+    // var OPTS = {
+    //   'ENT_NOQUOTES': 0,
+    //   'ENT_HTML_QUOTE_SINGLE': 1,
+    //   'ENT_HTML_QUOTE_DOUBLE': 2,
+    //   'ENT_COMPAT': 2,
+    //   'ENT_QUOTES': 3,
+    //   'ENT_IGNORE': 4
+    // }
+    // if (quoteStyle === 0) {
+    //   noquotes = true
+    // }
+    // if (typeof quoteStyle !== 'number') {
+    //   // Allow for a single string or an array of string flags
+    //   quoteStyle = [].concat(quoteStyle)
+    //   for (i = 0; i < quoteStyle.length; i++) {
+    //     // Resolve string input to bitwise e.g. 'ENT_IGNORE' becomes 4
+    //     if (OPTS[quoteStyle[i]] === 0) {
+    //       noquotes = true
+    //     } else if (OPTS[quoteStyle[i]]) {
+    //       optTemp = optTemp | OPTS[quoteStyle[i]]
+    //     }
+    //   }
+    //   quoteStyle = optTemp
+    // }
+    // if (quoteStyle & OPTS.ENT_HTML_QUOTE_SINGLE) {
+    //   string = string.replace(/'/g, '&#039;')
+    // }
+    // if (!noquotes) {
+    //   string = string.replace(/"/g, '&quot;')
+    // }
+
+    // return string
+  }
 
 }

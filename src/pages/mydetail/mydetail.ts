@@ -112,7 +112,7 @@ export class MydetailPage {
             this.temp_Data.detail = "email";
             if (this.temp_Data.old_userData != this.temp_Data.new_userData) {
               if (this.temp_Data.new_userData != "" && (this.emailFormControl.hasError('email') && !this.emailFormControl.hasError('required'))) {
-                this.change_userState();
+                this.update_email();
               } else {
                 this.user_Data.email = this.temp_Data.old_userData;
               }
@@ -131,7 +131,7 @@ export class MydetailPage {
             this.temp_Data.detail = "address";
             if (this.temp_Data.old_userData != this.temp_Data.new_userData) {
               if (this.temp_Data.new_userData != "") {
-                this.change_userState();
+                this.update_address();
               } else {
                 this.user_Data.address = this.temp_Data.old_userData;
               }
@@ -150,7 +150,7 @@ export class MydetailPage {
             this.temp_Data.detail = "phone";
             if (this.temp_Data.old_userData != this.temp_Data.new_userData) {
               if (this.temp_Data.new_userData != null) {
-                this.change_userState();
+                this.update_phone();
               } else {
                 this.user_Data.phone = this.temp_Data.old_userData;
               }
@@ -174,7 +174,7 @@ export class MydetailPage {
         this.temp_Data.detail = "email";
         if (this.temp_Data.old_userData != this.temp_Data.new_userData) {
           if (this.temp_Data.new_userData != "") {
-            this.change_userState();
+            this.update_email();
           } else {
             this.user_Data.email = this.temp_Data.old_userData;
           }
@@ -187,6 +187,40 @@ export class MydetailPage {
     }
   }
 
+  update_phone() {
+    let loading = this.loadingCtrl.create({
+      content: "Please Wait..."
+    });
+    loading.present();
+    let status = "get_detail";
+    this.user_Data.status = status;
+    console.log(this.user_Data);
+    this.accountServer.update_phone(this.user_Data.phone).subscribe(result => {
+      console.log(result);
+      loading.dismiss();
+    }, error => {
+      console.log("error");
+      loading.dismiss();
+    });
+  }
+
+  update_email() {
+    let loading = this.loadingCtrl.create({
+      content: "Please Wait..."
+    });
+    loading.present();
+    let status = "get_detail";
+    this.user_Data.status = status;
+    console.log(this.user_Data);
+    this.accountServer.update_email(this.user_Data.email).subscribe(result => {
+      console.log(result);
+      loading.dismiss();
+    }, error => {
+      console.log("error");
+      loading.dismiss();
+    });
+  }
+
   update_address() {
     let loading = this.loadingCtrl.create({
       content: "Please Wait..."
@@ -197,10 +231,6 @@ export class MydetailPage {
     console.log(this.user_Data);
     this.accountServer.update_address(this.user_Data.address).subscribe(result => {
       console.log(result);
-      // this.user_Data.username = result.FullName;
-      // this.user_Data.email = result.ContactEmailAddressList[0].EmailAddress;
-      // this.user_Data.address = result.AddressList;
-      // this.user_Data.phone = result.ContactPhoneList;
       loading.dismiss();
     }, error => {
       console.log("error");

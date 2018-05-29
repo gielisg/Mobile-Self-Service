@@ -30,4 +30,73 @@ export class ServiceProvider {
       );
   }
 
+  get_bill() {
+    let request_param = {
+      "SessionKey": localStorage.getItem("session_key"),
+      "PagingSortsAndFilters": {
+        "SkipRecords": 0,
+        "PropertyName": {},
+        "Sort": {
+          "Direction": "Descending",
+          "TargetProperty": "Id",
+        },
+        "TakeRecords": 1,
+      }
+    };
+    console.log((request_param));
+    return this.http.post('https://ua.selcomm.com/SelcommWS/1.0267/Bill.svc/rest/BillList', JSON.stringify(request_param))
+      .map(token => {
+        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return return_data;
+
+      })
+      .pipe(
+
+      );
+  }
+
+  get_billList() {
+    let request_param = {
+      "SessionKey": localStorage.getItem("session_key"),
+      "PagingSortsAndFilters": {
+        "SkipRecords": 0,
+        "PropertyName": {},
+        "Sort": {
+          "Direction": "Descending",
+          "TargetProperty": "Id",
+        },
+        "TakeRecords": 50,
+      }
+    };
+    console.log(JSON.stringify(request_param));
+    return this.http.post('https://ua.selcomm.com/SelcommWS/1.0267/Bill.svc/rest/BillList', JSON.stringify(request_param))
+      .map(token => {
+        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return return_data;
+
+      })
+      .pipe(
+
+      );
+  }
+
+  get_billFile(bill_number) {
+    let request_param = {
+      "SessionKey": localStorage.getItem("session_key"),
+      "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
+      "BillNumber": bill_number,
+      "BillType": "pdf"
+    };
+    console.log((request_param));
+    return this.http.get('https://ua.selcomm.com/SelcommWS/1.0267/Bill.svc/rest/BillFile?SessionKey=' + localStorage.getItem("session_key") + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username + "&BillNumber=" + bill_number + "&BillType=pdf")
+      .map(token => {
+        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return return_data;
+
+      })
+      .pipe(
+
+      );
+  }
+
 }

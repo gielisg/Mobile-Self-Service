@@ -58,6 +58,9 @@ import { ChangePlanPage } from '../pages/change-plan/change-plan';
 import { AuthserviceProvider } from '../providers/authservice/authservice';
 
 
+import { Base64 } from '@ionic-native/base64';
+
+
 import * as FusionCharts from 'fusioncharts';
 import * as Charts from 'fusioncharts/fusioncharts.charts';
 import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
@@ -76,7 +79,6 @@ export function createTranslateLoader(http: HttpClient) {
     HomePage,
     SigninPage,
     SignupPage,
-
     BillHistoryPage,
     CallHistoryPage,
     ChangeStatusPage,
@@ -120,7 +122,6 @@ export function createTranslateLoader(http: HttpClient) {
     HomePage,
     SigninPage,
     SignupPage,
-
     BillHistoryPage,
     CallHistoryPage,
     ChangeStatusPage,
@@ -147,6 +148,7 @@ export function createTranslateLoader(http: HttpClient) {
     SplashScreen,
     FileTransfer,
     File,
+    Base64,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ApiproviderProvider,
     AuthserviceProvider,
