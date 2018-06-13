@@ -93,7 +93,6 @@ export class SigninPage {
               console.log(data);
               localStorage.setItem("login_infor", JSON.stringify(this.user_Data));
               this.navCtrl.push(HomePage);
-
             }
             loading.dismiss();
 

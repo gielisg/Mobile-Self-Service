@@ -57,7 +57,7 @@ export class MyServicesPage {
 
   set_date(value) {
     let array_sam = value.split("-");
-    return array_sam[2] + "-" + this.monthNames[parseInt(array_sam[1])] + "-" + array_sam[0];
+    return array_sam[2] + ", " + this.monthNames[parseInt(array_sam[1])] + " " + array_sam[0];
   }
 
   get_typeSV(value) {
@@ -110,7 +110,7 @@ export class MyServicesPage {
 
             this.service_Data.push(array_data);
 
-            console.log(parseDate(list.DueDate));
+            // console.log(parseDate(list.DueDate));
             // console.log(parseDate(list.DueDate).getMonth());
 
           }
