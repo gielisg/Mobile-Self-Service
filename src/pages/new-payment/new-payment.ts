@@ -9,6 +9,8 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { FormControl, Validators } from '@angular/forms';
 import { PayNowPage } from '../pay-now/pay-now';
+import { PaymentMethodPage } from '../payment-method/payment-method';
+import { PaymentProvider } from '../../providers/payment/payment';
 
 /**
  * Generated class for the NewPaymentPage page.
@@ -35,7 +37,7 @@ export class NewPaymentPage {
   selExy = new FormControl('', [Validators.required]);
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
-    public apiprovider: ApiproviderProvider, public translate: TranslateService) {
+    public apiprovider: ApiproviderProvider, public translate: TranslateService, public paymentService: PaymentProvider) {
   }
 
   ionViewDidLoad() {
@@ -57,7 +59,27 @@ export class NewPaymentPage {
 
   completeAddCompany(comProfileForm) {
     if (comProfileForm.valid && this.selType.valid && this.selExm.valid) {
-      this.navCtrl.push(PayNowPage);
+
+      let add_param = {
+        "name": this.pay_Data.name,
+        "number": this.pay_Data.cardnum,
+        "expireDate": this.pay_Data.exy + "-" + this.set_twostring(this.pay_Data.exm) + "-" + new Date().getDate() + "T00:00:00"
+      };
+
+      let loading = this.loadingCtrl.create({
+        content: "Please Wait..."
+      });
+      loading.present();
+      console.log(add_param);
+      this.paymentService.account_paymentMethodAdd(add_param).subscribe(data => {
+        console.log(data);
+        loading.dismiss();
+        this.navCtrl.pop();
+        this.navCtrl.push(PaymentMethodPage);
+      }, error => {
+        console.log(error);
+        loading.dismiss();
+      });
     }
   }
 
@@ -67,6 +89,16 @@ export class NewPaymentPage {
       this.translate.use('en');
     } else {
       this.translate.use(localStorage.getItem("set_lng"));
+    }
+
+    this.pay_Data.exm = (new Date().getMonth() + 1).toString();
+  }
+
+  set_twostring(input_val) {
+    if (parseInt(input_val) < 10) {
+      return "0" + input_val;
+    } else {
+      return input_val;
     }
   }
 

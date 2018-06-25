@@ -102,7 +102,7 @@
       <ion-col col-4>
         <ion-row class="full_height">
           <mat-form-field>
-            <mat-select placeholder="--" [formControl]="selExm" [(ngModel)]="pay_Data.exm" class="expire_select" required>
+            <mat-select [formControl]="selExm" [(ngModel)]="pay_Data.exm" class="expire_select" required>
               <mat-option *ngFor="let list of expireMonth" value="{{list}}">
                 {{list}}
               </mat-option>
@@ -121,17 +121,18 @@
       </ion-col>
       <ion-col col-4>
         <ion-row class="full_height">
-          <mat-select placeholder="{{ 'select' | translate }}" [formControl]="selExy" [(ngModel)]="pay_Data.exy" class="expire_select"
-            required>
-            <mat-option *ngFor="let list of expireYear" value="{{list}}">
-              {{list}}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="selExy.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
+          <mat-form-field>
+            <mat-select [formControl]="selExy" [(ngModel)]="pay_Data.exy" class="expire_select" required>
+              <mat-option *ngFor="let list of expireYear" value="{{list}}">
+                {{list}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="selExy.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
 
-          <!-- <ion-select [(ngModel)]="pay_Data.exy" class="expire_select">
+            <!-- <ion-select [(ngModel)]="pay_Data.exy" class="expire_select">
           <ion-option *ngFor="let list of expireYear" value="{{list}}">{{list}}</ion-option>
         </ion-select> -->
+          </mat-form-field>
         </ion-row>
       </ion-col>
     </ion-row>

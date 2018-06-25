@@ -134,6 +134,9 @@ export class HomePage {
   }
 
   ionicInit() {
+
+
+
     let loading = this.loadingCtrl.create({
       content: "Please Wait..."
     });

@@ -13,6 +13,8 @@ import { User, APP_CONFIG, IAppConfig } from '../../model';
 @Injectable()
 export class AuthserviceProvider {
 
+  public url_header = "https://ua.selcomm.com/SelcommWS/1.0267/";
+
   constructor(@Inject(APP_CONFIG) public config: IAppConfig, public http: Http) {
     console.log('Hello AuthserviceProvider Provider');
   }
@@ -23,7 +25,7 @@ export class AuthserviceProvider {
       PrivateKey: this.config.WebPrivateKey, DatabaseUserCode: this.config.DatabaseUserCode, DatabasePassword: this.config.DatabasePassword,
       UserCode: username, Password: password
     }));
-    return this.http.post('https://ua.selcomm.com/SelcommWS/1.0267/Authentication.svc/rest/AuthenticateSimpleCreateSessionAndAuthenticateContact', JSON.stringify({
+    return this.http.post(this.url_header + 'Authentication.svc/rest/AuthenticateSimpleCreateSessionAndAuthenticateContact', JSON.stringify({
       PrivateKey: this.config.WebPrivateKey, DatabaseUserCode: this.config.DatabaseUserCode, DatabasePassword: this.config.DatabasePassword,
       UserCode: username, Password: password
     }))
@@ -39,7 +41,7 @@ export class AuthserviceProvider {
   }
 
   account_balance() {
-    return this.http.get('https://ua.selcomm.com/SelcommWS/1.0267/Account.svc/rest/AccountBalance?SessionKey=' + localStorage.getItem("session_key") + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&IncludeUnbilledUsage=true&IncludeOneOffAndRecurringCharges=true')
+    return this.http.get(this.url_header + 'Account.svc/rest/AccountBalance?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&IncludeUnbilledUsage=true&IncludeOneOffAndRecurringCharges=true')
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
@@ -51,10 +53,7 @@ export class AuthserviceProvider {
   }
 
   get_accountDetail() {
-    let get_param = this.convert_getParam(localStorage.getItem("session_key"), "", "", "");
-    console.log(get_param);
-    // console.log(this.http.get('https://ua.selcomm.com/SelcommWS/1.0267/Account.svc/rest/Account?SessionKey=' + get_param + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&RefreshCache=true'));
-    return this.http.get('https://ua.selcomm.com/SelcommWS/1.0267/Account.svc/rest/Account?SessionKey=' + get_param + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&RefreshCache=true')
+    return this.http.get(this.url_header + 'Account.svc/rest/Account?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&RefreshCache=true')
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
@@ -65,6 +64,8 @@ export class AuthserviceProvider {
   }
 
   update_address(new_address) {
+    let encoded_session_Key = encodeURIComponent(localStorage.getItem("session_key"));
+    console.log(encoded_session_Key);
     let param = {
       "SessionKey": localStorage.getItem("session_key"),
       "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
@@ -85,30 +86,29 @@ export class AuthserviceProvider {
         "Suburb": "TEST",
       }
     };
-
-    console.log(param);
     console.log(JSON.stringify(param));
-    return this.http.put('https://ua.selcomm.com/SelcommWS/1.0267/Address.svc/rest/AddressUpdateByContact', JSON.stringify(param))
+    return this.http.put(this.url_header + 'Address.svc/rest/AddressUpdateByContact', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        console.log(return_data);
         return return_data;
 
       })
       .pipe(
-
       );
   }
 
   update_email(email_address) {
+
     let param = {
-      "SessionKey": localStorage.getItem("session_key"),
+      "SessionKey": encodeURIComponent(localStorage.getItem("session_key")),
       "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
       "EmailAddress": {
         "EmailAddress": email_address
       }
     }
     console.log(param);
-    return this.http.put('https://ua.selcomm.com/SelcommWS/1.0267/Email.svc/rest/EmailAddressUpdate ', JSON.stringify(param))
+    return this.http.put(this.url_header + 'Email.svc/rest/EmailAddressUpdate ', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
@@ -120,19 +120,19 @@ export class AuthserviceProvider {
 
   update_phone(phone_number) {
     let param =
-      {
-        "SessionKey": localStorage.getItem("session_key"),
-        "ContactPhone": {
-          "AreaCode": 2,
-          "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
-          "ContactPhoneType": {
-            "Code": "HP",
-          },
-          "Number": phone_number,
-          "Reference": 3594,
-        }
+    {
+      "SessionKey": encodeURIComponent(localStorage.getItem("session_key")),
+      "ContactPhone": {
+        "AreaCode": 2,
+        "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
+        "ContactPhoneType": {
+          "Code": "HP",
+        },
+        "Number": phone_number,
+        "Reference": 3594,
       }
-    return this.http.put('https://ua.selcomm.com/SelcommWS/1.0267/ContactPhone.svc/rest/ContactPhoneUpdate', JSON.stringify(param))
+    }
+    return this.http.put(this.url_header + 'ContactPhone.svc/rest/ContactPhoneUpdate', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
@@ -145,19 +145,19 @@ export class AuthserviceProvider {
 
   update_name(user_name) {
     let param =
-      {
-        "SessionKey": localStorage.getItem("session_key"),
-        "ContactPhone": {
-          "AreaCode": 2,
-          "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
-          "ContactPhoneType": {
-            "Code": "HP",
-          },
-          "Number": user_name,
-          "Reference": 3594,
-        }
+    {
+      "SessionKey": encodeURIComponent(localStorage.getItem("session_key")),
+      "ContactPhone": {
+        "AreaCode": 2,
+        "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
+        "ContactPhoneType": {
+          "Code": "HP",
+        },
+        "Number": user_name,
+        "Reference": 3594,
       }
-    return this.http.put('https://ua.selcomm.com/SelcommWS/1.0267/Account.svc/rest/Account?SessionKey=', JSON.stringify(param))
+    }
+    return this.http.put(this.url_header + 'Account.svc/rest/Account?SessionKey=', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;

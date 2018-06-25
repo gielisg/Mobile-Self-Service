@@ -66,6 +66,7 @@ import * as Charts from 'fusioncharts/fusioncharts.charts';
 import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
 import { FusionChartsModule } from 'angular4-fusioncharts';
 import { ServiceProvider } from '../providers/service/service';
+import { PaymentProvider } from '../providers/payment/payment';
 FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 
 export function createTranslateLoader(http: HttpClient) {
@@ -153,7 +154,8 @@ export function createTranslateLoader(http: HttpClient) {
     ApiproviderProvider,
     AuthserviceProvider,
     { provide: APP_CONFIG, useValue: AppConfig },
-    ServiceProvider
+    ServiceProvider,
+    PaymentProvider
   ]
 })
 export class AppModule { }

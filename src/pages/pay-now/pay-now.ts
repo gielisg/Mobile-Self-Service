@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormControl, Validators } from '@angular/forms';
 import { PaynowCheckPage } from '../paynow-check/paynow-check';
 import { HomePage } from '../home/home';
+import { PaymentProvider } from '../../providers/payment/payment';
 
 /**
  * Generated class for the PayNowPage page.
@@ -32,7 +33,7 @@ export class PayNowPage {
   public pay_amount: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
-    public apiprovider: ApiproviderProvider, public translate: TranslateService, public modalCtrl: ModalController) {
+    public apiprovider: ApiproviderProvider, public translate: TranslateService, public modalCtrl: ModalController, public paymentService: PaymentProvider) {
   }
 
   ionViewDidLoad() {
@@ -54,6 +55,70 @@ export class PayNowPage {
     } else {
       this.translate.use(localStorage.getItem("set_lng"));
     }
+
+    // let loading = this.loadingCtrl.create({
+    //   content: "Please Wait..."
+    // });
+    // loading.present();
+
+    // this.paymentService.get_paymentAvailList().subscribe(data => {
+    //   console.log(data);
+    //   loading.dismiss();
+
+    // }, error => {
+    //   console.log(error);
+    //   loading.dismiss();
+    // });
+
+    // this.paymentService.account_paymentMethod(2806).subscribe(data => {
+    //   console.log(data);
+    //   /////////// This is work
+    // }, error => {
+    //   console.log(error);
+    // });
+
+    // this.paymentService.account_paymentMethodCancel(2806).subscribe(data => {
+    //   console.log(data);
+    // }, error => {
+    //   console.log(error);
+    // });
+
+    // this.paymentService.account_paymentMethodMakeDefault(2806).subscribe(data => {
+    //   console.log(data);
+    // }, error => {
+    //   console.log(error);
+    // });
+
+    // let update_param = {
+    //   "name": "dfdefeegsdg",
+    //   "number": "12342332354",
+    //   "expireDate": new Date().toISOString(),
+    //   "payment_id": 2806,
+    // };
+    // this.paymentService.account_paymentMethodUpdate(update_param).subscribe(data => {
+    //   console.log(data);
+    // }, error => {
+    //   console.log(error);
+    // });
+
+    // let update_param = {
+    //   "name": "dfdefeegsdg",
+    //   "amount": 0.15,
+    //   "expireDate": new Date().toISOString(),
+    //   "payment_id": 9143,
+    // };
+    // this.paymentService.payment_RequestCreate(update_param).subscribe(data => {
+    //   console.log(data);
+    // }, error => {
+    //   console.log(error);
+    // });
+
+    // this.paymentService.payment_MethodFromAccountNumberAndType().subscribe(data => {
+    //   console.log(data);
+    //   /////////this is work
+    // }, error => {
+    //   console.log(error);
+    // });
   }
 
   pay_now() {
