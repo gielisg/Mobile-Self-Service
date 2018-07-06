@@ -35,6 +35,8 @@ export class TopupHistoryPage {
 
   public top_Data: any[];
 
+  public userId  = "";
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
     public apiprovider: ApiproviderProvider, public translate: TranslateService) {
   }
@@ -66,6 +68,7 @@ export class TopupHistoryPage {
         this.top_Data.push(sam_data);
       }
     }
+    this.userId = JSON.parse(localStorage.getItem('currentUser')).username;
     console.log(this.top_Data);
     console.log(localStorage.getItem("set_lng"));
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {

@@ -24,6 +24,13 @@ export class PaymentProvider {
     } else {
       this.startDate = new Date().toISOString();
     }
+    console.log(this.startDate);
+
+    let temp_date = this.startDate;
+    this.startDate = temp_date.split("T")[0].split("-")[0] + "-" + temp_date.split("T")[0].split("-")[1] + "-" + (parseInt(temp_date.split("T")[0].split("-")[2]) + 1).toString();
+    this.startDate = this.startDate + "T" + "00:00:00";
+
+    console.log(this.startDate);
   }
 
 
@@ -51,7 +58,7 @@ export class PaymentProvider {
       .pipe(
       );
   }
-  
+
   account_paymentMethodAdd(account_method) {
     let param = {
       "SessionKey": localStorage.getItem("session_key"),
@@ -89,8 +96,17 @@ export class PaymentProvider {
       "Id": parseInt(payment_id),
       "StartDate": this.startDate,
     };
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Accept', 'application/json');
+
+
+    let options = new RequestOptions({ headers: headers });
+
+
     console.log(JSON.stringify(param));
-    return this.http.put(this.url_header + 'Payment.svc/rest/AccountPaymentMethodCancel', JSON.stringify(param))
+    return this.http.put(this.url_header + 'Payment.svc/rest/AccountPaymentMethodCancel', JSON.stringify(param), options)
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         console.log(return_data);
@@ -183,7 +199,6 @@ export class PaymentProvider {
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
-
       })
       .pipe(
       );

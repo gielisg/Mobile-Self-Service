@@ -66,7 +66,7 @@ export class PaymentMethodPage {
     loading.present();
 
     this.paymentService.get_paymentAvailList().subscribe(data => {
-      // console.log(data);
+      console.log(data);
       for (let list of data) {
         let array_sam = { "name": "", "type": "", "number": "", "expiry": "", "status": "open", "payment_id": 0 };
         array_sam.payment_id = list.Id;

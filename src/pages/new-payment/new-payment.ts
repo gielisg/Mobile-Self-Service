@@ -30,6 +30,8 @@ export class NewPaymentPage {
   public expireMonth: any[];
   public expireYear: any[];
 
+  public userId = "";
+
   selType = new FormControl('', [Validators.required]);
 
   selExm = new FormControl('', [Validators.required]);
@@ -90,6 +92,8 @@ export class NewPaymentPage {
     } else {
       this.translate.use(localStorage.getItem("set_lng"));
     }
+
+    this.userId = JSON.parse(localStorage.getItem('currentUser')).username;
 
     this.pay_Data.exm = (new Date().getMonth() + 1).toString();
   }
