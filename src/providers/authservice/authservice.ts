@@ -101,7 +101,7 @@ export class AuthserviceProvider {
   update_email(email_address) {
 
     let param = {
-      "SessionKey": encodeURIComponent(localStorage.getItem("session_key")),
+      "SessionKey": (localStorage.getItem("session_key")),
       "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
       "EmailAddress": {
         "EmailAddress": email_address
@@ -121,7 +121,7 @@ export class AuthserviceProvider {
   update_phone(phone_number) {
     let param =
     {
-      "SessionKey": encodeURIComponent(localStorage.getItem("session_key")),
+      "SessionKey": (localStorage.getItem("session_key")),
       "ContactPhone": {
         "AreaCode": 2,
         "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
