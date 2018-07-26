@@ -26,9 +26,26 @@
 
 <ion-content padding>
 
+
+  <!-- <ion-row class="header_row custom_header">
+    <ion-col col-2>
+      <ion-row class="full_height">
+        <ion-icon name="ios-arrow-back" (click)="goto_signin()" class="header_back_icon"></ion-icon>
+      </ion-row>
+    </ion-col>
+    <ion-col col-8>
+      <ion-row class="full_height">
+        <span class="header_span">
+          {{ 'sign_up' | translate }}
+        </span>
+      </ion-row>
+    </ion-col>
+  </ion-row> -->
+
   <ion-row class="logo_row">
     <img src="assets/imgs/titlebar_logo.png" class="logo_class" />
   </ion-row>
+
   <form #comProfileForm="ngForm" id="comProfileForm" (ngSubmit)="completeAddCompany(comProfileForm)" novalidate>
     <ion-row class="username_row">
       <mat-form-field class="example-full-width">
@@ -81,7 +98,8 @@
 
     <ion-row class="password_row">
       <mat-form-field class="example-full-width">
-        <input matInput type="text" [(ngModel)]="user_Data.address" required placeholder="{{ 'address' | translate }}" name="address" />
+        <input matInput type="text" [(ngModel)]="user_Data.address" required placeholder="{{ 'address' | translate }}" name="address"
+        />
 
         <mat-error>
           <span>{{ 'address_is_required' | translate }}</span>

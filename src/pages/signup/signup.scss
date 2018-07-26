@@ -3,6 +3,16 @@ page-signup {
         box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
         background-color: white;
     }
+    .custom_header {
+        height: 40px;
+        position: fixed;
+        top: 20px;
+        box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
+        margin-left: -16px;
+        // z-index: 100;
+        background-color: white;
+    }
+
     .header_span {
         color: black;
         font-weight: bold;
@@ -13,6 +23,9 @@ page-signup {
         margin-bottom: auto;
         margin-left: 5px;
         font-size: 2.5rem;
+    }
+    .logo_row{
+        // margin-top: 30px;
     }
     .payment_id {
         text-align: center;
@@ -66,6 +79,7 @@ page-signup {
     }
     .signup_row {
         margin-top: 10%;
+        margin-bottom: 40px;
     }
     .sign_up_span {
         margin: auto;
