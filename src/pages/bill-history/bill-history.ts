@@ -41,7 +41,6 @@ export class BillHistoryPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BillHistoryPage');
     this.ionicInit();
 
   }
@@ -61,7 +60,7 @@ export class BillHistoryPage {
       .subscribe(
         data => {
           if (data) {
-            console.log(localStorage.getItem("set_lng"));
+            
             if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
               this.translate.use('en');
             } else {
@@ -78,8 +77,6 @@ export class BillHistoryPage {
 
             }
             this.convert_billList();
-            console.log(data);
-            // console.log(this.bill_data);
           }
           loading.dismiss();
         },
@@ -98,13 +95,11 @@ export class BillHistoryPage {
 
   set_date(value) {
     let array_sam = value.split("-");
-    console.log(array_sam);
     return array_sam[1] + "-" + array_sam[2] + "-" + array_sam[0];
   }
 
 
   download(index) {
-    console.log(this.detail_Data[index]);
     let status = "download_bill";
     let bill_download = { "bill_num": "", "due_date": "", "amount_owin": "", "status": "download_bill", "index": "" };
     bill_download.bill_num = this.detail_Data[index].bill_num;
@@ -117,23 +112,12 @@ export class BillHistoryPage {
     });
     loading.present();
 
-    console.log(this.detail_Data[index].bill_num);
-    console.log(this.detail_Data[index].bill_num);
 
     this.bill_service.get_billFile(this.detail_Data[index].bill_num).subscribe(result => {
-      console.log(result);
       loading.dismiss();
     }, error => {
       loading.dismiss();
     });
-
-    // this.download_pdf(index);
-
-    // PDFJS.getDocument(pdfAsArray);
-
-    // console.log(this.convertBaseb64ToBlob(pdf_byte, "data:application/pdf;base64"))
-
-    // console.log(bill_download);
   }
 
   toUTF8Array(str) {
@@ -150,12 +134,8 @@ export class BillHistoryPage {
           0x80 | ((charcode >> 6) & 0x3f),
           0x80 | (charcode & 0x3f));
       }
-      // surrogate pair
       else {
         i++;
-        // UTF-16 encodes 0x10000-0x10FFFF by
-        // subtracting 0x10000 and splitting the
-        // 20 bits of 0x0-0xFFFFF into two halves
         charcode = 0x10000 + (((charcode & 0x3ff) << 10)
           | (str.charCodeAt(i) & 0x3ff));
         utf8.push(0xf0 | (charcode >> 18),
@@ -184,21 +164,14 @@ export class BillHistoryPage {
   download_pdf(index) {
     const url = "http://localhost/test_php/MyPDF.pdf";
 
-    // file:///storage/emulated/0/Android/data/com.self.serviceapp/files/MyPDF2.pdf
 
     this.file.checkDir('file:///storage/emulated/0/', 'Self_Service').then((result_check) => {
-
-      console.log(result_check);
-
-
-      // this.file.writeFile('file:///storage/emulated/0/Self_Service/', 'fffffff.pdf', this.convertBaseb64ToBlob(pdf_byte, 'data:application/pdf;base64'), { replace: true });
 
 
     }, (error) => {
 
       this.file.createDir('file:///storage/emulated/0/', 'Self_Service', false).then((DirectoryEntry) => {
 
-        // this.file.writeFile('file:///storage/emulated/0/Self_Service/', 'fffffff.pdf', this.convertBaseb64ToBlob(pdf_byte, 'data:application/pdf;base64'), { replace: true });
 
       }, (error) => {
         console.log("Create error");

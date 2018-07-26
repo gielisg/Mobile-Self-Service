@@ -65,12 +65,9 @@ export class MyaccountPage {
 
     this.file.checkDir('file:///storage/emulated/0/', 'Self_Service').then((result_check) => {
 
-      console.log(result_check);
 
 
       this.fileTransfer.download(url, 'file:///storage/emulated/0/Self_Service/' + 'Bill Data.pdf').then((entry) => {
-        console.log(this.file.externalDataDirectory);
-        console.log('download complete: ' + entry.toURL());
         let toast = this.toastCtrl.create({
           message: 'download complete: ' + entry.toURL(),
           duration: 2000
@@ -84,8 +81,6 @@ export class MyaccountPage {
 
       this.file.createDir('file:///storage/emulated/0/', 'Self_Service', false).then((DirectoryEntry) => {
         this.fileTransfer.download(url, 'file:///storage/emulated/0/Self_Service/' + 'Bill Data.pdf').then((entry) => {
-          console.log(this.file.externalDataDirectory);
-          console.log('download complete: ' + entry.toURL());
           let toast = this.toastCtrl.create({
             message: 'download complete: ' + entry.toURL(),
             duration: 2000
@@ -103,7 +98,6 @@ export class MyaccountPage {
 
   set_date(value) {
     let array_sam = value.split("-");
-    console.log(array_sam);
     return array_sam[1] + "-" + array_sam[2] + "-" + array_sam[0];
   }
 
@@ -118,12 +112,10 @@ export class MyaccountPage {
       .subscribe(
         data => {
           if (data) {
-            console.log(data);
             this.bill_data.bill_amount = data.Items[0].AmountDue;
             this.bill_data.bill_date = this.set_date(data.Items[0].DueDate.split("T")[0]);
             this.bill_data.account_number = data.Items[0].ContactCode;
-            console.log(this.bill_data);
-            console.log(localStorage.getItem("set_lng"));
+            
             if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
               this.translate.use('en');
             } else {

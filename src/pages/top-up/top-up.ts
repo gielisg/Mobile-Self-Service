@@ -43,7 +43,6 @@ export class TopUpPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TopUpPage');
     this.ionicInit();
-    // localStorage.clear();
     this.show_error = false;
   }
 
@@ -114,15 +113,6 @@ export class TopUpPage {
       this.top_Data.topup = "";
       this.confirm_error = false;
     }
-    // let datetimearray = this.top_Data.start_date.split("T");
-    // let sam = this.set_date(datetimearray[0]) + " " + this.set_time(datetimearray[1]);
-    // console.log(sam);
-    // this.top_Data.start_date = sam;
-    // this.set_date(datetimearray[0]);
-    // this.set_time(datetimearray[1]);
-    // this.top_Data.topup = "";
-    // this.top_Data.start_date = "";
-    // this.top_Data.method = "";
   }
 
   ionchange_date() {
@@ -140,7 +130,7 @@ export class TopUpPage {
   }
 
   ionicInit() {
-    console.log(localStorage.getItem("set_lng"));
+
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {

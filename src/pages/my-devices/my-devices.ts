@@ -48,7 +48,6 @@ export class MyDevicesPage {
   }
 
   goto_topupHistory() {
-    // this.navCtrl.push(TopupHistoryPage);
     this.navCtrl.push(TopUpPage);
   }
 
@@ -61,7 +60,7 @@ export class MyDevicesPage {
   }
 
   ionicInit() {
-    console.log(localStorage.getItem("set_lng"));
+
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {
@@ -76,7 +75,6 @@ export class MyDevicesPage {
     localStorage.setItem("ChangeStatusPage", JSON.stringify(change_data));
     let profileModal = this.modalCtrl.create(ChangeStatusPage);
     profileModal.onDidDismiss(data => {
-      console.log(data);
       if (typeof (data) != "undefined" && data != "") {
         this.device_Data[index].status = data;
       }
@@ -95,7 +93,6 @@ export class MyDevicesPage {
     localStorage.setItem("ChangePlanPage", JSON.stringify(change_data));
     let profileModal = this.modalCtrl.create(ChangePlanPage);
     profileModal.onDidDismiss(data => {
-      console.log(data);
       if (typeof (data) != "undefined" && data != "") {
         this.device_Data[index].plan = data;
       }

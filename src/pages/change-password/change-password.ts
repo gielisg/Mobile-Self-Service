@@ -33,39 +33,6 @@ export class ChangePasswordPage {
 
   completeAddCompany(comProfileForm) {
     if (comProfileForm.valid) {
-      // let loading = this.loadingCtrl.create({
-      //   content: "Please Wait..."
-      // });
-      // loading.present();
-      // let status = "change_password";
-      // this.user_Data.status = status;
-      // this.apiprovider.postData(this.user_Data).then((result) => {
-      //   console.log(Object(result));
-      //   loading.dismiss();
-      //   if (Object(result).status == "success") {
-
-      //     let toast = this.toastCtrl.create({
-      //       message: Object(result).detail,
-      //       duration: 2000
-      //     })
-      //     toast.present();
-
-      //   } else {
-      //     let toast = this.toastCtrl.create({
-      //       message: Object(result).detail,
-      //       duration: 2000
-      //     })
-      //     toast.present();
-      //   };
-
-      // }, (err) => {
-      //   let toast = this.toastCtrl.create({
-      //     message: "No Network",
-      //     duration: 2000
-      //   })
-      //   toast.present();
-      //   loading.dismiss();
-      // });
 
     }
   }
@@ -74,7 +41,7 @@ export class ChangePasswordPage {
   }
 
   ionicInit() {
-    console.log(localStorage.getItem("set_lng"));
+    
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {

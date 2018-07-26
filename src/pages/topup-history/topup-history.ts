@@ -53,13 +53,11 @@ export class TopupHistoryPage {
   }
 
   ionicInit() {
-    console.log(JSON.parse(localStorage.getItem("new_topup")));
     this.top_Data = new Array();
     for (let list of this.set_defalt) {
       this.top_Data.push(list);
     }
     if (localStorage.getItem("new_topup") != null) {
-      console.log("not_null");
       let storage = JSON.parse(localStorage.getItem("new_topup"));
       for (let list of storage) {
         let sam_data = { "top": "", "date": "", "expiry": "12/04/2017", "status": "Open" };
@@ -69,8 +67,7 @@ export class TopupHistoryPage {
       }
     }
     this.userId = JSON.parse(localStorage.getItem('currentUser')).username;
-    console.log(this.top_Data);
-    console.log(localStorage.getItem("set_lng"));
+    
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {

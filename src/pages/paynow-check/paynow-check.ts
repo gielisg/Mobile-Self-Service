@@ -25,7 +25,6 @@ export class PaynowCheckPage {
   goto_paymenthistory() {
     let data = "paynow_check";
     this.viewCtrl.dismiss();
-    // this.navCtrl.pop();
   }
 
 }

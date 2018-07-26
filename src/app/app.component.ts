@@ -46,7 +46,6 @@ export class MyApp {
     events.subscribe('user:created', (user, time) => {
 
       this.ionicInit();
-      console.log('Welcome', user, 'at', time);
     });
 
     this.ionicInit();
@@ -58,12 +57,10 @@ export class MyApp {
   }
 
   loggedIn() {
-    console.log("logged in");
   }
 
   openPage(page) {
     if (page.title == 'asdfasdf') {
-      console.log(page);
       alert("click");
     } else {
       this.translate.get('logout').subscribe(

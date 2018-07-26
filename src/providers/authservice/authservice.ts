@@ -21,17 +21,11 @@ export class AuthserviceProvider {
 
 
   login(username, password) {
-    console.log(JSON.stringify({
-      PrivateKey: this.config.WebPrivateKey, DatabaseUserCode: this.config.DatabaseUserCode, DatabasePassword: this.config.DatabasePassword,
-      UserCode: username, Password: password
-    }));
     return this.http.post(this.url_header + 'Authentication.svc/rest/AuthenticateSimpleCreateSessionAndAuthenticateContact', JSON.stringify({
       PrivateKey: this.config.WebPrivateKey, DatabaseUserCode: this.config.DatabaseUserCode, DatabasePassword: this.config.DatabasePassword,
       UserCode: username, Password: password
     }))
       .map(token => {
-        console.log(token);
-        console.log(JSON.parse(JSON.stringify(token))._body.replace(/"/g, ''));
         localStorage.setItem("session_key", JSON.parse(JSON.stringify(token))._body.replace(/"/g, ''));
         this.fillLoggedUser(username, password, token);
         return true;
@@ -65,7 +59,6 @@ export class AuthserviceProvider {
 
   update_address(new_address) {
     let encoded_session_Key = encodeURIComponent(localStorage.getItem("session_key"));
-    console.log(encoded_session_Key);
     let param = {
       "SessionKey": localStorage.getItem("session_key"),
       "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
@@ -86,11 +79,9 @@ export class AuthserviceProvider {
         "Suburb": "TEST",
       }
     };
-    console.log(JSON.stringify(param));
     return this.http.put(this.url_header + 'Address.svc/rest/AddressUpdateByContact', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-        console.log(return_data);
         return return_data;
 
       })
@@ -107,7 +98,6 @@ export class AuthserviceProvider {
         "EmailAddress": email_address
       }
     }
-    console.log(param);
     return this.http.put(this.url_header + 'Email.svc/rest/EmailAddressUpdate ', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
@@ -191,60 +181,6 @@ export class AuthserviceProvider {
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
-
-
-
-
-    // var optTemp = 0
-    // var i = 0
-    // var noquotes = false
-    // if (typeof quoteStyle === 'undefined' || quoteStyle === null) {
-    //   quoteStyle = 2
-    // }
-    // string = string || ''
-    // string = string.toString()
-
-    // if (doubleEncode !== false) {
-    //   // Put this first to avoid double-encoding
-    //   string = string.replace(/&/g, '&amp;')
-    // }
-
-    // string = string
-    //   .replace(/</g, '&lt;')
-    //   .replace(/>/g, '&gt;')
-
-    // var OPTS = {
-    //   'ENT_NOQUOTES': 0,
-    //   'ENT_HTML_QUOTE_SINGLE': 1,
-    //   'ENT_HTML_QUOTE_DOUBLE': 2,
-    //   'ENT_COMPAT': 2,
-    //   'ENT_QUOTES': 3,
-    //   'ENT_IGNORE': 4
-    // }
-    // if (quoteStyle === 0) {
-    //   noquotes = true
-    // }
-    // if (typeof quoteStyle !== 'number') {
-    //   // Allow for a single string or an array of string flags
-    //   quoteStyle = [].concat(quoteStyle)
-    //   for (i = 0; i < quoteStyle.length; i++) {
-    //     // Resolve string input to bitwise e.g. 'ENT_IGNORE' becomes 4
-    //     if (OPTS[quoteStyle[i]] === 0) {
-    //       noquotes = true
-    //     } else if (OPTS[quoteStyle[i]]) {
-    //       optTemp = optTemp | OPTS[quoteStyle[i]]
-    //     }
-    //   }
-    //   quoteStyle = optTemp
-    // }
-    // if (quoteStyle & OPTS.ENT_HTML_QUOTE_SINGLE) {
-    //   string = string.replace(/'/g, '&#039;')
-    // }
-    // if (!noquotes) {
-    //   string = string.replace(/"/g, '&quot;')
-    // }
-
-    // return string
   }
 
 }

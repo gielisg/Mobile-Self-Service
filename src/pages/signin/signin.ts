@@ -36,7 +36,6 @@ export class SigninPage {
     Validators.email,
   ]);
 
-  // matcher = new MyErrorStateMatcher();
 
 
   public send_data: any[];
@@ -44,7 +43,6 @@ export class SigninPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
     public apiprovider: ApiproviderProvider, public translate: TranslateService, public menu: MenuController, public authservice: AuthserviceProvider) {
 
-    // translate.use('ru');
 
   }
 
@@ -76,7 +74,6 @@ export class SigninPage {
 
   completeAddCompany(comProfileForm) {
     if (comProfileForm.valid) {
-      // this.navCtrl.push(HomePage);
       let loading = this.loadingCtrl.create({
         content: "Please Wait..."
       });
@@ -90,7 +87,6 @@ export class SigninPage {
         .subscribe(
           data => {
             if (data) {
-              console.log(data);
               localStorage.setItem("login_infor", JSON.stringify(this.user_Data));
               this.navCtrl.push(HomePage);
             }
@@ -104,29 +100,6 @@ export class SigninPage {
             loading.dismiss();
           });
 
-      // this.apiprovider.postData(this.user_Data).then((result) => {
-      //   console.log(Object(result));
-      //   loading.dismiss();
-      //   if (Object(result).status == "success") {
-      //     console.log(result);
-      //     localStorage.setItem("user_email", Object(result).userid);
-      //     this.navCtrl.push(HomePage);
-      //   } else {
-      //     let toast = this.toastCtrl.create({
-      //       message: Object(result).detail,
-      //       duration: 2000
-      //     })
-      //     toast.present();
-      //   };
-
-      // }, (err) => {
-      //   let toast = this.toastCtrl.create({
-      //     message: "No Network",
-      //     duration: 2000
-      //   })
-      //   toast.present();
-      //   loading.dismiss();
-      // });
     }
   }
 
@@ -136,7 +109,7 @@ export class SigninPage {
 
   ionicInit() {
     this.menu.swipeEnable(false);
-    console.log(localStorage.getItem("set_lng"));
+    
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {

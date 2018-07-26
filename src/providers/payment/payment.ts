@@ -24,19 +24,16 @@ export class PaymentProvider {
     } else {
       this.startDate = new Date().toISOString();
     }
-    console.log(this.startDate);
 
     let temp_date = this.startDate;
     this.startDate = temp_date.split("T")[0].split("-")[0] + "-" + temp_date.split("T")[0].split("-")[1] + "-" + (parseInt(temp_date.split("T")[0].split("-")[2]) + 1).toString();
     this.startDate = this.startDate + "T" + "00:00:00";
 
-    console.log(this.startDate);
   }
 
 
   get_paymentAvailList() {
     let encoded_session_Key = encodeURIComponent(localStorage.getItem("session_key"));
-    console.log(encoded_session_Key);
     return this.http.get(this.url_header + 'Payment.svc/rest/AccountPaymentMethodListValid?SessionKey=' + encoded_session_Key + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username)
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
@@ -48,7 +45,6 @@ export class PaymentProvider {
   }
   account_paymentMethod(payment_id) {
     let encoded_session_Key = encodeURIComponent(localStorage.getItem("session_key"));
-    console.log(encoded_session_Key);
     return this.http.get(this.url_header + 'Payment.svc/rest/AccountPaymentMethod?SessionKey=' + encoded_session_Key + "&Id=" + payment_id + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username)
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
@@ -79,11 +75,9 @@ export class PaymentProvider {
         "CreateOption": "NewOnly",
       }
     };
-    console.log(JSON.stringify(param));
     return this.http.post(this.url_header + 'Payment.svc/rest/AccountPaymentMethodAdd', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-        console.log(return_data);
         return return_data;
       })
       .pipe(
@@ -105,11 +99,9 @@ export class PaymentProvider {
     let options = new RequestOptions({ headers: headers });
 
 
-    console.log(JSON.stringify(param));
     return this.http.put(this.url_header + 'Payment.svc/rest/AccountPaymentMethodCancel', JSON.stringify(param), options)
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-        console.log(return_data);
         return return_data;
       })
       .pipe(
@@ -123,11 +115,9 @@ export class PaymentProvider {
       "StartDate": this.startDate,
       "StatusCode": "O"
     };
-    console.log(JSON.stringify(param));
     return this.http.put(this.url_header + 'Payment.svc/rest/AccountPaymentMethodMakeDefault', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-        console.log(return_data);
         return return_data;
       })
       .pipe(
@@ -150,11 +140,9 @@ export class PaymentProvider {
         "SubscriberOwns": true,
       }
     };
-    console.log(JSON.stringify(param));
     return this.http.put(this.url_header + 'Payment.svc/rest/AccountPaymentMethodUpdate', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-        console.log(return_data);
         return return_data;
       })
       .pipe(
@@ -181,11 +169,9 @@ export class PaymentProvider {
         "SendEmail": false,
       }
     };
-    console.log(JSON.stringify(param));
     return this.http.post(this.url_header + 'Payment.svc/rest/PaymentRequestCreate', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-        console.log(return_data);
         return return_data;
       })
       .pipe(
@@ -194,7 +180,6 @@ export class PaymentProvider {
 
   payment_MethodFromAccountNumberAndType() {
     let encoded_session_Key = encodeURIComponent(localStorage.getItem("session_key"));
-    console.log(encoded_session_Key);
     return this.http.get(this.url_header + 'Payment.svc/rest/PaymentMethodFromAccountNumberAndType?SessionKey=' + encoded_session_Key + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username + "&PaymentMethodTypeCode=C")
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));

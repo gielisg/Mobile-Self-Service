@@ -28,12 +28,6 @@ import { parseDate } from 'ionic-angular/util/datetime-util';
 })
 export class MyServicesPage {
 
-  // public service_Data = [
-  //   { "type": "GSM", "number": "04155188882", "date": "12, March 2017", "status": "Open", "plan": "Saver1" },
-  //   { "type": "GSM", "number": "04155188882", "date": "12, March 2017", "status": "Open", "plan": "Saver1" },
-  //   { "type": "GSM", "number": "04155188882", "date": "12, March 2017", "status": "Open", "plan": "Saver1" },
-  //   { "type": "GSM", "number": "04155188882", "date": "12, March 2017", "status": "Open", "plan": "Saver1" }
-  // ];
   public service_Data: any[];
 
   public monthNames = ["January", "February", "March", "April", "May", "June",
@@ -48,11 +42,6 @@ export class MyServicesPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyServicesPage');
     this.ionicInit();
-    // this.serviceprovider.get_serviceDisplay().subscribe(result => {
-    //   console.log(result.Items);
-    // }, error => {
-    //   console.log("error");
-    // });
   }
 
   set_date(value) {
@@ -94,8 +83,6 @@ export class MyServicesPage {
       .subscribe(
       data => {
         if (data) {
-
-          console.log(localStorage.getItem("set_lng"));
           if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
             this.translate.use('en');
           } else {
@@ -110,13 +97,7 @@ export class MyServicesPage {
 
             this.service_Data.push(array_data);
 
-            // console.log(parseDate(list.DueDate));
-            // console.log(parseDate(list.DueDate).getMonth());
-
           }
-
-          console.log(data);
-          // console.log(this.bill_data);
 
         }
         loading.dismiss();
@@ -129,14 +110,12 @@ export class MyServicesPage {
 
   change_state(index) {
 
-    // this.navCtrl.push(ChangeStatusPage, { navParams: index });
     let change_data = { "index": "", "status": "" };
     change_data.index = index;
     change_data.status = this.service_Data[index].status;
     localStorage.setItem("ChangeStatusPage", JSON.stringify(change_data));
     let profileModal = this.modalCtrl.create(ChangeStatusPage);
     profileModal.onDidDismiss(data => {
-      console.log(data);
       if (typeof (data) != "undefined" && data != "") {
         this.service_Data[index].status = data;
       }
@@ -153,14 +132,12 @@ export class MyServicesPage {
 
   change_plan(index) {
 
-    // this.navCtrl.push(ChangePlanPage, { navParams: index });
     let change_data = { "index": "", "plan": "" };
     change_data.index = index;
     change_data.plan = this.service_Data[index].plan;
     localStorage.setItem("ChangePlanPage", JSON.stringify(change_data));
     let profileModal = this.modalCtrl.create(ChangePlanPage);
     profileModal.onDidDismiss(data => {
-      console.log(data);
       if (typeof (data) != "undefined" && data != "") {
         this.service_Data[index].plan = data;
       }

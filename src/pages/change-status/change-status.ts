@@ -38,13 +38,10 @@ export class ChangeStatusPage {
   }
 
   goback() {
-    // this.navCtrl.pop();
-    console.log("faild");
     this.viewCtrl.dismiss("");
   }
 
   completeAddCompany(comProfileForm) {
-    // console.log(comProfileForm.valid);
     if (this.newState.valid && this.Reason.valid && this.changeDate.valid) {
       let data = this.change_state.new_state;
       this.viewCtrl.dismiss(data);
@@ -53,14 +50,12 @@ export class ChangeStatusPage {
 
   ionicInit() {
 
-    // localStorage.setItem("ChangeStatusPage", index);
     let current_state = JSON.parse(localStorage.getItem("ChangeStatusPage"));
 
-    console.log(JSON.parse(localStorage.getItem("ChangeStatusPage")));
 
     this.change_state.new_state = current_state.status;
 
-    console.log(localStorage.getItem("set_lng"));
+    
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {

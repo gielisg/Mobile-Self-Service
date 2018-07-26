@@ -49,83 +49,18 @@ export class PayNowPage {
   }
 
   ionicInit() {
-    console.log(localStorage.getItem("set_lng"));
+    
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {
       this.translate.use(localStorage.getItem("set_lng"));
     }
 
-    // let loading = this.loadingCtrl.create({
-    //   content: "Please Wait..."
-    // });
-    // loading.present();
-
-    // this.paymentService.get_paymentAvailList().subscribe(data => {
-    //   console.log(data);
-    //   loading.dismiss();
-
-    // }, error => {
-    //   console.log(error);
-    //   loading.dismiss();
-    // });
-
-    // this.paymentService.account_paymentMethod(2806).subscribe(data => {
-    //   console.log(data);
-    //   /////////// This is work
-    // }, error => {
-    //   console.log(error);
-    // });
-
-    // this.paymentService.account_paymentMethodCancel(2806).subscribe(data => {
-    //   console.log(data);
-    // }, error => {
-    //   console.log(error);
-    // });
-
-    // this.paymentService.account_paymentMethodMakeDefault(2806).subscribe(data => {
-    //   console.log(data);
-    // }, error => {
-    //   console.log(error);
-    // });
-
-    // let update_param = {
-    //   "name": "dfdefeegsdg",
-    //   "number": "12342332354",
-    //   "expireDate": new Date().toISOString(),
-    //   "payment_id": 2806,
-    // };
-    // this.paymentService.account_paymentMethodUpdate(update_param).subscribe(data => {
-    //   console.log(data);
-    // }, error => {
-    //   console.log(error);
-    // });
-
-    // let update_param = {
-    //   "name": "dfdefeegsdg",
-    //   "amount": 0.15,
-    //   "expireDate": new Date().toISOString(),
-    //   "payment_id": 9143,
-    // };
-    // this.paymentService.payment_RequestCreate(update_param).subscribe(data => {
-    //   console.log(data);
-    // }, error => {
-    //   console.log(error);
-    // });
-
-    // this.paymentService.payment_MethodFromAccountNumberAndType().subscribe(data => {
-    //   console.log(data);
-    //   /////////this is work
-    // }, error => {
-    //   console.log(error);
-    // });
   }
 
   pay_now() {
     let profileModal = this.modalCtrl.create(PaynowCheckPage);
     profileModal.onDidDismiss(data => {
-      console.log(data);
-      console.log("finish payment");
       this.navCtrl.push(HomePage);
     });
     profileModal.present();
@@ -133,14 +68,10 @@ export class PayNowPage {
 
   completeAddCompany(comProfileForm) {
 
-    console.log(comProfileForm.valid);
-    console.log(comProfileForm);
 
     if (comProfileForm.valid && !this.cancen_enable) {
       let profileModal = this.modalCtrl.create(PaynowCheckPage);
       profileModal.onDidDismiss(data => {
-        console.log(data);
-        console.log("finish payment");
         this.navCtrl.push(HomePage);
       });
       profileModal.present();

@@ -34,12 +34,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
-    // this.switch_mode = true;
     this.ionicInit();
-
-    console.log(localStorage.getItem('currentUser'));
-
-    console.log(this.switch_mode);
   }
   goto_mydetail() {
     this.navCtrl.push(MydetailPage);
@@ -62,12 +57,9 @@ export class HomePage {
 
     this.file.checkDir('file:///storage/emulated/0/', 'Self_Service').then((result_check) => {
 
-      console.log(result_check);
 
 
       this.fileTransfer.download(url, 'file:///storage/emulated/0/Self_Service/' + 'Bill Data.pdf').then((entry) => {
-        console.log(this.file.externalDataDirectory);
-        console.log('download complete: ' + entry.toURL());
         let toast = this.toastCtrl.create({
           message: 'download complete: ' + entry.toURL(),
           duration: 2000
@@ -81,8 +73,6 @@ export class HomePage {
 
       this.file.createDir('file:///storage/emulated/0/', 'Self_Service', false).then((DirectoryEntry) => {
         this.fileTransfer.download(url, 'file:///storage/emulated/0/Self_Service/' + 'Bill Data.pdf').then((entry) => {
-          console.log(this.file.externalDataDirectory);
-          console.log('download complete: ' + entry.toURL());
           let toast = this.toastCtrl.create({
             message: 'download complete: ' + entry.toURL(),
             duration: 2000
@@ -112,10 +102,8 @@ export class HomePage {
       .subscribe(
         data => {
           if (data) {
-            console.log(data);
             this.bill_data.bill_amount = data.Items[0].AmountDue;
             this.bill_data.bill_date = this.set_date(data.Items[0].DueDate.split("T")[0]);
-            console.log(this.bill_data);
 
           }
           loading.dismiss();
@@ -129,7 +117,6 @@ export class HomePage {
 
   set_date(value) {
     let array_sam = value.split("-");
-    console.log(array_sam);
     return array_sam[1] + "-" + array_sam[2] + "-" + array_sam[0];
   }
 
@@ -146,7 +133,6 @@ export class HomePage {
       if (data) {
 
         this.menu.swipeEnable(true);
-        console.log(localStorage.getItem("set_lng"));
         if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
           this.translate.use('en');
           this.switch_mode = true;
@@ -167,12 +153,6 @@ export class HomePage {
       error => {
         loading.dismiss();
       });
-    // this.authservice.account_balance().subscribe(result => {
-    //   console.log(result);
-    // }
-    //   , error => {
-    //     console.log("error");
-    //   });
   }
 
 }

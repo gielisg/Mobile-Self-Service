@@ -34,11 +34,10 @@ page-new-payment {
     }
     .select_class {
         width: 100%;
-        max-width: 100%; // border-bottom: 1px solid #ddd;
+        max-width: 100%; 
         font-size: 1.6rem;
     }
     .payment_input {
-        // border-bottom: 1px solid #ddd;
         width: 100%;
     }
     .mat-form-field {
@@ -46,7 +45,6 @@ page-new-payment {
     }
     .expire_select {
         max-width: 100%;
-        // border-bottom: 1px solid #ddd;
     }
     .button_row {
         width: 100%;
@@ -64,7 +62,7 @@ page-new-payment {
         width: 100%;
         font-weight: bold;
         background-color: #3ba464;
-        height: 40px; // font-size: 1.4rem;
+        height: 40px;
     }
     .add_cancel {
         margin-top: 15%;

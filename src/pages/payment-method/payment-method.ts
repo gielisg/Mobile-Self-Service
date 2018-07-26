@@ -44,7 +44,6 @@ export class PaymentMethodPage {
   goto_newPayment() {
     let profileModal = this.modalCtrl.create(NewpaymentCheckPage);
     profileModal.onDidDismiss(data => {
-      console.log(data);
       if (data == "open") {
         this.navCtrl.push(NewPaymentPage);
       }
@@ -53,7 +52,7 @@ export class PaymentMethodPage {
   }
 
   ionicInit() {
-    console.log(localStorage.getItem("set_lng"));
+    
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {
@@ -66,7 +65,6 @@ export class PaymentMethodPage {
     loading.present();
 
     this.paymentService.get_paymentAvailList().subscribe(data => {
-      console.log(data);
       for (let list of data) {
         let array_sam = { "name": "", "type": "", "number": "", "expiry": "", "status": "open", "payment_id": 0 };
         array_sam.payment_id = list.Id;
@@ -95,7 +93,6 @@ export class PaymentMethodPage {
     loading.present();
 
     this.paymentService.account_paymentMethodCancel(this.detail_Data[index].payment_id).subscribe(data => {
-      console.log(data);
       this.detail_Data.splice(index, 1);
       loading.dismiss();
     }, error => {

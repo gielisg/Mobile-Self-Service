@@ -24,15 +24,13 @@ page-change-plan {
     }
     .select_class {
         width: 100%;
-        max-width: 100%; // border-bottom: 1px solid #ddd;
+        max-width: 100%;
         font-size: 1.6rem;
     }
     .mat-form-field {
         width: 100%;
     }
-    .payment_row {
-        // margin-top: 5%;
-    }
+    .payment_row {}
     .payment_title_span {
         width: 100%;
         font-size: 1.7rem;
@@ -55,7 +53,7 @@ page-change-plan {
         width: 100%;
         font-weight: bold;
         background-color: #3ba464;
-        height: 40px; // font-size: 1.4rem;
+        height: 40px;
     }
     .add_cancel {
         margin-top: 5%;

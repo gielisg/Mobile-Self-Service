@@ -33,11 +33,10 @@ page-top-up {
     }
     .select_class {
         width: 100%;
-        max-width: 100%; // border-bottom: 1px solid #ddd;
+        max-width: 100%;
         font-size: 1.6rem;
     }
     .payment_input {
-        // border-bottom: 1px solid #ddd;
         width: 100%;
     }
     .mat-form-field {
@@ -55,28 +54,26 @@ page-top-up {
         width: 100%;
         font-weight: bold;
         background-color: #3982a3;
-        height: 40px; // font-size: 1.6rem;
+        height: 40px;
     }
     .button_style2 {
         border-radius: 25px;
         width: 100%;
         font-weight: bold;
         background-color: #3ba464;
-        height: 40px; // font-size: 1.4rem;
-        // font-size: 1.6rem;
+        height: 40px;
     }
-
-    .topup_calender ion-col{
+    .topup_calender ion-col {
         padding: 0px;
     }
-    .topup_calender ion-datetime{
+    .topup_calender ion-datetime {
         padding-left: 0px !important;
         border-bottom: 1px solid #ddd;
     }
-    .error_border{
+    .error_border {
         border-bottom: 1px solid #f44336 !important;
     }
-    .normal_border{
+    .normal_border {
         border-bottom: 1px solid #ddd;
     }
     .add_button {
@@ -97,14 +94,8 @@ page-top-up {
         width: 2rem !important;
         height: 2rem !important;
     }
-    .mat-form-field-infix {
-        // border: unset !important;
-    }
-    // .mat-input-flex.mat-form-field-flex {
-    //     border-bottom: 1px solid #ddd;
-    // }
-
-    .cal_error span{
+    .mat-form-field-infix {}
+    .cal_error span {
         color: #f44336;
         font-size: 75%;
         margin-top: .66667em;

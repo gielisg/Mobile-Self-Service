@@ -72,9 +72,7 @@ export class NewPaymentPage {
         content: "Please Wait..."
       });
       loading.present();
-      console.log(add_param);
       this.paymentService.account_paymentMethodAdd(add_param).subscribe(data => {
-        console.log(data);
         loading.dismiss();
         this.navCtrl.pop();
         this.navCtrl.push(PaymentMethodPage);
@@ -86,7 +84,7 @@ export class NewPaymentPage {
   }
 
   ionicInit() {
-    console.log(localStorage.getItem("set_lng"));
+    
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {

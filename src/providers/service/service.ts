@@ -43,7 +43,6 @@ export class ServiceProvider {
         "TakeRecords": 1,
       }
     };
-    console.log((request_param));
     return this.http.post(this.url_header + 'Bill.svc/rest/BillList', JSON.stringify(request_param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
@@ -66,7 +65,6 @@ export class ServiceProvider {
         "TakeRecords": 50,
       }
     };
-    console.log(JSON.stringify(request_param));
     return this.http.post(this.url_header + 'Bill.svc/rest/BillList', JSON.stringify(request_param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
@@ -83,7 +81,6 @@ export class ServiceProvider {
       "BillNumber": bill_number,
       "BillType": "pdf"
     };
-    console.log((request_param));
     return this.http.get(this.url_header + 'Bill.svc/rest/BillFile?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username + "&BillNumber=" + bill_number + "&BillType=pdf")
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));

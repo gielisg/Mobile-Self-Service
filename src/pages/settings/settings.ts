@@ -26,9 +26,6 @@ export class SettingsPage {
   public select_lng: any;
 
   selectFormControl = new FormControl('', [Validators.required]);
-  // selectFormControl = new FormControl('', [
-  //   Validators.required,
-  // ]);
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
     public apiprovider: ApiproviderProvider, public translate: TranslateService, public cdr: ChangeDetectorRef, public menuCtrl: MenuController
@@ -53,12 +50,10 @@ export class SettingsPage {
       this.select_lng = localStorage.getItem("set_lng");
       this.translate.use(localStorage.getItem("set_lng"));
     }
-    console.log(this.select_lng);
 
   }
 
   selected_lng() {
-    console.log(this.select_lng);
     localStorage.setItem("set_lng", this.select_lng);
     this.createUser("This is fake");
     this.ionicInit();
