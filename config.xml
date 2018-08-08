@@ -25,6 +25,7 @@
     <preference name="SplashScreenDelay" value="1000" />
     <preference name="orientation" value="portrait" />
     <preference name="loadUrlTimeoutValue" value="700000" />
+    <preference name="windows-target-version" value="10.0" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -91,4 +92,5 @@
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <engine name="android" spec="~7.0.0" />
     <plugin name="com-badrit-base64" spec="^0.2.0" />
+    <engine name="windows" spec="~5.0.0" />
 </widget>
