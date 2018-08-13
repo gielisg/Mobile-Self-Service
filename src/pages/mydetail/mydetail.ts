@@ -47,7 +47,7 @@ export class MydetailPage {
   ionicInit() {
 
 
-    
+
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {
@@ -68,6 +68,8 @@ export class MydetailPage {
       this.user_Data.email = result.ContactEmailAddressList[0].EmailAddress;
       this.user_Data.address = result.AddressList;
       this.user_Data.phone = result.ContactPhoneList;
+      console.log(result);
+      console.log(JSON.stringify(result));
       loading.dismiss();
     }, error => {
       console.log("error");
@@ -187,10 +189,23 @@ export class MydetailPage {
     let status = "get_detail";
     this.user_Data.status = status;
     this.accountServer.update_phone(this.user_Data.phone).subscribe(result => {
+      console.log(result);
       loading.dismiss();
     }, error => {
-      console.log("error");
-      loading.dismiss();
+      //   console.log("error");
+      //   loading.dismiss();
+      // });
+      if (error.indexOf("400") >= 0) {
+        var user = this.accountServer.getLoggedUser();
+        this.accountServer.login(user.username, user.password).subscribe(result => {
+          this.update_email();
+        }, error => {
+          loading.dismiss();
+        });
+      }
+      else {
+        loading.dismiss();
+      }
     });
   }
 
@@ -202,10 +217,23 @@ export class MydetailPage {
     let status = "get_detail";
     this.user_Data.status = status;
     this.accountServer.update_email(this.user_Data.email).subscribe(result => {
+      console.log(result);
       loading.dismiss();
     }, error => {
-      console.log("error");
-      loading.dismiss();
+      //   console.log("error");
+      //   loading.dismiss();
+      // });
+      if (error.indexOf("400") >= 0) {
+        var user = this.accountServer.getLoggedUser();
+        this.accountServer.login(user.username, user.password).subscribe(result => {
+          this.update_email();
+        }, error => {
+          loading.dismiss();
+        });
+      }
+      else {
+        loading.dismiss();
+      }
     });
   }
 
@@ -217,18 +245,54 @@ export class MydetailPage {
     let status = "get_detail";
     this.user_Data.status = status;
     this.accountServer.update_address(this.user_Data.address).subscribe(result => {
+      console.log(result);
       loading.dismiss();
     }, error => {
-      console.log("error");
-      loading.dismiss();
+      //   console.log("error");
+      //   loading.dismiss();
+      // });
+      if (error.indexOf("400") >= 0) {
+        var user = this.accountServer.getLoggedUser();
+        this.accountServer.login(user.username, user.password).subscribe(result => {
+          this.update_address();
+        }, error => {
+          loading.dismiss();
+        });
+      }
+      else {
+        loading.dismiss();
+      }
     });
   }
 
   change_userState() {
 
-    this.temp_Data.email = localStorage.getItem("user_email");
+    let loading = this.loadingCtrl.create({
+      content: "Please Wait..."
+    });
+    loading.present();
     let status = "change_userinfo";
-    this.temp_Data.status = status;
+    this.user_Data.status = status;
+    this.accountServer.update_name(this.user_Data.phone).subscribe(result => {
+      console.log(result);
+      loading.dismiss();
+    }, error => {
+      //   console.log("error");
+      //   loading.dismiss();
+      // });
+      if (error.indexOf("400") >= 0) {
+        var user = this.accountServer.getLoggedUser();
+        this.accountServer.login(user.username, user.password).subscribe(result => {
+          this.change_userState();
+        }, error => {
+          loading.dismiss();
+        });
+      }
+      else {
+        loading.dismiss();
+      }
+    });
+
   }
 
   current_state(value) {

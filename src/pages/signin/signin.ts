@@ -48,6 +48,7 @@ export class SigninPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SigninPage');
+    console.log(localStorage.getItem("login_infor"));
     this.ionicInit();
 
 

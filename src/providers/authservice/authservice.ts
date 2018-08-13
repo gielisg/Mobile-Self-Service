@@ -3,6 +3,11 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { User, APP_CONFIG, IAppConfig } from '../../model';
+import { HttpClient, HttpErrorResponse } from '../../../node_modules/@angular/common/http';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
+import { catchError, tap } from 'rxjs/operators';
 
 /*
   Generated class for the AuthserviceProvider provider.
@@ -15,7 +20,7 @@ export class AuthserviceProvider {
 
   public url_header = "https://ua.selcomm.com/SelcommWS/1.0267/";
 
-  constructor(@Inject(APP_CONFIG) public config: IAppConfig, public http: Http) {
+  constructor(@Inject(APP_CONFIG) public config: IAppConfig, public http: Http, public httpclient: HttpClient) {
     console.log('Hello AuthserviceProvider Provider');
   }
 
@@ -57,7 +62,7 @@ export class AuthserviceProvider {
       );
   }
 
-  update_address(new_address) {
+  update_address(new_address): Observable<any[]> {
     let encoded_session_Key = encodeURIComponent(localStorage.getItem("session_key"));
     let param = {
       "SessionKey": localStorage.getItem("session_key"),
@@ -79,17 +84,23 @@ export class AuthserviceProvider {
         "Suburb": "TEST",
       }
     };
-    return this.http.put(this.url_header + 'Address.svc/rest/AddressUpdateByContact', JSON.stringify(param))
-      .map(token => {
-        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-        return return_data;
+    // return this.http.put(this.url_header + 'Address.svc/rest/AddressUpdateByContact', JSON.stringify(param))
+    //   .map(token => {
+    //     let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+    //     return return_data;
 
-      })
+    //   })
+    //   .pipe(
+    //   );
+    console.log(JSON.stringify(param));
+    return this.httpclient.put<any[]>(this.url_header + 'Address.svc/rest/AddressUpdateByContact', JSON.stringify(param))
       .pipe(
+
+        catchError(this.handleError('getData'))
       );
   }
 
-  update_email(email_address) {
+  update_email(email_address): Observable<any[]> {
 
     let param = {
       "SessionKey": (localStorage.getItem("session_key")),
@@ -98,17 +109,22 @@ export class AuthserviceProvider {
         "EmailAddress": email_address
       }
     }
-    return this.http.put(this.url_header + 'Email.svc/rest/EmailAddressUpdate ', JSON.stringify(param))
-      .map(token => {
-        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-        return return_data;
-      })
+    // return this.http.put(this.url_header + 'Email.svc/rest/EmailAddressUpdate ', JSON.stringify(param))
+    //   .map(token => {
+    //     let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+    //     return return_data;
+    //   })
+    //   .pipe(
+
+    //   );
+    return this.httpclient.put<any[]>(this.url_header + 'Email.svc/rest/EmailAddressUpdate ', JSON.stringify(param))
       .pipe(
 
+        catchError(this.handleError('getData'))
       );
   }
 
-  update_phone(phone_number) {
+  update_phone(phone_number): Observable<any[]> {
     let param =
     {
       "SessionKey": (localStorage.getItem("session_key")),
@@ -122,18 +138,23 @@ export class AuthserviceProvider {
         "Reference": 3594,
       }
     }
-    return this.http.put(this.url_header + 'ContactPhone.svc/rest/ContactPhoneUpdate', JSON.stringify(param))
-      .map(token => {
-        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-        return return_data;
+    // return this.http.put(this.url_header + 'ContactPhone.svc/rest/ContactPhoneUpdate', JSON.stringify(param))
+    //   .map(token => {
+    //     let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+    //     return return_data;
 
-      })
-      .pipe(
+    //   })
+    //   .pipe(
 
-      );
+    //   );
+    return this.httpclient.put<any[]>(this.url_header + 'ContactPhone.svc/rest/ContactPhoneUpdate', JSON.stringify(param))
+    .pipe(
+
+      catchError(this.handleError('getData'))
+    );
   }
 
-  update_name(user_name) {
+  update_name(user_name): Observable<any[]> {
     let param =
     {
       "SessionKey": encodeURIComponent(localStorage.getItem("session_key")),
@@ -147,15 +168,20 @@ export class AuthserviceProvider {
         "Reference": 3594,
       }
     }
-    return this.http.put(this.url_header + 'Account.svc/rest/Account?SessionKey=', JSON.stringify(param))
-      .map(token => {
-        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-        return return_data;
+    // return this.http.put(this.url_header + 'Account.svc/rest/Account?SessionKey=', JSON.stringify(param))
+    //   .map(token => {
+    //     let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+    //     return return_data;
 
-      })
-      .pipe(
+    //   })
+    //   .pipe(
 
-      );
+    //   );
+    return this.httpclient.put<any[]>(this.url_header + 'Account.svc/rest/Account?SessionKey=', JSON.stringify(param))
+    .pipe(
+
+      catchError(this.handleError('getData'))
+    );
   }
 
 
@@ -181,6 +207,29 @@ export class AuthserviceProvider {
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
+  }
+
+  private handleError(operation: String) {
+    return (err: any) => {
+
+      if (err instanceof HttpErrorResponse) {
+
+        if (err.error.Message.indexOf("session key") >= 0)
+          return Observable.throw(`status: 400`);
+        else if (err.error.Code.Name.indexOf("Session") >= 0)
+          return Observable.throw(`status: 400`);
+        else
+          return Observable.throw(`status: ${err.error.Message}`);
+      }
+    }
+
+  }
+
+  getLoggedUser(): User {
+    if (localStorage.getItem("currentUser") != null) {
+      return JSON.parse(localStorage.getItem("currentUser"));
+    }
+    return null;
   }
 
 }
