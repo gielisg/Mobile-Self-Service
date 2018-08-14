@@ -47,7 +47,7 @@ export class MydetailPage {
   ionicInit() {
 
 
-
+    console.log(localStorage.getItem("set_lng"));
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {
@@ -56,6 +56,11 @@ export class MydetailPage {
 
     this.user_Data.email = localStorage.getItem("user_email");
 
+    // this.user_Data.email = "veerhunter127@gmail.com";
+    // this.user_Data.phone = "123456789";
+    // this.user_Data.username = "VeeRHunter";
+    // this.user_Data.address = "XX street, YY city, ZZ country";
+
 
     let loading = this.loadingCtrl.create({
       content: "Please Wait..."
@@ -63,13 +68,13 @@ export class MydetailPage {
     loading.present();
     let status = "get_detail";
     this.user_Data.status = status;
+    console.log(this.user_Data);
     this.accountServer.get_accountDetail().subscribe(result => {
+      console.log(result);
       this.user_Data.username = result.FullName;
       this.user_Data.email = result.ContactEmailAddressList[0].EmailAddress;
       this.user_Data.address = result.AddressList;
       this.user_Data.phone = result.ContactPhoneList;
-      console.log(result);
-      console.log(JSON.stringify(result));
       loading.dismiss();
     }, error => {
       console.log("error");
@@ -159,6 +164,7 @@ export class MydetailPage {
         }
         break;
     }
+    console.log(this.temp_Data);
   }
 
   completeAddCompany(comProfileForm) {
@@ -188,24 +194,13 @@ export class MydetailPage {
     loading.present();
     let status = "get_detail";
     this.user_Data.status = status;
+    console.log(this.user_Data);
     this.accountServer.update_phone(this.user_Data.phone).subscribe(result => {
       console.log(result);
       loading.dismiss();
     }, error => {
-      //   console.log("error");
-      //   loading.dismiss();
-      // });
-      if (error.indexOf("400") >= 0) {
-        var user = this.accountServer.getLoggedUser();
-        this.accountServer.login(user.username, user.password).subscribe(result => {
-          this.update_email();
-        }, error => {
-          loading.dismiss();
-        });
-      }
-      else {
-        loading.dismiss();
-      }
+      console.log("error");
+      loading.dismiss();
     });
   }
 
@@ -216,24 +211,13 @@ export class MydetailPage {
     loading.present();
     let status = "get_detail";
     this.user_Data.status = status;
+    console.log(this.user_Data);
     this.accountServer.update_email(this.user_Data.email).subscribe(result => {
       console.log(result);
       loading.dismiss();
     }, error => {
-      //   console.log("error");
-      //   loading.dismiss();
-      // });
-      if (error.indexOf("400") >= 0) {
-        var user = this.accountServer.getLoggedUser();
-        this.accountServer.login(user.username, user.password).subscribe(result => {
-          this.update_email();
-        }, error => {
-          loading.dismiss();
-        });
-      }
-      else {
-        loading.dismiss();
-      }
+      console.log("error");
+      loading.dismiss();
     });
   }
 
@@ -244,55 +228,48 @@ export class MydetailPage {
     loading.present();
     let status = "get_detail";
     this.user_Data.status = status;
+    console.log(this.user_Data);
     this.accountServer.update_address(this.user_Data.address).subscribe(result => {
       console.log(result);
       loading.dismiss();
     }, error => {
-      //   console.log("error");
-      //   loading.dismiss();
-      // });
-      if (error.indexOf("400") >= 0) {
-        var user = this.accountServer.getLoggedUser();
-        this.accountServer.login(user.username, user.password).subscribe(result => {
-          this.update_address();
-        }, error => {
-          loading.dismiss();
-        });
-      }
-      else {
-        loading.dismiss();
-      }
+      console.log("error");
+      loading.dismiss();
     });
   }
 
   change_userState() {
 
-    let loading = this.loadingCtrl.create({
-      content: "Please Wait..."
-    });
-    loading.present();
+    this.temp_Data.email = localStorage.getItem("user_email");
     let status = "change_userinfo";
-    this.user_Data.status = status;
-    this.accountServer.update_name(this.user_Data.phone).subscribe(result => {
-      console.log(result);
-      loading.dismiss();
-    }, error => {
-      //   console.log("error");
-      //   loading.dismiss();
-      // });
-      if (error.indexOf("400") >= 0) {
-        var user = this.accountServer.getLoggedUser();
-        this.accountServer.login(user.username, user.password).subscribe(result => {
-          this.change_userState();
-        }, error => {
-          loading.dismiss();
-        });
-      }
-      else {
-        loading.dismiss();
-      }
-    });
+    this.temp_Data.status = status;
+    // this.apiprovider.postData(this.temp_Data).then((result) => {
+    //   console.log(Object(result));
+    //   if (Object(result).status == "success") {
 
+    //     localStorage.setItem("user_email", this.user_Data.email);
+
+    //     let toast = this.toastCtrl.create({
+    //       message: Object(result).detail,
+    //       duration: 2000
+    //     })
+    //     toast.present();
+
+    //   } else {
+    //     let toast = this.toastCtrl.create({
+    //       message: Object(result).detail,
+    //       duration: 2000
+    //     })
+    //     toast.present();
+    //   };
+
+    // }, (err) => {
+    //   let toast = this.toastCtrl.create({
+    //     message: "No Network",
+    //     duration: 2000
+    //   })
+    //   toast.present();
+    // });
   }
 
   current_state(value) {
