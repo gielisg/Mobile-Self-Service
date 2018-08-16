@@ -15,6 +15,7 @@
     "sign_in": "Sign In",
     "email_is_required": "Email is required",
     "valid_email_address": "Please enter a valid email address",
+    "valid_phone_number": "Please enter 8 digits",
     "phone_number_is_required": "Phone Number is required",
     "address_is_required": "Address is required",
     "settings": "SETTINGS",

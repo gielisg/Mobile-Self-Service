@@ -15,6 +15,7 @@
     "sign_in": "Войти В Систему",
     "email_is_required": "Требуется электронная почта",
     "valid_email_address": "Введите действительный адрес электронной почты",
+    "valid_phone_number": "Введите 8 цифр",
     "phone_number_is_required": "Требуется номер телефона",
     "address_is_required": "Требуется адрес",
     "settings": "НАСТРОЙКИ",

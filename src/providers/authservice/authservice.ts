@@ -40,6 +40,7 @@ export class AuthserviceProvider {
   }
 
   account_balance() {
+
     return this.http.get(this.url_header + 'Account.svc/rest/AccountBalance?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&IncludeUnbilledUsage=true&IncludeOneOffAndRecurringCharges=true')
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
@@ -52,7 +53,7 @@ export class AuthserviceProvider {
   }
 
   get_accountDetail() {
-    return this.http.get(this.url_header + 'Account.svc/rest/Account?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&RefreshCache=true')
+    return this.http.get(this.url_header + 'Contact.svc/rest/Contact?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) + '&ContactCode=' + JSON.parse(localStorage.getItem('currentUser')).username + '&LoadAddress=true&LoadContactPhones=true&LoadContactEmailAddresses=true&RefreshCache=true')
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
@@ -148,13 +149,14 @@ export class AuthserviceProvider {
 
     //   );
     return this.httpclient.put<any[]>(this.url_header + 'ContactPhone.svc/rest/ContactPhoneUpdate', JSON.stringify(param))
-    .pipe(
+      .pipe(
 
-      catchError(this.handleError('getData'))
-    );
+        catchError(this.handleError('getData'))
+      );
+
   }
 
-  update_name(user_name): Observable<any[]> {
+  update_name(user_name) {
     let param =
     {
       "SessionKey": encodeURIComponent(localStorage.getItem("session_key")),
@@ -177,11 +179,20 @@ export class AuthserviceProvider {
     //   .pipe(
 
     //   );
-    return this.httpclient.put<any[]>(this.url_header + 'Account.svc/rest/Account?SessionKey=', JSON.stringify(param))
-    .pipe(
+    // return this.http.get(this.url_header + 'Contact.svc/rest/BusinessNameUpdate?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username + "&BusinessName=" + user_name)
+    //   .pipe(
 
-      catchError(this.handleError('getData'))
-    );
+    //     catchError(this.handleError('getData'))
+    //   );
+
+    return this.http.get(this.url_header + 'Contact.svc/rest/BusinessNameUpdate?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username + "&BusinessName=" + user_name)
+      .map(token => {
+        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return token;
+
+      })
+      .pipe(
+      );
   }
 
 

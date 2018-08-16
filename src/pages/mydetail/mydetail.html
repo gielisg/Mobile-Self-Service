@@ -118,8 +118,8 @@
                 {{ 'email' | translate }}
               </span>
               <mat-form-field class="example-full-width">
-                <input matInput type="email" placeholder="{{ 'email' | translate }}" [formControl]="emailFormControl" [(ngModel)]="user_Data.email" required
-                  name="email">
+                <input matInput type="email" placeholder="{{ 'email' | translate }}" [formControl]="emailFormControl" [(ngModel)]="user_Data.email"
+                  required name="email">
 
                 <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                   {{ 'valid_email_address' | translate }}
@@ -147,32 +147,46 @@
     </ion-row>
 
     <ion-row class="normal_row">
-      <ion-col col-10>
-        <ion-row class="full_height">
-          <span class="title_span">
-            {{ 'contact' | translate }}
-          </span>
-          <span class="detail_span" *ngIf="!change_state.phone">
-            +{{user_Data.phone}}
-          </span>
-          <mat-form-field class="example-full-width" *ngIf="change_state.phone">
-            <input matInput type="number" placeholder="{{ 'phone_number' | translate }}" [(ngModel)]="user_Data.phone" required name="phone">
-            <mat-error>
-              {{ 'phone_number_is_required' | translate }}
-            </mat-error>
-          </mat-form-field>
+      <form #userPhone="ngForm" id="userPhone" (ngSubmit)="changePhone()" novalidate>
+        <ion-row>
+          <ion-col col-10>
+            <ion-row class="full_height">
+              <span class="title_span">
+                {{ 'contact' | translate }}
+              </span>
+              <span class="detail_span" *ngIf="!change_state.phone">
+                +{{user_Data.phone}}
+              </span>
+              <mat-form-field class="example-full-width" *ngIf="change_state.phone">
+                <input matInput type="number" [formControl]="phoneFormCtrl" placeholder="{{ 'phone_number' | translate }}" [(ngModel)]="user_Data.phone"
+                  required name="phone">
+                <!-- <mat-error>
+                {{ 'phone_number_is_required' | translate }}
+              </mat-error> -->
+
+                <mat-error *ngIf="phoneFormCtrl.hasError('pattern') && !phoneFormCtrl.hasError('required')">
+                  {{ 'valid_phone_number' | translate }}
+                </mat-error>
+
+                <mat-error *ngIf="phoneFormCtrl.hasError('required')">
+                  {{ 'phone_number_is_required' | translate }}
+                </mat-error>
+
+              </mat-form-field>
+            </ion-row>
+          </ion-col>
+          <ion-col col-2>
+            <ion-row class="full_height" *ngIf="!change_state.phone" (click)="change_user('phone')">
+              <img src="assets/imgs/pencil.png" class="pencil_class" />
+            </ion-row>
+            <ion-row class="full_height" *ngIf="change_state.phone">
+              <button class="change_span">
+                {{ 'ok' | translate }}
+              </button>
+            </ion-row>
+          </ion-col>
         </ion-row>
-      </ion-col>
-      <ion-col col-2>
-        <ion-row class="full_height" *ngIf="!change_state.phone" (click)="change_user('phone')">
-          <img src="assets/imgs/pencil.png" class="pencil_class" />
-        </ion-row>
-        <ion-row class="full_height" *ngIf="change_state.phone" (click)="change_user('phone')">
-          <span class="change_span">
-            {{ 'ok' | translate }}
-          </span>
-        </ion-row>
-      </ion-col>
+      </form>
     </ion-row>
   </ion-row>
 

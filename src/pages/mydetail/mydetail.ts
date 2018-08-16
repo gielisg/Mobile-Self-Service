@@ -28,10 +28,17 @@ export class MydetailPage {
   public change_state = { "username": false, "address": false, "email": false, "phone": false };
 
   public send_data: any[];
+  public addressList: any[];
+  public phoneList: any[];
 
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
+  ]);
+
+  phoneFormCtrl = new FormControl('', [
+    Validators.required,
+    Validators.pattern("[0-9]{8}"),
   ]);
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController
@@ -61,6 +68,9 @@ export class MydetailPage {
     // this.user_Data.username = "VeeRHunter";
     // this.user_Data.address = "XX street, YY city, ZZ country";
 
+    this.addressList = new Array();
+    this.phoneList = new Array();
+
 
     let loading = this.loadingCtrl.create({
       content: "Please Wait..."
@@ -68,18 +78,52 @@ export class MydetailPage {
     loading.present();
     let status = "get_detail";
     this.user_Data.status = status;
-    console.log(this.user_Data);
     this.accountServer.get_accountDetail().subscribe(result => {
       console.log(result);
       this.user_Data.username = result.FullName;
+      for (let list of Object(result).ContactPhoneList) {
+        if (list.LastUpdated != null) {
+          this.phoneList.push(Date.parse(list.LastUpdated));
+        }
+      }
+      for (let list of Object(result).AddressList.Items) {
+        if (list.LastUpdated != null) {
+          this.addressList.push(Date.parse(list.LastUpdated));
+        }
+      }
       this.user_Data.email = result.ContactEmailAddressList[0].EmailAddress;
-      this.user_Data.address = result.AddressList;
-      this.user_Data.phone = result.ContactPhoneList;
+      if (Object(result).AddressList.Items[this.getMaxvalueIndex(this.addressList)].Address2 != null) {
+        this.user_Data.address = Object(result).AddressList.Items[this.getMaxvalueIndex(this.addressList)].Address1 + Object(result).AddressList.Items[this.getMaxvalueIndex(this.addressList)].Address2;
+      } else {
+        this.user_Data.address = Object(result).AddressList.Items[this.getMaxvalueIndex(this.addressList)].Address1;
+      }
+      this.user_Data.phone = Object(result).ContactPhoneList[this.getMaxvalueIndex(this.phoneList)].Number;
+      if (this.user_Data.phone.length > 8) {
+        this.user_Data.phone = this.user_Data.phone.substr(this.user_Data.phone.length - 8);
+      }
       loading.dismiss();
     }, error => {
       console.log("error");
       loading.dismiss();
     });
+  }
+
+  getMaxvalueIndex(arraySam) {
+    let maxValue = arraySam[0];
+    let returnIndex = 0;
+
+    for (let list of arraySam) {
+      if (maxValue < list) {
+        maxValue = list;
+      }
+    }
+
+    for (let i = 0; i < arraySam.length; i++) {
+      if (arraySam[i] == maxValue) {
+        returnIndex = i;
+      }
+    }
+    return returnIndex;
   }
 
   change_user(name) {
@@ -110,13 +154,13 @@ export class MydetailPage {
           if (this.change_state.email) {
             this.temp_Data.new_userData = this.user_Data.email;
             this.temp_Data.detail = "email";
-            if (this.temp_Data.old_userData != this.temp_Data.new_userData) {
-              if (this.temp_Data.new_userData != "" && (this.emailFormControl.hasError('email') && !this.emailFormControl.hasError('required'))) {
-                this.update_email();
-              } else {
-                this.user_Data.email = this.temp_Data.old_userData;
-              }
-            }
+            // if (this.temp_Data.old_userData != this.temp_Data.new_userData) {
+            //   if (this.temp_Data.new_userData != "" && (this.emailFormControl.hasError('email') && !this.emailFormControl.hasError('required'))) {
+            //     this.update_email();
+            //   } else {
+            //     this.user_Data.email = this.temp_Data.old_userData;
+            //   }
+            // }
             this.change_state.email = !this.change_state.email;
           } else {
             this.temp_Data.old_userData = this.user_Data.email;
@@ -148,14 +192,15 @@ export class MydetailPage {
           if (this.change_state.phone) {
             this.temp_Data.new_userData = this.user_Data.phone;
             this.temp_Data.detail = "phone";
-            if (this.temp_Data.old_userData != this.temp_Data.new_userData) {
-              if (this.temp_Data.new_userData != null) {
-                this.update_phone();
-              } else {
-                this.user_Data.phone = this.temp_Data.old_userData;
-              }
-            } else {
-            }
+            // if (this.temp_Data.old_userData != this.temp_Data.new_userData) {
+            //   if (this.temp_Data.new_userData != null && this.phoneFormCtrl.valid) {
+            //     this.change_state.phone = false
+            //     this.update_phone();
+            //   } else {
+            //     this.user_Data.phone = this.temp_Data.old_userData;
+            //   }
+            // } else {
+            // }
             this.change_state.phone = !this.change_state.phone;
           } else {
             this.temp_Data.old_userData = this.user_Data.phone;
@@ -187,6 +232,29 @@ export class MydetailPage {
     }
   }
 
+  changePhone() {
+    if (this.phoneFormCtrl.valid) {
+      if (this.current_state('phone')) {
+        if (this.change_state.phone) {
+          this.temp_Data.new_userData = this.user_Data.phone;
+          this.temp_Data.detail = "phone";
+          if (this.temp_Data.old_userData != this.temp_Data.new_userData) {
+            if (this.temp_Data.new_userData != null) {
+              this.update_phone();
+            } else {
+              this.user_Data.phone = this.temp_Data.old_userData;
+            }
+          } else {
+          }
+          this.change_state.phone = !this.change_state.phone;
+        } else {
+          this.temp_Data.old_userData = this.user_Data.phone;
+          this.change_state.phone = !this.change_state.phone;
+        }
+      }
+    }
+  }
+
   update_phone() {
     let loading = this.loadingCtrl.create({
       content: "Please Wait..."
@@ -200,7 +268,17 @@ export class MydetailPage {
       loading.dismiss();
     }, error => {
       console.log("error");
-      loading.dismiss();
+      if (error.indexOf("400") >= 0) {
+        var user = this.accountServer.getLoggedUser();
+        this.accountServer.login(user.username, user.password).subscribe(result => {
+          this.update_phone();
+        }, error => {
+          loading.dismiss();
+        });
+      }
+      else {
+        loading.dismiss();
+      }
     });
   }
 
@@ -217,7 +295,17 @@ export class MydetailPage {
       loading.dismiss();
     }, error => {
       console.log("error");
-      loading.dismiss();
+      if (error.indexOf("400") >= 0) {
+        var user = this.accountServer.getLoggedUser();
+        this.accountServer.login(user.username, user.password).subscribe(result => {
+          this.update_email();
+        }, error => {
+          loading.dismiss();
+        });
+      }
+      else {
+        loading.dismiss();
+      }
     });
   }
 
@@ -234,42 +322,51 @@ export class MydetailPage {
       loading.dismiss();
     }, error => {
       console.log("error");
-      loading.dismiss();
+      if (error.indexOf("400") >= 0) {
+        var user = this.accountServer.getLoggedUser();
+        this.accountServer.login(user.username, user.password).subscribe(result => {
+          this.update_address();
+        }, error => {
+          loading.dismiss();
+        });
+      }
+      else {
+        loading.dismiss();
+      }
     });
   }
 
   change_userState() {
+    let loading = this.loadingCtrl.create({
+      content: "Please Wait..."
+    });
+    loading.present();
 
     this.temp_Data.email = localStorage.getItem("user_email");
     let status = "change_userinfo";
     this.temp_Data.status = status;
-    // this.apiprovider.postData(this.temp_Data).then((result) => {
-    //   console.log(Object(result));
-    //   if (Object(result).status == "success") {
 
-    //     localStorage.setItem("user_email", this.user_Data.email);
 
-    //     let toast = this.toastCtrl.create({
-    //       message: Object(result).detail,
-    //       duration: 2000
-    //     })
-    //     toast.present();
+    this.accountServer.update_name(this.user_Data.username).subscribe(result => {
+      console.log(result);
+      loading.dismiss();
+    }, error => {
+      console.log("error");
+      loading.dismiss();
+      // if (error.indexOf("400") >= 0) {
+      //   var user = this.accountServer.getLoggedUser();
+      //   this.accountServer.login(user.username, user.password).subscribe(result => {
+      //     this.change_userState();
+      //   }, error => {
+      //     loading.dismiss();
+      //   });
+      // }
+      // else {
+      //   loading.dismiss();
+      // }
 
-    //   } else {
-    //     let toast = this.toastCtrl.create({
-    //       message: Object(result).detail,
-    //       duration: 2000
-    //     })
-    //     toast.present();
-    //   };
+    });
 
-    // }, (err) => {
-    //   let toast = this.toastCtrl.create({
-    //     message: "No Network",
-    //     duration: 2000
-    //   })
-    //   toast.present();
-    // });
   }
 
   current_state(value) {
