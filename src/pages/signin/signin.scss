@@ -20,42 +20,7 @@ page-signin {
         margin-left: auto;
         margin-right: auto;
     }
-    .password-row {
-        margin-top: 5%;
-        width: 90%;
-        margin-left: 5%;
-    }
-    .login-row {
-        margin-top: 20%;
-    }
-    .button-class {
-        width: 90%;
-        margin: auto;
-        text-transform: initial;
-        border-radius: 25px;
-        background-color: #3a83a4;
-        font-weight: bold;
-        color: white;
-        height: 45px;
-        font-size: 20px;
-    }
-    .example-form {
-        min-width: 150px;
-        max-width: 500px;
-        width: 100%;
-    }
-    .example-full-width {
-        width: 100%;
-    }
     .signup-row {
         margin-top: 10%;
-    }
-    .sign-up-span {
-        margin: auto;
-        font-size: 1.5rem;
-    }
-    .sign-up-page {
-        color: blue;
-        cursor: pointer;
     }
 }

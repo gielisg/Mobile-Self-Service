@@ -1,10 +1,7 @@
 page-home {
     .header-class {
         background-color: #222222;
-    }
-    .header-row {
-        margin: auto;
-        height: 40px;
+        box-shadow: none;
     }
     .header-span {
         color: white;
@@ -12,7 +9,6 @@ page-home {
         margin-top: auto;
         margin-bottom: auto;
         margin-left: 5%;
-        font-size: 1.8rem;
     }
     .first-row {
         margin-top: 10%;
@@ -48,27 +44,16 @@ page-home {
         max-width: 100% !important;
         flex: unset !important;
     }
-    .button-row {
-        width: 100%;
-    }
     .rus_button {
         width: 100%;
     }
     .button-style1 {
-        border-radius: 25px;
-        width: 100%;
-        font-weight: bold;
-        background-color: #3982a3;
         height: 46px;
         color: white;
         text-align: center;
         margin: auto;
     }
     .button-style2 {
-        border-radius: 25px;
-        width: 100%;
-        font-weight: bold;
-        background-color: #3ba464;
         height: 46px;
         color: white;
     }

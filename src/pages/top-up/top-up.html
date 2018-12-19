@@ -14,7 +14,7 @@
     </ion-col>
     <ion-col col-8>
       <ion-row class="full-height">
-        <p class="header-span">
+        <p class="header-span black-text">
           {{ 'new_topup' | translate }}
         </p>
         <p class="payment-id">[2132]</p>
@@ -64,7 +64,7 @@
         <!-- <mat-form-field>
           <input matInput [(ngModel)]="top_Data.start_date" [matDatepicker]="myDatepicker" [formControl]="changeDate"> -->
 
-        <ion-datetime [ngClass]="{'error_border':show_error == true, 'normal_border':show_error == false}"
+        <ion-datetime [ngClass]="{'error-border':show_error == true, 'normal-border':show_error == false}"
           displayFormat="MM/DD/YYYY hh:mm a" (ionChange)="ionchange_date()" [(ngModel)]="top_Data.start_date" name="start_date"></ion-datetime>
         <!-- <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker></mat-datepicker>
@@ -118,14 +118,14 @@
       <ion-col col-1>
       </ion-col>
       <ion-col col-5>
-        <ion-row class="button-row">
+        <ion-row class="full-width">
           <button ion-button class="button-style1">
             {{ 'create' | translate }}
           </button>
         </ion-row>
       </ion-col>
       <ion-col col-5>
-        <ion-row class="button-row">
+        <ion-row class="full-width">
           <button ion-button class="button-style2" (click)="goback()">
             {{ 'cancel_UP' | translate }}
           </button>

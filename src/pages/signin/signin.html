@@ -13,7 +13,7 @@
   </ion-row>
   <form #comProfileForm="ngForm" id="comProfileForm" (ngSubmit)="completeAddCompany(comProfileForm)" novalidate>
     <ion-row class="username-row">
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="full-width">
         <input matInput type="text" placeholder="{{ 'username' | translate }}" [(ngModel)]="user_Data.username"
           required name="username">
         <mat-error>
@@ -23,7 +23,7 @@
     </ion-row>
 
     <ion-row class="password-row">
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="full-width">
         <input matInput type="password" #title="ngModel" id="password" [(ngModel)]="user_Data.password" required
           placeholder="{{ 'password' | translate }}" i18n-placeholder="@@password" name="password" />
 

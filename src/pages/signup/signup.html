@@ -14,7 +14,7 @@
     </ion-col>
     <ion-col col-8>
       <ion-row class="full-height">
-        <span class="header-span">
+        <span class="header-span black-text">
           {{ 'sign_up' | translate }}
         </span>
       </ion-row>
@@ -35,7 +35,7 @@
     </ion-col>
     <ion-col col-8>
       <ion-row class="full-height">
-        <span class="header-span">
+        <span class="header-span black-text">
           {{ 'sign_up' | translate }}
         </span>
       </ion-row>
@@ -48,7 +48,7 @@
 
   <form #comProfileForm="ngForm" id="comProfileForm" (ngSubmit)="completeAddCompany(comProfileForm)" novalidate>
     <ion-row class="username-row">
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="full-width">
         <input matInput type="text" placeholder="{{ 'username' | translate }}" [(ngModel)]="user_Data.username"
           required name="username">
         <mat-error>
@@ -58,7 +58,7 @@
     </ion-row>
 
     <ion-row class="password-row">
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="full-width">
         <input matInput type="email" placeholder="{{ 'email' | translate }}" [formControl]="emailFormControl"
           [(ngModel)]="user_Data.email" required name="username">
 
@@ -74,7 +74,7 @@
     </ion-row>
 
     <ion-row class="password-row">
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="full-width">
         <input matInput type="number" [(ngModel)]="user_Data.phone" [formControl]="phoneFormControl" required
           placeholder="{{ 'phone_number' | translate }}" name="password" />
 
@@ -86,7 +86,7 @@
     </ion-row>
 
     <ion-row class="password-row">
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="full-width">
         <input matInput type="password" [(ngModel)]="user_Data.password" required placeholder="{{ 'password' | translate }}"
           name="password" />
 
@@ -98,7 +98,7 @@
     </ion-row>
 
     <ion-row class="password-row">
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="full-width">
         <input matInput type="text" [(ngModel)]="user_Data.address" required placeholder="{{ 'address' | translate }}"
           name="address" />
 

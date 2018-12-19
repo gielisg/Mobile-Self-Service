@@ -15,7 +15,7 @@
     <ion-col col-1></ion-col>
     <ion-col col-6>
       <ion-row class="full-height">
-        <p class="header-span">
+        <p class="header-span black-text">
           {{ 'change_state' | translate }}
         </p>
         <p class="payment-id">[0415518882]</p>
@@ -111,7 +111,7 @@
 
     <ion-row class="payment-row">
       <ion-col>
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="full-width">
           <input matInput class="payment-input" type="text" #title="ngModel" [(ngModel)]="change_state.note" placeholder="{{ 'type_here' | translate }}."
             name="Note" />
 
@@ -127,14 +127,14 @@
       <ion-col col-1>
       </ion-col>
       <ion-col col-5>
-        <ion-row class="button-row">
+        <ion-row class="full-width">
           <button ion-button class="button-style1">
             {{ 'change_UP' | translate }}
           </button>
         </ion-row>
       </ion-col>
       <ion-col col-5>
-        <ion-row class="button-row">
+        <ion-row class="full-width">
           <button ion-button class="button-style2" (click)="goback()">
             {{ 'cancel_UP' | translate }}
           </button>

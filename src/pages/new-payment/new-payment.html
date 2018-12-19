@@ -14,7 +14,7 @@
     </ion-col>
     <ion-col col-8>
       <ion-row class="full-height">
-        <p class="header-span">
+        <p class="header-span black-text">
           {{ 'new_payment_method' | translate }}
         </p>
         <p class="payment-id">{{userId}}</p>
@@ -60,8 +60,8 @@
     </ion-row>
 
     <ion-row class="payment-row">
-      <mat-form-field class="example-full-width">
-        <input matInput class="payment-input" type="text" #title="ngModel" [(ngModel)]="pay_Data.name" required placeholder="{{ 'your_name' | translate }}"
+      <mat-form-field class="full-width">
+        <input matInput class="full-width" type="text" #title="ngModel" [(ngModel)]="pay_Data.name" required placeholder="{{ 'your_name' | translate }}"
           name="name" />
 
         <mat-error id="matLoginError2">
@@ -69,7 +69,7 @@
         </mat-error>
 
       </mat-form-field>
-      <!-- <ion-input class="payment-input" [(ngModel)]="pay_Data.name" placeholder="Your name"></ion-input> -->
+      <!-- <ion-input class="full-width" [(ngModel)]="pay_Data.name" placeholder="Your name"></ion-input> -->
     </ion-row>
 
     <ion-row class="payment-row">
@@ -79,8 +79,8 @@
     </ion-row>
 
     <ion-row class="payment-row">
-      <mat-form-field class="example-full-width">
-        <input matInput class="payment-input" type="text" #title="ngModel" [(ngModel)]="pay_Data.cardnum" required placeholder="{{ '16_digit_credit_num' | translate }}"
+      <mat-form-field class="full-width">
+        <input matInput class="full-width" type="text" #title="ngModel" [(ngModel)]="pay_Data.cardnum" required placeholder="{{ '16_digit_credit_num' | translate }}"
           name="CardNumber" />
 
         <mat-error id="matLoginError2">
@@ -89,7 +89,7 @@
 
       </mat-form-field>
 
-      <!-- <ion-input class="payment-input" [(ngModel)]="pay_Data.cardnum" placeholder="16 Digit Credit Card Number"></ion-input> -->
+      <!-- <ion-input class="full-width" [(ngModel)]="pay_Data.cardnum" placeholder="16 Digit Credit Card Number"></ion-input> -->
     </ion-row>
 
     <ion-row class="payment-row">
@@ -102,7 +102,7 @@
       <ion-col col-4>
         <ion-row class="full-height">
           <mat-form-field>
-            <mat-select [formControl]="selExm" [(ngModel)]="pay_Data.exm" class="expire_select" required>
+            <mat-select [formControl]="selExm" [(ngModel)]="pay_Data.exm" class="full-width" required>
               <mat-option *ngFor="let list of expireMonth" value="{{list}}">
                 {{list}}
               </mat-option>
@@ -112,7 +112,7 @@
             </mat-error>
           </mat-form-field>
 
-          <!-- <ion-select [(ngModel)]="pay_Data.exm" class="expire_select">
+          <!-- <ion-select [(ngModel)]="pay_Data.exm" class="full-width">
           <ion-option value="none">--</ion-option>
           <ion-option *ngFor="let list of expireMonth" value="{{list}}">{{list}}</ion-option>
         </ion-select> -->
@@ -122,14 +122,14 @@
       <ion-col col-4>
         <ion-row class="full-height">
           <mat-form-field>
-            <mat-select [formControl]="selExy" [(ngModel)]="pay_Data.exy" class="expire_select" required>
+            <mat-select [formControl]="selExy" [(ngModel)]="pay_Data.exy" class="full-width" required>
               <mat-option *ngFor="let list of expireYear" value="{{list}}">
                 {{list}}
               </mat-option>
             </mat-select>
             <mat-error *ngIf="selExy.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
 
-            <!-- <ion-select [(ngModel)]="pay_Data.exy" class="expire_select">
+            <!-- <ion-select [(ngModel)]="pay_Data.exy" class="full-width">
           <ion-option *ngFor="let list of expireYear" value="{{list}}">{{list}}</ion-option>
         </ion-select> -->
           </mat-form-field>
@@ -141,14 +141,14 @@
       <ion-col col-1>
       </ion-col>
       <ion-col col-5>
-        <ion-row class="button-row">
+        <ion-row class="full-width">
           <button ion-button class="button-style1">
             {{ 'add' | translate }}
           </button>
         </ion-row>
       </ion-col>
       <ion-col col-5>
-        <ion-row class="button-row">
+        <ion-row class="full-width">
           <button ion-button class="button-style2" (click)="goback()">
             {{ 'cancel_UP' | translate }}
           </button>

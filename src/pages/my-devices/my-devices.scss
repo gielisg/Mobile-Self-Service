@@ -1,19 +1,4 @@
 page-my-devices {
-    .header-class {
-        background-color: white;
-        box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
-    }
-    .header-row {
-        margin: auto;
-        height: 40px;
-    }
-    .header-span {
-        text-align: center;
-        margin: auto;
-        font-size: 1.8rem;
-        color: #3982a3;
-        font-weight: bold;
-    }
     .header_icon {
         margin: auto;
         font-size: 2.5rem;
@@ -28,40 +13,8 @@ page-my-devices {
         padding: 2px;
         background-color: white;
     }
-    .left-col {
-        text-align: left;
-    }
-    .right-col {
-        text-align: right;
-    }
     .center-col {
         text-align: center
-    }
-    .name-span {
-        width: 100%;
-        font-size: 1.7rem;
-        color: #3982a3;
-        font-weight: bold;
-    }
-    .detail-span {
-        width: 100%;
-        font-size: 1.7rem;
-        margin-top: 5px;
-    }
-    .change-button {
-        height: 25px;
-        color: white;
-        font-weight: bold;
-        background-color: #3c82a3;
-        margin-top: auto;
-        margin-bottom: auto;
-        margin-left: auto;
-        border-radius: 5px;
-        width: 100%;
-    }
-    .type-number-date {
-        margin-top: 3px;
-        margin-bottom: 3px;
     }
     .service_back_style {
         width: 100%;
@@ -72,10 +25,6 @@ page-my-devices {
         margin-top: 5%;
         margin-bottom: 3%;
     }
-    .image-button-row {
-        height: 100%;
-        background-color: #3c82a3;
-    }
     .clear_button {
         margin-top: auto;
         margin-bottom: auto;
@@ -84,9 +33,6 @@ page-my-devices {
         height: 100%;
         padding: 0px;
     }
-    .bottom-image-row {
-        position: relative;
-    }
     .serviceDetail-icon {
         padding-top: 12px;
         margin: auto;
@@ -94,13 +40,5 @@ page-my-devices {
     }
     .servicespan-row {
         margin-top: 8px;
-    }
-    .servicedetail-span {
-        margin: auto;
-        color: white;
-        text-align: center;
-        padding-bottom: 12px;
-        width: 100%;
-        font-size: 12px;
     }
 }

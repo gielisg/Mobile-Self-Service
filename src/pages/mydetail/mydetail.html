@@ -36,7 +36,7 @@
           <span class="detail-span" *ngIf="!change_state.username">
             {{user_Data.username}}
           </span>
-          <mat-form-field class="example-full-width" *ngIf="change_state.username">
+          <mat-form-field class="full-width" *ngIf="change_state.username">
             <input matInput type="text" placeholder="{{ 'username' | translate }}" [(ngModel)]="user_Data.username" required name="username">
             <mat-error>
               {{ 'username_is_required' | translate }}
@@ -68,7 +68,7 @@
           <span class="detail-span" *ngIf="!change_state.address">
             {{user_Data.address}}
           </span>
-          <mat-form-field class="example-full-width" *ngIf="change_state.address">
+          <mat-form-field class="full-width" *ngIf="change_state.address">
             <input matInput type="text" placeholder="{{ 'address' | translate }}" [(ngModel)]="user_Data.address" required name="address">
             <mat-error>
               {{ 'address_is_required' | translate }}
@@ -117,7 +117,7 @@
               <span class="title-span">
                 {{ 'email' | translate }}
               </span>
-              <mat-form-field class="example-full-width">
+              <mat-form-field class="full-width">
                 <input matInput type="email" placeholder="{{ 'email' | translate }}" [formControl]="emailFormControl" [(ngModel)]="user_Data.email"
                   required name="email">
 
@@ -157,7 +157,7 @@
               <span class="detail-span" *ngIf="!change_state.phone">
                 +{{user_Data.phone}}
               </span>
-              <mat-form-field class="example-full-width" *ngIf="change_state.phone">
+              <mat-form-field class="full-width" *ngIf="change_state.phone">
                 <input matInput type="number" [formControl]="phoneFormCtrl" placeholder="{{ 'phone_number' | translate }}" [(ngModel)]="user_Data.phone"
                   required name="phone">
                 <!-- <mat-error>

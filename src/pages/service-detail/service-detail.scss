@@ -1,29 +1,6 @@
 page-service-detail {
-    .header-class {
-        background-color: white;
-        box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
-    }
-    .header-span {
-        color: black;
-        font-weight: bold;
-    }
     .header-row {
         height: 60px !important;
-    }
-    .header-back-icon {
-        margin-right: auto;
-        margin-top: auto;
-        margin-bottom: auto;
-        margin-left: 5px;
-        font-size: 2.5rem;
-    }
-    .payment-id {
-        text-align: center;
-        width: 100%;
-        margin: auto;
-    }
-    .bill-content {
-        background-color: #fafafa;
     }
     .main-row {
         margin-top: 0%;
@@ -33,15 +10,10 @@ page-service-detail {
         background-color: white;
     }
     .name-span {
-        width: 100%;
         font-size: 1.4rem;
-        color: #3982a3;
-        font-weight: bold;
     }
     .detail-span {
-        width: 100%;
         font-size: 1.3rem;
-        margin-top: 5px;
         font-weight: bold;
     }
     .first-row {
@@ -50,7 +22,7 @@ page-service-detail {
         margin-bottom: 5px;
         padding-bottom: 3px;
     }
-    .last_row {
+    .last-row {
         border: none;
     }
 }

@@ -1,8 +1,4 @@
 page-signup {
-    .header-class {
-        box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
-        background-color: white;
-    }
     .custom_header {
         height: 40px;
         position: fixed;
@@ -10,23 +6,6 @@ page-signup {
         box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
         margin-left: -16px;
         background-color: white;
-    }
-    .header-span {
-        color: black;
-        font-weight: bold;
-    }
-    .header-back-icon {
-        margin-right: auto;
-        margin-top: auto;
-        margin-bottom: auto;
-        margin-left: 5px;
-        font-size: 2.5rem;
-    }
-    .logo-row {}
-    .payment-id {
-        text-align: center;
-        width: 100%;
-        margin: auto;
     }
     .margin-content {
         background-color: #fafafa;
@@ -46,43 +25,11 @@ page-signup {
         margin-left: auto;
         margin-right: auto;
     }
-    .password-row {
-        margin-top: 3%;
-        width: 90%;
-        margin-left: 5%;
-    }
     .login-row {
         margin-top: 10%;
-    }
-    .button-class {
-        width: 90%;
-        margin: auto;
-        text-transform: initial;
-        border-radius: 25px;
-        background-color: #3a83a4;
-        font-weight: bold;
-        color: white;
-        height: 45px;
-        font-size: 20px;
-    }
-    .example-form {
-        min-width: 150px;
-        max-width: 500px;
-        width: 100%;
-    }
-    .example-full-width {
-        width: 100%;
     }
     .signup-row {
         margin-top: 10%;
         margin-bottom: 40px;
-    }
-    .sign-up-span {
-        margin: auto;
-        font-size: 1.5rem;
-    }
-    .sign-up-page {
-        color: blue;
-        cursor: pointer;
     }
 }
