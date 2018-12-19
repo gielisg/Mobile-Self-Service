@@ -1,13 +1,13 @@
 page-mydetail {
-    .header_class {
+    .header-class {
         background-color: white;
         box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3)
     }
-    .header_row {
+    .header-row {
         margin: auto;
         height: 40px;
     }
-    .header_span {
+    .header-span {
         text-align: center;
         margin: auto;
         font-size: 1.8rem;
@@ -25,20 +25,20 @@ page-mydetail {
         padding-left: 10px;
         padding-right: 10px;
     }
-    .title_span {
+    .title-span {
         width: 100%;
         color: #3982a3;
         font-size: 1.8rem;
         font-weight: bold;
     }
-    .detail_span {
+    .detail-span {
         width: 100%;
         margin-top: 5px;
         color: #414141;
         font-size: 1.8rem;
         font-weight: bold;
     }
-    .change_span {
+    .change-span {
         width: 100%;
         color: #3982a3;
         font-size: 1.8rem;
@@ -52,10 +52,10 @@ page-mydetail {
         height: 16px;
         margin: auto;
     }
-    .border_row {
+    .border-row {
         border: 1px solid #ddd;
     }
-    .normal_row {
+    .normal-row {
         padding-top: 5px;
         padding-bottom: 5px;
     }

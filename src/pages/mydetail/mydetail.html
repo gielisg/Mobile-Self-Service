@@ -4,17 +4,17 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header class="header_class">
+<ion-header class="header-class">
 
-  <ion-row class="header_row">
+  <ion-row class="header-row">
     <ion-col col-2>
-      <ion-row class="full_height">
+      <ion-row class="full-height">
         <ion-icon name="md-menu" menuToggle class="header_icon"></ion-icon>
       </ion-row>
     </ion-col>
     <ion-col col-8>
-      <ion-row class="full_height">
-        <span class="header_span">
+      <ion-row class="full-height">
+        <span class="header-span">
           {{ 'my_detail' | translate }}
         </span>
       </ion-row>
@@ -27,13 +27,13 @@
 <ion-content padding>
 
   <ion-row class="main_body">
-    <ion-row class="normal_row">
+    <ion-row class="normal-row">
       <ion-col col-10>
-        <ion-row class="full_height">
-          <span class="title_span">
+        <ion-row class="full-height">
+          <span class="title-span">
             {{ 'name' | translate }}
           </span>
-          <span class="detail_span" *ngIf="!change_state.username">
+          <span class="detail-span" *ngIf="!change_state.username">
             {{user_Data.username}}
           </span>
           <mat-form-field class="example-full-width" *ngIf="change_state.username">
@@ -45,27 +45,27 @@
         </ion-row>
       </ion-col>
       <ion-col col-2>
-        <ion-row class="full_height" *ngIf="!change_state.username" (click)="change_user('username')">
+        <ion-row class="full-height" *ngIf="!change_state.username" (click)="change_user('username')">
           <img src="assets/imgs/pencil.png" class="pencil_class" />
         </ion-row>
-        <ion-row class="full_height" *ngIf="change_state.username" (click)="change_user('username')">
-          <span class="change_span">
+        <ion-row class="full-height" *ngIf="change_state.username" (click)="change_user('username')">
+          <span class="change-span">
             {{ 'ok' | translate }}
           </span>
         </ion-row>
       </ion-col>
     </ion-row>
 
-    <ion-row class="border_row">
+    <ion-row class="border-row">
     </ion-row>
 
-    <ion-row class="normal_row">
+    <ion-row class="normal-row">
       <ion-col col-10>
-        <ion-row class="full_height">
-          <span class="title_span">
+        <ion-row class="full-height">
+          <span class="title-span">
             {{ 'address' | translate }}
           </span>
-          <span class="detail_span" *ngIf="!change_state.address">
+          <span class="detail-span" *ngIf="!change_state.address">
             {{user_Data.address}}
           </span>
           <mat-form-field class="example-full-width" *ngIf="change_state.address">
@@ -77,44 +77,44 @@
         </ion-row>
       </ion-col>
       <ion-col col-2>
-        <ion-row class="full_height" *ngIf="!change_state.address" (click)="change_user('address')">
+        <ion-row class="full-height" *ngIf="!change_state.address" (click)="change_user('address')">
           <img src="assets/imgs/pencil.png" class="pencil_class" />
         </ion-row>
-        <ion-row class="full_height" *ngIf="change_state.address" (click)="change_user('address')">
-          <span class="change_span">
+        <ion-row class="full-height" *ngIf="change_state.address" (click)="change_user('address')">
+          <span class="change-span">
             {{ 'ok' | translate }}
           </span>
         </ion-row>
       </ion-col>
     </ion-row>
 
-    <ion-row class="border_row">
+    <ion-row class="border-row">
     </ion-row>
 
-    <ion-row class="normal_row" *ngIf="!change_state.email">
+    <ion-row class="normal-row" *ngIf="!change_state.email">
       <ion-col col-10>
-        <ion-row class="full_height">
-          <span class="title_span">
+        <ion-row class="full-height">
+          <span class="title-span">
             {{ 'email' | translate }}
           </span>
-          <span class="detail_span">
+          <span class="detail-span">
             {{user_Data.email}}
           </span>
         </ion-row>
       </ion-col>
       <ion-col col-2>
-        <ion-row class="full_height" (click)="change_user('email')">
+        <ion-row class="full-height" (click)="change_user('email')">
           <img src="assets/imgs/pencil.png" class="pencil_class" />
         </ion-row>
       </ion-col>
     </ion-row>
 
-    <ion-row class="normal_row" *ngIf="change_state.email">
+    <ion-row class="normal-row" *ngIf="change_state.email">
       <form #comProfileForm="ngForm" id="comProfileForm" (ngSubmit)="completeAddCompany(comProfileForm)" novalidate>
         <ion-row>
           <ion-col col-10>
-            <ion-row class="full_height">
-              <span class="title_span">
+            <ion-row class="full-height">
+              <span class="title-span">
                 {{ 'email' | translate }}
               </span>
               <mat-form-field class="example-full-width">
@@ -133,8 +133,8 @@
             </ion-row>
           </ion-col>
           <ion-col col-2>
-            <ion-row class="full_height button">
-              <button class="change_span">
+            <ion-row class="full-height button">
+              <button class="change-span">
                 {{ 'ok' | translate }}
               </button>
             </ion-row>
@@ -143,18 +143,18 @@
       </form>
     </ion-row>
 
-    <ion-row class="border_row">
+    <ion-row class="border-row">
     </ion-row>
 
-    <ion-row class="normal_row">
+    <ion-row class="normal-row">
       <form #userPhone="ngForm" id="userPhone" (ngSubmit)="changePhone()" novalidate>
         <ion-row>
           <ion-col col-10>
-            <ion-row class="full_height">
-              <span class="title_span">
+            <ion-row class="full-height">
+              <span class="title-span">
                 {{ 'contact' | translate }}
               </span>
-              <span class="detail_span" *ngIf="!change_state.phone">
+              <span class="detail-span" *ngIf="!change_state.phone">
                 +{{user_Data.phone}}
               </span>
               <mat-form-field class="example-full-width" *ngIf="change_state.phone">
@@ -176,11 +176,11 @@
             </ion-row>
           </ion-col>
           <ion-col col-2>
-            <ion-row class="full_height" *ngIf="!change_state.phone" (click)="change_user('phone')">
+            <ion-row class="full-height" *ngIf="!change_state.phone" (click)="change_user('phone')">
               <img src="assets/imgs/pencil.png" class="pencil_class" />
             </ion-row>
-            <ion-row class="full_height" *ngIf="change_state.phone">
-              <button class="change_span">
+            <ion-row class="full-height" *ngIf="change_state.phone">
+              <button class="change-span">
                 {{ 'ok' | translate }}
               </button>
             </ion-row>

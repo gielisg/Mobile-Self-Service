@@ -4,17 +4,17 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header class="header_class">
+<ion-header class="header-class">
 
-  <ion-row class="header_row">
+  <ion-row class="header-row">
     <ion-col col-2>
-      <ion-row class="full_height">
+      <ion-row class="full-height">
         <ion-icon name="md-menu" menuToggle class="header_icon"></ion-icon>
       </ion-row>
     </ion-col>
     <ion-col col-8>
-      <ion-row class="full_height">
-        <span class="header_span">
+      <ion-row class="full-height">
+        <span class="header-span">
           {{ 'my_account' | translate }}
         </span>
       </ion-row>
@@ -25,60 +25,60 @@
 
 
 <ion-content padding>
-  <ion-row class="first_row">
+  <ion-row class="first-row">
     <ion-col col-1></ion-col>
     <ion-col col-5>
-      <ion-row class="normal_margin">
-        <span class="amount_span">
+      <ion-row class="normal-margin">
+        <span class="amount-span">
           {{ 'account_number' | translate }}
         </span>
       </ion-row>
-      <ion-row class="normal_margin">
-        <span class="dollar_amount_span">
+      <ion-row class="normal-margin">
+        <span class="dollar-amount-span">
           {{bill_data.account_number}}
         </span>
       </ion-row>
     </ion-col>
     <ion-col col-5>
-      <ion-row class="normal_margin">
-        <span class="amount_span">
+      <ion-row class="normal-margin">
+        <span class="amount-span">
           {{ 'amount_owing' | translate }}
         </span>
       </ion-row>
-      <ion-row class="normal_margin">
-        <span class="dollar_amount_span">
+      <ion-row class="normal-margin">
+        <span class="dollar-amount-span">
           ${{bill_data.bill_amount}}
         </span>
       </ion-row>
     </ion-col>
   </ion-row>
 
-  <ion-row class="first_row">
-    <ion-row class="normal_margin">
-      <span class="amount_span">
+  <ion-row class="first-row">
+    <ion-row class="normal-margin">
+      <span class="amount-span">
         {{ 'due_date' | translate }}
       </span>
     </ion-row>
-    <ion-row class="normal_margin">
-      <span class="dollar_amount_span">
+    <ion-row class="normal-margin">
+      <span class="dollar-amount-span">
         {{bill_data.bill_date}}
       </span>
     </ion-row>
   </ion-row>
 
-  <ion-row [ngClass]="{'download_pay':switch_mode == true, 'rus_pay':switch_mode == false}">
+  <ion-row [ngClass]="{'download-pay':switch_mode == true, 'rus-pay':switch_mode == false}">
     <!-- <ion-col col-1>
     </ion-col> -->
     <ion-col col-6>
-      <ion-row class="button_row">
-        <button mat-button class="button_style1" (click)="click_download()">
+      <ion-row class="button-row">
+        <button mat-button class="button-style1" (click)="click_download()">
           {{ 'download_bill' | translate }}
         </button>
       </ion-row>
     </ion-col>
     <ion-col col-6>
-      <ion-row class="button_row">
-        <button mat-button class="button_style2" (click)="goto_payNow()">
+      <ion-row class="button-row">
+        <button mat-button class="button-style2" (click)="goto_payNow()">
           {{ 'pay_now' | translate }}
         </button>
       </ion-row>
@@ -91,8 +91,8 @@
     <ion-col col-1>
     </ion-col>
     <ion-col col-10>
-      <ion-row class="button_row">
-        <button mat-button class="button_style1" (click)="goto_billHistory()">
+      <ion-row class="button-row">
+        <button mat-button class="button-style1" (click)="goto_billHistory()">
           {{ 'bill_history' | translate }}
         </button>
       </ion-row>
@@ -101,12 +101,12 @@
     </ion-col>
   </ion-row>
 
-  <ion-row class="my_normal">
+  <ion-row class="my-normal">
     <ion-col col-1>
     </ion-col>
     <ion-col col-10>
-      <ion-row class="button_row">
-        <button mat-button class="button_style1" (click)="goto_transactionHistory()">
+      <ion-row class="button-row">
+        <button mat-button class="button-style1" (click)="goto_transactionHistory()">
           {{ 'transaction_history' | translate }}
         </button>
       </ion-row>
@@ -115,12 +115,12 @@
     </ion-col>
   </ion-row>
 
-  <ion-row class="my_normal">
+  <ion-row class="my-normal">
     <ion-col col-1>
     </ion-col>
     <ion-col col-10>
-      <ion-row class="button_row">
-        <button mat-button class="button_style1" (click)="goto_paymentHistory()">
+      <ion-row class="button-row">
+        <button mat-button class="button-style1" (click)="goto_paymentHistory()">
           {{ 'payment_method' | translate }}
         </button>
       </ion-row>

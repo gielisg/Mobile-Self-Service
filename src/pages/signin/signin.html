@@ -6,25 +6,26 @@
 -->
 
 
-<ion-content padding class="margin_content">
+<ion-content padding class="margin-content">
 
-  <ion-row class="logo_row">
-    <img src="assets/imgs/titlebar_logo.png" class="logo_class" />
+  <ion-row class="logo-row">
+    <img src="assets/imgs/titlebar_logo.png" class="logo-class" />
   </ion-row>
   <form #comProfileForm="ngForm" id="comProfileForm" (ngSubmit)="completeAddCompany(comProfileForm)" novalidate>
-    <ion-row class="username_row">
+    <ion-row class="username-row">
       <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="{{ 'username' | translate }}" [(ngModel)]="user_Data.username" required name="username">
+        <input matInput type="text" placeholder="{{ 'username' | translate }}" [(ngModel)]="user_Data.username"
+          required name="username">
         <mat-error>
           {{ 'username_is_required' | translate }}
         </mat-error>
       </mat-form-field>
     </ion-row>
 
-    <ion-row class="password_row">
+    <ion-row class="password-row">
       <mat-form-field class="example-full-width">
-        <input matInput type="password" #title="ngModel" id="password" [(ngModel)]="user_Data.password" required placeholder="{{ 'password' | translate }}"
-          i18n-placeholder="@@password" name="password" />
+        <input matInput type="password" #title="ngModel" id="password" [(ngModel)]="user_Data.password" required
+          placeholder="{{ 'password' | translate }}" i18n-placeholder="@@password" name="password" />
 
         <mat-error id="matLoginError2">
           <span>{{ 'password_is_required' | translate }}</span>
@@ -32,17 +33,17 @@
 
       </mat-form-field>
     </ion-row>
-    <ion-row class="login_row">
-      <button mat-mini-fab class="button_class">
+    <ion-row class="login-row">
+      <button mat-mini-fab class="button-class">
         {{ 'login' | translate }}
       </button>
     </ion-row>
   </form>
 
-  <ion-row class="signup_row">
-    <span class="sign_up_span">
+  <ion-row class="signup-row">
+    <span class="sign-up-span">
       {{ 'not_a_member' | translate }}?
-      <span class="sign_up_page" (click)="goto_signup()">
+      <span class="sign-up-page" (click)="goto_signup()">
         &nbsp;{{ 'create_account' | translate }}
       </span>
     </span>

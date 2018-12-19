@@ -1,13 +1,13 @@
 page-my-devices {
-    .header_class {
+    .header-class {
         background-color: white;
         box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    .header_row {
+    .header-row {
         margin: auto;
         height: 40px;
     }
-    .header_span {
+    .header-span {
         text-align: center;
         margin: auto;
         font-size: 1.8rem;
@@ -18,37 +18,37 @@ page-my-devices {
         margin: auto;
         font-size: 2.5rem;
     }
-    .myservice_content {
+    .myservice-content {
         background-color: #fafafa;
     }
-    .main_row {
+    .main-row {
         background-color: white;
         border: 1px solid #ddd;
         border-radius: 5px;
         padding: 2px;
         background-color: white;
     }
-    .left_col {
+    .left-col {
         text-align: left;
     }
-    .right_col {
+    .right-col {
         text-align: right;
     }
-    .center_col {
+    .center-col {
         text-align: center
     }
-    .name_span {
+    .name-span {
         width: 100%;
         font-size: 1.7rem;
         color: #3982a3;
         font-weight: bold;
     }
-    .detail_span {
+    .detail-span {
         width: 100%;
         font-size: 1.7rem;
         margin-top: 5px;
     }
-    .change_button {
+    .change-button {
         height: 25px;
         color: white;
         font-weight: bold;
@@ -59,7 +59,7 @@ page-my-devices {
         border-radius: 5px;
         width: 100%;
     }
-    .type_number_date {
+    .type-number-date {
         margin-top: 3px;
         margin-bottom: 3px;
     }
@@ -68,11 +68,11 @@ page-my-devices {
         height: 100%;
         margin: auto;
     }
-    .margin_top {
+    .margin-top {
         margin-top: 5%;
         margin-bottom: 3%;
     }
-    .image_button_row {
+    .image-button-row {
         height: 100%;
         background-color: #3c82a3;
     }
@@ -84,18 +84,18 @@ page-my-devices {
         height: 100%;
         padding: 0px;
     }
-    .bottom_image_row {
+    .bottom-image-row {
         position: relative;
     }
-    .serviceDetail_icon {
+    .serviceDetail-icon {
         padding-top: 12px;
         margin: auto;
         color: white;
     }
-    .servicespan_rpw {
+    .servicespan-row {
         margin-top: 8px;
     }
-    .serviceDetail_span {
+    .servicedetail-span {
         margin: auto;
         color: white;
         text-align: center;

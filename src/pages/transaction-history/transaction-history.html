@@ -4,18 +4,18 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header class="header_class">
+<ion-header class="header-class">
 
-  <ion-row class="header_row">
+  <ion-row class="header-row">
     <ion-col col-2>
-      <ion-row class="full_height">
-        <ion-icon name="ios-arrow-back" (click)="goback()" class="header_back_icon"></ion-icon>
+      <ion-row class="full-height">
+        <ion-icon name="ios-arrow-back" (click)="goback()" class="header-back-icon"></ion-icon>
       </ion-row>
     </ion-col>
     <ion-col col-1></ion-col>
     <ion-col col-6>
-      <ion-row class="full_height">
-        <p class="header_span">
+      <ion-row class="full-height">
+        <p class="header-span">
           {{ 'transaction_history' | translate }}
         </p>
       </ion-row>
@@ -25,69 +25,69 @@
 </ion-header>
 
 
-<ion-content padding class="bill_content">
+<ion-content padding class="bill-content">
 
 
-  <ion-row [ngClass]="{'main_row': i == 0, 'other_row': i != 0}" *ngFor="let list of transactionList; let i =  index;">
-    <ion-row class="first_row">
-      <ion-col col-6 class="left_col">
-        <ion-row class="full_height">
-          <span class="name_span">
+  <ion-row [ngClass]="{'main-row': i == 0, 'other-row': i != 0}" *ngFor="let list of transactionList; let i =  index;">
+    <ion-row class="first-row">
+      <ion-col col-6 class="left-col">
+        <ion-row class="full-height">
+          <span class="name-span">
             {{ 'transaction_number' | translate }}
           </span>
         </ion-row>
       </ion-col>
 
       <ion-col col-3>
-        <ion-row class="full_height">
-          <span class="name_span">
+        <ion-row class="full-height">
+          <span class="name-span">
             {{ 'type' | translate }}
           </span>
         </ion-row>
       </ion-col>
 
-      <ion-col col-3 class="right_col">
-        <ion-row class="full_height">
-          <span class="name_span">
+      <ion-col col-3 class="right-col">
+        <ion-row class="full-height">
+          <span class="name-span">
             {{ 'date' | translate }}
           </span>
         </ion-row>
       </ion-col>
     </ion-row>
 
-    <ion-row class="first_row">
-      <ion-col col-6 class="left_col">
-        <ion-row class="full_height">
-          <span class="tran_num_span">
+    <ion-row class="first-row">
+      <ion-col col-6 class="left-col">
+        <ion-row class="full-height">
+          <span class="tran-num-span">
             {{list.tran_num}}
           </span>
         </ion-row>
       </ion-col>
 
       <ion-col col-3>
-        <ion-row class="full_height">
-          <span class="receipt_span">
+        <ion-row class="full-height">
+          <span class="receipt-span">
             {{ list.type | translate }}
           </span>
         </ion-row>
       </ion-col>
 
-      <ion-col col-3 class="right_col">
-        <ion-row class="full_height">
-          <span class="date_span">
+      <ion-col col-3 class="right-col">
+        <ion-row class="full-height">
+          <span class="date-span">
             {{list.date}}
           </span>
         </ion-row>
       </ion-col>
     </ion-row>
 
-    <ion-row class="bill_second_row">
-      <ion-col col-4 class="left_col">
-        <ion-row class="full_height">
-          <span class="name_span">
+    <ion-row class="bill-second-row">
+      <ion-col col-4 class="left-col">
+        <ion-row class="full-height">
+          <span class="name-span">
             {{ 'amount' | translate }}
           </span>
-          <span class="detail_span">
+          <span class="detail-span">
             {{list.amount}}
           </span>
         </ion-row>
@@ -95,12 +95,12 @@
       <ion-col col-4>
       </ion-col>
 
-      <ion-col col-4 class="right_col">
-        <ion-row class="full_height">
-          <span class="name_span">
+      <ion-col col-4 class="right-col">
+        <ion-row class="full-height">
+          <span class="name-span">
             {{ 'status' | translate }}
           </span>
-          <span class="detail_span">
+          <span class="detail-span">
             {{ list.status | translate }}
           </span>
         </ion-row>
@@ -109,8 +109,8 @@
 
   </ion-row>
 
-  <ion-row class="more_button_Row" *ngIf="show_moreState">
-    <button ion-button class="more_button" (click)="add_moreAction()">
+  <ion-row class="more-button-row" *ngIf="show_moreState">
+    <button ion-button class="more-button" (click)="add_moreAction()">
       {{'more' | translate}}
     </button>
   </ion-row>

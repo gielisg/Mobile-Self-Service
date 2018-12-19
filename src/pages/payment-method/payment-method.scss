@@ -1,67 +1,67 @@
 page-payment-method {
-    .header_class {
+    .header-class {
         background-color: white;
         box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    .header_row {
+    .header-row {
         height: 80px !important;
     }
-    .header_span {
+    .header-span {
         color: black;
         font-weight: bold;
     }
-    .header_back_icon {
+    .header-back-icon {
         margin-right: auto;
         margin-top: auto;
         margin-bottom: auto;
         margin-left: 5px;
         font-size: 2.5rem;
     }
-    .payment_id {
+    .payment-id {
         text-align: center;
         width: 100%;
         margin: auto;
     }
-    .bill_content {
+    .bill-content {
         background-color: #fafafa;
     }
-    .main_row {
+    .main-row {
         margin-top: 0%;
         border: 1px solid #ddd;
         border-radius: 10px;
         padding: 5px;
         background-color: white;
     }
-    .other_row {
+    .other-row {
         margin-top: 5%;
         border: 1px solid #ddd;
         border-radius: 10px;
         padding: 5px;
         background-color: white;
     }
-    .left_col {
+    .left-col {
         text-align: left;
     }
-    .right_col {
+    .right-col {
         text-align: right;
     }
-    .name_span {
+    .name-span {
         width: 100%;
         font-size: 1.7rem;
         color: #3982a3;
         font-weight: bold;
     }
-    .detail_span {
+    .detail-span {
         width: 100%;
         font-size: 1.5rem;
         margin-top: 10px;
         font-weight: bold;
     }
-    .right_col .detail_span {
+    .right-col .detail-span {
         text-align: center;
         font-size: 1.5rem;
     }
-    .down_button_class {
+    .down-button-class {
         background-color: #3881a2;
         color: white;
         border-radius: 10px;
@@ -72,20 +72,20 @@ page-payment-method {
         margin-top: auto;
         margin-bottom: auto;
     }
-    .download_image {
+    .download-image {
         width: 20px;
         height: 20px;
         margin: auto;
         margin-right: auto;
     }
-    .button_span_name {
+    .button-span-name {
         margin: auto;
         font-size: 1.5rem;
     }
-    .non_padding {
+    .non-padding {
         padding: 0px;
     }
-    .button_name {
+    .button-name {
         margin-left: -15px;
     }
 }

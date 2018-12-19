@@ -1,13 +1,13 @@
 page-settings {
-    .header_class {
+    .header-class {
         background-color: white;
         box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    .header_row {
+    .header-row {
         margin: auto;
         height: 40px;
     }
-    .header_span {
+    .header-span {
         text-align: center;
         margin: auto;
         font-size: 1.8rem;
@@ -18,28 +18,28 @@ page-settings {
         margin: auto;
         font-size: 2.5rem;
     }
-    .setting_content {
+    .setting-content {
         background-color: #f3f3f3;
     }
-    .main_row {
+    .main-row {
         background-color: white;
         border-bottom: 2px solid #ddd;
         height: 50px;
     }
-    .other_row {
+    .other-row {
         background-color: white;
         height: 50px;
     }
-    .left_align {
+    .left-align {
         text-align: right;
     }
-    .lock_image {
+    .lock-image {
         width: 20px;
         height: 20px;
         margin: auto;
         opacity: 0.5;
     }
-    .change_password {
+    .change-password {
         margin-top: auto;
         margin-bottom: auto;
         font-size: 17px;
@@ -63,7 +63,7 @@ page-settings {
         opacity: 0.5;
         font-size: 17px;
     }
-    .select_class {
+    .select-class {
         width: 100%;
         max-width: 100%;
         font-size: 1.6rem;
@@ -71,7 +71,7 @@ page-settings {
     .mat-select-trigger {
         margin-top: 10px;
     }
-    .sel_lng {
+    .sel-lng {
         padding-left: 10px;
     }
 }
