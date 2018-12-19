@@ -37,7 +37,7 @@
     <ion-row class="payment-row">
       <ion-col>
         <mat-form-field>
-          <mat-select placeholder="{{ 'select' | translate }}" [formControl]="selType" [(ngModel)]="top_Data.topup"
+          <mat-select placeholder="{{ 'select' | translate }}" [formControl]="selType" [(ngModel)]="topData.topup"
             class="select-class" required>
             <mat-option value="unlimited1">
               3GB {{ 'unlimited' | translate }}
@@ -62,10 +62,10 @@
     <ion-row class="payment-row topup-calender">
       <ion-col>
         <!-- <mat-form-field>
-          <input matInput [(ngModel)]="top_Data.start_date" [matDatepicker]="myDatepicker" [formControl]="changeDate"> -->
+          <input matInput [(ngModel)]="topData.startDate" [matDatepicker]="myDatepicker" [formControl]="changeDate"> -->
 
-        <ion-datetime [ngClass]="{'error-border':show_error == true, 'normal-border':show_error == false}"
-          displayFormat="MM/DD/YYYY hh:mm a" (ionChange)="ionchange_date()" [(ngModel)]="top_Data.start_date" name="start_date"></ion-datetime>
+        <ion-datetime [ngClass]="{'error-border':showError == true, 'normal-border':showError == false}" displayFormat="MM/DD/YYYY hh:mm a"
+          (ionChange)="ionchangeDate()" [(ngModel)]="topData.startDate" name="startDate"></ion-datetime>
         <!-- <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker></mat-datepicker>
 
@@ -77,7 +77,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row class="cal-error" *ngIf="show_error">
+    <ion-row class="cal-error" *ngIf="showError">
       <span>
         {{ 'start_date_required' | translate }}
       </span>
@@ -92,7 +92,7 @@
     <ion-row class="payment-row">
       <ion-col>
         <mat-form-field>
-          <mat-select placeholder="{{ 'debit_card' | translate }}" [formControl]="setMethod" [(ngModel)]="top_Data.method"
+          <mat-select placeholder="{{ 'debit_card' | translate }}" [formControl]="setMethod" [(ngModel)]="topData.method"
             class="select-class" required>
             <mat-option value="Visa">
               {{ 'visa' | translate }}
@@ -109,7 +109,7 @@
     </ion-row>
 
     <ion-row class="">
-      <button ion-button class="button-style1 add-button" (click)="add_new()">
+      <button ion-button class="button-style1 add-button" (click)="addNew()">
         + {{ 'add_new' | translate }}
       </button>
     </ion-row>

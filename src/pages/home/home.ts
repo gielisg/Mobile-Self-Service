@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController, MenuController } from 'ionic-angular';
 import { MydetailPage } from '../mydetail/mydetail';
-import { MyaccountPage } from '../myaccount/myaccount';
 import { MyServicesPage } from '../my-services/my-services';
 import { MyDevicesPage } from '../my-devices/my-devices';
 import { PayNowPage } from '../pay-now/pay-now';
@@ -12,6 +11,7 @@ import { File } from '@ionic-native/file'
 import { TranslateService } from '@ngx-translate/core';
 import { AuthserviceProvider } from '../../providers/authservice/authservice';
 import { ServiceProvider } from '../../providers/service/service';
+import { MyaccountPage } from '../myaccount/myaccount';
 
 
 @Component({
@@ -21,14 +21,14 @@ import { ServiceProvider } from '../../providers/service/service';
 export class HomePage {
 
   fileTransfer: FileTransferObject = this.transfer.create();
-  public switch_mode: boolean;
+  public switchMode: boolean;
 
-  public bill_data = { "bill_amount": "", "bill_date": "" };
+  public billData = { "billAmount": "", "billDate": "" };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController
     , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public transfer: FileTransfer
     , public file: File, public translate: TranslateService, public menu: MenuController, public authservice: AuthserviceProvider,
-    public bill_service: ServiceProvider) {
+    public billService: ServiceProvider) {
 
   }
 
@@ -36,22 +36,22 @@ export class HomePage {
     console.log('ionViewDidLoad HomePage');
     this.ionicInit();
   }
-  goto_mydetail() {
+  gotoMyDetail() {
     this.navCtrl.push(MydetailPage);
   }
-  goto_myaccount() {
+  gotoMyAccount() {
     this.navCtrl.push(MyaccountPage);
   }
-  goto_myservice() {
+  gotoMyService() {
     this.navCtrl.push(MyServicesPage);
   }
-  goto_mydevice() {
+  gotoMyDevice() {
     this.navCtrl.push(MyDevicesPage);
   }
-  goto_paynow() {
-    this.navCtrl.push(PayNowPage, { navParams: this.bill_data.bill_amount });
+  gotoPayNow() {
+    this.navCtrl.push(PayNowPage, { navParams: this.billData.billAmount });
   }
-  download_bill() {
+  downloadBill() {
 
     const url = "http://localhost/test_php/MyPDF.pdf";
 
@@ -89,21 +89,21 @@ export class HomePage {
   }
 
   click_download() {
-    let status = "download_bill_total";
-    let bill_download = { "email": "", "due_date": "", "amount_owin": "", "status": "download_bill_total", "index": "" };
-    bill_download.email = localStorage.getItem("user_email");
+    let status = "downloadBillTotal";
+    let bill_download = { "email": "", "dueDate": "", "amountOwin": "", "status": "downloadBillTotal", "index": "" };
+    bill_download.email = localStorage.getItem("userEmail");
     let loading = this.loadingCtrl.create({
       content: "Please Wait..."
     });
     loading.present();
 
-    this.bill_service.get_billList()
+    this.billService.getBillList()
 
       .subscribe(
         data => {
           if (data) {
-            this.bill_data.bill_amount = data.Items[0].AmountDue;
-            this.bill_data.bill_date = this.set_date(data.Items[0].DueDate.split("T")[0]);
+            this.billData.billAmount = data.Items[0].AmountDue;
+            this.billData.billDate = this.setDate(data.Items[0].DueDate.split("T")[0]);
 
           }
           loading.dismiss();
@@ -115,9 +115,9 @@ export class HomePage {
   }
 
 
-  set_date(value) {
-    let array_sam = value.split("-");
-    return array_sam[1] + "-" + array_sam[2] + "-" + array_sam[0];
+  setDate(value) {
+    let arraySam = value.split("-");
+    return arraySam[1] + "-" + arraySam[2] + "-" + arraySam[0];
   }
 
   ionicInit() {
@@ -129,23 +129,23 @@ export class HomePage {
     });
     loading.present();
 
-    this.bill_service.get_bill().subscribe(data => {
+    this.billService.getBill().subscribe(data => {
       if (data) {
 
         this.menu.swipeEnable(true);
-        if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
+        if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
           this.translate.use('en');
-          this.switch_mode = true;
+          this.switchMode = true;
         } else {
-          this.translate.use(localStorage.getItem("set_lng"));
-          if (localStorage.getItem("set_lng") == "en") {
-            this.switch_mode = true;
+          this.translate.use(localStorage.getItem("setLang"));
+          if (localStorage.getItem("setLang") == "en") {
+            this.switchMode = true;
           } else {
-            this.switch_mode = false;
+            this.switchMode = false;
           }
         }
-        this.bill_data.bill_amount = data.Items[0].AmountDue;
-        this.bill_data.bill_date = this.set_date(data.Items[0].DueDate.split("T")[0]);
+        this.billData.billAmount = data.Items[0].AmountDue;
+        this.billData.billDate = this.setDate(data.Items[0].DueDate.split("T")[0]);
       }
       loading.dismiss();
 

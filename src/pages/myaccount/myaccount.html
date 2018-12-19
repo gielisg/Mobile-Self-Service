@@ -30,24 +30,24 @@
     <ion-col col-5>
       <ion-row class="normal-margin">
         <span class="amount-span">
-          {{ 'account_number' | translate }}
+          {{ 'accountNumber' | translate }}
         </span>
       </ion-row>
       <ion-row class="normal-margin">
         <span class="dollar-amount-span">
-          {{bill_data.account_number}}
+          {{billData.accountNumber}}
         </span>
       </ion-row>
     </ion-col>
     <ion-col col-5>
       <ion-row class="normal-margin">
         <span class="amount-span">
-          {{ 'amount_owing' | translate }}
+          {{ 'amountOwing' | translate }}
         </span>
       </ion-row>
       <ion-row class="normal-margin">
         <span class="dollar-amount-span">
-          ${{bill_data.bill_amount}}
+          ${{billData.billAmount}}
         </span>
       </ion-row>
     </ion-col>
@@ -56,12 +56,12 @@
   <ion-row class="first-row">
     <ion-row class="normal-margin">
       <span class="amount-span">
-        {{ 'due_date' | translate }}
+        {{ 'dueDate' | translate }}
       </span>
     </ion-row>
     <ion-row class="normal-margin">
       <span class="dollar-amount-span">
-        {{bill_data.bill_date}}
+        {{billData.billDate}}
       </span>
     </ion-row>
   </ion-row>
@@ -71,14 +71,14 @@
     </ion-col> -->
     <ion-col col-6>
       <ion-row class="full-width">
-        <button mat-button class="button-style1" (click)="click_download()">
+        <button mat-button class="button-style1" (click)="clickDownload()">
           {{ 'download_bill' | translate }}
         </button>
       </ion-row>
     </ion-col>
     <ion-col col-6>
       <ion-row class="full-width">
-        <button mat-button class="button-style2" (click)="goto_payNow()">
+        <button mat-button class="button-style2" (click)="gotoPayNow()">
           {{ 'pay_now' | translate }}
         </button>
       </ion-row>
@@ -92,7 +92,7 @@
     </ion-col>
     <ion-col col-10>
       <ion-row class="full-width">
-        <button mat-button class="button-style1" (click)="goto_billHistory()">
+        <button mat-button class="button-style1" (click)="gotoBillHistory()">
           {{ 'bill_history' | translate }}
         </button>
       </ion-row>
@@ -106,7 +106,7 @@
     </ion-col>
     <ion-col col-10>
       <ion-row class="full-width">
-        <button mat-button class="button-style1" (click)="goto_transactionHistory()">
+        <button mat-button class="button-style1" (click)="gotoTransactionHistory()">
           {{ 'transaction_history' | translate }}
         </button>
       </ion-row>
@@ -120,7 +120,7 @@
     </ion-col>
     <ion-col col-10>
       <ion-row class="full-width">
-        <button mat-button class="button-style1" (click)="goto_paymentHistory()">
+        <button mat-button class="button-style1" (click)="gotoPaymentHistory()">
           {{ 'payment_method' | translate }}
         </button>
       </ion-row>

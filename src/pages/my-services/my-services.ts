@@ -28,7 +28,7 @@ import { parseDate } from 'ionic-angular/util/datetime-util';
 })
 export class MyServicesPage {
 
-  public service_Data: any[];
+  public serviceData: any[];
 
   public monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -44,110 +44,110 @@ export class MyServicesPage {
     this.ionicInit();
   }
 
-  set_date(value) {
-    let array_sam = value.split("-");
-    return array_sam[2] + ", " + this.monthNames[parseInt(array_sam[1])] + " " + array_sam[0];
+  setDate(value) {
+    let arraySam = value.split("-");
+    return arraySam[2] + ", " + this.monthNames[parseInt(arraySam[1])] + " " + arraySam[0];
   }
 
-  get_typeSV(value) {
-    let array_sam = value.split(".");
-    return array_sam[0].charAt(0) + "" + array_sam[1].charAt(0) + "" + array_sam[2].charAt(0);
+  getTypeSV(value) {
+    let arraySam = value.split(".");
+    return arraySam[0].charAt(0) + "" + arraySam[1].charAt(0) + "" + arraySam[2].charAt(0);
   }
 
-  goto_callHistory() {
+  gotoCallHistory() {
     this.navCtrl.push(CallHistoryPage);
   }
 
-  goto_topupHistory() {
+  gotoTopupHistory() {
     this.navCtrl.push(TopupHistoryPage);
   }
 
-  goto_serviceDetail() {
+  gotoServiceDetail() {
     this.navCtrl.push(ServiceDetailPage);
   }
 
-  goto_serviceBundle() {
+  gotoServiceBundle() {
     this.navCtrl.push(ServiceBundlePage);
   }
 
   ionicInit() {
 
-    this.service_Data = new Array();
+    this.serviceData = new Array();
     let loading = this.loadingCtrl.create({
       content: "Please Wait..."
     });
     loading.present();
 
-    this.serviceprovider.get_serviceDisplay()
+    this.serviceprovider.getServiceDisplay()
 
       .subscribe(
-      data => {
-        if (data) {
-          if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-            this.translate.use('en');
-          } else {
-            this.translate.use(localStorage.getItem("set_lng"));
+        data => {
+          if (data) {
+            if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
+              this.translate.use('en');
+            } else {
+              this.translate.use(localStorage.getItem("setLang"));
+            }
+
+            for (let list of data.Items) {
+              let arrayData = { "type": "GSM", "number": "", "date": "", "status": "open", "plan": "saver1", "changeState": false, "changePlan": false };
+              arrayData.type = this.getTypeSV(list.$type.split(",")[0]);
+              arrayData.number = list.Number;
+              arrayData.date = this.setDate(list.DueDate.split("T")[0]);
+
+              this.serviceData.push(arrayData);
+
+            }
+
           }
+          loading.dismiss();
 
-          for (let list of data.Items) {
-            let array_data = { "type": "GSM", "number": "", "date": "", "status": "open", "plan": "saver1", "change_state": false, "change_plan": false };
-            array_data.type = this.get_typeSV(list.$type.split(",")[0]);
-            array_data.number = list.Number;
-            array_data.date = this.set_date(list.DueDate.split("T")[0]);
-
-            this.service_Data.push(array_data);
-
-          }
-
-        }
-        loading.dismiss();
-
-      },
-      error => {
-        loading.dismiss();
-      });
+        },
+        error => {
+          loading.dismiss();
+        });
   }
 
-  change_state(index) {
+  changeStateService(index) {
 
-    let change_data = { "index": "", "status": "" };
-    change_data.index = index;
-    change_data.status = this.service_Data[index].status;
-    localStorage.setItem("ChangeStatusPage", JSON.stringify(change_data));
+    let changeData = { "index": "", "status": "" };
+    changeData.index = index;
+    changeData.status = this.serviceData[index].status;
+    localStorage.setItem("ChangeStatusPage", JSON.stringify(changeData));
     let profileModal = this.modalCtrl.create(ChangeStatusPage);
     profileModal.onDidDismiss(data => {
       if (typeof (data) != "undefined" && data != "") {
-        this.service_Data[index].status = data;
+        this.serviceData[index].status = data;
       }
     });
     profileModal.present();
 
   }
 
-  save_state(index) {
+  saveState(index) {
 
-    this.service_Data[index].change_state = false;
+    this.serviceData[index].changeState = false;
 
   }
 
-  change_plan(index) {
+  changePlan(index) {
 
-    let change_data = { "index": "", "plan": "" };
-    change_data.index = index;
-    change_data.plan = this.service_Data[index].plan;
-    localStorage.setItem("ChangePlanPage", JSON.stringify(change_data));
+    let changeData = { "index": "", "plan": "" };
+    changeData.index = index;
+    changeData.plan = this.serviceData[index].plan;
+    localStorage.setItem("ChangePlanPage", JSON.stringify(changeData));
     let profileModal = this.modalCtrl.create(ChangePlanPage);
     profileModal.onDidDismiss(data => {
       if (typeof (data) != "undefined" && data != "") {
-        this.service_Data[index].plan = data;
+        this.serviceData[index].plan = data;
       }
     });
     profileModal.present();
 
   }
 
-  save_plan(index) {
-    this.service_Data[index].change_plan = false;
+  savePlan(index) {
+    this.serviceData[index].changePlan = false;
   }
 
 }

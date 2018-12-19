@@ -26,7 +26,7 @@
 
 <ion-content padding class="bill-content">
 
-    <ion-row *ngFor="let list of call_historyData; let i = index" [ngClass]="{'main-row':i == 0, 'other-row': i != 0}">
+    <ion-row *ngFor="let list of callHistoryData; let i = index" [ngClass]="{'main-row':i == 0, 'other-row': i != 0}">
         <ion-row class="first-row">
             <ion-col col-4 class="left-col">
                 <ion-row class="full-height">
@@ -34,7 +34,7 @@
                         {{ 'number_called' | translate }}
                     </span>
                     <span class="detail-span">
-                        {{list.call_num}}
+                        {{list.callNum}}
                     </span>
                 </ion-row>
             </ion-col>

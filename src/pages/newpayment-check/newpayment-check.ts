@@ -22,12 +22,12 @@ export class NewpaymentCheckPage {
     console.log('ionViewDidLoad NewpaymentCheckPage');
   }
 
-  open_payment() {
+  openPayment() {
     let data = "open";
     this.viewCtrl.dismiss(data);
   }
 
-  close_payment() {
+  closePayment() {
     let data = "close";
     this.viewCtrl.dismiss(data);
   }

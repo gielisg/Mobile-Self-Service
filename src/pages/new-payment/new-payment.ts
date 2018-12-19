@@ -26,7 +26,7 @@ import { PaymentProvider } from '../../providers/payment/payment';
 })
 export class NewPaymentPage {
 
-  public pay_Data = { "name": "", "method": "", "cardnum": "", "exm": "1", "exy": "2018" };
+  public payData = { "name": "", "method": "", "cardnum": "", "exm": "1", "exy": "2018" };
   public expireMonth: any[];
   public expireYear: any[];
 
@@ -62,17 +62,17 @@ export class NewPaymentPage {
   completeAddCompany(comProfileForm) {
     if (comProfileForm.valid && this.selType.valid && this.selExm.valid) {
 
-      let add_param = {
-        "name": this.pay_Data.name,
-        "number": this.pay_Data.cardnum,
-        "expireDate": this.pay_Data.exy + "-" + this.set_twostring(this.pay_Data.exm) + "-" + new Date().getDate() + "T00:00:00"
+      let addParam = {
+        "name": this.payData.name,
+        "number": this.payData.cardnum,
+        "expireDate": this.payData.exy + "-" + this.setTwoString(this.payData.exm) + "-" + new Date().getDate() + "T00:00:00"
       };
 
       let loading = this.loadingCtrl.create({
         content: "Please Wait..."
       });
       loading.present();
-      this.paymentService.account_paymentMethodAdd(add_param).subscribe(data => {
+      this.paymentService.accountPaymentMethodAdd(addParam).subscribe(data => {
         loading.dismiss();
         this.navCtrl.pop();
         this.navCtrl.push(PaymentMethodPage);
@@ -85,22 +85,22 @@ export class NewPaymentPage {
 
   ionicInit() {
     
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
+    if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
       this.translate.use('en');
     } else {
-      this.translate.use(localStorage.getItem("set_lng"));
+      this.translate.use(localStorage.getItem("setLang"));
     }
 
     this.userId = JSON.parse(localStorage.getItem('currentUser')).username;
 
-    this.pay_Data.exm = (new Date().getMonth() + 1).toString();
+    this.payData.exm = (new Date().getMonth() + 1).toString();
   }
 
-  set_twostring(input_val) {
-    if (parseInt(input_val) < 10) {
-      return "0" + input_val;
+  setTwoString(inputVal) {
+    if (parseInt(inputVal) < 10) {
+      return "0" + inputVal;
     } else {
-      return input_val;
+      return inputVal;
     }
   }
 

@@ -18,7 +18,7 @@ import { catchError, tap } from 'rxjs/operators';
 @Injectable()
 export class AuthserviceProvider {
 
-  public url_header = "https://ua.selcomm.com/SelcommWS/1.0267/";
+  public urlHeader = "https://ua.selcomm.com/SelcommWS/1.0267/";
 
   constructor(@Inject(APP_CONFIG) public config: IAppConfig, public http: Http, public httpclient: HttpClient) {
     console.log('Hello AuthserviceProvider Provider');
@@ -26,12 +26,12 @@ export class AuthserviceProvider {
 
 
   login(username, password) {
-    return this.http.post(this.url_header + 'Authentication.svc/rest/AuthenticateSimpleCreateSessionAndAuthenticateContact', JSON.stringify({
+    return this.http.post(this.urlHeader + 'Authentication.svc/rest/AuthenticateSimpleCreateSessionAndAuthenticateContact', JSON.stringify({
       PrivateKey: this.config.WebPrivateKey, DatabaseUserCode: this.config.DatabaseUserCode, DatabasePassword: this.config.DatabasePassword,
       UserCode: username, Password: password
     }))
       .map(token => {
-        localStorage.setItem("session_key", JSON.parse(JSON.stringify(token))._body.replace(/"/g, ''));
+        localStorage.setItem("sessionKey", JSON.parse(JSON.stringify(token))._body.replace(/"/g, ''));
         this.fillLoggedUser(username, password, token);
         return true;
       })
@@ -39,12 +39,12 @@ export class AuthserviceProvider {
       );
   }
 
-  account_balance() {
+  accountBalance() {
 
-    return this.http.get(this.url_header + 'Account.svc/rest/AccountBalance?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&IncludeUnbilledUsage=true&IncludeOneOffAndRecurringCharges=true')
+    return this.http.get(this.urlHeader + 'Account.svc/rest/AccountBalance?SessionKey=' + encodeURIComponent(localStorage.getItem("sessionKey")) + '&AccountNumber=' + JSON.parse(localStorage.getItem('currentUser')).username + '&IncludeUnbilledUsage=true&IncludeOneOffAndRecurringCharges=true')
       .map(token => {
-        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-        return return_data;
+        let returnData = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return returnData;
 
       })
       .pipe(
@@ -52,24 +52,24 @@ export class AuthserviceProvider {
       );
   }
 
-  get_accountDetail() {
-    return this.http.get(this.url_header + 'Contact.svc/rest/Contact?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) + '&ContactCode=' + JSON.parse(localStorage.getItem('currentUser')).username + '&LoadAddress=true&LoadContactPhones=true&LoadContactEmailAddresses=true&RefreshCache=true')
+  getAccountDetail() {
+    return this.http.get(this.urlHeader + 'Contact.svc/rest/Contact?SessionKey=' + encodeURIComponent(localStorage.getItem("sessionKey")) + '&ContactCode=' + JSON.parse(localStorage.getItem('currentUser')).username + '&LoadAddress=true&LoadContactPhones=true&LoadContactEmailAddresses=true&RefreshCache=true')
       .map(token => {
-        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-        return return_data;
+        let returnData = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return returnData;
 
       })
       .pipe(
       );
   }
 
-  update_address(new_address): Observable<any[]> {
-    let encoded_session_Key = encodeURIComponent(localStorage.getItem("session_key"));
+  updateAddress(newAddress): Observable<any[]> {
+    let encoded_sessionKey = encodeURIComponent(localStorage.getItem("sessionKey"));
     let param = {
-      "SessionKey": localStorage.getItem("session_key"),
+      "SessionKey": localStorage.getItem("sessionKey"),
       "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
       "Address": {
-        "Address1": new_address,
+        "Address1": newAddress,
         "AddressType": {
           "Code": "BA",
         },
@@ -85,70 +85,70 @@ export class AuthserviceProvider {
         "Suburb": "TEST",
       }
     };
-    // return this.http.put(this.url_header + 'Address.svc/rest/AddressUpdateByContact', JSON.stringify(param))
+    // return this.http.put(this.urlHeader + 'Address.svc/rest/AddressUpdateByContact', JSON.stringify(param))
     //   .map(token => {
-    //     let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-    //     return return_data;
+    //     let returnData = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+    //     return returnData;
 
     //   })
     //   .pipe(
     //   );
     console.log(JSON.stringify(param));
-    return this.httpclient.put<any[]>(this.url_header + 'Address.svc/rest/AddressUpdateByContact', JSON.stringify(param))
+    return this.httpclient.put<any[]>(this.urlHeader + 'Address.svc/rest/AddressUpdateByContact', JSON.stringify(param))
       .pipe(
 
         catchError(this.handleError('getData'))
       );
   }
 
-  update_email(email_address): Observable<any[]> {
+  updateEmail(emailAddress): Observable<any[]> {
 
     let param = {
-      "SessionKey": (localStorage.getItem("session_key")),
+      "SessionKey": (localStorage.getItem("sessionKey")),
       "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
       "EmailAddress": {
-        "EmailAddress": email_address
+        "EmailAddress": emailAddress
       }
     }
-    // return this.http.put(this.url_header + 'Email.svc/rest/EmailAddressUpdate ', JSON.stringify(param))
+    // return this.http.put(this.urlHeader + 'Email.svc/rest/EmailAddressUpdate ', JSON.stringify(param))
     //   .map(token => {
-    //     let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-    //     return return_data;
+    //     let returnData = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+    //     return returnData;
     //   })
     //   .pipe(
 
     //   );
-    return this.httpclient.put<any[]>(this.url_header + 'Email.svc/rest/EmailAddressUpdate ', JSON.stringify(param))
+    return this.httpclient.put<any[]>(this.urlHeader + 'Email.svc/rest/EmailAddressUpdate ', JSON.stringify(param))
       .pipe(
 
         catchError(this.handleError('getData'))
       );
   }
 
-  update_phone(phone_number): Observable<any[]> {
+  updatePhone(phoneNumber): Observable<any[]> {
     let param =
     {
-      "SessionKey": (localStorage.getItem("session_key")),
+      "SessionKey": (localStorage.getItem("sessionKey")),
       "ContactPhone": {
         "AreaCode": 2,
         "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
         "ContactPhoneType": {
           "Code": "HP",
         },
-        "Number": phone_number,
+        "Number": phoneNumber,
         "Reference": 3594,
       }
     }
-    // return this.http.put(this.url_header + 'ContactPhone.svc/rest/ContactPhoneUpdate', JSON.stringify(param))
+    // return this.http.put(this.urlHeader + 'ContactPhone.svc/rest/ContactPhoneUpdate', JSON.stringify(param))
     //   .map(token => {
-    //     let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-    //     return return_data;
+    //     let returnData = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+    //     return returnData;
 
     //   })
     //   .pipe(
 
     //   );
-    return this.httpclient.put<any[]>(this.url_header + 'ContactPhone.svc/rest/ContactPhoneUpdate', JSON.stringify(param))
+    return this.httpclient.put<any[]>(this.urlHeader + 'ContactPhone.svc/rest/ContactPhoneUpdate', JSON.stringify(param))
       .pipe(
 
         catchError(this.handleError('getData'))
@@ -156,38 +156,38 @@ export class AuthserviceProvider {
 
   }
 
-  update_name(user_name) {
+  updateName(userName) {
     let param =
     {
-      "SessionKey": encodeURIComponent(localStorage.getItem("session_key")),
+      "SessionKey": encodeURIComponent(localStorage.getItem("sessionKey")),
       "ContactPhone": {
         "AreaCode": 2,
         "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
         "ContactPhoneType": {
           "Code": "HP",
         },
-        "Number": user_name,
+        "Number": userName,
         "Reference": 3594,
       }
     }
-    // return this.http.put(this.url_header + 'Account.svc/rest/Account?SessionKey=', JSON.stringify(param))
+    // return this.http.put(this.urlHeader + 'Account.svc/rest/Account?SessionKey=', JSON.stringify(param))
     //   .map(token => {
-    //     let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-    //     return return_data;
+    //     let returnData = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+    //     return returnData;
 
     //   })
     //   .pipe(
 
     //   );
-    // return this.http.get(this.url_header + 'Contact.svc/rest/BusinessNameUpdate?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username + "&BusinessName=" + user_name)
+    // return this.http.get(this.urlHeader + 'Contact.svc/rest/BusinessNameUpdate?SessionKey=' + encodeURIComponent(localStorage.getItem("sessionKey")) + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username + "&BusinessName=" + userName)
     //   .pipe(
 
     //     catchError(this.handleError('getData'))
     //   );
 
-    return this.http.get(this.url_header + 'Contact.svc/rest/BusinessNameUpdate?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username + "&BusinessName=" + user_name)
+    return this.http.get(this.urlHeader + 'Contact.svc/rest/BusinessNameUpdate?SessionKey=' + encodeURIComponent(localStorage.getItem("sessionKey")) + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username + "&BusinessName=" + userName)
       .map(token => {
-        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        let returnData = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return token;
 
       })
@@ -209,7 +209,7 @@ export class AuthserviceProvider {
     this.config.Password = password;
   }
 
-  convert_getParam(string, quoteStyle, charset, doubleEncode) {
+  convertGetParam(string, quoteStyle, charset, doubleEncode) {
 
 
     return string

@@ -10,21 +10,21 @@
   <ion-row class="first-row">
     <ion-row class="normal-margin">
       <span class="amount-span">
-        {{ 'amount_owing' | translate }}
+        {{ 'amountOwing' | translate }}
       </span>
     </ion-row>
     <ion-row class="normal-margin">
       <span class="dollar-amount-span">
-        ${{bill_data.bill_amount}}
+        ${{billData.billAmount}}
       </span>
     </ion-row>
     <ion-row class="normal-margin">
       <span class="dollar-date-span">
-        {{ 'due' | translate }} {{bill_data.bill_date}}
+        {{ 'due' | translate }} {{billData.billDate}}
       </span>
     </ion-row>
   </ion-row>
-  <ion-row [ngClass]="{'download-pay':switch_mode == true, 'rus-pay':switch_mode == false}">
+  <ion-row [ngClass]="{'download-pay':switchMode == true, 'rus-pay':switchMode == false}">
     <!-- <ion-col col-1>
     </ion-col> -->
     <ion-col col-6>
@@ -36,7 +36,7 @@
     </ion-col>
     <ion-col col-6>
       <ion-row class="full-width">
-        <button mat-button class="button-style2" (click)="goto_paynow()">
+        <button mat-button class="button-style2" (click)="gotoPayNow()">
           {{ 'pay_now' | translate }}
         </button>
       </ion-row>
@@ -50,7 +50,7 @@
     </ion-col>
     <ion-col col-10>
       <ion-row class="full-width">
-        <button mat-button class="button-style1" (click)="goto_mydetail()">
+        <button mat-button class="button-style1" (click)="gotoMyDetail()">
           {{ 'my_details' | translate }}
         </button>
       </ion-row>
@@ -64,7 +64,7 @@
     </ion-col>
     <ion-col col-10>
       <ion-row class="full-width">
-        <button mat-button class="button-style1" (click)="goto_myaccount()">
+        <button mat-button class="button-style1" (click)="gotoMyAccount()">
           {{ 'my_account' | translate }}
         </button>
       </ion-row>
@@ -78,7 +78,7 @@
     </ion-col>
     <ion-col col-10>
       <ion-row class="full-width">
-        <button mat-button class="button-style1" (click)="goto_myservice()">
+        <button mat-button class="button-style1" (click)="gotoMyService()">
           {{ 'my_services' | translate }}
         </button>
       </ion-row>
@@ -92,7 +92,7 @@
     </ion-col>
     <ion-col col-10>
       <ion-row class="full-width">
-        <button mat-button class="button-style1" (click)="goto_mydevice()">
+        <button mat-button class="button-style1" (click)="gotoMyDevice()">
           {{ 'my_devices' | translate }}
         </button>
       </ion-row>

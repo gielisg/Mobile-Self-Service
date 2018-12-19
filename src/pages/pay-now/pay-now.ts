@@ -27,10 +27,10 @@ export class PayNowPage {
 
   animalControl = new FormControl('', [Validators.required]);
 
-  public pay_Data = { "name": "", "method": "", "cardnum": "", "exm": "none", "exy": "2018" };
-  public cancen_enable: boolean;
+  public payData = { "name": "", "method": "", "cardnum": "", "exm": "none", "exy": "2018" };
+  public cancenEnable: boolean;
 
-  public pay_amount: any;
+  public payAmount: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
     public apiprovider: ApiproviderProvider, public translate: TranslateService, public modalCtrl: ModalController, public paymentService: PaymentProvider) {
@@ -39,26 +39,26 @@ export class PayNowPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PayNowPage');
     this.ionicInit();
-    this.cancen_enable = false;
-    this.pay_amount = this.navParams.data.navParams;
+    this.cancenEnable = false;
+    this.payAmount = this.navParams.data.navParams;
   }
 
   goback() {
-    this.cancen_enable = true;
+    this.cancenEnable = true;
     this.navCtrl.pop();
   }
 
   ionicInit() {
     
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
+    if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
       this.translate.use('en');
     } else {
-      this.translate.use(localStorage.getItem("set_lng"));
+      this.translate.use(localStorage.getItem("setLang"));
     }
 
   }
 
-  pay_now() {
+  payNow() {
     let profileModal = this.modalCtrl.create(PaynowCheckPage);
     profileModal.onDidDismiss(data => {
       this.navCtrl.push(HomePage);
@@ -69,7 +69,7 @@ export class PayNowPage {
   completeAddCompany(comProfileForm) {
 
 
-    if (comProfileForm.valid && !this.cancen_enable) {
+    if (comProfileForm.valid && !this.cancenEnable) {
       let profileModal = this.modalCtrl.create(PaynowCheckPage);
       profileModal.onDidDismiss(data => {
         this.navCtrl.push(HomePage);

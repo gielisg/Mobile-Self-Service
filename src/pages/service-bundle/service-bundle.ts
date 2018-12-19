@@ -75,10 +75,10 @@ export class ServiceBundlePage {
 
   ionicInit() {
     
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
+    if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
       this.translate.use('en');
     } else {
-      this.translate.use(localStorage.getItem("set_lng"));
+      this.translate.use(localStorage.getItem("setLang"));
     }
   }
 

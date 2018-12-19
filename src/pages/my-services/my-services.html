@@ -26,7 +26,7 @@
 
 <ion-content padding class="myservice-content">
 
-    <ion-row class="main-row margin-top" *ngFor="let list of service_Data; let i = index">
+    <ion-row class="main-row margin-top" *ngFor="let list of serviceData; let i = index">
         <ion-row class="type-number-date">
             <ion-col col-2 class="left-col">
                 <ion-row class="full-height">
@@ -51,7 +51,7 @@
             <ion-col col-7 class="right-col">
                 <ion-row class="full-height">
                     <span class="name-span">
-                        {{ 'due_date' | translate }}
+                        {{ 'dueDate' | translate }}
                     </span>
                     <span class="detail-span">
                         {{list.date}}
@@ -78,28 +78,28 @@
 
             <ion-col col-5 class="right-col">
                 <ion-row class="full-height">
-                    <button ion-button class="mat-button change-button" (click)="change_state(i)">
+                    <button ion-button class="mat-button change-button" (click)="changeStateService(i)">
                         {{ 'change_UP' | translate }}
                     </button>
-                    <!-- <button ion-button class="mat-button change-button" *ngIf="list.change_state" (click)="save_state(i)">
+                    <!-- <button ion-button class="mat-button change-button" *ngIf="list.changeStateService" (click)="saveState(i)">
             {{ 'save' | translate }}
           </button> -->
                 </ion-row>
             </ion-col>
         </ion-row>
         <ion-row class="type-number-date">
-            <ion-col col-6 *ngIf="!list.change_plan">
+            <ion-col col-6 *ngIf="!list.changePlan">
                 <ion-row class="full-height">
                     <span class="name-span">
                         {{ 'plan' | translate }}
                     </span>
-                    <span class="detail-span" *ngIf="!list.change_plan">
+                    <span class="detail-span" *ngIf="!list.changePlan">
                         {{ list.plan | translate }}
                     </span>
                 </ion-row>
             </ion-col>
 
-            <ion-col col-6 *ngIf="list.change_plan">
+            <ion-col col-6 *ngIf="list.changePlan">
                 <ion-row class="full-height">
                     <span class="name-span">
                         {{ 'plan' | translate }}
@@ -129,11 +129,11 @@
             </ion-col>
             <ion-col col-5 class="right-col">
                 <ion-row class="full-height">
-                    <button ion-button class="mat-button change-button" (click)="change_plan(i)">
+                    <button ion-button class="mat-button change-button" (click)="changePlan(i)">
                         {{ 'change_UP' | translate }}
                     </button>
 
-                    <!-- <button ion-button class="mat-button change-button" *ngIf="list.change_plan" (click)="save_plan(i)">
+                    <!-- <button ion-button class="mat-button change-button" *ngIf="list.changePlan" (click)="savePlan(i)">
             {{ 'save' | translate }}
           </button> -->
                 </ion-row>
@@ -142,28 +142,28 @@
         <ion-row class="bottom-image-row">
             <ion-row class="image-full-width">
                 <ion-row class="">
-                    <ion-col col-3 (click)="goto_callHistory()">
+                    <ion-col col-3 (click)="gotoCallHistory()">
                         <ion-row class="full-height">
                             <ion-row class="service-iconRow">
                                 <ion-icon class="serviceDetail-icon" name="ios-call-outline"></ion-icon>
                             </ion-row>
                         </ion-row>
                     </ion-col>
-                    <ion-col col-3 (click)="goto_topupHistory()">
+                    <ion-col col-3 (click)="gotoTopupHistory()">
                         <ion-row class="full-height">
                             <ion-row class="service-iconRow">
                                 <ion-icon class="serviceDetail-icon" name="ios-list-box-outline"></ion-icon>
                             </ion-row>
                         </ion-row>
                     </ion-col>
-                    <ion-col col-3 (click)="goto_serviceDetail()">
+                    <ion-col col-3 (click)="gotoServiceDetail()">
                         <ion-row class="full-height">
                             <ion-row class="service-iconRow">
                                 <ion-icon class="serviceDetail-icon" name="ios-list-box-outline"></ion-icon>
                             </ion-row>
                         </ion-row>
                     </ion-col>
-                    <ion-col col-3 (click)="goto_serviceBundle()">
+                    <ion-col col-3 (click)="gotoServiceBundle()">
                         <ion-row class="full-height">
                             <ion-row class="service-iconRow">
                                 <ion-icon class="serviceDetail-icon" name="ios-bug-outline"></ion-icon>
@@ -173,7 +173,7 @@
                 </ion-row>
 
                 <ion-row class="">
-                    <ion-col col-3 (click)="goto_callHistory()">
+                    <ion-col col-3 (click)="gotoCallHistory()">
                         <ion-row class="full-height">
                             <ion-row class="servicespan-row">
                                 <span class="servicedetail-span">
@@ -182,7 +182,7 @@
                             </ion-row>
                         </ion-row>
                     </ion-col>
-                    <ion-col col-3 (click)="goto_topupHistory()">
+                    <ion-col col-3 (click)="gotoTopupHistory()">
                         <ion-row class="full-height">
                             <ion-row class="servicespan-row">
                                 <span class="servicedetail-span">
@@ -191,7 +191,7 @@
                             </ion-row>
                         </ion-row>
                     </ion-col>
-                    <ion-col col-3 (click)="goto_serviceDetail()">
+                    <ion-col col-3 (click)="gotoServiceDetail()">
                         <ion-row class="full-height">
                             <ion-row class="servicespan-row">
                                 <span class="servicedetail-span">
@@ -200,7 +200,7 @@
                             </ion-row>
                         </ion-row>
                     </ion-col>
-                    <ion-col col-3 (click)="goto_serviceBundle()">
+                    <ion-col col-3 (click)="gotoServiceBundle()">
                         <ion-row class="full-height">
                             <ion-row class="servicespan-row">
                                 <span class="servicedetail-span">

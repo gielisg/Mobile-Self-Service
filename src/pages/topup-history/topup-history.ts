@@ -22,7 +22,7 @@ import { TopUpPage } from '../top-up/top-up';
 })
 export class TopupHistoryPage {
 
-  public set_defalt = [
+  public setDefalt = [
     { "top": "unlimited1", "date": "12, March, 2017 10:12 am", "expiry": "12/04/2017", "status": "open" },
     { "top": "unlimited2", "date": "12, March, 2017 10:12 am", "expiry": "12/04/2017", "status": "open" },
     { "top": "unlimited1", "date": "12, March, 2017 10:12 am", "expiry": "12/04/2017", "status": "open" },
@@ -33,7 +33,7 @@ export class TopupHistoryPage {
     { "top": "unlimited1", "date": "12, March, 2017 10:12 am", "expiry": "12/04/2017", "status": "open" }
   ];
 
-  public top_Data: any[];
+  public topData: any[];
 
   public userId  = "";
 
@@ -45,7 +45,7 @@ export class TopupHistoryPage {
     console.log('ionViewDidLoad TopupHistoryPage');
     this.ionicInit();
   }
-  goto_newTopup() {
+  gotoNewTopup() {
     this.navCtrl.push(TopUpPage);
   }
   goback() {
@@ -53,25 +53,25 @@ export class TopupHistoryPage {
   }
 
   ionicInit() {
-    this.top_Data = new Array();
-    for (let list of this.set_defalt) {
-      this.top_Data.push(list);
+    this.topData = new Array();
+    for (let list of this.setDefalt) {
+      this.topData.push(list);
     }
-    if (localStorage.getItem("new_topup") != null) {
-      let storage = JSON.parse(localStorage.getItem("new_topup"));
+    if (localStorage.getItem("newTopup") != null) {
+      let storage = JSON.parse(localStorage.getItem("newTopup"));
       for (let list of storage) {
-        let sam_data = { "top": "", "date": "", "expiry": "12/04/2017", "status": "Open" };
-        sam_data.top = list.topup;
-        sam_data.date = list.start_date;
-        this.top_Data.push(sam_data);
+        let samData = { "top": "", "date": "", "expiry": "12/04/2017", "status": "Open" };
+        samData.top = list.topup;
+        samData.date = list.startDate;
+        this.topData.push(samData);
       }
     }
     this.userId = JSON.parse(localStorage.getItem('currentUser')).username;
     
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
+    if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
       this.translate.use('en');
     } else {
-      this.translate.use(localStorage.getItem("set_lng"));
+      this.translate.use(localStorage.getItem("setLang"));
     }
   }
 

@@ -29,7 +29,7 @@ import { AuthserviceProvider } from '../../providers/authservice/authservice';
 
 export class SigninPage {
 
-  public user_Data = { "username": "", "password": "", "email": "", "phone": "", "status": "" };
+  public userData = { "username": "", "password": "", "email": "", "phone": "", "status": "" };
 
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -38,7 +38,7 @@ export class SigninPage {
 
 
 
-  public send_data: any[];
+  public sendData: any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
     public apiprovider: ApiproviderProvider, public translate: TranslateService, public menu: MenuController, public authservice: AuthserviceProvider) {
@@ -48,19 +48,19 @@ export class SigninPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SigninPage');
-    console.log(localStorage.getItem("login_infor"));
+    console.log(localStorage.getItem("loggedUser"));
     this.ionicInit();
 
 
-    if (localStorage.getItem("login_infor") != null && localStorage.getItem("login_infor") != "") {
+    if (localStorage.getItem("loggedUser") != null && localStorage.getItem("loggedUser") != "") {
       this.navCtrl.push(HomePage);
     } else {
       this.ionicInit();
     }
 
   }
-  goto_home() {
-    if (this.user_Data.username == "" || this.user_Data.password == "") {
+  gotoHome() {
+    if (this.userData.username == "" || this.userData.password == "") {
       let toast = this.toastCtrl.create({
         message: 'Please input full data',
         duration: 3000,
@@ -78,17 +78,17 @@ export class SigninPage {
       let loading = this.loadingCtrl.create({
         content: "Please Wait..."
       });
-      this.user_Data.email = this.user_Data.username;
+      this.userData.email = this.userData.username;
       loading.present();
       let status = "login";
-      this.user_Data.status = status;
+      this.userData.status = status;
 
-      this.authservice.login(this.user_Data.username, this.user_Data.password)
+      this.authservice.login(this.userData.username, this.userData.password)
 
         .subscribe(
           data => {
             if (data) {
-              localStorage.setItem("login_infor", JSON.stringify(this.user_Data));
+              localStorage.setItem("loggedUser", JSON.stringify(this.userData));
               this.navCtrl.push(HomePage);
             }
             loading.dismiss();
@@ -96,25 +96,25 @@ export class SigninPage {
           },
           error => {
 
-            this.user_Data.username = "";
-            this.user_Data.password = "";
+            this.userData.username = "";
+            this.userData.password = "";
             loading.dismiss();
           });
 
     }
   }
 
-  goto_signup() {
+  gotoSignup() {
     this.navCtrl.push(SignupPage);
   }
 
   ionicInit() {
     this.menu.swipeEnable(false);
-    
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
+
+    if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
       this.translate.use('en');
     } else {
-      this.translate.use(localStorage.getItem("set_lng"));
+      this.translate.use(localStorage.getItem("setLang"));
     }
 
   }

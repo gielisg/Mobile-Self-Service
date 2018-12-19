@@ -9,7 +9,7 @@
   <ion-row class="header-row">
     <ion-col col-2>
       <ion-row class="full-height">
-        <ion-icon name="ios-arrow-back" (click)="goto_signin()" class="header-back-icon"></ion-icon>
+        <ion-icon name="ios-arrow-back" (click)="gotoSignin()" class="header-back-icon"></ion-icon>
       </ion-row>
     </ion-col>
     <ion-col col-8>
@@ -30,7 +30,7 @@
   <!-- <ion-row class="header-row custom_header">
     <ion-col col-2>
       <ion-row class="full-height">
-        <ion-icon name="ios-arrow-back" (click)="goto_signin()" class="header-back-icon"></ion-icon>
+        <ion-icon name="ios-arrow-back" (click)="gotoSignin()" class="header-back-icon"></ion-icon>
       </ion-row>
     </ion-col>
     <ion-col col-8>
@@ -49,7 +49,7 @@
   <form #comProfileForm="ngForm" id="comProfileForm" (ngSubmit)="completeAddCompany(comProfileForm)" novalidate>
     <ion-row class="username-row">
       <mat-form-field class="full-width">
-        <input matInput type="text" placeholder="{{ 'username' | translate }}" [(ngModel)]="user_Data.username"
+        <input matInput type="text" placeholder="{{ 'username' | translate }}" [(ngModel)]="userData.username"
           required name="username">
         <mat-error>
           {{ 'username_is_required' | translate }}
@@ -60,7 +60,7 @@
     <ion-row class="password-row">
       <mat-form-field class="full-width">
         <input matInput type="email" placeholder="{{ 'email' | translate }}" [formControl]="emailFormControl"
-          [(ngModel)]="user_Data.email" required name="username">
+          [(ngModel)]="userData.email" required name="username">
 
         <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
           {{ 'valid_email_address' | translate }}
@@ -75,7 +75,7 @@
 
     <ion-row class="password-row">
       <mat-form-field class="full-width">
-        <input matInput type="number" [(ngModel)]="user_Data.phone" [formControl]="phoneFormControl" required
+        <input matInput type="number" [(ngModel)]="userData.phone" [formControl]="phoneFormControl" required
           placeholder="{{ 'phone_number' | translate }}" name="password" />
 
         <mat-error *ngIf="phoneFormControl.hasError('required')">
@@ -87,7 +87,7 @@
 
     <ion-row class="password-row">
       <mat-form-field class="full-width">
-        <input matInput type="password" [(ngModel)]="user_Data.password" required placeholder="{{ 'password' | translate }}"
+        <input matInput type="password" [(ngModel)]="userData.password" required placeholder="{{ 'password' | translate }}"
           name="password" />
 
         <mat-error>
@@ -99,7 +99,7 @@
 
     <ion-row class="password-row">
       <mat-form-field class="full-width">
-        <input matInput type="text" [(ngModel)]="user_Data.address" required placeholder="{{ 'address' | translate }}"
+        <input matInput type="text" [(ngModel)]="userData.address" required placeholder="{{ 'address' | translate }}"
           name="address" />
 
         <mat-error>
@@ -119,7 +119,7 @@
   <ion-row class="signup-row">
     <span class="sign-up-span">
       {{ 'already_have' | translate }}?
-      <span class="sign-up-page" (click)="goto_signin()">
+      <span class="sign-up-page" (click)="gotoSignin()">
         &nbsp;{{ 'sign_in' | translate }}
       </span>
     </span>

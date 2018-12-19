@@ -26,8 +26,8 @@ import { PaymentProvider } from '../../providers/payment/payment';
 export class PaymentMethodPage {
 
 
-  public detail_Data = [];
-  public account_number = "";
+  public detailData = [];
+  public accountNumber = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
     public apiprovider: ApiproviderProvider, public translate: TranslateService, public alertCtrl: AlertController, public modalCtrl: ModalController
@@ -41,7 +41,7 @@ export class PaymentMethodPage {
   goback() {
     this.navCtrl.pop();
   }
-  goto_newPayment() {
+  gotoNewPayment() {
     let profileModal = this.modalCtrl.create(NewpaymentCheckPage);
     profileModal.onDidDismiss(data => {
       if (data == "open") {
@@ -53,29 +53,29 @@ export class PaymentMethodPage {
 
   ionicInit() {
 
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
+    if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
       this.translate.use('en');
     } else {
-      this.translate.use(localStorage.getItem("set_lng"));
+      this.translate.use(localStorage.getItem("setLang"));
     }
-    this.account_number = JSON.parse(localStorage.getItem('currentUser')).username;
+    this.accountNumber = JSON.parse(localStorage.getItem('currentUser')).username;
     let loading = this.loadingCtrl.create({
       content: "Please Wait..."
     });
     loading.present();
 
-    this.paymentService.get_paymentAvailList().subscribe(data => {
+    this.paymentService.getPaymentAvailList().subscribe(data => {
       for (let list of data) {
-        let array_sam = { "name": "", "type": "", "number": "", "expiry": "", "status": "open", "payment_id": 0 };
-        array_sam.payment_id = list.Id;
-        array_sam.name = list.AccountName;
-        array_sam.number = list.AccountNumber;
-        array_sam.type = list.PaymentMethod.Type.Description;
+        let arraySam = { "name": "", "type": "", "number": "", "expiry": "", "status": "open", "paymentId": 0 };
+        arraySam.paymentId = list.Id;
+        arraySam.name = list.AccountName;
+        arraySam.number = list.AccountNumber;
+        arraySam.type = list.PaymentMethod.Type.Description;
         if (list.ExpiryDate != null) {
-          array_sam.expiry = this.get_expiryDate(list.ExpiryDate);
+          arraySam.expiry = this.getExpiryDate(list.ExpiryDate);
         }
-        array_sam.status = list.Status.Description.replace(/ /g, '');
-        this.detail_Data.push(array_sam);
+        arraySam.status = list.Status.Description.replace(/ /g, '');
+        this.detailData.push(arraySam);
       }
       loading.dismiss();
 
@@ -92,8 +92,8 @@ export class PaymentMethodPage {
     });
     loading.present();
 
-    this.paymentService.account_paymentMethodCancel(this.detail_Data[index].payment_id).subscribe(data => {
-      this.detail_Data.splice(index, 1);
+    this.paymentService.accountPaymentMethodCancel(this.detailData[index].paymentId).subscribe(data => {
+      this.detailData.splice(index, 1);
       loading.dismiss();
     }, error => {
       console.log(error);
@@ -101,11 +101,11 @@ export class PaymentMethodPage {
     });
   }
 
-  get_expiryDate(input_val) {
-    let array_sam1 = input_val.split("T")[0];
-    let array_sam2 = array_sam1.split("-");
-    let return_val = array_sam2[1] + "/" + array_sam2[0].substr(2);
-    return return_val;
+  getExpiryDate(inputVal) {
+    let arraySam1 = inputVal.split("T")[0];
+    let arraySam2 = arraySam1.split("-");
+    let returnVal = arraySam2[1] + "/" + arraySam2[0].substr(2);
+    return returnVal;
   }
 
 }

@@ -40,7 +40,7 @@
     <ion-row class="payment-row">
       <ion-col>
         <mat-form-field>
-          <mat-select placeholder="{{ 'select' | translate }}" [formControl]="newState" [(ngModel)]="change_state.new_state" class="select-class"
+          <mat-select placeholder="{{ 'select' | translate }}" [formControl]="newState" [(ngModel)]="changeState.newState" class="select-class"
             required>
             <mat-option value="saver1">
               {{ 'saver1' | translate }}
@@ -71,7 +71,7 @@
     <ion-row class="payment-row">
       <ion-col>
         <mat-form-field>
-          <mat-select placeholder="{{ 'select' | translate }}" [formControl]="Reason" [(ngModel)]="change_state.reason" class="select-class"
+          <mat-select placeholder="{{ 'select' | translate }}" [formControl]="Reason" [(ngModel)]="changeState.reason" class="select-class"
             required>
             <mat-option value="Visa">
               {{ 'visa' | translate }}
@@ -115,7 +115,7 @@
     <ion-row class="payment-row">
       <ion-col>
         <mat-form-field class="full-width">
-          <input matInput class="payment-input" type="text" #title="ngModel" [(ngModel)]="change_state.note" placeholder="{{ 'type_here' | translate }}."
+          <input matInput class="payment-input" type="text" #title="ngModel" [(ngModel)]="changeState.note" placeholder="{{ 'type_here' | translate }}."
             name="Note" />
 
           <!-- <mat-error id="matLoginError2">

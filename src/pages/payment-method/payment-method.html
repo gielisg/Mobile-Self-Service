@@ -18,12 +18,12 @@
         <p class="header-span black-text">
           {{ 'payment_method' | translate }}
         </p>
-        <p class="payment-id">{{account_number}}</p>
+        <p class="payment-id">{{accountNumber}}</p>
       </ion-row>
     </ion-col>
     <ion-col col-3>
       <ion-row class="full-height">
-        <p class="header-span black-text" (click)="goto_newPayment()">
+        <p class="header-span black-text" (click)="gotoNewPayment()">
           +{{ 'new' | translate }}
         </p>
       </ion-row>
@@ -36,7 +36,7 @@
 <ion-content padding class="bill-content">
 
 
-  <ion-row [ngClass]="{'main-row':i == 0, 'other-row':i != 0}" *ngFor="let list of detail_Data; let i = index">
+  <ion-row [ngClass]="{'main-row':i == 0, 'other-row':i != 0}" *ngFor="let list of detailData; let i = index">
     <ion-row class="first-row">
       <ion-col col-4 class="left-col">
         <ion-row class="full-height">

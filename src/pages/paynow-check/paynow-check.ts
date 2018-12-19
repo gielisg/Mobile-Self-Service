@@ -22,7 +22,7 @@ export class PaynowCheckPage {
     console.log('ionViewDidLoad PaynowCheckPage');
   }
 
-  goto_paymenthistory() {
+  gotoPaymenthistory() {
     let data = "paynow_check";
     this.viewCtrl.dismiss();
   }

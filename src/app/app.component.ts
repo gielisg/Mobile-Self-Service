@@ -11,7 +11,6 @@ import { CallHistoryPage } from '../pages/call-history/call-history';
 import { ChangeStatusPage } from '../pages/change-status/change-status';
 import { MyDevicesPage } from '../pages/my-devices/my-devices';
 import { MyServicesPage } from '../pages/my-services/my-services';
-import { MyaccountPage } from '../pages/myaccount/myaccount';
 import { MydetailPage } from '../pages/mydetail/mydetail';
 import { NewPaymentPage } from '../pages/new-payment/new-payment';
 import { PayNowPage } from '../pages/pay-now/pay-now';
@@ -22,6 +21,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { TopUpPage } from '../pages/top-up/top-up';
 import { TopupHistoryPage } from '../pages/topup-history/topup-history';
 import { TransactionHistoryPage } from '../pages/transaction-history/transaction-history';
+import { MyaccountPage } from '../pages/myaccount/myaccount';
 
 
 import { TranslateService } from '@ngx-translate/core';
@@ -67,7 +67,7 @@ export class MyApp {
         value => {
 
           if (page.title == value) {
-            localStorage.setItem("login_infor", "");
+            localStorage.setItem("loggedUser", "");
             this.nav.setRoot(SigninPage);
           } else {
             this.nav.push(page.component);
@@ -94,8 +94,8 @@ export class MyApp {
     ];
 
     this.translate.addLangs(['en', 'ru']);
-    this.translate.setDefaultLang(localStorage.getItem('set_lng') != null ? localStorage.getItem('set_lng') : "en");
-    this.translate.use(localStorage.getItem('set_lng') != null ? localStorage.getItem('set_lng') : "en");
+    this.translate.setDefaultLang(localStorage.getItem('setLang') != null ? localStorage.getItem('setLang') : "en");
+    this.translate.use(localStorage.getItem('setLang') != null ? localStorage.getItem('setLang') : "en");
 
     for (let list of this.pages) {
       this.translate.get(list.title).subscribe(

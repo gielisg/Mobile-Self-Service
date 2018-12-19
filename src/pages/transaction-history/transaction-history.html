@@ -59,7 +59,7 @@
       <ion-col col-6 class="left-col">
         <ion-row class="full-height">
           <span class="tran-num-span">
-            {{list.tran_num}}
+            {{list.tranNum}}
           </span>
         </ion-row>
       </ion-col>
@@ -109,8 +109,8 @@
 
   </ion-row>
 
-  <ion-row class="more-full-width" *ngIf="show_moreState">
-    <button ion-button class="more-button" (click)="add_moreAction()">
+  <ion-row class="more-full-width" *ngIf="showMoreState">
+    <button ion-button class="more-button" (click)="addMoreAction()">
       {{'more' | translate}}
     </button>
   </ion-row>

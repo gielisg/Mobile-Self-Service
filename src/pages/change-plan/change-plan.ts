@@ -20,7 +20,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ChangePlanPage {
 
-  public change_state = { "new_state": "", "reason": "", "effect_date": "", "note": "" };
+  public changeState = { "newState": "", "reason": "", "effectDate": "", "note": "" };
 
   newState = new FormControl('', [Validators.required]);
 
@@ -42,22 +42,22 @@ export class ChangePlanPage {
   }
 
   completeAddCompany(comProfileForm) {
-    if (this.changeDate.valid && this.Reason.valid && this.newState.valid){
-      let data = this.change_state.new_state;
+    if (this.changeDate.valid && this.Reason.valid && this.newState.valid) {
+      let data = this.changeState.newState;
       this.viewCtrl.dismiss(data);
     }
   }
 
   ionicInit() {
-    let current_state = JSON.parse(localStorage.getItem("ChangePlanPage"));
+    let currentState = JSON.parse(localStorage.getItem("ChangePlanPage"));
 
-    this.change_state.new_state = current_state.plan;
+    this.changeState.newState = currentState.plan;
 
-    
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
+
+    if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
       this.translate.use('en');
     } else {
-      this.translate.use(localStorage.getItem("set_lng"));
+      this.translate.use(localStorage.getItem("setLang"));
     }
   }
 

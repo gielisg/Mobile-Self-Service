@@ -28,15 +28,15 @@ export class BillHistoryPage {
 
   fileTransfer: FileTransferObject = this.transfer.create();
 
-  public user_Data = { "username": "", "address": "", "email": "", "phone": "", "status": "" };
-  public send_data: any[];
+  public userData = { "username": "", "address": "", "email": "", "phone": "", "status": "" };
+  public sendData: any[];
 
 
-  public detail_Data = [];
+  public detailData = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController
     , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public transfer: FileTransfer, public file: File
-    , public translate: TranslateService, public authservice: AuthserviceProvider, public bill_service: ServiceProvider,
+    , public translate: TranslateService, public authservice: AuthserviceProvider, public billService: ServiceProvider,
     public base64: Base64) {
   }
 
@@ -55,28 +55,28 @@ export class BillHistoryPage {
     });
     loading.present();
 
-    this.bill_service.get_billList()
+    this.billService.getBillList()
 
       .subscribe(
         data => {
           if (data) {
-            
-            if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
+
+            if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
               this.translate.use('en');
             } else {
-              this.translate.use(localStorage.getItem("set_lng"));
+              this.translate.use(localStorage.getItem("setLang"));
             }
-            this.user_Data.email = localStorage.getItem("user_email");
-            this.detail_Data = Array();
+            this.userData.email = localStorage.getItem("userEmail");
+            this.detailData = Array();
             for (let list of data.Items) {
-              let array_data = { "bill_num": "", "due_date": "", "amount_owin": "" };
-              array_data.bill_num = list.Number.replace(/ /g, '');
-              array_data.amount_owin = list.AmountDue;
-              array_data.due_date = (list.DueDate.split("T")[0]);
-              this.detail_Data.push(array_data);
+              let arrayData = { "billNum": "", "dueDate": "", "amountOwin": "" };
+              arrayData.billNum = list.Number.replace(/ /g, '');
+              arrayData.amountOwin = list.AmountDue;
+              arrayData.dueDate = (list.DueDate.split("T")[0]);
+              this.detailData.push(arrayData);
 
             }
-            this.convert_billList();
+            this.convertBillList();
           }
           loading.dismiss();
         },
@@ -85,27 +85,27 @@ export class BillHistoryPage {
         });
   }
 
-  convert_billList() {
-    let sam = this.detail_Data;
-    this.detail_Data = new Array();
+  convertBillList() {
+    let sam = this.detailData;
+    this.detailData = new Array();
     for (let i = sam.length - 1; i >= 0; i--) {
-      this.detail_Data.push(sam[i]);
+      this.detailData.push(sam[i]);
     }
   }
 
-  set_date(value) {
-    let array_sam = value.split("-");
-    return array_sam[1] + "-" + array_sam[2] + "-" + array_sam[0];
+  setDate(value) {
+    let arraySam = value.split("-");
+    return arraySam[1] + "-" + arraySam[2] + "-" + arraySam[0];
   }
 
 
   download(index) {
     let status = "download_bill";
-    let bill_download = { "bill_num": "", "due_date": "", "amount_owin": "", "status": "download_bill", "index": "" };
-    bill_download.bill_num = this.detail_Data[index].bill_num;
-    bill_download.due_date = this.detail_Data[index].due_date;
-    bill_download.amount_owin = this.detail_Data[index].amount_owin;
-    bill_download.index = index;
+    let billBownload = { "billNum": "", "dueDate": "", "amountOwin": "", "status": "download_bill", "index": "" };
+    billBownload.billNum = this.detailData[index].billNum;
+    billBownload.dueDate = this.detailData[index].dueDate;
+    billBownload.amountOwin = this.detailData[index].amountOwin;
+    billBownload.index = index;
 
     let loading = this.loadingCtrl.create({
       content: "Please Wait..."
@@ -113,7 +113,7 @@ export class BillHistoryPage {
     loading.present();
 
 
-    this.bill_service.get_billFile(this.detail_Data[index].bill_num).subscribe(result => {
+    this.billService.getBillFile(this.detailData[index].billNum).subscribe(result => {
       loading.dismiss();
     }, error => {
       loading.dismiss();
@@ -161,7 +161,7 @@ export class BillHistoryPage {
     return array;
   }
 
-  download_pdf(index) {
+  downloadPdf(index) {
     const url = "http://localhost/test_php/MyPDF.pdf";
 
 
