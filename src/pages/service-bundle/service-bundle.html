@@ -29,7 +29,12 @@
   <ion-row>
     <!-- <canvas class="pie_chart_class" width=250 height=200 #barCanvas>
     </canvas> -->
-    <fusioncharts class="pie_class" [id]="id" [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat" [dataSource]="dataSource"></fusioncharts>
+    <!-- <fusioncharts class="pie_class" [id]="id" [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat" [dataSource]="dataSource"></fusioncharts> -->
+
+    <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+      [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)">
+    </canvas>
   </ion-row>
 
   <ion-row class="other-row">

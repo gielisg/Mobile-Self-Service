@@ -61,14 +61,15 @@ import { AuthserviceProvider } from '../providers/authservice/authservice';
 import { Base64 } from '@ionic-native/base64';
 
 
-import * as FusionCharts from 'fusioncharts';
-import * as Charts from 'fusioncharts/fusioncharts.charts';
-import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
-import { FusionChartsModule } from 'angular4-fusioncharts';
+// import * as FusionCharts from 'fusioncharts';
+// import * as Charts from 'fusioncharts/fusioncharts.charts';
+// import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
+// import { FusionChartsModule } from 'angular4-fusioncharts';
 import { ServiceProvider } from '../providers/service/service';
 import { PaymentProvider } from '../providers/payment/payment';
 import { SharedModule } from './share.module';
-FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
+// FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
+import { ChartsModule } from 'ng2-charts';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -109,7 +110,8 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserAnimationsModule,
     HttpModule,
     HttpClientModule,
-    FusionChartsModule,
+    ChartsModule,
+    // FusionChartsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

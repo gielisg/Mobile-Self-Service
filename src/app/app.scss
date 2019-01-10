@@ -191,10 +191,10 @@ ion-row {
 }
 
 .button-class {
-    width: 90%;
-    margin: auto;
+    width: 90% !important;
+    margin: auto !important;
     text-transform: initial;
-    border-radius: 25px;
+    border-radius: 25px !important;
     background-color: #3a83a4;
     font-weight: bold;
     color: white;
