@@ -4,26 +4,26 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header class="header-class">
+<ion-header class="header_class">
 
-  <ion-row class="header-row">
+  <ion-row class="header_row">
     <ion-col col-2>
-      <ion-row class="full-height">
-        <ion-icon name="ios-arrow-back" (click)="goback()" class="header-back-icon"></ion-icon>
+      <ion-row class="full_height">
+        <ion-icon name="ios-arrow-back" (click)="goback()" class="header_back_icon"></ion-icon>
       </ion-row>
     </ion-col>
     <ion-col col-1></ion-col>
     <ion-col col-6>
-      <ion-row class="full-height">
-        <p class="header-span black-text">
+      <ion-row class="full_height">
+        <p class="header_span">
           {{ 'payment_method' | translate }}
         </p>
-        <p class="payment-id">{{accountNumber}}</p>
+        <p class="payment_id">{{account_number}}</p>
       </ion-row>
     </ion-col>
     <ion-col col-3>
-      <ion-row class="full-height">
-        <p class="header-span black-text" (click)="gotoNewPayment()">
+      <ion-row class="full_height">
+        <p class="header_span" (click)="goto_newPayment()">
           +{{ 'new' | translate }}
         </p>
       </ion-row>
@@ -33,70 +33,70 @@
 </ion-header>
 
 
-<ion-content padding class="bill-content">
+<ion-content padding class="bill_content">
 
 
-  <ion-row [ngClass]="{'main-row':i == 0, 'other-row':i != 0}" *ngFor="let list of detailData; let i = index">
-    <ion-row class="first-row">
-      <ion-col col-4 class="left-col">
-        <ion-row class="full-height">
-          <span class="name-span">
+  <ion-row [ngClass]="{'main_row':i == 0, 'other_row':i != 0}" *ngFor="let list of detail_Data; let i = index">
+    <ion-row class="first_row">
+      <ion-col col-4 class="left_col">
+        <ion-row class="full_height">
+          <span class="name_span">
             {{ 'name' | translate }}
           </span>
-          <span class="detail-span">
+          <span class="detail_span">
             {{list.name}}
           </span>
         </ion-row>
       </ion-col>
 
       <ion-col col-4>
-        <ion-row class="full-height">
-          <span class="name-span">
+        <ion-row class="full_height">
+          <span class="name_span">
             {{ 'type' | translate }}
           </span>
-          <span class="detail-span">
+          <span class="detail_span">
             {{list.type}}
           </span>
         </ion-row>
       </ion-col>
 
-      <ion-col col-4 class="right-col">
-        <ion-row class="full-height">
-          <span class="name-span">
+      <ion-col col-4 class="right_col">
+        <ion-row class="full_height">
+          <span class="name_span">
             {{ 'number' | translate }}
           </span>
-          <span class="detail-span">
+          <span class="detail_span">
             {{list.number}}
           </span>
         </ion-row>
       </ion-col>
     </ion-row>
 
-    <ion-row class="bill-second-row">
-      <ion-col col-4 class="left-col">
-        <ion-row class="full-height">
-          <span class="name-span">
+    <ion-row class="bill_second_row">
+      <ion-col col-4 class="left_col">
+        <ion-row class="full_height">
+          <span class="name_span">
             {{ 'expiry' | translate }}
           </span>
-          <span class="detail-span">
+          <span class="detail_span">
             {{list.expiry}}
           </span>
         </ion-row>
       </ion-col>
       <ion-col col-4>
-        <ion-row class="full-height">
-          <span class="name-span">
+        <ion-row class="full_height">
+          <span class="name_span">
             {{ 'status' | translate }}
           </span>
-          <span class="detail-span">
+          <span class="detail_span">
             {{ list.status | translate }}
           </span>
         </ion-row>
       </ion-col>
 
-      <ion-col col-4 class="right-col">
-        <ion-row class="full-height">
-          <button ion-button class="down-button-class" (click)="deleteItem(i)">
+      <ion-col col-4 class="right_col">
+        <ion-row class="full_height">
+          <button ion-button class="down_button_class" (click)="deleteItem(i)">
             {{ 'delete' | translate }}
           </button>
         </ion-row>

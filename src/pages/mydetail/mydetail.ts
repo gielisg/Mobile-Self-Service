@@ -21,13 +21,13 @@ import { AuthserviceProvider } from '../../providers/authservice/authservice';
 })
 export class MydetailPage {
 
-  public userData = { "username": "", "address": "", "email": "", "phone": "", "status": "" };
+  public user_Data = { "username": "", "address": "", "email": "", "phone": "", "status": "" };
 
-  public tempData = { "email": "", "oldUserData": "", "newUserData": "", "detail": "", "status": "" };
+  public temp_Data = { "email": "", "old_userData": "", "new_userData": "", "detail": "", "status": "" };
 
-  public changeState = { "username": false, "address": false, "email": false, "phone": false };
+  public change_state = { "username": false, "address": false, "email": false, "phone": false };
 
-  public sendData: any[];
+  public send_data: any[];
   public addressList: any[];
   public phoneList: any[];
 
@@ -54,19 +54,19 @@ export class MydetailPage {
   ionicInit() {
 
 
-    console.log(localStorage.getItem("setLang"));
-    if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
+    console.log(localStorage.getItem("set_lng"));
+    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {
-      this.translate.use(localStorage.getItem("setLang"));
+      this.translate.use(localStorage.getItem("set_lng"));
     }
 
-    this.userData.email = localStorage.getItem("userEmail");
+    this.user_Data.email = localStorage.getItem("user_email");
 
-    // this.userData.email = "veerhunter127@gmail.com";
-    // this.userData.phone = "123456789";
-    // this.userData.username = "VeeRHunter";
-    // this.userData.address = "XX street, YY city, ZZ country";
+    // this.user_Data.email = "veerhunter127@gmail.com";
+    // this.user_Data.phone = "123456789";
+    // this.user_Data.username = "VeeRHunter";
+    // this.user_Data.address = "XX street, YY city, ZZ country";
 
     this.addressList = new Array();
     this.phoneList = new Array();
@@ -76,11 +76,11 @@ export class MydetailPage {
       content: "Please Wait..."
     });
     loading.present();
-    let status = "getDetail";
-    this.userData.status = status;
-    this.accountServer.getAccountDetail().subscribe(result => {
+    let status = "get_detail";
+    this.user_Data.status = status;
+    this.accountServer.get_accountDetail().subscribe(result => {
       console.log(result);
-      this.userData.username = result.FullName;
+      this.user_Data.username = result.FullName;
       for (let list of Object(result).ContactPhoneList) {
         if (list.LastUpdated != null) {
           this.phoneList.push(Date.parse(list.LastUpdated));
@@ -91,15 +91,15 @@ export class MydetailPage {
           this.addressList.push(Date.parse(list.LastUpdated));
         }
       }
-      this.userData.email = result.ContactEmailAddressList[0].EmailAddress;
+      this.user_Data.email = result.ContactEmailAddressList[0].EmailAddress;
       if (Object(result).AddressList.Items[this.getMaxvalueIndex(this.addressList)].Address2 != null) {
-        this.userData.address = Object(result).AddressList.Items[this.getMaxvalueIndex(this.addressList)].Address1 + Object(result).AddressList.Items[this.getMaxvalueIndex(this.addressList)].Address2;
+        this.user_Data.address = Object(result).AddressList.Items[this.getMaxvalueIndex(this.addressList)].Address1 + Object(result).AddressList.Items[this.getMaxvalueIndex(this.addressList)].Address2;
       } else {
-        this.userData.address = Object(result).AddressList.Items[this.getMaxvalueIndex(this.addressList)].Address1;
+        this.user_Data.address = Object(result).AddressList.Items[this.getMaxvalueIndex(this.addressList)].Address1;
       }
-      this.userData.phone = Object(result).ContactPhoneList[this.getMaxvalueIndex(this.phoneList)].Number;
-      if (this.userData.phone.length > 8) {
-        this.userData.phone = this.userData.phone.substr(this.userData.phone.length - 8);
+      this.user_Data.phone = Object(result).ContactPhoneList[this.getMaxvalueIndex(this.phoneList)].Number;
+      if (this.user_Data.phone.length > 8) {
+        this.user_Data.phone = this.user_Data.phone.substr(this.user_Data.phone.length - 8);
       }
       loading.dismiss();
     }, error => {
@@ -126,144 +126,144 @@ export class MydetailPage {
     return returnIndex;
   }
 
-  changeUser(name) {
+  change_user(name) {
     switch (name) {
       case "username":
-        if (this.currentState('username')) {
-          if (this.changeState.username) {
-            this.tempData.newUserData = this.userData.username;
-            this.tempData.detail = "username";
-            if (this.tempData.oldUserData != this.tempData.newUserData) {
-              if (this.tempData.newUserData != "") {
-                this.changeUserState();
+        if (this.current_state('username')) {
+          if (this.change_state.username) {
+            this.temp_Data.new_userData = this.user_Data.username;
+            this.temp_Data.detail = "username";
+            if (this.temp_Data.old_userData != this.temp_Data.new_userData) {
+              if (this.temp_Data.new_userData != "") {
+                this.change_userState();
               } else {
-                this.userData.username = this.tempData.oldUserData;
+                this.user_Data.username = this.temp_Data.old_userData;
               }
-              this.changeState.username = !this.changeState.username;
+              this.change_state.username = !this.change_state.username;
             } else {
-              this.changeState.username = !this.changeState.username;
+              this.change_state.username = !this.change_state.username;
             }
           } else {
-            this.tempData.oldUserData = this.userData.username;
-            this.changeState.username = !this.changeState.username;
+            this.temp_Data.old_userData = this.user_Data.username;
+            this.change_state.username = !this.change_state.username;
           }
         }
         break;
       case 'email':
-        if (this.currentState('email')) {
-          if (this.changeState.email) {
-            this.tempData.newUserData = this.userData.email;
-            this.tempData.detail = "email";
-            // if (this.tempData.oldUserData != this.tempData.newUserData) {
-            //   if (this.tempData.newUserData != "" && (this.emailFormControl.hasError('email') && !this.emailFormControl.hasError('required'))) {
-            //     this.updateEmail();
+        if (this.current_state('email')) {
+          if (this.change_state.email) {
+            this.temp_Data.new_userData = this.user_Data.email;
+            this.temp_Data.detail = "email";
+            // if (this.temp_Data.old_userData != this.temp_Data.new_userData) {
+            //   if (this.temp_Data.new_userData != "" && (this.emailFormControl.hasError('email') && !this.emailFormControl.hasError('required'))) {
+            //     this.update_email();
             //   } else {
-            //     this.userData.email = this.tempData.oldUserData;
+            //     this.user_Data.email = this.temp_Data.old_userData;
             //   }
             // }
-            this.changeState.email = !this.changeState.email;
+            this.change_state.email = !this.change_state.email;
           } else {
-            this.tempData.oldUserData = this.userData.email;
-            this.changeState.email = !this.changeState.email;
+            this.temp_Data.old_userData = this.user_Data.email;
+            this.change_state.email = !this.change_state.email;
           }
         }
         break;
       case 'address':
-        if (this.currentState('address')) {
-          if (this.changeState.address) {
-            this.tempData.newUserData = this.userData.address;
-            this.tempData.detail = "address";
-            if (this.tempData.oldUserData != this.tempData.newUserData) {
-              if (this.tempData.newUserData != "") {
-                this.updateAddress();
+        if (this.current_state('address')) {
+          if (this.change_state.address) {
+            this.temp_Data.new_userData = this.user_Data.address;
+            this.temp_Data.detail = "address";
+            if (this.temp_Data.old_userData != this.temp_Data.new_userData) {
+              if (this.temp_Data.new_userData != "") {
+                this.update_address();
               } else {
-                this.userData.address = this.tempData.oldUserData;
+                this.user_Data.address = this.temp_Data.old_userData;
               }
             }
-            this.changeState.address = !this.changeState.address;
+            this.change_state.address = !this.change_state.address;
           } else {
-            this.tempData.oldUserData = this.userData.address;
-            this.changeState.address = !this.changeState.address;
+            this.temp_Data.old_userData = this.user_Data.address;
+            this.change_state.address = !this.change_state.address;
           }
         }
         break;
       case 'phone':
-        if (this.currentState('phone')) {
-          if (this.changeState.phone) {
-            this.tempData.newUserData = this.userData.phone;
-            this.tempData.detail = "phone";
-            // if (this.tempData.oldUserData != this.tempData.newUserData) {
-            //   if (this.tempData.newUserData != null && this.phoneFormCtrl.valid) {
-            //     this.changeState.phone = false
-            //     this.updatePhone();
+        if (this.current_state('phone')) {
+          if (this.change_state.phone) {
+            this.temp_Data.new_userData = this.user_Data.phone;
+            this.temp_Data.detail = "phone";
+            // if (this.temp_Data.old_userData != this.temp_Data.new_userData) {
+            //   if (this.temp_Data.new_userData != null && this.phoneFormCtrl.valid) {
+            //     this.change_state.phone = false
+            //     this.update_phone();
             //   } else {
-            //     this.userData.phone = this.tempData.oldUserData;
+            //     this.user_Data.phone = this.temp_Data.old_userData;
             //   }
             // } else {
             // }
-            this.changeState.phone = !this.changeState.phone;
+            this.change_state.phone = !this.change_state.phone;
           } else {
-            this.tempData.oldUserData = this.userData.phone;
-            this.changeState.phone = !this.changeState.phone;
+            this.temp_Data.old_userData = this.user_Data.phone;
+            this.change_state.phone = !this.change_state.phone;
           }
         }
         break;
     }
-    console.log(this.tempData);
+    console.log(this.temp_Data);
   }
 
   completeAddCompany(comProfileForm) {
-    if (this.currentState('email') && comProfileForm.valid && this.emailFormControl.valid) {
-      if (this.changeState.email) {
-        this.tempData.newUserData = this.userData.email;
-        this.tempData.detail = "email";
-        if (this.tempData.oldUserData != this.tempData.newUserData) {
-          if (this.tempData.newUserData != "") {
-            this.updateEmail();
+    if (this.current_state('email') && comProfileForm.valid && this.emailFormControl.valid) {
+      if (this.change_state.email) {
+        this.temp_Data.new_userData = this.user_Data.email;
+        this.temp_Data.detail = "email";
+        if (this.temp_Data.old_userData != this.temp_Data.new_userData) {
+          if (this.temp_Data.new_userData != "") {
+            this.update_email();
           } else {
-            this.userData.email = this.tempData.oldUserData;
+            this.user_Data.email = this.temp_Data.old_userData;
           }
         }
-        this.changeState.email = !this.changeState.email;
+        this.change_state.email = !this.change_state.email;
       } else {
-        this.tempData.oldUserData = this.userData.email;
-        this.changeState.email = !this.changeState.email;
+        this.temp_Data.old_userData = this.user_Data.email;
+        this.change_state.email = !this.change_state.email;
       }
     }
   }
 
   changePhone() {
     if (this.phoneFormCtrl.valid) {
-      if (this.currentState('phone')) {
-        if (this.changeState.phone) {
-          this.tempData.newUserData = this.userData.phone;
-          this.tempData.detail = "phone";
-          if (this.tempData.oldUserData != this.tempData.newUserData) {
-            if (this.tempData.newUserData != null) {
-              this.updatePhone();
+      if (this.current_state('phone')) {
+        if (this.change_state.phone) {
+          this.temp_Data.new_userData = this.user_Data.phone;
+          this.temp_Data.detail = "phone";
+          if (this.temp_Data.old_userData != this.temp_Data.new_userData) {
+            if (this.temp_Data.new_userData != null) {
+              this.update_phone();
             } else {
-              this.userData.phone = this.tempData.oldUserData;
+              this.user_Data.phone = this.temp_Data.old_userData;
             }
           } else {
           }
-          this.changeState.phone = !this.changeState.phone;
+          this.change_state.phone = !this.change_state.phone;
         } else {
-          this.tempData.oldUserData = this.userData.phone;
-          this.changeState.phone = !this.changeState.phone;
+          this.temp_Data.old_userData = this.user_Data.phone;
+          this.change_state.phone = !this.change_state.phone;
         }
       }
     }
   }
 
-  updatePhone() {
+  update_phone() {
     let loading = this.loadingCtrl.create({
       content: "Please Wait..."
     });
     loading.present();
-    let status = "getDetail";
-    this.userData.status = status;
-    console.log(this.userData);
-    this.accountServer.updatePhone(this.userData.phone).subscribe(result => {
+    let status = "get_detail";
+    this.user_Data.status = status;
+    console.log(this.user_Data);
+    this.accountServer.update_phone(this.user_Data.phone).subscribe(result => {
       console.log(result);
       loading.dismiss();
     }, error => {
@@ -271,7 +271,7 @@ export class MydetailPage {
       if (error.indexOf("400") >= 0) {
         var user = this.accountServer.getLoggedUser();
         this.accountServer.login(user.username, user.password).subscribe(result => {
-          this.updatePhone();
+          this.update_phone();
         }, error => {
           loading.dismiss();
         });
@@ -282,15 +282,15 @@ export class MydetailPage {
     });
   }
 
-  updateEmail() {
+  update_email() {
     let loading = this.loadingCtrl.create({
       content: "Please Wait..."
     });
     loading.present();
-    let status = "getDetail";
-    this.userData.status = status;
-    console.log(this.userData);
-    this.accountServer.updateEmail(this.userData.email).subscribe(result => {
+    let status = "get_detail";
+    this.user_Data.status = status;
+    console.log(this.user_Data);
+    this.accountServer.update_email(this.user_Data.email).subscribe(result => {
       console.log(result);
       loading.dismiss();
     }, error => {
@@ -298,7 +298,7 @@ export class MydetailPage {
       if (error.indexOf("400") >= 0) {
         var user = this.accountServer.getLoggedUser();
         this.accountServer.login(user.username, user.password).subscribe(result => {
-          this.updateEmail();
+          this.update_email();
         }, error => {
           loading.dismiss();
         });
@@ -309,15 +309,15 @@ export class MydetailPage {
     });
   }
 
-  updateAddress() {
+  update_address() {
     let loading = this.loadingCtrl.create({
       content: "Please Wait..."
     });
     loading.present();
-    let status = "getDetail";
-    this.userData.status = status;
-    console.log(this.userData);
-    this.accountServer.updateAddress(this.userData.address).subscribe(result => {
+    let status = "get_detail";
+    this.user_Data.status = status;
+    console.log(this.user_Data);
+    this.accountServer.update_address(this.user_Data.address).subscribe(result => {
       console.log(result);
       loading.dismiss();
     }, error => {
@@ -325,7 +325,7 @@ export class MydetailPage {
       if (error.indexOf("400") >= 0) {
         var user = this.accountServer.getLoggedUser();
         this.accountServer.login(user.username, user.password).subscribe(result => {
-          this.updateAddress();
+          this.update_address();
         }, error => {
           loading.dismiss();
         });
@@ -336,18 +336,18 @@ export class MydetailPage {
     });
   }
 
-  changeUserState() {
+  change_userState() {
     let loading = this.loadingCtrl.create({
       content: "Please Wait..."
     });
     loading.present();
 
-    this.tempData.email = localStorage.getItem("userEmail");
-    let status = "changeUserinfo";
-    this.tempData.status = status;
+    this.temp_Data.email = localStorage.getItem("user_email");
+    let status = "change_userinfo";
+    this.temp_Data.status = status;
 
 
-    this.accountServer.updateName(this.userData.username).subscribe(result => {
+    this.accountServer.update_name(this.user_Data.username).subscribe(result => {
       console.log(result);
       loading.dismiss();
     }, error => {
@@ -356,7 +356,7 @@ export class MydetailPage {
       // if (error.indexOf("400") >= 0) {
       //   var user = this.accountServer.getLoggedUser();
       //   this.accountServer.login(user.username, user.password).subscribe(result => {
-      //     this.changeUserState();
+      //     this.change_userState();
       //   }, error => {
       //     loading.dismiss();
       //   });
@@ -369,41 +369,41 @@ export class MydetailPage {
 
   }
 
-  currentState(value) {
-    let returnValue = false;
+  current_state(value) {
+    let return_value = false;
     switch (value) {
       case "username":
-        if (this.changeState.address || this.changeState.email || this.changeState.phone) {
-          returnValue = false;
+        if (this.change_state.address || this.change_state.email || this.change_state.phone) {
+          return_value = false;
         } else {
-          returnValue = true;
+          return_value = true;
         }
         break;
       case "address":
-        if (this.changeState.username || this.changeState.email || this.changeState.phone) {
-          returnValue = false;
+        if (this.change_state.username || this.change_state.email || this.change_state.phone) {
+          return_value = false;
         } else {
-          returnValue = true;
+          return_value = true;
         }
         break;
       case "email":
-        if (this.changeState.address || this.changeState.username || this.changeState.phone) {
-          returnValue = false;
+        if (this.change_state.address || this.change_state.username || this.change_state.phone) {
+          return_value = false;
         } else {
-          returnValue = true;
+          return_value = true;
         }
         break;
       case "phone":
-        if (this.changeState.address || this.changeState.email || this.changeState.username) {
-          returnValue = false;
+        if (this.change_state.address || this.change_state.email || this.change_state.username) {
+          return_value = false;
         } else {
-          returnValue = true;
+          return_value = true;
         }
         break;
 
     }
 
-    return returnValue;
+    return return_value;
   }
 
 }

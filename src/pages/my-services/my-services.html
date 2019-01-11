@@ -4,17 +4,17 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header class="header-class">
+<ion-header class="header_class">
 
-    <ion-row class="header-row">
+    <ion-row class="header_row">
         <ion-col col-2>
-            <ion-row class="full-height">
+            <ion-row class="full_height">
                 <ion-icon name="md-menu" menuToggle class="header_icon"></ion-icon>
             </ion-row>
         </ion-col>
         <ion-col col-8>
-            <ion-row class="full-height">
-                <span class="header-span">
+            <ion-row class="full_height">
+                <span class="header_span">
                     {{ 'my_service' | translate }}
                 </span>
             </ion-row>
@@ -24,50 +24,50 @@
 </ion-header>
 
 
-<ion-content padding class="myservice-content">
+<ion-content padding class="myservice_content">
 
-    <ion-row class="main-row margin-top" *ngFor="let list of serviceData; let i = index">
-        <ion-row class="type-number-date">
-            <ion-col col-2 class="left-col">
-                <ion-row class="full-height">
-                    <span class="name-span">
+    <ion-row class="main_row margin_top" *ngFor="let list of service_Data; let i = index">
+        <ion-row class="type_number_date">
+            <ion-col col-2 class="left_col">
+                <ion-row class="full_height">
+                    <span class="name_span">
                         {{ 'type' | translate }}
                     </span>
-                    <span class="detail-span">
+                    <span class="detail_span">
                         {{list.type}}
                     </span>
                 </ion-row>
             </ion-col>
-            <ion-col col-3 class="center-col">
-                <ion-row class="full-height">
-                    <span class="name-span">
+            <ion-col col-3 class="center_col">
+                <ion-row class="full_height">
+                    <span class="name_span">
                         {{ 'number' | translate }}
                     </span>
-                    <span class="detail-span">
+                    <span class="detail_span">
                         {{list.number}}
                     </span>
                 </ion-row>
             </ion-col>
-            <ion-col col-7 class="right-col">
-                <ion-row class="full-height">
-                    <span class="name-span">
-                        {{ 'dueDate' | translate }}
+            <ion-col col-7 class="right_col">
+                <ion-row class="full_height">
+                    <span class="name_span">
+                        {{ 'due_date' | translate }}
                     </span>
-                    <span class="detail-span">
+                    <span class="detail_span">
                         {{list.date}}
                     </span>
                 </ion-row>
             </ion-col>
         </ion-row>
 
-        <ion-row class="type-number-date">
+        <ion-row class="type_number_date">
 
             <ion-col col-6>
-                <ion-row class="full-height">
-                    <span class="name-span">
+                <ion-row class="full_height">
+                    <span class="name_span">
                         {{ 'status' | translate }}
                     </span>
-                    <span class="detail-span">
+                    <span class="detail_span">
                         {{ list.status | translate}}
                     </span>
                 </ion-row>
@@ -76,37 +76,37 @@
             <ion-col col-1>
             </ion-col>
 
-            <ion-col col-5 class="right-col">
-                <ion-row class="full-height">
-                    <button ion-button class="mat-button change-button" (click)="changeStateService(i)">
+            <ion-col col-5 class="right_col">
+                <ion-row class="full_height">
+                    <button ion-button class="mat-button change_button" (click)="change_state(i)">
                         {{ 'change_UP' | translate }}
                     </button>
-                    <!-- <button ion-button class="mat-button change-button" *ngIf="list.changeStateService" (click)="saveState(i)">
+                    <!-- <button ion-button class="mat-button change_button" *ngIf="list.change_state" (click)="save_state(i)">
             {{ 'save' | translate }}
           </button> -->
                 </ion-row>
             </ion-col>
         </ion-row>
-        <ion-row class="type-number-date">
-            <ion-col col-6 *ngIf="!list.changePlan">
-                <ion-row class="full-height">
-                    <span class="name-span">
+        <ion-row class="type_number_date">
+            <ion-col col-6 *ngIf="!list.change_plan">
+                <ion-row class="full_height">
+                    <span class="name_span">
                         {{ 'plan' | translate }}
                     </span>
-                    <span class="detail-span" *ngIf="!list.changePlan">
+                    <span class="detail_span" *ngIf="!list.change_plan">
                         {{ list.plan | translate }}
                     </span>
                 </ion-row>
             </ion-col>
 
-            <ion-col col-6 *ngIf="list.changePlan">
-                <ion-row class="full-height">
-                    <span class="name-span">
+            <ion-col col-6 *ngIf="list.change_plan">
+                <ion-row class="full_height">
+                    <span class="name_span">
                         {{ 'plan' | translate }}
                     </span>
-                    <mat-form-field class="full-width">
+                    <mat-form-field class="matchange_plan">
 
-                        <mat-select [(ngModel)]="list.plan" class="select-class" required>
+                        <mat-select [(ngModel)]="list.plan" class="select_class" required>
 
                             <mat-option value="saver1">
                                 {{ 'saver1' | translate }}
@@ -127,83 +127,83 @@
             </ion-col>
             <ion-col col-1>
             </ion-col>
-            <ion-col col-5 class="right-col">
-                <ion-row class="full-height">
-                    <button ion-button class="mat-button change-button" (click)="changePlan(i)">
+            <ion-col col-5 class="right_col">
+                <ion-row class="full_height">
+                    <button ion-button class="mat-button change_button" (click)="change_plan(i)">
                         {{ 'change_UP' | translate }}
                     </button>
 
-                    <!-- <button ion-button class="mat-button change-button" *ngIf="list.changePlan" (click)="savePlan(i)">
+                    <!-- <button ion-button class="mat-button change_button" *ngIf="list.change_plan" (click)="save_plan(i)">
             {{ 'save' | translate }}
           </button> -->
                 </ion-row>
             </ion-col>
         </ion-row>
-        <ion-row class="bottom-image-row">
-            <ion-row class="image-full-width">
+        <ion-row class="bottom_image_row">
+            <ion-row class="image_button_row">
                 <ion-row class="">
-                    <ion-col col-3 (click)="gotoCallHistory()">
-                        <ion-row class="full-height">
-                            <ion-row class="service-iconRow">
-                                <ion-icon class="serviceDetail-icon" name="ios-call-outline"></ion-icon>
+                    <ion-col col-3 (click)="goto_callHistory()">
+                        <ion-row class="full_height">
+                            <ion-row class="service_iconRow">
+                                <ion-icon class="serviceDetail_icon" name="ios-call-outline"></ion-icon>
                             </ion-row>
                         </ion-row>
                     </ion-col>
-                    <ion-col col-3 (click)="gotoTopupHistory()">
-                        <ion-row class="full-height">
-                            <ion-row class="service-iconRow">
-                                <ion-icon class="serviceDetail-icon" name="ios-list-box-outline"></ion-icon>
+                    <ion-col col-3 (click)="goto_topupHistory()">
+                        <ion-row class="full_height">
+                            <ion-row class="service_iconRow">
+                                <ion-icon class="serviceDetail_icon" name="ios-list-box-outline"></ion-icon>
                             </ion-row>
                         </ion-row>
                     </ion-col>
-                    <ion-col col-3 (click)="gotoServiceDetail()">
-                        <ion-row class="full-height">
-                            <ion-row class="service-iconRow">
-                                <ion-icon class="serviceDetail-icon" name="ios-list-box-outline"></ion-icon>
+                    <ion-col col-3 (click)="goto_serviceDetail()">
+                        <ion-row class="full_height">
+                            <ion-row class="service_iconRow">
+                                <ion-icon class="serviceDetail_icon" name="ios-list-box-outline"></ion-icon>
                             </ion-row>
                         </ion-row>
                     </ion-col>
-                    <ion-col col-3 (click)="gotoServiceBundle()">
-                        <ion-row class="full-height">
-                            <ion-row class="service-iconRow">
-                                <ion-icon class="serviceDetail-icon" name="ios-bug-outline"></ion-icon>
+                    <ion-col col-3 (click)="goto_serviceBundle()">
+                        <ion-row class="full_height">
+                            <ion-row class="service_iconRow">
+                                <ion-icon class="serviceDetail_icon" name="ios-bug-outline"></ion-icon>
                             </ion-row>
                         </ion-row>
                     </ion-col>
                 </ion-row>
 
                 <ion-row class="">
-                    <ion-col col-3 (click)="gotoCallHistory()">
-                        <ion-row class="full-height">
-                            <ion-row class="servicespan-row">
-                                <span class="servicedetail-span">
+                    <ion-col col-3 (click)="goto_callHistory()">
+                        <ion-row class="full_height">
+                            <ion-row class="servicespan_rpw">
+                                <span class="serviceDetail_span">
                                     {{ 'call' | translate }}
                                 </span>
                             </ion-row>
                         </ion-row>
                     </ion-col>
-                    <ion-col col-3 (click)="gotoTopupHistory()">
-                        <ion-row class="full-height">
-                            <ion-row class="servicespan-row">
-                                <span class="servicedetail-span">
+                    <ion-col col-3 (click)="goto_topupHistory()">
+                        <ion-row class="full_height">
+                            <ion-row class="servicespan_rpw">
+                                <span class="serviceDetail_span">
                                     {{ 'topup' | translate }}
                                 </span>
                             </ion-row>
                         </ion-row>
                     </ion-col>
-                    <ion-col col-3 (click)="gotoServiceDetail()">
-                        <ion-row class="full-height">
-                            <ion-row class="servicespan-row">
-                                <span class="servicedetail-span">
+                    <ion-col col-3 (click)="goto_serviceDetail()">
+                        <ion-row class="full_height">
+                            <ion-row class="servicespan_rpw">
+                                <span class="serviceDetail_span">
                                     {{ 'details' | translate }}
                                 </span>
                             </ion-row>
                         </ion-row>
                     </ion-col>
-                    <ion-col col-3 (click)="gotoServiceBundle()">
-                        <ion-row class="full-height">
-                            <ion-row class="servicespan-row">
-                                <span class="servicedetail-span">
+                    <ion-col col-3 (click)="goto_serviceBundle()">
+                        <ion-row class="full_height">
+                            <ion-row class="servicespan_rpw">
+                                <span class="serviceDetail_span">
                                     {{ 'bundles' | translate }}
                                 </span>
                             </ion-row>

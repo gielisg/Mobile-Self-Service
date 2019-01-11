@@ -1,35 +1,45 @@
 page-settings {
+    .header_class {
+        background-color: white;
+        box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+    .header_row {
+        margin: auto;
+        height: 40px;
+    }
+    .header_span {
+        text-align: center;
+        margin: auto;
+        font-size: 1.8rem;
+        color: #3982a3;
+        font-weight: bold;
+    }
     .header_icon {
         margin: auto;
         font-size: 2.5rem;
     }
-    .setting-content {
+    .setting_content {
         background-color: #f3f3f3;
     }
-    .main-row {
+    .main_row {
         background-color: white;
         border-bottom: 2px solid #ddd;
         height: 50px;
     }
-    .other-row {
+    .other_row {
         background-color: white;
         height: 50px;
-        margin-top: 0px;
-        margin-bottom: 0px;
-        border: none;
-        border-radius: unset;
-        padding: 0px;
     }
-    .left-align {
+    .left_align {
         text-align: right;
     }
-    .lock-image {
+    .lock_image {
         width: 20px;
         height: 20px;
         margin: auto;
         opacity: 0.5;
     }
-    .change-password {
+    .change_password {
         margin-top: auto;
         margin-bottom: auto;
         font-size: 17px;
@@ -37,10 +47,31 @@ page-settings {
         opacity: 0.5;
         width: 100%;
     }
+    .app_version_span {
+        padding-left: 15px;
+        margin-top: auto;
+        margin-bottom: auto;
+        width: 100%;
+        opacity: 0.5;
+        font-size: 17px;
+    }
+    .app_version {
+        margin-top: auto;
+        margin-bottom: auto;
+        padding-right: 10px;
+        width: 100%;
+        opacity: 0.5;
+        font-size: 17px;
+    }
+    .select_class {
+        width: 100%;
+        max-width: 100%;
+        font-size: 1.6rem;
+    }
     .mat-select-trigger {
         margin-top: 10px;
     }
-    .sel-lng {
+    .sel_lng {
         padding-left: 10px;
     }
 }

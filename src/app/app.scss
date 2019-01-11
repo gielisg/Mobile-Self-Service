@@ -12,7 +12,6 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-// Global CSS
 ion-row {
     width: 100%;
 }
@@ -21,7 +20,7 @@ ion-row {
     margin-top: 5% !important;
 }
 
-.margin-content.content-ios {
+.margin_content.content-ios {
     margin-top: 0% !important;
 }
 
@@ -29,211 +28,8 @@ ion-row {
     margin-top: 5%;
 }
 
-.full-height {
+.full_height {
     height: 100%;
-}
-
-.full-width {
-    width: 100%;
-}
-
-.header-class {
-    background-color: white;
-    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
-}
-
-.header-back-icon {
-    margin-right: auto;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 5px;
-    font-size: 2.5rem;
-}
-
-.bill-content {
-    background-color: #fafafa;
-}
-
-.left-col {
-    text-align: left;
-}
-
-.right-col {
-    text-align: right;
-}
-
-.name-span {
-    width: 100%;
-    font-size: 1.7rem;
-    color: #3982a3;
-    font-weight: bold;
-}
-
-.payment-title-span {
-    width: 100%;
-    font-size: 1.7rem;
-    color: #3982a3;
-    font-weight: bold;
-}
-
-.detail-span {
-    width: 100%;
-    font-size: 1.7rem;
-    margin-top: 5px;
-}
-
-.down-button-class {
-    background-color: #3881a2;
-    color: white;
-    border-radius: 10px;
-    text-transform: initial;
-    width: 80%;
-    margin-left: auto;
-    height: 30px;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.button-name {
-    margin-left: -15px;
-}
-
-.non-padding {
-    padding: 0px;
-}
-
-.download-image {
-    width: 20px;
-    height: 20px;
-    margin: auto;
-    margin-right: auto;
-}
-
-.button-span-name {
-    margin: auto;
-    font-size: 1.5rem;
-}
-
-.receipt-span {
-    text-align: right;
-    font-size: 1.3rem;
-    font-weight: bold;
-    width: 100%;
-}
-
-.center-text {
-    width: 100%;
-    text-align: center;
-}
-
-.center-align {
-    text-align: center;
-}
-
-.other-row {
-    margin-top: 5%;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 5px;
-    background-color: white;
-}
-
-.password-row {
-    margin-top: 3%;
-    width: 90%;
-    margin-left: 5%;
-}
-
-.login-row {
-    margin-top: 20%;
-}
-
-.payment-id {
-    text-align: center;
-    width: 100%;
-    margin: auto;
-}
-
-.payment-row {
-    margin-top: 5%;
-}
-
-.select-class {
-    width: 100%;
-    max-width: 100%;
-    font-size: 1.6rem;
-}
-
-.button-style1 {
-    border-radius: 25px;
-    width: 100%;
-    font-weight: bold;
-    background-color: #3982a3;
-}
-
-.button-style2 {
-    border-radius: 25px;
-    width: 100%;
-    font-weight: bold;
-    background-color: #3ba464;
-}
-
-.change-button {
-    height: 25px;
-    color: white;
-    font-weight: bold;
-    background-color: #3c82a3;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: auto;
-    border-radius: 5px;
-    width: 100%;
-}
-
-.button-class {
-    width: 90% !important;
-    margin: auto !important;
-    text-transform: initial;
-    border-radius: 25px !important;
-    background-color: #3a83a4;
-    font-weight: bold;
-    color: white;
-    height: 45px;
-    font-size: 20px;
-}
-
-.image-full-width {
-    height: 100%;
-    background-color: #3c82a3;
-}
-
-.bottom-image-row {
-    position: relative;
-}
-
-.servicedetail-span {
-    margin: auto;
-    color: white;
-    text-align: center;
-    padding-bottom: 12px;
-    width: 100%;
-    font-size: 12px;
-}
-
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-}
-
-.sign-up-span {
-    margin: auto;
-    font-size: 1.5rem;
-}
-
-.sign-up-page {
-    color: blue;
-    cursor: pointer;
 }
 
 //////// Menu List
@@ -278,27 +74,18 @@ ion-row {
     margin-top: 5%;
 }
 
-.type-number-date {
-    margin-top: 3px;
-    margin-bottom: 3px;
-}
-
 /////// Normal Header
-.header-row {
+.header_row {
     margin: auto;
     height: 40px;
 }
 
-.header-span {
+.header_span {
     text-align: center;
     margin: auto;
     font-size: 1.8rem;
     color: #3982a3;
     font-weight: bold;
-}
-
-.black-text {
-    color: black;
 }
 
 .header_icon {
@@ -322,11 +109,23 @@ ion-row {
     border-bottom: unset;
 }
 
-.lng-setmode .mat-form-field-infix {
-    padding: 0;
+.lng_setmode .mat-form-field-infix {
+    padding:  0;
     border-top: unset;
     padding-bottom: .5rem;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 .mat-elevation-z0 {
     box-shadow: 0 0 0 0 rgba(0, 0, 0, .2), 0 0 0 0 rgba(0, 0, 0, .14), 0 0 0 0 rgba(0, 0, 0, .12)
@@ -586,11 +385,11 @@ ion-row {
     font-size: 18px
 }
 
+
 .mat-form-field-infix {
     padding: .5em 0;
     border-top: .84375em solid transparent
 }
-
 .mat-table {
     font-family: Roboto, "Helvetica Neue", sans-serif
 }

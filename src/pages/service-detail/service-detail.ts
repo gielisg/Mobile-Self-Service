@@ -37,10 +37,10 @@ export class ServiceDetailPage {
 
   ionicInit() {
     
-    if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
+    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {
-      this.translate.use(localStorage.getItem("setLang"));
+      this.translate.use(localStorage.getItem("set_lng"));
     }
   }
 

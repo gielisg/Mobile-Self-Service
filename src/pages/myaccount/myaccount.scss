@@ -1,47 +1,73 @@
 page-myaccount {
+    .header_class {
+        background-color: white;
+        box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+    .header_row {
+        margin: auto;
+        height: 40px;
+    }
+    .header_span {
+        text-align: center;
+        margin: auto;
+        font-size: 1.8rem;
+        color: #3982a3;
+        font-weight: bold;
+    }
     .header_icon {
         margin: auto;
         font-size: 2.5rem;
     }
-    .first-row {
+    .first_row {
         margin-top: 0%;
     }
-    .normal-margin {
+    .normal_margin {
         margin-top: 2%;
     }
-    .amount-span {
+    .amount_span {
         margin: auto;
         font-size: 1.6rem;
         font-weight: bold;
     }
-    .dollar-amount-span {
+    .dollar_amount_span {
         margin: auto;
         font-size: 2rem;
         font-weight: bold;
     }
-    .dollar-date-span {
+    .dollar_date_span {
         margin: auto;
         font-size: 1.7rem;
         font-weight: bold;
     }
-    .download-pay {
+    .download_pay {
         margin-top: 15%;
         font-size: 1.3rem !important;
     }
-    .rus-pay {
+    .rus_pay {
         margin-top: 15%;
         font-size: 1.3rem !important;
     }
-    .rus-pay ion-col {
+    .rus_pay ion-col {
         width: 100% !important;
         max-width: 100%;
         flex: unset !important;
     }
-    .button-style1 {
+    .button_row {
+        width: 100%;
+    }
+    .button_style1 {
+        border-radius: 25px;
+        width: 100%;
+        font-weight: bold;
+        background-color: #3982a3;
         height: 46px;
         color: white;
     }
-    .button-style2 {
+    .button_style2 {
+        border-radius: 25px;
+        width: 100%;
+        font-weight: bold;
+        background-color: #3ba464;
         height: 46px;
         color: white;
     }

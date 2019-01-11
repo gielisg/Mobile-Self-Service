@@ -6,7 +6,6 @@ import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { Chart } from 'chart.js';
 
 /**
  * Generated class for the ServiceBundlePage page.
@@ -35,46 +34,50 @@ export class ServiceBundlePage {
   public myJson;
 
 
-  public lineChartData: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
-    { data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C' }
-  ];
-  public lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChartOptions: any = {
-    responsive: true
+  // Pie
+  public pieChartLabels: string[] = ['Non/Usage', 'Calls', 'Data', 'SMS/MMS'];
+  public pieChartData: number[] = [500, 190, 300, 120];
+  public pieChartType: string = 'pie';
+
+  public pieChartOptions: any = {
+    // responsive: true,
+    // elements: {
+    //   point: {
+    //     radius: 1,
+    //     hitRadius: 2,
+    //     hoverRadius: 2,
+    //     hoverBorderWidth: 1
+    //   }
+    // },
+    // lineOnHover: {
+    //   enabled: true,
+    //   lineColor: '#bbb',
+    //   lineWidth: 1
+    // },
+
+    animate: true,
+    offset: 25,
+    sliceOffset: 0,
+    labelOffset: 3,
+    type: 'stacked',
+    hoveredColor: '#9fd4ff',
+    showLabels: true,
+    resizeLabels: false,
+    updateHeights: false,
+    // legend: { display: false },
+    // scales: {
+    //   xAxes: [
+    //     {
+    //       display: false
+    //     }
+    //   ],
+    //   yAxes: [
+    //     {
+    //       display: false
+    //     }
+    //   ]
+    // }
   };
-  public lineChartColors: Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    }
-  ];
-  public lineChartLegend: boolean = true;
-  public lineChartType: string = 'line';
-
-
-
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
     public apiprovider: ApiproviderProvider, public translate: TranslateService) {
@@ -115,11 +118,20 @@ export class ServiceBundlePage {
 
   ionicInit() {
 
-    if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
+    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {
-      this.translate.use(localStorage.getItem("setLang"));
+      this.translate.use(localStorage.getItem("set_lng"));
     }
+  }
+
+  // events
+  public chartClicked(e: any): void {
+    console.log(e);
+  }
+
+  public chartHovered(e: any): void {
+    console.log(e);
   }
 
 }

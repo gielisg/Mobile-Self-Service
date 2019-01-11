@@ -4,17 +4,17 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header class="header-class">
+<ion-header class="header_class">
 
-  <ion-row class="header-row">
+  <ion-row class="header_row">
     <ion-col col-2>
-      <ion-row class="full-height">
-        <ion-icon name="ios-arrow-back" (click)="goback()" class="header-back-icon"></ion-icon>
+      <ion-row class="full_height">
+        <ion-icon name="ios-arrow-back" (click)="goback()" class="header_back_icon"></ion-icon>
       </ion-row>
     </ion-col>
     <ion-col col-8>
-      <ion-row class="full-height">
-        <span class="header-span black-text">
+      <ion-row class="full_height">
+        <span class="header_span">
           {{ 'bill_history' | translate }}
         </span>
       </ion-row>
@@ -24,57 +24,57 @@
 </ion-header>
 
 
-<ion-content padding class="bill-content">
+<ion-content padding class="bill_content">
 
-  <ion-row [ngClass]="{'main-row':i == 0, 'other-row':i != 0}" *ngFor="let list of detail_Data; let i = index">
-    <ion-row class="first-row">
-      <ion-col col-6 class="left-col">
-        <ion-row class="full-height">
-          <span class="name-span">
-            {{ 'billNumber' | translate }}
+  <ion-row [ngClass]="{'main_row':i == 0, 'other_row':i != 0}" *ngFor="let list of detail_Data; let i = index">
+    <ion-row class="first_row">
+      <ion-col col-6 class="left_col">
+        <ion-row class="full_height">
+          <span class="name_span">
+            {{ 'bill_number' | translate }}
           </span>
-          <span class="detail-span">
-            {{list.billNum}}
+          <span class="detail_span">
+            {{list.bill_num}}
           </span>
         </ion-row>
       </ion-col>
 
-      <ion-col col-6 class="right-col">
-        <ion-row class="full-height">
-          <span class="name-span">
-            {{ 'dueDate' | translate }}
+      <ion-col col-6 class="right_col">
+        <ion-row class="full_height">
+          <span class="name_span">
+            {{ 'due_date' | translate }}
           </span>
-          <span class="detail-span">
-            {{list.dueDate}}
+          <span class="detail_span">
+            {{list.due_date}}
           </span>
         </ion-row>
       </ion-col>
     </ion-row>
 
-    <ion-row class="bill-second-row">
-      <ion-col col-6 class="left-col">
-        <ion-row class="full-height">
-          <span class="name-span">
-            {{ 'amountOwing' | translate }}
+    <ion-row class="bill_second_row">
+      <ion-col col-6 class="left_col">
+        <ion-row class="full_height">
+          <span class="name_span">
+            {{ 'amount_owing' | translate }}
           </span>
-          <span class="detail-span">
-            {{list.amountOwin}}
+          <span class="detail_span">
+            {{list.amount_owin}}
           </span>
         </ion-row>
       </ion-col>
 
-      <ion-col col-6 class="right-col">
-        <ion-row class="full-height">
-          <button ion-button class="down-button-class" (click)="download(i)">
-            <ion-row class="button-name">
-              <ion-col col-3 class="non-padding">
-                <ion-row class="full-height">
-                  <img src="assets/imgs/download.png" class="download-image" />
+      <ion-col col-6 class="right_col">
+        <ion-row class="full_height">
+          <button ion-button class="down_button_class"  (click)="download(i)">
+            <ion-row class="button_name">
+              <ion-col col-3 class="non_padding">
+                <ion-row class="full_height">
+                  <img src="assets/imgs/download.png" class="download_image" />
                 </ion-row>
               </ion-col>
               <ion-col col-9>
-                <ion-row class="full-height">
-                  <span class="button-span-name">
+                <ion-row class="full_height">
+                  <span class="button_span_name">
                     {{ 'download' | translate }}
                   </span>
                 </ion-row>

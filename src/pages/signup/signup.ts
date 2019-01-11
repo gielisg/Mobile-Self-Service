@@ -21,8 +21,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class SignupPage {
 
-  public userData = { "username": "", "password": "", "email": "", "phone": "", "address": "", "status": "" };
-  public confirmState: boolean;
+  public user_Data = { "username": "", "password": "", "email": "", "phone": "", "address": "", "status": "" };
+  public confirm_state: boolean;
 
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -35,7 +35,7 @@ export class SignupPage {
     Validators.required
   ]);
 
-  public sendData: any[];
+  public send_data: any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
     public apiprovider: ApiproviderProvider, public translate: TranslateService, public menu: MenuController) {
@@ -43,25 +43,25 @@ export class SignupPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignupPage');
-    this.confirmState = true;
+    this.confirm_state = true;
     this.ionicInit();
   }
 
   completeAddCompany(comProfileForm) {
     if (comProfileForm.valid && this.emailFormControl.valid) {
-      localStorage.setItem("signup_infor", JSON.stringify(this.userData));
+      localStorage.setItem("signup_infor", JSON.stringify(this.user_Data));
     }
   }
-  gotoSignin() {
+  goto_signin() {
     this.navCtrl.pop();
   }
 
   ionicInit() {
     this.menu.swipeEnable(false);
-    if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
+    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.setDefaultLang('en');
     } else {
-      this.translate.use(localStorage.getItem("setLang"));
+      this.translate.use(localStorage.getItem("set_lng"));
     }
     
   }

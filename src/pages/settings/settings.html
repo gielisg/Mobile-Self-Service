@@ -4,17 +4,17 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header class="header-class">
+<ion-header class="header_class">
 
-  <ion-row class="header-row">
+  <ion-row class="header_row">
     <ion-col col-2>
-      <ion-row class="full-height">
+      <ion-row class="full_height">
         <ion-icon name="md-menu" menuToggle class="header_icon"></ion-icon>
       </ion-row>
     </ion-col>
     <ion-col col-8>
-      <ion-row class="full-height">
-        <span class="header-span">
+      <ion-row class="full_height">
+        <span class="header_span">
           {{ 'settings' | translate }}
         </span>
       </ion-row>
@@ -24,44 +24,44 @@
 </ion-header>
 
 
-<ion-content class="setting-content">
+<ion-content class="setting_content">
 
-  <ion-row class="main-row">
+  <ion-row class="main_row">
     <ion-col col-2>
-      <ion-row class="full-height">
-        <img src="assets/imgs/lock.png" class="lock-image" alt="">
+      <ion-row class="full_height">
+        <img src="assets/imgs/lock.png" class="lock_image" alt="">
       </ion-row>
     </ion-col>
     <ion-col col-10>
-      <ion-row class="full-height" (click)="gotoChangePass()">
-        <span class="change-password">{{ 'change-password' | translate }}</span>
+      <ion-row class="full_height" (click)="goto_changePass()">
+        <span class="change_password">{{ 'change_password' | translate }}</span>
       </ion-row>
     </ion-col>
   </ion-row>
 
-  <ion-row class=" main-row">
+  <ion-row class=" main_row">
     <ion-col col-2>
-      <ion-row class="full-height">
-        <img src="assets/imgs/pin_code.png" class="lock-image" alt="">
+      <ion-row class="full_height">
+        <img src="assets/imgs/pin_code.png" class="lock_image" alt="">
       </ion-row>
     </ion-col>
     <ion-col col-10>
-      <ion-row class="full-height">
-        <span class="change-password">{{ 'change_pin' | translate }}</span>
+      <ion-row class="full_height">
+        <span class="change_password">{{ 'change_pin' | translate }}</span>
       </ion-row>
     </ion-col>
   </ion-row>
 
-  <ion-row class=" main-row">
+  <ion-row class=" main_row">
     <ion-col col-6>
-      <ion-row class="full-height">
-        <span class="change-password sel-lng">{{ 'select_language' | translate }}</span>
+      <ion-row class="full_height">
+        <span class="change_password sel_lng">{{ 'select_language' | translate }}</span>
       </ion-row>
     </ion-col>
     <ion-col col-6>
-      <ion-row class="full-height lng-setmode">
+      <ion-row class="full_height lng_setmode">
         <mat-form-field>
-          <mat-select [formControl]="selectFormControl" (change)="selectedLang()" [(ngModel)]="selectLang" class="select-class" required>
+          <mat-select [formControl]="selectFormControl" (change)="selected_lng()" [(ngModel)]="select_lng" class="select_class" required>
             <mat-option value="en">
               {{ 'english' | translate }}
             </mat-option>

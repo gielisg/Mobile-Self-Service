@@ -23,7 +23,7 @@ import { MyApp } from '../../app/app.component';
   templateUrl: 'settings.html',
 })
 export class SettingsPage {
-  public selectLang: any;
+  public select_lng: any;
 
   selectFormControl = new FormControl('', [Validators.required]);
 
@@ -37,35 +37,35 @@ export class SettingsPage {
     this.ionicInit();
   }
 
-  gotoChangePass() {
+  goto_changePass() {
     this.navCtrl.push(ChangePasswordPage);
   }
 
   ionicInit() {
 
-    if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
-      this.selectLang = "en";
+    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
+      this.select_lng = "en";
       this.translate.setDefaultLang("en");
     } else {
-      this.selectLang = localStorage.getItem("setLang");
-      this.translate.use(localStorage.getItem("setLang"));
+      this.select_lng = localStorage.getItem("set_lng");
+      this.translate.use(localStorage.getItem("set_lng"));
     }
 
   }
 
-  selectedLang() {
-    localStorage.setItem("setLang", this.selectLang);
+  selected_lng() {
+    localStorage.setItem("set_lng", this.select_lng);
     this.createUser("This is fake");
     this.ionicInit();
   }
 
   ngAfterViewChecked() {
-    this.translate.use(this.selectLang);
+    this.translate.use(this.select_lng);
     this.events.publish('user:login');
     this.cdr.detectChanges();
   }
 
-  openMenu() {
+  open_menu() {
   }
 
   createUser(user) {
@@ -74,7 +74,7 @@ export class SettingsPage {
   }
 
   ngAfterViewInit() {
-    this.translate.use(this.selectLang);
+    this.translate.use(this.select_lng);
     this.events.publish('user:login');
     this.cdr.detectChanges();
   }

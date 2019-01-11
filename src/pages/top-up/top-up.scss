@@ -1,36 +1,88 @@
 page-top-up {
-    .header-row {
+    .header_class {
+        background-color: white;
+        box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+    .header_row {
         height: 60px !important;
+    }
+    .header_span {
+        color: black;
+        font-weight: bold;
+    }
+    .header_back_icon {
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 5px;
+        font-size: 2.5rem;
+    }
+    .payment_id {
+        text-align: center;
+        width: 100%;
+        margin: auto;
+    }
+    .payment_row {
+        margin-top: 5%;
+    }
+    .payment_title_span {
+        width: 100%;
+        font-size: 1.7rem;
+        color: #3982a3;
+        font-weight: bold;
+    }
+    .select_class {
+        width: 100%;
+        max-width: 100%;
+        font-size: 1.6rem;
+    }
+    .payment_input {
+        width: 100%;
     }
     .mat-form-field {
         width: 100%;
     }
-    .button-style1 {
+    .expire_select {
+        max-width: 100%;
+        border-bottom: 1px solid #ddd;
+    }
+    .button_row {
+        width: 100%;
+    }
+    .button_style1 {
+        border-radius: 25px;
+        width: 100%;
+        font-weight: bold;
+        background-color: #3982a3;
         height: 40px;
     }
-    .button-style2 {
+    .button_style2 {
+        border-radius: 25px;
+        width: 100%;
+        font-weight: bold;
+        background-color: #3ba464;
         height: 40px;
     }
-    .topup-calender ion-col {
+    .topup_calender ion-col {
         padding: 0px;
     }
-    .topup-calender ion-datetime {
+    .topup_calender ion-datetime {
         padding-left: 0px !important;
         border-bottom: 1px solid #ddd;
     }
-    .error-border {
+    .error_border {
         border-bottom: 1px solid #f44336 !important;
     }
-    .normal-border {
+    .normal_border {
         border-bottom: 1px solid #ddd;
     }
-    .add-button {
+    .add_button {
         width: 50%;
         margin: auto;
         text-transform: initial;
         margin-top: 5%;
     }
-    .add-cancel {
+    .add_cancel {
         margin-top: 10%;
     }
     .mat-icon-button {
@@ -42,7 +94,8 @@ page-top-up {
         width: 2rem !important;
         height: 2rem !important;
     }
-    .cal-error span {
+    .mat-form-field-infix {}
+    .cal_error span {
         color: #f44336;
         font-size: 75%;
         margin-top: .66667em;

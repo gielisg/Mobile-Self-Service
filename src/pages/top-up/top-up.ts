@@ -23,10 +23,10 @@ import { TopupHistoryPage } from '../topup-history/topup-history';
 })
 export class TopUpPage {
 
-  public topData = { "topup": "", "startDate": "", "method": "" };
+  public top_Data = { "topup": "", "start_date": "", "method": "" };
 
-  public showError = false;
-  public confirmError = false;
+  public show_error = false;
+  public confirm_error = false;
 
   selType = new FormControl('', [Validators.required]);
 
@@ -43,40 +43,40 @@ export class TopUpPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TopUpPage');
     this.ionicInit();
-    this.showError = false;
+    this.show_error = false;
   }
 
   completeAddCompany(comProfileForm) {
 
-    if (this.topData.startDate != null && this.topData.startDate != "") {
-      this.showError = false;
+    if (this.top_Data.start_date != null && this.top_Data.start_date != "") {
+      this.show_error = false;
     } else {
-      this.showError = true;
+      this.show_error = true;
     }
 
-    console.log(this.showError);
-    console.log(this.topData.startDate);
-    this.confirmError = true;
+    console.log(this.show_error);
+    console.log(this.top_Data.start_date);
+    this.confirm_error = true;
 
 
-    if (comProfileForm.valid && this.setMethod.valid && this.selType.valid && this.topData.startDate != null && this.topData.startDate != "") {
-      let tempTotal = { "topup": "", "startDate": "", "method": "" };
-      tempTotal.method = this.topData.method;
-      tempTotal.topup = this.topData.topup;
-      let datetimearray = this.topData.startDate.split("T");
-      let sam = this.setDate(datetimearray[0]) + " " + this.setTime(datetimearray[1]);
-      tempTotal.startDate = sam;
-      if (localStorage.getItem("newTopup") != null) {
-        let oldData = new Array();
-        for (let list of JSON.parse(localStorage.getItem("newTopup"))) {
-          oldData.push(list);
+    if (comProfileForm.valid && this.setMethod.valid && this.selType.valid && this.top_Data.start_date != null && this.top_Data.start_date != "") {
+      let temp_total = { "topup": "", "start_date": "", "method": "" };
+      temp_total.method = this.top_Data.method;
+      temp_total.topup = this.top_Data.topup;
+      let datetimearray = this.top_Data.start_date.split("T");
+      let sam = this.set_date(datetimearray[0]) + " " + this.set_time(datetimearray[1]);
+      temp_total.start_date = sam;
+      if (localStorage.getItem("new_topup") != null) {
+        let old_data = new Array();
+        for (let list of JSON.parse(localStorage.getItem("new_topup"))) {
+          old_data.push(list);
         }
-        oldData.push(tempTotal);
-        localStorage.setItem("newTopup", JSON.stringify(oldData));
+        old_data.push(temp_total);
+        localStorage.setItem("new_topup", JSON.stringify(old_data));
       } else {
-        let newArray = new Array();
-        newArray.push(tempTotal);
-        localStorage.setItem("newTopup", JSON.stringify(newArray));
+        let new_array = new Array();
+        new_array.push(temp_total);
+        localStorage.setItem("new_topup", JSON.stringify(new_array));
       }
 
       this.navCtrl.push(TopupHistoryPage);
@@ -87,77 +87,77 @@ export class TopUpPage {
     this.navCtrl.pop();
   }
 
-  addNew() {
-    console.log(this.topData.startDate);
-    if (this.setMethod.valid && this.selType.valid && this.topData.startDate != null && this.topData.startDate != "") {
-      let tempTotal = { "topup": "", "startDate": "", "method": "" };
-      tempTotal.method = this.topData.method;
-      tempTotal.topup = this.topData.topup;
-      let datetimearray = this.topData.startDate.split("T");
-      let sam = this.setDate(datetimearray[0]) + " " + this.setTime(datetimearray[1]);
-      tempTotal.startDate = sam;
-      if (localStorage.getItem("newTopup") != null) {
-        let oldData = new Array();
-        for (let list of JSON.parse(localStorage.getItem("newTopup"))) {
-          oldData.push(list);
+  add_new() {
+    console.log(this.top_Data.start_date);
+    if (this.setMethod.valid && this.selType.valid && this.top_Data.start_date != null && this.top_Data.start_date != "") {
+      let temp_total = { "topup": "", "start_date": "", "method": "" };
+      temp_total.method = this.top_Data.method;
+      temp_total.topup = this.top_Data.topup;
+      let datetimearray = this.top_Data.start_date.split("T");
+      let sam = this.set_date(datetimearray[0]) + " " + this.set_time(datetimearray[1]);
+      temp_total.start_date = sam;
+      if (localStorage.getItem("new_topup") != null) {
+        let old_data = new Array();
+        for (let list of JSON.parse(localStorage.getItem("new_topup"))) {
+          old_data.push(list);
         }
-        oldData.push(tempTotal);
-        localStorage.setItem("newTopup", JSON.stringify(oldData));
+        old_data.push(temp_total);
+        localStorage.setItem("new_topup", JSON.stringify(old_data));
       } else {
-        let newArray = new Array();
-        newArray.push(tempTotal);
-        localStorage.setItem("newTopup", JSON.stringify(newArray));
+        let new_array = new Array();
+        new_array.push(temp_total);
+        localStorage.setItem("new_topup", JSON.stringify(new_array));
       }
-      this.topData.startDate = "";
-      this.topData.method = "";
-      this.topData.topup = "";
-      this.confirmError = false;
+      this.top_Data.start_date = "";
+      this.top_Data.method = "";
+      this.top_Data.topup = "";
+      this.confirm_error = false;
     }
   }
 
-  ionchangeDate() {
-    console.log(this.showError);
-    console.log(this.confirmError);
-    console.log(this.topData.startDate);
-    if (this.confirmError && this.topData.startDate == "") {
-      this.showError = true;
+  ionchange_date() {
+    console.log(this.show_error);
+    console.log(this.confirm_error);
+    console.log(this.top_Data.start_date);
+    if (this.confirm_error && this.top_Data.start_date == "") {
+      this.show_error = true;
     } else {
-      this.showError = false;
+      this.show_error = false;
     }
-    console.log(this.showError);
-    console.log(this.confirmError);
-    console.log(this.topData.startDate);
+    console.log(this.show_error);
+    console.log(this.confirm_error);
+    console.log(this.top_Data.start_date);
   }
 
   ionicInit() {
 
-    if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
+    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {
-      this.translate.use(localStorage.getItem("setLang"));
+      this.translate.use(localStorage.getItem("set_lng"));
     }
   }
 
-  setDate(value) {
-    let arraySam = value.split("-");
-    console.log(arraySam);
-    return arraySam[1] + "/" + arraySam[2] + "/" + arraySam[0];
+  set_date(value) {
+    let array_sam = value.split("-");
+    console.log(array_sam);
+    return array_sam[1] + "/" + array_sam[2] + "/" + array_sam[0];
   }
 
-  setTime(value) {
-    let arraySam = value.split(":");
-    console.log(arraySam);
-    let returnVal = "";
-    if (parseInt(arraySam[0]) > 12) {
-      if (parseInt(arraySam[0]) - 12 < 10) {
-        returnVal = "0" + (arraySam[0] - 12).toFixed(0) + ":" + arraySam[1] + " pm";
+  set_time(value) {
+    let array_sam = value.split(":");
+    console.log(array_sam);
+    let return_val = "";
+    if (parseInt(array_sam[0]) > 12) {
+      if (parseInt(array_sam[0]) - 12 < 10) {
+        return_val = "0" + (array_sam[0] - 12).toFixed(0) + ":" + array_sam[1] + " pm";
       } else {
-        returnVal = (arraySam[0] - 12).toFixed(0) + ":" + arraySam[1] + " pm";
+        return_val = (array_sam[0] - 12).toFixed(0) + ":" + array_sam[1] + " pm";
       }
     } else {
-      returnVal = arraySam[0] + ":" + arraySam[1] + " am";
+      return_val = array_sam[0] + ":" + array_sam[1] + " am";
     }
-    return returnVal;
+    return return_val;
   }
 
 }

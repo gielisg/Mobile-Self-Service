@@ -27,11 +27,11 @@ import { ChangeStatusPage } from '../change-status/change-status';
 })
 export class MyDevicesPage {
 
-  public deviceData = [
-    { "type": "GSM", "deviceId": "041523", "date": "12, March 2017", "status": "open", "plan": "saver1", "changeState": false, "changePlan": false },
-    { "type": "GSM", "deviceId": "245678", "date": "12, March 2017", "status": "open", "plan": "saver1", "changeState": false, "changePlan": false },
-    { "type": "GSM", "deviceId": "875482", "date": "12, March 2017", "status": "open", "plan": "saver3", "changeState": false, "changePlan": false },
-    { "type": "GSM", "deviceId": "685683", "date": "12, March 2017", "status": "open", "plan": "saver2", "changeState": false, "changePlan": false }
+  public device_Data = [
+    { "type": "GSM", "device_id": "041523", "date": "12, March 2017", "status": "open", "plan": "saver1", "change_state": false, "change_plan": false },
+    { "type": "GSM", "device_id": "245678", "date": "12, March 2017", "status": "open", "plan": "saver1", "change_state": false, "change_plan": false },
+    { "type": "GSM", "device_id": "875482", "date": "12, March 2017", "status": "open", "plan": "saver3", "change_state": false, "change_plan": false },
+    { "type": "GSM", "device_id": "685683", "date": "12, March 2017", "status": "open", "plan": "saver2", "change_state": false, "change_plan": false }
   ];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
@@ -43,65 +43,65 @@ export class MyDevicesPage {
     this.ionicInit();
   }
 
-  gotoTransactionHistory() {
+  goto_transactionHistory() {
     this.navCtrl.push(TransactionHistoryPage);
   }
 
-  gotoTopupHistory() {
+  goto_topupHistory() {
     this.navCtrl.push(TopUpPage);
   }
 
-  gotoServiceDetail() {
+  goto_serviceDetail() {
     this.navCtrl.push(ServiceDetailPage);
   }
 
-  gotoServiceBundle() {
+  goto_serviceBundle() {
     this.navCtrl.push(ServiceBundlePage);
   }
 
   ionicInit() {
 
-    if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
+    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {
-      this.translate.use(localStorage.getItem("setLang"));
+      this.translate.use(localStorage.getItem("set_lng"));
     }
   }
 
-  changeStateDevice(index) {
-    let changeData = { "index": "", "status": "" };
-    changeData.index = index;
-    changeData.status = this.deviceData[index].status;
-    localStorage.setItem("ChangeStatusPage", JSON.stringify(changeData));
+  change_state(index) {
+    let change_data = { "index": "", "status": "" };
+    change_data.index = index;
+    change_data.status = this.device_Data[index].status;
+    localStorage.setItem("ChangeStatusPage", JSON.stringify(change_data));
     let profileModal = this.modalCtrl.create(ChangeStatusPage);
     profileModal.onDidDismiss(data => {
       if (typeof (data) != "undefined" && data != "") {
-        this.deviceData[index].status = data;
+        this.device_Data[index].status = data;
       }
     });
     profileModal.present();
   }
 
-  saveState(index) {
-    this.deviceData[index].changeState = false;
+  save_state(index) {
+    this.device_Data[index].change_state = false;
   }
 
-  changePlanDevice(index) {
-    let changeData = { "index": "", "plan": "" };
-    changeData.index = index;
-    changeData.plan = this.deviceData[index].plan;
-    localStorage.setItem("ChangePlanPage", JSON.stringify(changeData));
+  change_plan(index) {
+    let change_data = { "index": "", "plan": "" };
+    change_data.index = index;
+    change_data.plan = this.device_Data[index].plan;
+    localStorage.setItem("ChangePlanPage", JSON.stringify(change_data));
     let profileModal = this.modalCtrl.create(ChangePlanPage);
     profileModal.onDidDismiss(data => {
       if (typeof (data) != "undefined" && data != "") {
-        this.deviceData[index].plan = data;
+        this.device_Data[index].plan = data;
       }
     });
     profileModal.present();
   }
 
-  savePlan(index) {
-    this.deviceData[index].changePlan = false;
+  save_plan(index) {
+    this.device_Data[index].change_plan = false;
   }
 
 }

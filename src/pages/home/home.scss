@@ -1,59 +1,74 @@
 page-home {
-    .header-class {
+    .header_class {
         background-color: #222222;
-        box-shadow: none;
     }
-    .header-span {
+    .header_row {
+        margin: auto;
+        height: 40px;
+    }
+    .header_span {
         color: white;
         text-align: left;
         margin-top: auto;
         margin-bottom: auto;
         margin-left: 5%;
+        font-size: 1.8rem;
     }
-    .first-row {
+    .first_row {
         margin-top: 10%;
     }
-    .normal-margin {
+    .normal_margin {
         margin-top: 2%;
     }
-    .amount-span {
+    .amount_span {
         margin: auto;
         font-size: 1.6rem;
         font-weight: bold;
     }
-    .dollar-amount-span {
+    .dollar_amount_span {
         margin: auto;
         font-size: 2rem;
         font-weight: bold;
     }
-    .dollar-date-span {
+    .dollar_date_span {
         margin: auto;
         font-size: 1.7rem;
         font-weight: bold;
     }
-    .download-pay {
+    .download_pay {
         margin-top: 15%;
         font-size: 1.3rem !important;
     }
-    .rus-pay {
+    .rus_pay {
         margin-top: 15%;
         font-size: 1.3rem !important;
     }
-    .rus-pay ion-col {
+    .rus_pay ion-col {
         width: 100% !important;
         max-width: 100% !important;
         flex: unset !important;
     }
+    .button_row {
+        width: 100%;
+    }
     .rus_button {
         width: 100%;
     }
-    .button-style1 {
+    .button_style1 {
+        border-radius: 25px;
+        width: 100%;
+        font-weight: bold;
+        background-color: #3982a3;
         height: 46px;
         color: white;
         text-align: center;
         margin: auto;
     }
-    .button-style2 {
+    .button_style2 {
+        border-radius: 25px;
+        width: 100%;
+        font-weight: bold;
+        background-color: #3ba464;
         height: 46px;
         color: white;
     }

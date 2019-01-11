@@ -20,7 +20,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ChangeStatusPage {
 
-  public changeState = { "newState": "", "reason": "", "effectDate": "", "note": "" };
+  public change_state = { "new_state": "", "reason": "", "effect_date": "", "note": "" };
 
   newState = new FormControl('', [Validators.required]);
 
@@ -43,7 +43,7 @@ export class ChangeStatusPage {
 
   completeAddCompany(comProfileForm) {
     if (this.newState.valid && this.Reason.valid && this.changeDate.valid) {
-      let data = this.changeState.newState;
+      let data = this.change_state.new_state;
       this.viewCtrl.dismiss(data);
     }
   }
@@ -53,13 +53,13 @@ export class ChangeStatusPage {
     let current_state = JSON.parse(localStorage.getItem("ChangeStatusPage"));
 
 
-    this.changeState.newState = current_state.status;
+    this.change_state.new_state = current_state.status;
 
-
-    if (typeof (localStorage.getItem("setLang")) == "undefined" || localStorage.getItem("setLang") == "" || localStorage.getItem("setLang") == null) {
+    
+    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
     } else {
-      this.translate.use(localStorage.getItem("setLang"));
+      this.translate.use(localStorage.getItem("set_lng"));
     }
   }
 

@@ -4,12 +4,12 @@
         <ion-row class="first_menu">
             <ion-row *ngFor="let p of pages; let i = index;" class="top_menu_content" menuClose (click)="openPage(p)">
                 <ion-col col-2 *ngIf="i != 5">
-                    <ion-row class="full-height">
+                    <ion-row class="full_height">
                         <img src="assets/imgs/{{p.image}}.png" class="menu_imageList" alt="" />
                     </ion-row>
                 </ion-col>
                 <ion-col col-8 *ngIf="i != 5">
-                    <ion-row class="full-height">
+                    <ion-row class="full_height">
                         <span class="menu_list">{{p.title}}</span>
                     </ion-row>
                 </ion-col>
@@ -18,12 +18,12 @@
         <ion-row class="second_row">
             <ion-row *ngFor="let p of bottom_pages" class="bottom_menu_content" menuClose (click)="openPage(p)">
                 <ion-col col-2>
-                    <ion-row class="full-height">
+                    <ion-row class="full_height">
                         <img src="assets/imgs/{{p.image}}.png" class="menu_imageList" alt="" />
                     </ion-row>
                 </ion-col>
                 <ion-col col-8>
-                    <ion-row class="full-height">
+                    <ion-row class="full_height">
                         <span class="menu_list">{{p.title}}</span>
                     </ion-row>
                 </ion-col>

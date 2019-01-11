@@ -1,42 +1,42 @@
-<ion-header class="header-class">
-  <ion-row class="header-row">
-    <span class="header-span">
+<ion-header class="header_class">
+  <ion-row class="header_row">
+    <span class="header_span">
       {{ 'home' | translate }}
     </span>
   </ion-row>
 </ion-header>
 
 <ion-content padding>
-  <ion-row class="first-row">
-    <ion-row class="normal-margin">
-      <span class="amount-span">
-        {{ 'amountOwing' | translate }}
+  <ion-row class="first_row">
+    <ion-row class="normal_margin">
+      <span class="amount_span">
+        {{ 'amount_owing' | translate }}
       </span>
     </ion-row>
-    <ion-row class="normal-margin">
-      <span class="dollar-amount-span">
-        ${{billData.billAmount}}
+    <ion-row class="normal_margin">
+      <span class="dollar_amount_span">
+        ${{bill_data.bill_amount}}
       </span>
     </ion-row>
-    <ion-row class="normal-margin">
-      <span class="dollar-date-span">
-        {{ 'due' | translate }} {{billData.billDate}}
+    <ion-row class="normal_margin">
+      <span class="dollar_date_span">
+        {{ 'due' | translate }} {{bill_data.bill_date}}
       </span>
     </ion-row>
   </ion-row>
-  <ion-row [ngClass]="{'download-pay':switchMode == true, 'rus-pay':switchMode == false}">
+  <ion-row [ngClass]="{'download_pay':switch_mode == true, 'rus_pay':switch_mode == false}">
     <!-- <ion-col col-1>
     </ion-col> -->
     <ion-col col-6>
-      <ion-row class="full-width">
-        <button mat-button class="button-style1" (click)="click_download()">
+      <ion-row class="button_row">
+        <button mat-button class="button_style1" (click)="click_download()">
           {{ 'download_bill' | translate }}
         </button>
       </ion-row>
     </ion-col>
     <ion-col col-6>
-      <ion-row class="full-width">
-        <button mat-button class="button-style2" (click)="gotoPayNow()">
+      <ion-row class="button_row">
+        <button mat-button class="button_style2" (click)="goto_paynow()">
           {{ 'pay_now' | translate }}
         </button>
       </ion-row>
@@ -49,8 +49,8 @@
     <ion-col col-1>
     </ion-col>
     <ion-col col-10>
-      <ion-row class="full-width">
-        <button mat-button class="button-style1" (click)="gotoMyDetail()">
+      <ion-row class="button_row">
+        <button mat-button class="button_style1" (click)="goto_mydetail()">
           {{ 'my_details' | translate }}
         </button>
       </ion-row>
@@ -59,12 +59,12 @@
     </ion-col>
   </ion-row>
 
-  <ion-row class="my-normal">
+  <ion-row class="my_normal">
     <ion-col col-1>
     </ion-col>
     <ion-col col-10>
-      <ion-row class="full-width">
-        <button mat-button class="button-style1" (click)="gotoMyAccount()">
+      <ion-row class="button_row">
+        <button mat-button class="button_style1" (click)="goto_myaccount()">
           {{ 'my_account' | translate }}
         </button>
       </ion-row>
@@ -73,12 +73,12 @@
     </ion-col>
   </ion-row>
 
-  <ion-row class="my-normal">
+  <ion-row class="my_normal">
     <ion-col col-1>
     </ion-col>
     <ion-col col-10>
-      <ion-row class="full-width">
-        <button mat-button class="button-style1" (click)="gotoMyService()">
+      <ion-row class="button_row">
+        <button mat-button class="button_style1" (click)="goto_myservice()">
           {{ 'my_services' | translate }}
         </button>
       </ion-row>
@@ -87,12 +87,12 @@
     </ion-col>
   </ion-row>
 
-  <!-- <ion-row class="my-normal">
+  <!-- <ion-row class="my_normal">
     <ion-col col-1>
     </ion-col>
     <ion-col col-10>
-      <ion-row class="full-width">
-        <button mat-button class="button-style1" (click)="gotoMyDevice()">
+      <ion-row class="button_row">
+        <button mat-button class="button_style1" (click)="goto_mydevice()">
           {{ 'my_devices' | translate }}
         </button>
       </ion-row>

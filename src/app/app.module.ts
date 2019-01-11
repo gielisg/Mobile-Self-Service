@@ -30,14 +30,14 @@ import { APP_CONFIG, AppConfig } from '../model';
 ////////api and other part.
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { MatInputModule } from '@angular/material/input';
-// import { MatButtonModule } from '@angular/material/button';
-// import { MatChipsModule } from '@angular/material/chips';
-// import { MatIconModule } from '@angular/material/icon';
-// import { MatSelectModule } from '@angular/material/select';
-// import { MatDatepickerModule } from '@angular/material/datepicker';
-// import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
-// import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 
 import { ApiproviderProvider } from '../providers/apiprovider/apiprovider';
@@ -67,7 +67,6 @@ import { Base64 } from '@ionic-native/base64';
 // import { FusionChartsModule } from 'angular4-fusioncharts';
 import { ServiceProvider } from '../providers/service/service';
 import { PaymentProvider } from '../providers/payment/payment';
-import { SharedModule } from './share.module';
 // FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 import { ChartsModule } from 'ng2-charts';
 
@@ -105,7 +104,6 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   imports: [
     BrowserModule,
-    SharedModule,
     IonicModule.forRoot(MyApp),
     BrowserAnimationsModule,
     HttpModule,
@@ -119,7 +117,7 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    // MatInputModule, MatButtonModule, MatChipsModule, MatIconModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule
+    MatInputModule, MatButtonModule, MatChipsModule, MatIconModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
