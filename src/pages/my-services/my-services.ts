@@ -4,15 +4,17 @@ import { TopupHistoryPage } from '../topup-history/topup-history';
 import { ServiceDetailPage } from '../service-detail/service-detail';
 import { ServiceBundlePage } from '../service-bundle/service-bundle';
 
-import { IonicPage, NavController, NavParams, ToastController, LoadingController, ModalController } from 'ionic-angular';
-import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 
 import { TranslateService } from '@ngx-translate/core';
 import { ChangeStatusPage } from '../change-status/change-status';
 import { ChangePlanPage } from '../change-plan/change-plan';
 import { ServiceProvider } from '../../providers/service/service';
-import { parseDate } from 'ionic-angular/util/datetime-util';
+import { AuthserviceProvider } from '../../providers/authservice/authservice';
+import { TranslateProvider } from '../../providers/translate/translate';
+import { LoadingProvider } from '../../providers/loading/loading';
+import { ToastProvider } from '../../providers/toast/toast';
 
 /**
  * Generated class for the MyServicesPage page.
@@ -35,8 +37,16 @@ export class MyServicesPage {
   ];
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
-    public apiprovider: ApiproviderProvider, public translate: TranslateService, public modalCtrl: ModalController, public serviceprovider: ServiceProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loading: LoadingProvider,
+    public toast: ToastProvider,
+    public translate: TranslateProvider,
+    public modalCtrl: ModalController,
+    public serviceprovider: ServiceProvider,
+    public authservice: AuthserviceProvider,
+  ) {
   }
 
   ionViewDidLoad() {
@@ -73,39 +83,46 @@ export class MyServicesPage {
   ionicInit() {
 
     this.service_Data = new Array();
-    let loading = this.loadingCtrl.create({
-      content: "Please Wait..."
-    });
-    loading.present();
+    this.loading.show();
 
     this.serviceprovider.get_serviceDisplay()
 
       .subscribe(
-      data => {
-        if (data) {
-          if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-            this.translate.use('en');
-          } else {
-            this.translate.use(localStorage.getItem("set_lng"));
-          }
+        data => {
+          if (data) {
+            this.translate.translaterService();
 
-          for (let list of data.Items) {
-            let array_data = { "type": "GSM", "number": "", "date": "", "status": "open", "plan": "saver1", "change_state": false, "change_plan": false };
-            array_data.type = this.get_typeSV(list.$type.split(",")[0]);
-            array_data.number = list.Number;
-            array_data.date = this.set_date(list.DueDate.split("T")[0]);
+            for (let list of data.Items) {
+              let array_data = { "type": "GSM", "number": "", "date": "", "status": "open", "plan": "saver1", "change_state": false, "change_plan": false };
+              array_data.type = this.get_typeSV(list.$type.split(",")[0]);
+              array_data.number = list.Number;
+              array_data.date = this.set_date(list.DueDate.split("T")[0]);
 
-            this.service_Data.push(array_data);
+              this.service_Data.push(array_data);
+
+            }
 
           }
+          this.loading.hide();
 
-        }
-        loading.dismiss();
-
-      },
-      error => {
-        loading.dismiss();
-      });
+        },
+        error => {
+          console.log(error);
+          let errorBody = JSON.parse(error._body);
+          console.log(errorBody);
+          if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+            this.authservice.createRandomSessionKey().subscribe(result => {
+              if (result) {
+                console.log(result);
+                this.ionicInit();
+              }
+            }, error => {
+              console.log(error);
+              this.loading.hide();
+            });
+          }
+          this.loading.hide();
+        });
   }
 
   change_state(index) {

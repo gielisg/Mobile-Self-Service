@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { FormControl, Validators } from '@angular/forms';
-import { HomePage } from '../home/home';
-import { SigninPage } from '../signin/signin';
-import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
-
-import { TranslateService } from '@ngx-translate/core';
+import { LoadingProvider } from '../../providers/loading/loading';
+import { ToastProvider } from '../../providers/toast/toast';
+import { TranslateProvider } from '../../providers/translate/translate';
 
 /**
  * Generated class for the SignupPage page.
@@ -37,8 +35,14 @@ export class SignupPage {
 
   public send_data: any[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
-    public apiprovider: ApiproviderProvider, public translate: TranslateService, public menu: MenuController) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loading: LoadingProvider,
+    public toast: ToastProvider,
+    public translate: TranslateProvider,
+    public menu: MenuController,
+  ) {
   }
 
   ionViewDidLoad() {
@@ -58,12 +62,7 @@ export class SignupPage {
 
   ionicInit() {
     this.menu.swipeEnable(false);
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-      this.translate.setDefaultLang('en');
-    } else {
-      this.translate.use(localStorage.getItem("set_lng"));
-    }
-    
+    this.translate.translaterService();
   }
 
 }

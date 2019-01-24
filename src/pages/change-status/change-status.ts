@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { FormControl, Validators } from '@angular/forms';
-import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
 
 
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateProvider } from '../../providers/translate/translate';
+import { ToastProvider } from '../../providers/toast/toast';
+import { LoadingProvider } from '../../providers/loading/loading';
 
 /**
  * Generated class for the ChangeStatusPage page.
@@ -28,8 +29,14 @@ export class ChangeStatusPage {
 
   changeDate = new FormControl('', [Validators.required]);
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
-    public apiprovider: ApiproviderProvider, public translate: TranslateService, public viewCtrl: ViewController) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loading: LoadingProvider,
+    public toast: ToastProvider,
+    public translate: TranslateProvider,
+    public viewCtrl: ViewController
+  ) {
   }
 
   ionViewDidLoad() {
@@ -54,13 +61,7 @@ export class ChangeStatusPage {
 
 
     this.change_state.new_state = current_state.status;
-
-    
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-      this.translate.use('en');
-    } else {
-      this.translate.use(localStorage.getItem("set_lng"));
-    }
+    this.translate.translaterService();
   }
 
 }

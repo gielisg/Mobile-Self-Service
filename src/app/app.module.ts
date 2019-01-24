@@ -69,6 +69,9 @@ import { ServiceProvider } from '../providers/service/service';
 import { PaymentProvider } from '../providers/payment/payment';
 // FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 import { ChartsModule } from 'ng2-charts';
+import { LoadingProvider } from '../providers/loading/loading';
+import { ToastProvider } from '../providers/toast/toast';
+import { TranslateProvider } from '../providers/translate/translate';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -157,7 +160,10 @@ export function createTranslateLoader(http: HttpClient) {
     AuthserviceProvider,
     { provide: APP_CONFIG, useValue: AppConfig },
     ServiceProvider,
-    PaymentProvider
+    PaymentProvider,
+    LoadingProvider,
+    ToastProvider,
+    TranslateProvider
   ]
 })
 export class AppModule { }

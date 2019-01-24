@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormControl, Validators } from '@angular/forms';
 
 
-import { TranslateService } from '@ngx-translate/core';
 import { AuthserviceProvider } from '../../providers/authservice/authservice';
+import { LoadingProvider } from '../../providers/loading/loading';
+import { ToastProvider } from '../../providers/toast/toast';
+import { TranslateProvider } from '../../providers/translate/translate';
 
 /**
  * Generated class for the MydetailPage page.
@@ -41,9 +42,15 @@ export class MydetailPage {
     Validators.pattern("[0-9]{8}"),
   ]);
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController
-    , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public translate: TranslateService
-    , public accountServer: AuthserviceProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loading: LoadingProvider,
+    public toasst: ToastProvider,
+    public translate: TranslateProvider,
+    public accountServer: AuthserviceProvider,
+    public authservice: AuthserviceProvider,
+  ) {
   }
 
   ionViewDidLoad() {
@@ -55,11 +62,7 @@ export class MydetailPage {
 
 
     console.log(localStorage.getItem("set_lng"));
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-      this.translate.use('en');
-    } else {
-      this.translate.use(localStorage.getItem("set_lng"));
-    }
+    this.translate.translaterService();
 
     this.user_Data.email = localStorage.getItem("user_email");
 
@@ -72,10 +75,7 @@ export class MydetailPage {
     this.phoneList = new Array();
 
 
-    let loading = this.loadingCtrl.create({
-      content: "Please Wait..."
-    });
-    loading.present();
+    this.loading.show();
     let status = "get_detail";
     this.user_Data.status = status;
     this.accountServer.get_accountDetail().subscribe(result => {
@@ -101,10 +101,24 @@ export class MydetailPage {
       if (this.user_Data.phone.length > 8) {
         this.user_Data.phone = this.user_Data.phone.substr(this.user_Data.phone.length - 8);
       }
-      loading.dismiss();
+      this.loading.hide();
     }, error => {
       console.log("error");
-      loading.dismiss();
+      console.log(error);
+      let errorBody = JSON.parse(error._body);
+      console.log(errorBody);
+      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+        this.authservice.createRandomSessionKey().subscribe(result => {
+          if (result) {
+            console.log(result);
+            this.ionicInit();
+          }
+        }, error => {
+          console.log(error);
+          this.loading.hide();
+        });
+      }
+      this.loading.hide();
     });
   }
 
@@ -256,16 +270,13 @@ export class MydetailPage {
   }
 
   update_phone() {
-    let loading = this.loadingCtrl.create({
-      content: "Please Wait..."
-    });
-    loading.present();
+    this.loading.show();
     let status = "get_detail";
     this.user_Data.status = status;
     console.log(this.user_Data);
     this.accountServer.update_phone(this.user_Data.phone).subscribe(result => {
       console.log(result);
-      loading.dismiss();
+      this.loading.hide();
     }, error => {
       console.log("error");
       if (error.indexOf("400") >= 0) {
@@ -273,26 +284,23 @@ export class MydetailPage {
         this.accountServer.login(user.username, user.password).subscribe(result => {
           this.update_phone();
         }, error => {
-          loading.dismiss();
+          this.loading.hide();
         });
       }
       else {
-        loading.dismiss();
+        this.loading.hide();
       }
     });
   }
 
   update_email() {
-    let loading = this.loadingCtrl.create({
-      content: "Please Wait..."
-    });
-    loading.present();
+    this.loading.show();
     let status = "get_detail";
     this.user_Data.status = status;
     console.log(this.user_Data);
     this.accountServer.update_email(this.user_Data.email).subscribe(result => {
       console.log(result);
-      loading.dismiss();
+      this.loading.hide();
     }, error => {
       console.log("error");
       if (error.indexOf("400") >= 0) {
@@ -300,26 +308,23 @@ export class MydetailPage {
         this.accountServer.login(user.username, user.password).subscribe(result => {
           this.update_email();
         }, error => {
-          loading.dismiss();
+          this.loading.hide();
         });
       }
       else {
-        loading.dismiss();
+        this.loading.hide();
       }
     });
   }
 
   update_address() {
-    let loading = this.loadingCtrl.create({
-      content: "Please Wait..."
-    });
-    loading.present();
+    this.loading.show();
     let status = "get_detail";
     this.user_Data.status = status;
     console.log(this.user_Data);
     this.accountServer.update_address(this.user_Data.address).subscribe(result => {
       console.log(result);
-      loading.dismiss();
+      this.loading.hide();
     }, error => {
       console.log("error");
       if (error.indexOf("400") >= 0) {
@@ -327,20 +332,17 @@ export class MydetailPage {
         this.accountServer.login(user.username, user.password).subscribe(result => {
           this.update_address();
         }, error => {
-          loading.dismiss();
+          this.loading.hide();
         });
       }
       else {
-        loading.dismiss();
+        this.loading.hide();
       }
     });
   }
 
   change_userState() {
-    let loading = this.loadingCtrl.create({
-      content: "Please Wait..."
-    });
-    loading.present();
+    this.loading.show();
 
     this.temp_Data.email = localStorage.getItem("user_email");
     let status = "change_userinfo";
@@ -349,10 +351,10 @@ export class MydetailPage {
 
     this.accountServer.update_name(this.user_Data.username).subscribe(result => {
       console.log(result);
-      loading.dismiss();
+      this.loading.hide();
     }, error => {
       console.log("error");
-      loading.dismiss();
+      this.loading.hide();
       // if (error.indexOf("400") >= 0) {
       //   var user = this.accountServer.getLoggedUser();
       //   this.accountServer.login(user.username, user.password).subscribe(result => {

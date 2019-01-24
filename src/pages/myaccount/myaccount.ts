@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { BillHistoryPage } from '../bill-history/bill-history';
 import { TransactionHistoryPage } from '../transaction-history/transaction-history';
 import { PaymentMethodPage } from '../payment-method/payment-method';
 import { PayNowPage } from '../pay-now/pay-now';
 import { FileTransferObject, FileTransfer } from '@ionic-native/file-transfer';
-import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
 import { File } from '@ionic-native/file'
 
 
-import { TranslateService } from '@ngx-translate/core';
 import { AuthserviceProvider } from '../../providers/authservice/authservice';
 import { ServiceProvider } from '../../providers/service/service';
+import { LoadingProvider } from '../../providers/loading/loading';
+import { ToastProvider } from '../../providers/toast/toast';
+import { TranslateProvider } from '../../providers/translate/translate';
 
 /**
  * Generated class for the MyaccountPage page.
@@ -32,9 +33,17 @@ export class MyaccountPage {
 
   public bill_data = { "bill_amount": "", "bill_date": "", "account_number": "" };
 
-  constructor(public navCtrl: NavController, public translate: TranslateService, public navParams: NavParams, public loadingCtrl: LoadingController
-    , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public transfer: FileTransfer, public authservice: AuthserviceProvider
-    , public file: File, public bill_service: ServiceProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public translate: TranslateProvider,
+    public navParams: NavParams,
+    public loading: LoadingProvider,
+    public toast: ToastProvider,
+    public transfer: FileTransfer,
+    public authservice: AuthserviceProvider,
+    public file: File,
+    public bill_service: ServiceProvider,
+  ) {
   }
 
   ionViewDidLoad() {
@@ -68,11 +77,7 @@ export class MyaccountPage {
 
 
       this.fileTransfer.download(url, 'file:///storage/emulated/0/Self_Service/' + 'Bill Data.pdf').then((entry) => {
-        let toast = this.toastCtrl.create({
-          message: 'download complete: ' + entry.toURL(),
-          duration: 2000
-        });
-        toast.present();
+        this.toast.show('download complete: ' + entry.toURL());
       }, (error) => {
         console.log('download failed');
       });
@@ -81,11 +86,7 @@ export class MyaccountPage {
 
       this.file.createDir('file:///storage/emulated/0/', 'Self_Service', false).then((DirectoryEntry) => {
         this.fileTransfer.download(url, 'file:///storage/emulated/0/Self_Service/' + 'Bill Data.pdf').then((entry) => {
-          let toast = this.toastCtrl.create({
-            message: 'download complete: ' + entry.toURL(),
-            duration: 2000
-          })
-          toast.present();
+          this.toast.show('download complete: ' + entry.toURL());
         }, (error) => {
           console.log('download failed');
         });
@@ -102,10 +103,8 @@ export class MyaccountPage {
   }
 
   ionicInit() {
-    let loading = this.loadingCtrl.create({
-      content: "Please Wait..."
-    });
-    loading.present();
+
+    this.loading.show();
 
     this.bill_service.get_billList()
 
@@ -115,24 +114,33 @@ export class MyaccountPage {
             this.bill_data.bill_amount = data.Items[0].AmountDue;
             this.bill_data.bill_date = this.set_date(data.Items[0].DueDate.split("T")[0]);
             this.bill_data.account_number = data.Items[0].ContactCode;
-            
-            if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-              this.translate.use('en');
+            this.translate.translaterService();
+            if (localStorage.getItem("set_lng") == "en") {
+              this.switch_mode = true;
             } else {
-              this.translate.use(localStorage.getItem("set_lng"));
-              if (localStorage.getItem("set_lng") == "en") {
-                this.switch_mode = true;
-              } else {
-                this.switch_mode = false;
-              }
+              this.switch_mode = false;
             }
 
           }
-          loading.dismiss();
+          this.loading.hide();
 
         },
         error => {
-          loading.dismiss();
+          console.log(error);
+          let errorBody = JSON.parse(error._body);
+          console.log(errorBody);
+          if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+            this.authservice.createRandomSessionKey().subscribe(result => {
+              if (result) {
+                console.log(result);
+                this.ionicInit();
+              }
+            }, error => {
+              console.log(error);
+              this.loading.hide();
+            });
+          }
+          this.loading.hide();
         });
   }
 

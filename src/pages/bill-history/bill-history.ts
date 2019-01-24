@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file'
 
-import { TranslateService } from '@ngx-translate/core';
 import { AuthserviceProvider } from '../../providers/authservice/authservice';
 import { ServiceProvider } from '../../providers/service/service';
 
-import { Base64 } from '@ionic-native/base64';
+import { LoadingProvider } from '../../providers/loading/loading';
+import { ToastProvider } from '../../providers/toast/toast';
+import { TranslateProvider } from '../../providers/translate/translate';
 
 
 /**
@@ -34,10 +34,18 @@ export class BillHistoryPage {
 
   public detail_Data = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController
-    , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public transfer: FileTransfer, public file: File
-    , public translate: TranslateService, public authservice: AuthserviceProvider, public bill_service: ServiceProvider,
-    public base64: Base64) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loading: LoadingProvider,
+    public toast: ToastProvider,
+    public transfer: FileTransfer,
+    public file: File,
+    public translate: TranslateProvider,
+    public authservice: AuthserviceProvider,
+    public bill_service: ServiceProvider,
+    public plt: Platform,
+  ) {
   }
 
   ionViewDidLoad() {
@@ -50,22 +58,14 @@ export class BillHistoryPage {
   }
 
   ionicInit() {
-    let loading = this.loadingCtrl.create({
-      content: "Please Wait..."
-    });
-    loading.present();
+    this.loading.show();
 
     this.bill_service.get_billList()
 
       .subscribe(
         data => {
           if (data) {
-            
-            if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-              this.translate.use('en');
-            } else {
-              this.translate.use(localStorage.getItem("set_lng"));
-            }
+            this.translate.translaterService();
             this.user_Data.email = localStorage.getItem("user_email");
             this.detail_Data = Array();
             for (let list of data.Items) {
@@ -78,10 +78,24 @@ export class BillHistoryPage {
             }
             this.convert_billList();
           }
-          loading.dismiss();
+          this.loading.hide();
         },
         error => {
-          loading.dismiss();
+          console.log(error);
+          let errorBody = JSON.parse(error._body);
+          console.log(errorBody);
+          if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+            this.authservice.createRandomSessionKey().subscribe(result => {
+              if (result) {
+                console.log(result);
+                this.ionicInit();
+              }
+            }, error => {
+              console.log(error);
+              this.loading.hide();
+            });
+          }
+          this.loading.hide();
         });
   }
 
@@ -100,23 +114,48 @@ export class BillHistoryPage {
 
 
   download(index) {
-    let status = "download_bill";
     let bill_download = { "bill_num": "", "due_date": "", "amount_owin": "", "status": "download_bill", "index": "" };
     bill_download.bill_num = this.detail_Data[index].bill_num;
     bill_download.due_date = this.detail_Data[index].due_date;
     bill_download.amount_owin = this.detail_Data[index].amount_owin;
     bill_download.index = index;
 
-    let loading = this.loadingCtrl.create({
-      content: "Please Wait..."
-    });
-    loading.present();
+    this.loading.show();
 
 
     this.bill_service.get_billFile(this.detail_Data[index].bill_num).subscribe(result => {
-      loading.dismiss();
+      console.log(result);
+      // console.log(result.Content.$value);
+
+      if (result.Content != null && typeof (result.Content) != "undefined") {
+        console.log("here");
+        var pdf = 'data:application/pdf;base64,' + result.Content.$value;
+        let pdfName = result.FileName;
+        console.log("here");
+        // var dlnk = document.getElementById('dwnldLnk' + index);
+        // this.downPdf.href = pdf;
+
+        // this.downPdf.click();
+        this.download_pdf(pdf, pdfName);
+        // window.open(pdf, "_blank");
+      }
+      this.loading.hide();
     }, error => {
-      loading.dismiss();
+      console.log(error);
+      let errorBody = JSON.parse(error._body);
+      console.log(errorBody);
+      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+        this.authservice.createRandomSessionKey().subscribe(result => {
+          if (result) {
+            console.log(result);
+            this.download(index);
+          }
+        }, error => {
+          console.log(error);
+          this.loading.hide();
+        });
+      }
+      this.loading.hide();
     });
   }
 
@@ -161,22 +200,44 @@ export class BillHistoryPage {
     return array;
   }
 
-  download_pdf(index) {
-    const url = "http://localhost/test_php/MyPDF.pdf";
+  download_pdf(pdf_byte, pdfName) {
 
+    // file:///storage/emulated/0/Android/data/com.self.serviceapp/files/MyPDF2.pdf
 
-    this.file.checkDir('file:///storage/emulated/0/', 'Self_Service').then((result_check) => {
+    // this.file.checkDir('file:///storage/emulated/0/', 'Self_Service').then((result_check) => {
+    //   console.log(result_check);
+    //   this.file.writeFile('file:///storage/emulated/0/Self_Service/', pdfName, this.convertBaseb64ToBlob(pdf_byte, 'data:application/pdf;base64'), { replace: true });
+    // }, (error) => {
 
+    //   this.file.createDir('file:///storage/emulated/0/', 'Self_Service', false).then((DirectoryEntry) => {
+    //     this.file.writeFile('file:///storage/emulated/0/Self_Service/', pdfName, this.convertBaseb64ToBlob(pdf_byte, 'data:application/pdf;base64'), { replace: true });
+    //   }, (error) => {
+    //     console.log("Create error");
+    //   });
+    // });
 
+    let pathDirect = "";
+    let pathFile = "";
+
+    console.log(this.file);
+
+    if (this.plt.is('android')) {
+      pathDirect = this.file.externalApplicationStorageDirectory;
+      pathFile = this.file.externalApplicationStorageDirectory + "Self_Service/";
+    } else if (this.plt.is('ios')) {
+      pathDirect = this.file.tempDirectory;
+      pathFile = this.file.tempDirectory + "Self_Service/";
+    }
+
+    this.file.checkDir(pathDirect, 'Self_Service').then((result_check) => {
+      console.log(result_check);
+      this.file.writeFile(pathFile, pdfName, this.convertBaseb64ToBlob(pdf_byte, 'data:application/pdf;base64'), { replace: true });
     }, (error) => {
-
-      this.file.createDir('file:///storage/emulated/0/', 'Self_Service', false).then((DirectoryEntry) => {
-
-
+      this.file.createDir(pathDirect, 'Self_Service', false).then((DirectoryEntry) => {
+        this.file.writeFile(pathFile, pdfName, this.convertBaseb64ToBlob(pdf_byte, 'data:application/pdf;base64'), { replace: true });
       }, (error) => {
         console.log("Create error");
       });
-
     });
   }
 

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
-import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
-
-
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateProvider } from '../../providers/translate/translate';
+import { ToastProvider } from '../../providers/toast/toast';
+import { LoadingProvider } from '../../providers/loading/loading';
 
 
 /**
@@ -33,8 +32,13 @@ export class TransactionHistoryPage {
   public transactionList: any[];
   public show_moreState: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
-    public apiprovider: ApiproviderProvider, public translate: TranslateService) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loading: LoadingProvider,
+    public toast: ToastProvider,
+    public translate: TranslateProvider,
+  ) {
   }
 
   ionViewDidLoad() {
@@ -51,12 +55,7 @@ export class TransactionHistoryPage {
     for (let list of this.set_default) {
       this.transactionList.push(list);
     }
-    
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-      this.translate.use('en');
-    } else {
-      this.translate.use(localStorage.getItem("set_lng"));
-    }
+    this.translate.translaterService();
   }
 
   add_moreAction() {
@@ -68,7 +67,7 @@ export class TransactionHistoryPage {
     } else {
       this.show_moreState = false;
     }
-    
+
     if (this.transactionList.length > 25) {
       this.show_moreState = false;
     }

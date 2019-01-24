@@ -1,10 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
-import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
-
-
-import { TranslateService } from '@ngx-translate/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoadingProvider } from '../../providers/loading/loading';
+import { ToastProvider } from '../../providers/toast/toast';
+import { TranslateProvider } from '../../providers/translate/translate';
 
 
 /**
@@ -40,21 +39,6 @@ export class ServiceBundlePage {
   public pieChartType: string = 'pie';
 
   public pieChartOptions: any = {
-    // responsive: true,
-    // elements: {
-    //   point: {
-    //     radius: 1,
-    //     hitRadius: 2,
-    //     hoverRadius: 2,
-    //     hoverBorderWidth: 1
-    //   }
-    // },
-    // lineOnHover: {
-    //   enabled: true,
-    //   lineColor: '#bbb',
-    //   lineWidth: 1
-    // },
-
     animate: true,
     offset: 25,
     sliceOffset: 0,
@@ -64,23 +48,15 @@ export class ServiceBundlePage {
     showLabels: true,
     resizeLabels: false,
     updateHeights: false,
-    // legend: { display: false },
-    // scales: {
-    //   xAxes: [
-    //     {
-    //       display: false
-    //     }
-    //   ],
-    //   yAxes: [
-    //     {
-    //       display: false
-    //     }
-    //   ]
-    // }
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
-    public apiprovider: ApiproviderProvider, public translate: TranslateService) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loading: LoadingProvider,
+    public toast: ToastProvider,
+    public translate: TranslateProvider,
+  ) {
     this.dataSource = {
       "chart": {
         "theme": "fint",
@@ -117,12 +93,7 @@ export class ServiceBundlePage {
   }
 
   ionicInit() {
-
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-      this.translate.use('en');
-    } else {
-      this.translate.use(localStorage.getItem("set_lng"));
-    }
+    this.translate.translaterService();
   }
 
   // events

@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 
-import { IonicPage, NavController, NavParams, ToastController, LoadingController, AlertController, ModalController } from 'ionic-angular';
-import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
+import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 
-
-import { TranslateService } from '@ngx-translate/core';
 
 
 import { NewPaymentPage } from '../new-payment/new-payment';
 import { NewpaymentCheckPage } from '../newpayment-check/newpayment-check';
 import { PaymentProvider } from '../../providers/payment/payment';
+import { AuthserviceProvider } from '../../providers/authservice/authservice';
+import { TranslateProvider } from '../../providers/translate/translate';
+import { ToastProvider } from '../../providers/toast/toast';
+import { LoadingProvider } from '../../providers/loading/loading';
 
 /**
  * Generated class for the PaymentMethodPage page.
@@ -29,9 +30,17 @@ export class PaymentMethodPage {
   public detail_Data = [];
   public account_number = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
-    public apiprovider: ApiproviderProvider, public translate: TranslateService, public alertCtrl: AlertController, public modalCtrl: ModalController
-    , public paymentService: PaymentProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loading: LoadingProvider,
+    public toast: ToastProvider,
+    public translate: TranslateProvider,
+    public alertCtrl: AlertController,
+    public modalCtrl: ModalController,
+    public paymentService: PaymentProvider,
+    public authservice: AuthserviceProvider,
+  ) {
   }
 
   ionViewDidLoad() {
@@ -52,17 +61,11 @@ export class PaymentMethodPage {
   }
 
   ionicInit() {
-    
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-      this.translate.use('en');
-    } else {
-      this.translate.use(localStorage.getItem("set_lng"));
-    }
+
+    this.translate.translaterService();
     this.account_number = JSON.parse(localStorage.getItem('currentUser')).username;
-    let loading = this.loadingCtrl.create({
-      content: "Please Wait..."
-    });
-    loading.present();
+
+    this.loading.show();
 
     this.paymentService.get_paymentAvailList().subscribe(data => {
       for (let list of data) {
@@ -77,27 +80,50 @@ export class PaymentMethodPage {
         array_sam.status = list.Status.Description.replace(/ /g, '');
         this.detail_Data.push(array_sam);
       }
-      loading.dismiss();
+      this.loading.hide();
 
     }, error => {
       console.log(error);
-      loading.dismiss();
+      let errorBody = JSON.parse(error._body);
+      console.log(errorBody);
+      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+        this.authservice.createRandomSessionKey().subscribe(result => {
+          if (result) {
+            console.log(result);
+            this.ionicInit();
+          }
+        }, error => {
+          console.log(error);
+          this.loading.hide();
+        });
+      }
+      this.loading.hide();
     });
   }
 
   deleteItem(index) {
 
-    let loading = this.loadingCtrl.create({
-      content: "Please Wait..."
-    });
-    loading.present();
+    this.loading.show();
 
     this.paymentService.account_paymentMethodCancel(this.detail_Data[index].payment_id).subscribe(data => {
       this.detail_Data.splice(index, 1);
-      loading.dismiss();
+      this.loading.hide();
     }, error => {
       console.log(error);
-      loading.dismiss();
+      let errorBody = JSON.parse(error._body);
+      console.log(errorBody);
+      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+        this.authservice.createRandomSessionKey().subscribe(result => {
+          if (result) {
+            console.log(result);
+            this.deleteItem(index);
+          }
+        }, error => {
+          console.log(error);
+          this.loading.hide();
+        });
+      }
+      this.loading.hide();
     });
   }
 

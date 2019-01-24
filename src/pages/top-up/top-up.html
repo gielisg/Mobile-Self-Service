@@ -27,45 +27,48 @@
 
 <ion-content padding>
 
-  <form #comProfileForm="ngForm" id="comProfileForm" (ngSubmit)="completeAddCompany(comProfileForm)" novalidate>
-    <ion-row class="payment_row">
-      <span class="payment_title_span">
-        {{ 'topup' | translate }}
-      </span>
-    </ion-row>
+  <ion-row class="main_row">
 
-    <ion-row class="payment_row">
-      <ion-col>
-        <mat-form-field>
-          <mat-select placeholder="{{ 'select' | translate }}" [formControl]="selType" [(ngModel)]="top_Data.topup" class="select_class"
-            required>
-            <mat-option value="unlimited1">
-              3GB {{ 'unlimited' | translate }}
-            </mat-option>
-            <mat-option value="unlimited2">
-              4GB {{ 'unlimited' | translate }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="selType.hasError('required')">
-            {{ 'choose_type_of_payment' | translate }}
-          </mat-error>
-        </mat-form-field>
-      </ion-col>
-    </ion-row>
+    <form #comProfileForm="ngForm" id="comProfileForm" (ngSubmit)="completeAddCompany(comProfileForm)" novalidate>
+      <ion-row class="payment_row">
+        <span class="payment_title_span">
+          {{ 'topup' | translate }}
+        </span>
+      </ion-row>
 
-    <ion-row class="payment_row">
-      <span class="payment_title_span">
-        {{ 'start_date' | translate }}
-      </span>
-    </ion-row>
+      <ion-row class="payment_row">
+        <ion-col>
+          <mat-form-field>
+            <mat-select placeholder="{{ 'select' | translate }}" [formControl]="selType" [(ngModel)]="top_Data.topup"
+              class="select_class" required>
+              <mat-option value="unlimited1">
+                3GB {{ 'unlimited' | translate }}
+              </mat-option>
+              <mat-option value="unlimited2">
+                4GB {{ 'unlimited' | translate }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="selType.hasError('required')">
+              {{ 'choose_type_of_payment' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </ion-col>
+      </ion-row>
 
-    <ion-row class="payment_row topup_calender">
-      <ion-col>
-        <!-- <mat-form-field>
+      <ion-row class="payment_row">
+        <span class="payment_title_span">
+          {{ 'start_date' | translate }}
+        </span>
+      </ion-row>
+
+      <ion-row class="payment_row topup_calender">
+        <ion-col>
+          <!-- <mat-form-field>
           <input matInput [(ngModel)]="top_Data.start_date" [matDatepicker]="myDatepicker" [formControl]="changeDate"> -->
 
-        <ion-datetime [ngClass]="{'error_border':show_error == true, 'normal_border':show_error == false}" displayFormat="MM/DD/YYYY hh:mm a" (ionChange)="ionchange_date()" [(ngModel)]="top_Data.start_date" name="start_date"></ion-datetime>
-        <!-- <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+          <ion-datetime [ngClass]="{'error_border':show_error == true, 'normal_border':show_error == false}"
+            displayFormat="MM/DD/YYYY hh:mm a" (ionChange)="ionchange_date()" [(ngModel)]="top_Data.start_date" name="start_date"></ion-datetime>
+          <!-- <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker></mat-datepicker>
 
           <mat-error *ngIf="changeDate.hasError('required')">
@@ -73,66 +76,67 @@
           </mat-error>
 
         </mat-form-field> -->
-      </ion-col>
-    </ion-row>
+        </ion-col>
+      </ion-row>
 
-    <ion-row class="cal_error" *ngIf="show_error">
-      <span>
-        {{ 'start_date_required' | translate }}
-      </span>
-    </ion-row>
+      <ion-row class="cal_error" *ngIf="show_error">
+        <span>
+          {{ 'start_date_required' | translate }}
+        </span>
+      </ion-row>
 
-    <ion-row class="payment_row">
-      <span class="payment_title_span">
-        {{ 'payment_method' | translate }}
-      </span>
-    </ion-row>
+      <ion-row class="payment_row">
+        <span class="payment_title_span">
+          {{ 'payment_method' | translate }}
+        </span>
+      </ion-row>
 
-    <ion-row class="payment_row">
-      <ion-col>
-        <mat-form-field>
-          <mat-select placeholder="{{ 'debit_card' | translate }}" [formControl]="setMethod" [(ngModel)]="top_Data.method" class="select_class"
-            required>
-            <mat-option value="Visa">
-              {{ 'visa' | translate }}
-            </mat-option>
-            <mat-option value="Paypal">
-              {{ 'paypal' | translate }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="setMethod.hasError('required')">
-            {{ 'choose_type_of_payment' | translate }}
-          </mat-error>
-        </mat-form-field>
-      </ion-col>
-    </ion-row>
+      <ion-row class="payment_row">
+        <ion-col>
+          <mat-form-field>
+            <mat-select placeholder="{{ 'debit_card' | translate }}" [formControl]="setMethod" [(ngModel)]="top_Data.method"
+              class="select_class" required>
+              <mat-option value="Visa">
+                {{ 'visa' | translate }}
+              </mat-option>
+              <mat-option value="Paypal">
+                {{ 'paypal' | translate }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="setMethod.hasError('required')">
+              {{ 'choose_type_of_payment' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </ion-col>
+      </ion-row>
 
-    <ion-row class="add_new_button">
-      <button ion-button class="button_style1 add_button" (click)="add_new()">
-        + {{ 'add_new' | translate }}
-      </button>
-    </ion-row>
+      <ion-row class="add_new_button">
+        <button ion-button class="button_style1 add_button" (click)="add_new()">
+          + {{ 'add_new' | translate }}
+        </button>
+      </ion-row>
 
-    <ion-row class="add_cancel">
-      <ion-col col-1>
-      </ion-col>
-      <ion-col col-5>
-        <ion-row class="button_row">
-          <button ion-button class="button_style1">
-            {{ 'create' | translate }}
-          </button>
-        </ion-row>
-      </ion-col>
-      <ion-col col-5>
-        <ion-row class="button_row">
-          <button ion-button class="button_style2" (click)="goback()">
-            {{ 'cancel_UP' | translate }}
-          </button>
-        </ion-row>
-      </ion-col>
-      <ion-col col-1>
-      </ion-col>
-    </ion-row>
-  </form>
+      <ion-row class="add_cancel">
+        <ion-col col-1>
+        </ion-col>
+        <ion-col col-5>
+          <ion-row class="button_row">
+            <button ion-button class="button_style1">
+              {{ 'create' | translate }}
+            </button>
+          </ion-row>
+        </ion-col>
+        <ion-col col-5>
+          <ion-row class="button_row">
+            <button ion-button class="button_style2" (click)="goback()">
+              {{ 'cancel_UP' | translate }}
+            </button>
+          </ion-row>
+        </ion-col>
+        <ion-col col-1>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-row>
 
 </ion-content>

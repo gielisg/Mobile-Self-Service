@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 
-import { IonicPage, NavController, NavParams, ToastController, LoadingController, AlertController, ModalController, ViewController } from 'ionic-angular';
-import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
+import { IonicPage, NavController, NavParams, ModalController, ViewController } from 'ionic-angular';
 
-
-import { TranslateService } from '@ngx-translate/core';
 
 import { FormControl, Validators } from '@angular/forms';
 import { PaynowCheckPage } from '../paynow-check/paynow-check';
 import { HomePage } from '../home/home';
 import { PaymentProvider } from '../../providers/payment/payment';
+import { LoadingProvider } from '../../providers/loading/loading';
+import { ToastProvider } from '../../providers/toast/toast';
+import { TranslateProvider } from '../../providers/translate/translate';
 
 /**
  * Generated class for the PayNowPage page.
@@ -32,8 +32,15 @@ export class PayNowPage {
 
   public pay_amount: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
-    public apiprovider: ApiproviderProvider, public translate: TranslateService, public modalCtrl: ModalController, public paymentService: PaymentProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loading: LoadingProvider,
+    public toast: ToastProvider,
+    public translate: TranslateProvider,
+    public modalCtrl: ModalController,
+    public paymentService: PaymentProvider,
+  ) {
   }
 
   ionViewDidLoad() {
@@ -49,12 +56,8 @@ export class PayNowPage {
   }
 
   ionicInit() {
-    
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-      this.translate.use('en');
-    } else {
-      this.translate.use(localStorage.getItem("set_lng"));
-    }
+
+    this.translate.translaterService();
 
   }
 

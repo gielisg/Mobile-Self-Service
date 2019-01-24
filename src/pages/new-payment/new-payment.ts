@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 
-import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
-import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-
-import { TranslateService } from '@ngx-translate/core';
 
 
 import { FormControl, Validators } from '@angular/forms';
 import { PayNowPage } from '../pay-now/pay-now';
 import { PaymentMethodPage } from '../payment-method/payment-method';
 import { PaymentProvider } from '../../providers/payment/payment';
+import { AuthserviceProvider } from '../../providers/authservice/authservice';
+import { TranslateProvider } from '../../providers/translate/translate';
+import { LoadingProvider } from '../../providers/loading/loading';
+import { ToastProvider } from '../../providers/toast/toast';
 
 /**
  * Generated class for the NewPaymentPage page.
@@ -38,8 +39,15 @@ export class NewPaymentPage {
 
   selExy = new FormControl('', [Validators.required]);
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
-    public apiprovider: ApiproviderProvider, public translate: TranslateService, public paymentService: PaymentProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loading: LoadingProvider,
+    public toast: ToastProvider,
+    public translate: TranslateProvider,
+    public paymentService: PaymentProvider,
+    public authservice: AuthserviceProvider,
+  ) {
   }
 
   ionViewDidLoad() {
@@ -68,28 +76,35 @@ export class NewPaymentPage {
         "expireDate": this.pay_Data.exy + "-" + this.set_twostring(this.pay_Data.exm) + "-" + new Date().getDate() + "T00:00:00"
       };
 
-      let loading = this.loadingCtrl.create({
-        content: "Please Wait..."
-      });
-      loading.present();
+      this.loading.show();
       this.paymentService.account_paymentMethodAdd(add_param).subscribe(data => {
-        loading.dismiss();
+        console.log(data);
+        this.loading.hide();
         this.navCtrl.pop();
         this.navCtrl.push(PaymentMethodPage);
       }, error => {
         console.log(error);
-        loading.dismiss();
+        let errorBody = JSON.parse(error._body);
+        console.log(errorBody);
+        if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+          this.authservice.createRandomSessionKey().subscribe(result => {
+            if (result) {
+              console.log(result);
+              this.completeAddCompany(comProfileForm);
+            }
+          }, error => {
+            console.log(error);
+            this.loading.hide();
+          });
+        }
+        this.loading.hide();
       });
     }
   }
 
   ionicInit() {
-    
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-      this.translate.use('en');
-    } else {
-      this.translate.use(localStorage.getItem("set_lng"));
-    }
+
+    this.translate.translaterService();
 
     this.userId = JSON.parse(localStorage.getItem('currentUser')).username;
 

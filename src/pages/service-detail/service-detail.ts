@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 
-import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
-import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 
-import { TranslateService } from '@ngx-translate/core';
+import { LoadingProvider } from '../../providers/loading/loading';
+import { ToastProvider } from '../../providers/toast/toast';
+import { TranslateProvider } from '../../providers/translate/translate';
 
 
 
@@ -22,8 +23,13 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ServiceDetailPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
-    public apiprovider: ApiproviderProvider, public translate: TranslateService) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loading: LoadingProvider,
+    public toast: ToastProvider,
+    public translate: TranslateProvider,
+  ) {
   }
 
   ionViewDidLoad() {
@@ -31,17 +37,12 @@ export class ServiceDetailPage {
     this.ionicInit();
   }
 
-  goback(){
+  goback() {
     this.navCtrl.pop();
   }
 
   ionicInit() {
-    
-    if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-      this.translate.use('en');
-    } else {
-      this.translate.use(localStorage.getItem("set_lng"));
-    }
+    this.translate.translaterService();
   }
 
 }

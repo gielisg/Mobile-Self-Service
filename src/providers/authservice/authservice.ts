@@ -243,4 +243,39 @@ export class AuthserviceProvider {
     return null;
   }
 
+  createRandomSessionKey() {
+
+    // const param = {
+    //   'PrivateKey': '1234567890',
+    //   'UserCode': 'webuser',
+    //   'Password': 'resubew'
+    // };
+
+    // return this.http.post(this.url_header + '/Session.svc/rest/SessionCreateByPrivateKey',
+    //   JSON.stringify(param))
+    //   .map(token => {
+    //     return (JSON.parse(JSON.parse(JSON.stringify(token))._body)).SessionKey;
+    //   })
+    //   .pipe(
+    //   );
+
+    return this.http.post(this.url_header + 'Authentication.svc/rest/AuthenticateSimpleCreateSessionAndAuthenticateContact',
+      JSON.stringify({
+        PrivateKey: this.config.WebPrivateKey,
+        DatabaseUserCode: this.config.DatabaseUserCode,
+        DatabasePassword: this.config.DatabasePassword,
+        UserCode: JSON.parse(localStorage.getItem('currentUser')).username,
+        Password: JSON.parse(localStorage.getItem('currentUser')).password
+      }))
+      .map(token => {
+        localStorage.setItem("session_key", JSON.parse(JSON.stringify(token))._body.replace(/"/g, ''));
+        return true;
+      })
+      .pipe(
+      );
+
+    // this.login(JSON.parse(localStorage.getItem('currentUser')).username, JSON.parse(localStorage.getItem('currentUser')).password);
+
+  }
+
 }

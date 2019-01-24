@@ -1,43 +1,34 @@
 page-transaction-history {
-
-    .header_class{
+    .header_class {
         background-color: white;
-        box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.3);
+        box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    .header_row{
+    .header_row {
         height: 60px !important;
     }
-    .header_span{
+    .header_span {
         color: black;
         font-weight: bold;
     }
-    .header_back_icon{
-        margin-right: auto;
-        margin-top: auto;
-        margin-bottom: auto;
-        margin-left: 5px;
-        font-size: 2.5rem;
-    }
-
-    .payment_id{
+    .payment_id {
         text-align: center;
         width: 100%;
         margin: auto;
     }
-
-    .bill_content{
+    .bill_content {
         background-color: #fafafa;
-        position: relative;
+        .bill-relative {
+            position: relative;
+        }
     }
-
-    .main_row{
+    .normal-row {
         margin-top: 0%;
         border: 1px solid #ddd;
         border-radius: 10px;
         padding: 5px;
         background-color: white;
     }
-    .other_row{
+    .other_row {
         margin-top: 5%;
         border: 1px solid #ddd;
         border-radius: 10px;
@@ -45,39 +36,39 @@ page-transaction-history {
         margin-bottom: 5%;
         background-color: white;
     }
-    .left_col{
+    .left_col {
         text-align: left;
     }
-    .right_col{
+    .right_col {
         text-align: right;
     }
-    .name_span{
+    .name_span {
         width: 100%;
         font-size: 1.7rem;
         color: #3982a3;
         font-weight: bold;
     }
-    .detail_span{
+    .detail_span {
         width: 100%;
         font-size: 1.5rem;
         margin-top: 10px;
         font-weight: bold;
     }
-    .receipt_span{
+    .receipt_span {
         text-align: center;
         font-size: 1.5rem;
         font-weight: bold;
         width: 100%;
     }
-    .tran_num_span{
+    .tran_num_span {
         font-size: 1.5rem;
         font-weight: bold;
         width: 100%;
     }
-    .right_col .detail_span{
+    .right_col .detail_span {
         font-size: 1.5rem;
     }
-    .down_button_class{
+    .down_button_class {
         background-color: #3881a2;
         color: white;
         border-radius: 10px;
@@ -88,42 +79,39 @@ page-transaction-history {
         margin-top: auto;
         margin-bottom: auto;
     }
-    .download_image{
+    .download_image {
         width: 20px;
         height: 20px;
         margin: auto;
         margin-right: auto;
     }
-    .button_span_name{
+    .button_span_name {
         margin: auto;
         font-size: 1.5rem;
     }
-    .non_padding{
+    .non_padding {
         padding: 0px;
     }
-    .button_name{
+    .button_name {
         margin-left: -15px;
     }
-
-    .date_span{
+    .date_span {
         font-size: 1.5rem;
         font-weight: bold;
         margin-left: auto;
     }
-
-    .more_button_Row{
-        position: fixed;
-        bottom: 3%;
+    .more_button_Row {
+        position: absolute;
+        bottom: 10px;
         width: 100%;
         margin-left: -16px;
-    }
-
-    .more_button{
-        width: 50%;
-        margin: auto;
-        text-transform: initial;
-        height: 30px;
-        z-index: 200;
-        border-radius: 5px;
+        .more_button {
+            width: 50%;
+            margin: auto;
+            text-transform: initial;
+            height: 30px;
+            z-index: 200;
+            border-radius: 5px;
+        }
     }
 }

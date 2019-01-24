@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ToastController, MenuController } from 'ionic-angular';
+import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { MydetailPage } from '../mydetail/mydetail';
 import { MyaccountPage } from '../myaccount/myaccount';
 import { MyServicesPage } from '../my-services/my-services';
 import { MyDevicesPage } from '../my-devices/my-devices';
 import { PayNowPage } from '../pay-now/pay-now';
-import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file'
 
-import { TranslateService } from '@ngx-translate/core';
 import { AuthserviceProvider } from '../../providers/authservice/authservice';
 import { ServiceProvider } from '../../providers/service/service';
+import { TranslateProvider } from '../../providers/translate/translate';
+import { LoadingProvider } from '../../providers/loading/loading';
+import { ToastProvider } from '../../providers/toast/toast';
 
 
 @Component({
@@ -25,10 +26,18 @@ export class HomePage {
 
   public bill_data = { "bill_amount": "", "bill_date": "" };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController
-    , public toastCtrl: ToastController, public apiprovider: ApiproviderProvider, public transfer: FileTransfer
-    , public file: File, public translate: TranslateService, public menu: MenuController, public authservice: AuthserviceProvider,
-    public bill_service: ServiceProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loading: LoadingProvider,
+    public toast: ToastProvider,
+    public transfer: FileTransfer,
+    public file: File,
+    public translate: TranslateProvider,
+    public menu: MenuController,
+    public authservice: AuthserviceProvider,
+    public bill_service: ServiceProvider,
+  ) {
 
   }
 
@@ -57,14 +66,8 @@ export class HomePage {
 
     this.file.checkDir('file:///storage/emulated/0/', 'Self_Service').then((result_check) => {
 
-
-
       this.fileTransfer.download(url, 'file:///storage/emulated/0/Self_Service/' + 'Bill Data.pdf').then((entry) => {
-        let toast = this.toastCtrl.create({
-          message: 'download complete: ' + entry.toURL(),
-          duration: 2000
-        });
-        toast.present();
+        this.toast.show('download complete: ' + entry.toURL())
       }, (error) => {
         console.log('download failed');
       });
@@ -73,11 +76,7 @@ export class HomePage {
 
       this.file.createDir('file:///storage/emulated/0/', 'Self_Service', false).then((DirectoryEntry) => {
         this.fileTransfer.download(url, 'file:///storage/emulated/0/Self_Service/' + 'Bill Data.pdf').then((entry) => {
-          let toast = this.toastCtrl.create({
-            message: 'download complete: ' + entry.toURL(),
-            duration: 2000
-          })
-          toast.present();
+          this.toast.show('download complete: ' + entry.toURL())
         }, (error) => {
           console.log('download failed');
         });
@@ -92,10 +91,8 @@ export class HomePage {
     let status = "download_bill_total";
     let bill_download = { "email": "", "due_date": "", "amount_owin": "", "status": "download_bill_total", "index": "" };
     bill_download.email = localStorage.getItem("user_email");
-    let loading = this.loadingCtrl.create({
-      content: "Please Wait..."
-    });
-    loading.present();
+
+    this.loading.show();
 
     this.bill_service.get_billList()
 
@@ -106,11 +103,24 @@ export class HomePage {
             this.bill_data.bill_date = this.set_date(data.Items[0].DueDate.split("T")[0]);
 
           }
-          loading.dismiss();
+          this.loading.hide();
 
-        },
-        error => {
-          loading.dismiss();
+        }, error => {
+          console.log(error);
+          let errorBody = JSON.parse(error._body);
+          console.log(errorBody);
+          if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+            this.authservice.createRandomSessionKey().subscribe(result => {
+              if (result) {
+                console.log(result);
+                this.click_download();
+              }
+            }, error => {
+              console.log(error);
+              this.loading.hide();
+            });
+          }
+          this.loading.hide();
         });
   }
 
@@ -121,23 +131,20 @@ export class HomePage {
   }
 
   ionicInit() {
+    this.loading.show();
 
-
-
-    let loading = this.loadingCtrl.create({
-      content: "Please Wait..."
-    });
-    loading.present();
+    console.log("data");
 
     this.bill_service.get_bill().subscribe(data => {
       if (data) {
 
+        console.log(data);
+
         this.menu.swipeEnable(true);
+        this.translate.translaterService();
         if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
-          this.translate.use('en');
           this.switch_mode = true;
         } else {
-          this.translate.use(localStorage.getItem("set_lng"));
           if (localStorage.getItem("set_lng") == "en") {
             this.switch_mode = true;
           } else {
@@ -147,12 +154,25 @@ export class HomePage {
         this.bill_data.bill_amount = data.Items[0].AmountDue;
         this.bill_data.bill_date = this.set_date(data.Items[0].DueDate.split("T")[0]);
       }
-      loading.dismiss();
+      this.loading.hide();
 
-    },
-      error => {
-        loading.dismiss();
-      });
+    }, error => {
+      console.log(error);
+      let errorBody = JSON.parse(error._body);
+      console.log(errorBody);
+      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+        this.authservice.createRandomSessionKey().subscribe(result => {
+          if (result) {
+            console.log(result);
+            this.ionicInit();
+          }
+        }, error => {
+          console.log(error);
+          this.loading.hide();
+        });
+      }
+      this.loading.hide();
+    });
   }
 
 }

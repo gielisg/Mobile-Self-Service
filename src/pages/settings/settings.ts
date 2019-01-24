@@ -1,14 +1,12 @@
-import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 
-import { IonicPage, NavController, NavParams, ToastController, LoadingController, MenuController, Events } from 'ionic-angular';
-import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';
+import { IonicPage, NavController, MenuController, Events } from 'ionic-angular';
 
 
 import { TranslateService } from '@ngx-translate/core';
 
 import { ChangePasswordPage } from '../change-password/change-password';
 import { FormControl, Validators } from '@angular/forms';
-import { MyApp } from '../../app/app.component';
 
 /**
  * Generated class for the SettingsPage page.
@@ -27,9 +25,13 @@ export class SettingsPage {
 
   selectFormControl = new FormControl('', [Validators.required]);
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public toastCtrl: ToastController,
-    public apiprovider: ApiproviderProvider, public translate: TranslateService, public cdr: ChangeDetectorRef, public menuCtrl: MenuController
-    , public events: Events) {
+  constructor(
+    public navCtrl: NavController,
+    public translate: TranslateService,
+    public cdr: ChangeDetectorRef,
+    public menuCtrl: MenuController,
+    public events: Events,
+  ) {
   }
 
   ionViewDidLoad() {
