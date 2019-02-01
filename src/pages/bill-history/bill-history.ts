@@ -138,6 +138,8 @@ export class BillHistoryPage {
         // this.downPdf.click();
         this.download_pdf(pdf, pdfName);
         // window.open(pdf, "_blank");
+      } else {
+        this.toast.show('The Bill you trying to download is unavailable at the moment. Sorry for the inconvenience. Please try again later. Please contact Support Team. Error: Bill not available to download yet.');
       }
       this.loading.hide();
     }, error => {

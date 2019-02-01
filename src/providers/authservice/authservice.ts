@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { User, APP_CONFIG, IAppConfig } from '../../model';
@@ -7,7 +7,7 @@ import { HttpClient, HttpErrorResponse } from '../../../node_modules/@angular/co
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 /*
   Generated class for the AuthserviceProvider provider.
@@ -64,7 +64,6 @@ export class AuthserviceProvider {
   }
 
   update_address(new_address): Observable<any[]> {
-    let encoded_session_Key = encodeURIComponent(localStorage.getItem("session_key"));
     let param = {
       "SessionKey": localStorage.getItem("session_key"),
       "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
@@ -157,19 +156,19 @@ export class AuthserviceProvider {
   }
 
   update_name(user_name) {
-    let param =
-    {
-      "SessionKey": encodeURIComponent(localStorage.getItem("session_key")),
-      "ContactPhone": {
-        "AreaCode": 2,
-        "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
-        "ContactPhoneType": {
-          "Code": "HP",
-        },
-        "Number": user_name,
-        "Reference": 3594,
-      }
-    }
+    // let param =
+    // {
+    //   "SessionKey": encodeURIComponent(localStorage.getItem("session_key")),
+    //   "ContactPhone": {
+    //     "AreaCode": 2,
+    //     "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
+    //     "ContactPhoneType": {
+    //       "Code": "HP",
+    //     },
+    //     "Number": user_name,
+    //     "Reference": 3594,
+    //   }
+    // }
     // return this.http.put(this.url_header + 'Account.svc/rest/Account?SessionKey=', JSON.stringify(param))
     //   .map(token => {
     //     let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
@@ -187,7 +186,7 @@ export class AuthserviceProvider {
 
     return this.http.get(this.url_header + 'Contact.svc/rest/BusinessNameUpdate?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username + "&BusinessName=" + user_name)
       .map(token => {
-        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        // let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return token;
 
       })

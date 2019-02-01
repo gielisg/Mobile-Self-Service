@@ -1,39 +1,39 @@
 page-home {
     .header_class {
         background-color: #222222;
-    }
-    .header_row {
-        margin: auto;
-        height: 40px;
-    }
-    .header_span {
-        color: white;
-        text-align: left;
-        margin-top: auto;
-        margin-bottom: auto;
-        margin-left: 5%;
-        font-size: 1.8rem;
+        .header_row {
+            margin: auto;
+            height: 40px;
+            .header_span {
+                color: white;
+                text-align: left;
+                margin-top: auto;
+                margin-bottom: auto;
+                margin-left: 5%;
+                font-size: 1.8rem;
+            }
+        }
     }
     .first_row {
         margin-top: 10%;
-    }
-    .normal_margin {
-        margin-top: 2%;
-    }
-    .amount_span {
-        margin: auto;
-        font-size: 1.6rem;
-        font-weight: bold;
-    }
-    .dollar_amount_span {
-        margin: auto;
-        font-size: 2rem;
-        font-weight: bold;
-    }
-    .dollar_date_span {
-        margin: auto;
-        font-size: 1.7rem;
-        font-weight: bold;
+        .normal_margin {
+            margin-top: 2%;
+            .amount_span {
+                margin: auto;
+                font-size: 1.6rem;
+                font-weight: bold;
+            }
+            .dollar_amount_span {
+                margin: auto;
+                font-size: 2rem;
+                font-weight: bold;
+            }
+            .dollar_date_span {
+                margin: auto;
+                font-size: 1.7rem;
+                font-weight: bold;
+            }
+        }
     }
     .download_pay {
         margin-top: 15%;
@@ -50,27 +50,24 @@ page-home {
     }
     .button_row {
         width: 100%;
-    }
-    .rus_button {
-        width: 100%;
-    }
-    .button_style1 {
-        border-radius: 25px;
-        width: 100%;
-        font-weight: bold;
-        background-color: #3982a3;
-        height: 46px;
-        color: white;
-        text-align: center;
-        margin: auto;
-    }
-    .button_style2 {
-        border-radius: 25px;
-        width: 100%;
-        font-weight: bold;
-        background-color: #3ba464;
-        height: 46px;
-        color: white;
+        .button_style1 {
+            border-radius: 25px;
+            width: 100%;
+            font-weight: bold;
+            background-color: #3982a3;
+            height: 46px;
+            color: white;
+            text-align: center;
+            margin: auto;
+        }
+        .button_style2 {
+            border-radius: 25px;
+            width: 100%;
+            font-weight: bold;
+            background-color: #3ba464;
+            height: 46px;
+            color: white;
+        }
     }
     .my_detail {
         margin-top: 10%;

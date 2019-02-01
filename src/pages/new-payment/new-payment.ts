@@ -5,7 +5,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 
 import { FormControl, Validators } from '@angular/forms';
-import { PayNowPage } from '../pay-now/pay-now';
 import { PaymentMethodPage } from '../payment-method/payment-method';
 import { PaymentProvider } from '../../providers/payment/payment';
 import { AuthserviceProvider } from '../../providers/authservice/authservice';

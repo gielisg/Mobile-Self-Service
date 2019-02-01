@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController, ModalController } from 'ionic-angular';
 import { TransactionHistoryPage } from '../transaction-history/transaction-history';
-import { TopupHistoryPage } from '../topup-history/topup-history';
 import { ServiceDetailPage } from '../service-detail/service-detail';
 import { ServiceBundlePage } from '../service-bundle/service-bundle';
 import { ApiproviderProvider } from '../../providers/apiprovider/apiprovider';

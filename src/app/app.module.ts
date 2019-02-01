@@ -36,8 +36,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
-import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 import { ApiproviderProvider } from '../providers/apiprovider/apiprovider';
@@ -49,7 +48,7 @@ import { File } from '@ionic-native/file'
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpModule, Http } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { PaynowCheckPage } from '../pages/paynow-check/paynow-check';

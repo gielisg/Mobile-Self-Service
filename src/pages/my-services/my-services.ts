@@ -7,7 +7,6 @@ import { ServiceBundlePage } from '../service-bundle/service-bundle';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 
-import { TranslateService } from '@ngx-translate/core';
 import { ChangeStatusPage } from '../change-status/change-status';
 import { ChangePlanPage } from '../change-plan/change-plan';
 import { ServiceProvider } from '../../providers/service/service';
@@ -85,44 +84,40 @@ export class MyServicesPage {
     this.service_Data = new Array();
     this.loading.show();
 
-    this.serviceprovider.get_serviceDisplay()
+    this.serviceprovider.get_serviceDisplay().subscribe(data => {
+      if (data) {
+        this.translate.translaterService();
 
-      .subscribe(
-        data => {
-          if (data) {
-            this.translate.translaterService();
+        for (let list of data.Items) {
+          let array_data = { "type": "GSM", "number": "", "date": "", "status": "open", "plan": "saver1", "change_state": false, "change_plan": false };
+          array_data.type = this.get_typeSV(list.$type.split(",")[0]);
+          array_data.number = list.Number;
+          array_data.date = this.set_date(list.DueDate.split("T")[0]);
 
-            for (let list of data.Items) {
-              let array_data = { "type": "GSM", "number": "", "date": "", "status": "open", "plan": "saver1", "change_state": false, "change_plan": false };
-              array_data.type = this.get_typeSV(list.$type.split(",")[0]);
-              array_data.number = list.Number;
-              array_data.date = this.set_date(list.DueDate.split("T")[0]);
+          this.service_Data.push(array_data);
 
-              this.service_Data.push(array_data);
+        }
 
-            }
+      }
+      this.loading.hide();
 
+    }, error => {
+      console.log(error);
+      let errorBody = JSON.parse(error._body);
+      console.log(errorBody);
+      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+        this.authservice.createRandomSessionKey().subscribe(result => {
+          if (result) {
+            console.log(result);
+            this.ionicInit();
           }
-          this.loading.hide();
-
-        },
-        error => {
+        }, error => {
           console.log(error);
-          let errorBody = JSON.parse(error._body);
-          console.log(errorBody);
-          if (errorBody.Code.Name == 'InvalidSessionKeyException') {
-            this.authservice.createRandomSessionKey().subscribe(result => {
-              if (result) {
-                console.log(result);
-                this.ionicInit();
-              }
-            }, error => {
-              console.log(error);
-              this.loading.hide();
-            });
-          }
           this.loading.hide();
         });
+      }
+      this.loading.hide();
+    });
   }
 
   change_state(index) {

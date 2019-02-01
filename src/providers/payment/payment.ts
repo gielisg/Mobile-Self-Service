@@ -1,9 +1,6 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-
-import { User, APP_CONFIG, IAppConfig } from '../../model';
-import { getLocaleDateTimeFormat } from '@angular/common';
 
 /*
   Generated class for the PaymentProvider provider.

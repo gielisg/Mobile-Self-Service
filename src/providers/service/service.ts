@@ -1,8 +1,7 @@
-import { Injectable, Inject } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { User, APP_CONFIG, IAppConfig } from '../../model';
 
 /*
   Generated class for the ServiceProvider provider.
@@ -75,12 +74,12 @@ export class ServiceProvider {
   }
 
   get_billFile(bill_number) {
-    let request_param = {
-      "SessionKey": encodeURIComponent(localStorage.getItem("session_key")),
-      "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
-      "BillNumber": bill_number,
-      "BillType": "pdf"
-    };
+    // let request_param = {
+    //   "SessionKey": encodeURIComponent(localStorage.getItem("session_key")),
+    //   "ContactCode": JSON.parse(localStorage.getItem('currentUser')).username,
+    //   "BillNumber": bill_number,
+    //   "BillType": "pdf"
+    // };
     return this.http.get(this.url_header + 'Bill.svc/rest/BillFile?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username + "&BillNumber=" + bill_number + "&BillType=pdf")
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
