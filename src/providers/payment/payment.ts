@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { APP_CONFIG, IAppConfig } from '../../model';
 
 /*
   Generated class for the PaymentProvider provider.
@@ -12,9 +13,10 @@ import 'rxjs/add/operator/map';
 export class PaymentProvider {
 
   public startDate: any;
-  public url_header = "https://ua.selcomm.com/SelcommWS/1.0267/";
 
-  constructor(public http: Http) {
+  constructor(
+    @Inject(APP_CONFIG) public config: IAppConfig,
+    public http: Http) {
     console.log('Hello PaymentProvider Provider');
     if (new Date().toISOString().includes(".")) {
       this.startDate = new Date().toISOString().split(".")[0];
@@ -22,16 +24,19 @@ export class PaymentProvider {
       this.startDate = new Date().toISOString();
     }
 
-    let temp_date = this.startDate;
-    this.startDate = temp_date.split("T")[0].split("-")[0] + "-" + temp_date.split("T")[0].split("-")[1] + "-" + (parseInt(temp_date.split("T")[0].split("-")[2]) + 1).toString();
-    this.startDate = this.startDate + "T" + "00:00:00";
+    if (new Date().toISOString().includes(".")) {
+      this.startDate = new Date().toISOString().split(".")[0];
+    } else {
+      this.startDate = new Date().toISOString();
+    }
+    console.log(this.startDate);
 
   }
 
 
   get_paymentAvailList() {
     let encoded_session_Key = encodeURIComponent(localStorage.getItem("session_key"));
-    return this.http.get(this.url_header + 'Payment.svc/rest/AccountPaymentMethodListValid?SessionKey=' + encoded_session_Key + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username)
+    return this.http.get(this.config.apiEndpoint + 'Payment.svc/rest/AccountPaymentMethodListValid?SessionKey=' + encoded_session_Key + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username)
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
@@ -40,9 +45,10 @@ export class PaymentProvider {
       .pipe(
       );
   }
+
   account_paymentMethod(payment_id) {
     let encoded_session_Key = encodeURIComponent(localStorage.getItem("session_key"));
-    return this.http.get(this.url_header + 'Payment.svc/rest/AccountPaymentMethod?SessionKey=' + encoded_session_Key + "&Id=" + payment_id + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username)
+    return this.http.get(this.config.apiEndpoint + 'Payment.svc/rest/AccountPaymentMethod?SessionKey=' + encoded_session_Key + "&Id=" + payment_id + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username)
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
@@ -72,7 +78,7 @@ export class PaymentProvider {
         "CreateOption": "NewOnly",
       }
     };
-    return this.http.post(this.url_header + 'Payment.svc/rest/AccountPaymentMethodAdd', JSON.stringify(param))
+    return this.http.post(this.config.apiEndpoint + 'Payment.svc/rest/AccountPaymentMethodAdd', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
@@ -96,7 +102,7 @@ export class PaymentProvider {
     let options = new RequestOptions({ headers: headers });
 
 
-    return this.http.put(this.url_header + 'Payment.svc/rest/AccountPaymentMethodCancel', JSON.stringify(param), options)
+    return this.http.put(this.config.apiEndpoint + 'Payment.svc/rest/AccountPaymentMethodCancel', JSON.stringify(param), options)
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
@@ -112,7 +118,51 @@ export class PaymentProvider {
       "StartDate": this.startDate,
       "StatusCode": "O"
     };
-    return this.http.put(this.url_header + 'Payment.svc/rest/AccountPaymentMethodMakeDefault', JSON.stringify(param))
+    return this.http.put(this.config.apiEndpoint + 'Payment.svc/rest/AccountPaymentMethodMakeDefault', JSON.stringify(param))
+      .map(token => {
+        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return return_data;
+      })
+      .pipe(
+      );
+  }
+
+  accountPaymentMethodDefault() {
+    let sendParam = 'Payment.svc/rest/AccountPaymentMethodDefault?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) +
+      '&ContactCode=' + JSON.parse(localStorage.getItem('currentUser')).username;
+
+    return this.http.get(this.config.apiEndpoint + sendParam)
+      .map(token => {
+        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return return_data;
+      })
+      .pipe(
+      );
+  }
+
+  setAccountBalanceByCard(balanceData) {
+
+    let sendParam = 'Payment.svc/rest/PaymentRequestSimpleByCreditCard?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) +
+      '&ContactCode=' + JSON.parse(localStorage.getItem('currentUser')).username +
+      '&CardNumber=' + balanceData.cardNum + '&CardName=' + balanceData.name + '&ExpiryDate=' + balanceData.expireDate + '&Amount=' + balanceData.amount;
+
+    return this.http.get(this.config.apiEndpoint + sendParam)
+      .map(token => {
+        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        return return_data;
+      })
+      .pipe(
+      );
+
+  }
+
+  setAccountBalanceByDefault(amount) {
+
+    let sendParam = 'Payment.svc/rest/PaymentRequestSimpleByDefaultPaymentMethod?SessionKey=' + encodeURIComponent(localStorage.getItem("session_key")) +
+      '&ContactCode=' + JSON.parse(localStorage.getItem('currentUser')).username +
+      '&Amount=' + amount;
+
+    return this.http.get(this.config.apiEndpoint + sendParam)
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
@@ -137,7 +187,7 @@ export class PaymentProvider {
         "SubscriberOwns": true,
       }
     };
-    return this.http.put(this.url_header + 'Payment.svc/rest/AccountPaymentMethodUpdate', JSON.stringify(param))
+    return this.http.put(this.config.apiEndpoint + 'Payment.svc/rest/AccountPaymentMethodUpdate', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
@@ -166,7 +216,7 @@ export class PaymentProvider {
         "SendEmail": false,
       }
     };
-    return this.http.post(this.url_header + 'Payment.svc/rest/PaymentRequestCreate', JSON.stringify(param))
+    return this.http.post(this.config.apiEndpoint + 'Payment.svc/rest/PaymentRequestCreate', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
@@ -177,7 +227,7 @@ export class PaymentProvider {
 
   payment_MethodFromAccountNumberAndType() {
     let encoded_session_Key = encodeURIComponent(localStorage.getItem("session_key"));
-    return this.http.get(this.url_header + 'Payment.svc/rest/PaymentMethodFromAccountNumberAndType?SessionKey=' + encoded_session_Key + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username + "&PaymentMethodTypeCode=C")
+    return this.http.get(this.config.apiEndpoint + 'Payment.svc/rest/PaymentMethodFromAccountNumberAndType?SessionKey=' + encoded_session_Key + "&ContactCode=" + JSON.parse(localStorage.getItem('currentUser')).username + "&PaymentMethodTypeCode=C")
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;

@@ -16,7 +16,7 @@ export const AppConfig: IAppConfig = {
     WebPrivateKey:"1234567890",
     DatabaseUserCode:"webuser",
     DatabasePassword:"resubew",
-    Usercode:"40000560",
-    Password:"1234"
+    Usercode:"40001304",
+    Password:"sct910"
 };
  

@@ -4,13 +4,14 @@ import { HomePage } from '../home/home';
 import { FormControl, Validators } from '@angular/forms';
 import { SignupPage } from '../signup/signup';
 
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ModalController } from 'ionic-angular';
 
 
 import { AuthserviceProvider } from '../../providers/authservice/authservice';
 import { TranslateProvider } from '../../providers/translate/translate';
 import { ToastProvider } from '../../providers/toast/toast';
 import { LoadingProvider } from '../../providers/loading/loading';
+import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 
 
 /**
@@ -48,6 +49,7 @@ export class SigninPage {
     public translate: TranslateProvider,
     public menu: MenuController,
     public authservice: AuthserviceProvider,
+    private modalCtrl: ModalController,
   ) {
 
 
@@ -117,6 +119,14 @@ export class SigninPage {
   ionicInit() {
     this.menu.swipeEnable(false);
     this.translate.translaterService();
+  }
+
+  gotoForgot() {
+    let profileModal = this.modalCtrl.create(ForgotPasswordPage);
+    profileModal.onDidDismiss(data => {
+      console.log(data);
+    });
+    profileModal.present();
   }
 
 

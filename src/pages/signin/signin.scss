@@ -58,4 +58,18 @@ page-signin {
         color: blue;
         cursor: pointer;
     }
+    .forgot-row {
+        margin-top: 20px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        .forgot-password {
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-left: auto;
+            font-size: 18px;
+            color: blue;
+            cursor: pointer;
+        }
+    }
 }

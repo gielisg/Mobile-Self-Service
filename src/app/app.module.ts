@@ -71,6 +71,11 @@ import { ChartsModule } from 'ng2-charts';
 import { LoadingProvider } from '../providers/loading/loading';
 import { ToastProvider } from '../providers/toast/toast';
 import { TranslateProvider } from '../providers/translate/translate';
+import { BillProvider } from '../providers/bill/bill';
+import { TransactionProvider } from '../providers/transaction/transaction';
+import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
+import { AccountBalancePage } from '../pages/account-balance/account-balance';
+import { PaymentUpdatePage } from '../pages/payment-update/payment-update';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -103,6 +108,9 @@ export function createTranslateLoader(http: HttpClient) {
     PaynowCheckPage,
     NewpaymentCheckPage,
     ChangePlanPage,
+    ForgotPasswordPage,
+    AccountBalancePage,
+    PaymentUpdatePage,
   ],
   imports: [
     BrowserModule,
@@ -147,6 +155,9 @@ export function createTranslateLoader(http: HttpClient) {
     PaynowCheckPage,
     NewpaymentCheckPage,
     ChangePlanPage,
+    ForgotPasswordPage,
+    AccountBalancePage,
+    PaymentUpdatePage,
   ],
   providers: [
     StatusBar,
@@ -162,7 +173,9 @@ export function createTranslateLoader(http: HttpClient) {
     PaymentProvider,
     LoadingProvider,
     ToastProvider,
-    TranslateProvider
+    TranslateProvider,
+    BillProvider,
+    TransactionProvider
   ]
 })
 export class AppModule { }

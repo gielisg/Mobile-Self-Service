@@ -125,6 +125,19 @@ ion-row {
     padding-bottom: .5rem;
 }
 
+.login_row {
+    .mat-ripple-element {
+        border-radius: 25px !important;
+    }
+    .mat-badge-content {
+        border-radius: 25px !important;
+    }
+    .mat-button-ripple-round {
+        border-radius: 25px !important;
+    }
+}
+
+//// Material CSS
 .mat-elevation-z0 {
     box-shadow: 0 0 0 0 rgba(0, 0, 0, .2), 0 0 0 0 rgba(0, 0, 0, .14), 0 0 0 0 rgba(0, 0, 0, .12)
 }
