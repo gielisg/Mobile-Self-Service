@@ -76,6 +76,7 @@ import { TransactionProvider } from '../providers/transaction/transaction';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { AccountBalancePage } from '../pages/account-balance/account-balance';
 import { PaymentUpdatePage } from '../pages/payment-update/payment-update';
+import { MatCheckboxModule } from '@angular/material';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -127,7 +128,7 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    MatInputModule, MatButtonModule, MatChipsModule, MatIconModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule
+    MatInputModule, MatButtonModule, MatChipsModule, MatIconModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatCheckboxModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

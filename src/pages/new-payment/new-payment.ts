@@ -5,12 +5,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 
 import { FormControl, Validators } from '@angular/forms';
-import { PaymentMethodPage } from '../payment-method/payment-method';
 import { PaymentProvider } from '../../providers/payment/payment';
 import { AuthserviceProvider } from '../../providers/authservice/authservice';
 import { TranslateProvider } from '../../providers/translate/translate';
 import { LoadingProvider } from '../../providers/loading/loading';
 import { ToastProvider } from '../../providers/toast/toast';
+import { MyaccountPage } from '../myaccount/myaccount';
 
 /**
  * Generated class for the NewPaymentPage page.
@@ -26,7 +26,7 @@ import { ToastProvider } from '../../providers/toast/toast';
 })
 export class NewPaymentPage {
 
-  public pay_Data = { "name": "", "method": "", "cardnum": "", "exm": "1", "exy": "2018" };
+  public pay_Data = { "name": "", "method": "", "cardnum": "", "exm": "", "exy": "" };
   public expireMonth: any[];
   public expireYear: any[];
 
@@ -41,25 +41,16 @@ export class NewPaymentPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public loading: LoadingProvider,
-    public toast: ToastProvider,
-    public translate: TranslateProvider,
-    public paymentService: PaymentProvider,
-    public authservice: AuthserviceProvider,
+    private loading: LoadingProvider,
+    private toast: ToastProvider,
+    private translate: TranslateProvider,
+    private paymentService: PaymentProvider,
+    private authservice: AuthserviceProvider,
   ) {
   }
 
   ionViewDidLoad() {
-    this.expireMonth = new Array();
-    this.expireYear = new Array();
     console.log('ionViewDidLoad NewPaymentPage');
-    for (let i = 1; i < 13; i++) {
-      this.expireMonth.push(i);
-    }
-
-    for (let i = 2018; i < 2050; i++) {
-      this.expireYear.push(i);
-    }
     this.ionicInit();
   }
   goback() {
@@ -71,16 +62,28 @@ export class NewPaymentPage {
 
       let add_param = {
         "name": this.pay_Data.name,
+        "cardType": '',
+        "cardCodeType": '',
         "number": this.pay_Data.cardnum,
-        "expireDate": this.pay_Data.exy + "-" + this.set_twostring(this.pay_Data.exm) + "-" + new Date().getDate() + "T00:00:00"
+        "expireDate": this.pay_Data.exy + "-" + this.set_twostring(this.pay_Data.exm) + "-" + this.set_twostring(new Date().getDate()) + "T00:00:00"
       };
+
+      if (this.pay_Data.method == 'credit') {
+        add_param.cardType = 'CC';
+        add_param.cardCodeType = 'C';
+      } else if (this.pay_Data.method == 'debit') {
+        add_param.cardType = 'DD';
+        add_param.cardCodeType = 'D';
+      } else {
+        add_param.cardType = 'MC';
+        add_param.cardCodeType = 'C';
+      }
 
       this.loading.show();
       this.paymentService.account_paymentMethodAdd(add_param).subscribe(data => {
         console.log(data);
         this.loading.hide();
-        this.navCtrl.pop();
-        this.navCtrl.push(PaymentMethodPage);
+        this.navCtrl.push(MyaccountPage);
       }, error => {
         console.log(error);
         let errorBody = JSON.parse(error._body);
@@ -95,6 +98,8 @@ export class NewPaymentPage {
             console.log(error);
             this.loading.hide();
           });
+        } else {
+          this.toast.show(errorBody.Message)
         }
         this.loading.hide();
       });
@@ -105,9 +110,17 @@ export class NewPaymentPage {
 
     this.translate.translaterService();
 
-    this.userId = JSON.parse(localStorage.getItem('currentUser')).username;
+    this.expireMonth = new Array();
+    this.expireYear = new Array();
+    for (let i = 1; i < 13; i++) {
+      this.expireMonth.push(i);
+    }
 
-    this.pay_Data.exm = (new Date().getMonth() + 1).toString();
+    for (let i = new Date().getFullYear(); i < 2050; i++) {
+      this.expireYear.push(i);
+    }
+
+    this.userId = JSON.parse(localStorage.getItem('currentUser')).username;
   }
 
   set_twostring(input_val) {
@@ -115,6 +128,23 @@ export class NewPaymentPage {
       return "0" + input_val;
     } else {
       return input_val;
+    }
+  }
+
+  selectExpireYear() {
+    if (parseInt(this.pay_Data.exy) == new Date().getFullYear()) {
+      if (parseInt(this.pay_Data.exm) == new Date().getMonth() + 1) {
+        this.pay_Data.exm = '';
+      }
+      this.expireMonth = new Array();
+      for (let i = new Date().getMonth() + 1; i < 13; i++) {
+        this.expireMonth.push(i);
+      }
+    } else {
+      this.expireMonth = new Array();
+      for (let i = 1; i < 13; i++) {
+        this.expireMonth.push(i);
+      }
     }
   }
 

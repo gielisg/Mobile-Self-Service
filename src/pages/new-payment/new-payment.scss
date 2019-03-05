@@ -1,13 +1,14 @@
 page-new-payment {
     .header_class {
-        background-color: white;
+        // background-color: white;
         box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
     }
     #comProfileForm {
         margin-bottom: 30px;
+        width: 100%;
     }
     .header_span {
-        color: black;
+        color: white;
         font-weight: bold;
     }
     .header_row {
@@ -18,6 +19,7 @@ page-new-payment {
         width: 100%;
         margin: auto;
         font-weight: bold;
+        color: white;
     }
     .payment_row {
         margin-top: 5%;

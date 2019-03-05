@@ -10,6 +10,7 @@ import { PaymentProvider } from '../../providers/payment/payment';
 import { LoadingProvider } from '../../providers/loading/loading';
 import { ToastProvider } from '../../providers/toast/toast';
 import { TranslateProvider } from '../../providers/translate/translate';
+import { AuthserviceProvider } from '../../providers/authservice/authservice';
 
 /**
  * Generated class for the PayNowPage page.
@@ -31,6 +32,12 @@ export class PayNowPage {
   public cancen_enable: boolean;
 
   public pay_amount: any;
+  public totalAmount: any;
+  private checked = false;
+
+  customAmount = new FormControl('', [
+    Validators.required
+  ]);
 
   constructor(
     public navCtrl: NavController,
@@ -40,6 +47,7 @@ export class PayNowPage {
     public translate: TranslateProvider,
     public modalCtrl: ModalController,
     public paymentService: PaymentProvider,
+    public authservice: AuthserviceProvider,
   ) {
   }
 
@@ -47,11 +55,12 @@ export class PayNowPage {
     console.log('ionViewDidLoad PayNowPage');
     this.ionicInit();
     this.cancen_enable = false;
-    this.pay_amount = this.navParams.data.navParams;
+    this.pay_amount = parseFloat(this.navParams.data.navParams);
+    this.totalAmount = parseFloat(this.navParams.data.navParams);
   }
 
   goback() {
-    this.cancen_enable = true;
+    // this.cancen_enable = true;
     this.navCtrl.pop();
   }
 
@@ -69,17 +78,76 @@ export class PayNowPage {
     profileModal.present();
   }
 
-  completeAddCompany(comProfileForm) {
+  paymentSubmit(comProfileForm) {
 
+    console.log(this.customAmount.valid);
 
-    if (comProfileForm.valid && !this.cancen_enable) {
-      let profileModal = this.modalCtrl.create(PaynowCheckPage);
-      profileModal.onDidDismiss(data => {
-        this.navCtrl.push(HomePage);
-      });
-      profileModal.present();
+    if (comProfileForm.valid && !this.cancen_enable && (this.customAmount.valid && this.checked || !this.checked)
+      && this.pay_amount <= this.totalAmount) {
+      this.loading.show();
+      if (this.pay_Data.method == 'Paypal') {
+        if (this.checked) {
+
+        } else {
+          this.pay_amount = this.totalAmount;
+        }
+        this.paymentService.setAccountBalanceByDefault(parseFloat(this.pay_amount)).subscribe((result: any) => {
+          console.log(result);
+          this.cancen_enable = true;
+          this.loading.hide();
+        }, error => {
+          let errorBody = JSON.parse(error._body);
+          console.log(errorBody);
+          if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+            this.authservice.createRandomSessionKey().subscribe(result => {
+              if (result) {
+                console.log(result);
+                this.paymentSubmit(comProfileForm);
+              }
+            }, error => {
+              console.log(error);
+              this.loading.hide();
+            });
+          } else {
+            this.toast.show(errorBody.Message);
+          }
+          this.loading.hide();
+        })
+      } else {
+        this.paymentService.setAccountBalanceByCard(parseFloat(this.pay_amount)).subscribe((result: any) => {
+          console.log(result);
+          this.cancen_enable = true;
+          this.loading.hide();
+        }, error => {
+          let errorBody = JSON.parse(error._body);
+          console.log(errorBody);
+          if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+            this.authservice.createRandomSessionKey().subscribe(result => {
+              if (result) {
+                console.log(result);
+                this.paymentSubmit(comProfileForm);
+              }
+            }, error => {
+              console.log(error);
+              this.loading.hide();
+            });
+          } else {
+            this.toast.show(errorBody.Message);
+          }
+          this.loading.hide();
+        })
+      }
     }
 
+  }
+
+  changeCheck() {
+    console.log(this.checked);
+  }
+
+  gotoPaymenthistory() {
+    this.cancen_enable = false;
+    this.navCtrl.push(HomePage);
   }
 
 }

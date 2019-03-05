@@ -4,15 +4,118 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header class="header_class">
 
-  <ion-navbar>
-    <ion-title>payment-update</ion-title>
-  </ion-navbar>
+  <ion-row class="header_row">
+    <ion-col col-2>
+      <ion-row class="full_height">
+        <ion-icon name="ios-arrow-back" (click)="goback()" class="header_back_icon"></ion-icon>
+      </ion-row>
+    </ion-col>
+    <ion-col col-8>
+      <ion-row class="full_height">
+        <p class="header_span">
+          {{ 'update_payment' | translate }}
+        </p>
+        <p class="payment_id">{{userId}}</p>
+      </ion-row>
+    </ion-col>
+  </ion-row>
 
 </ion-header>
 
 
 <ion-content padding>
 
+  <ion-row class="">
+    <form #paymentData="ngForm" id="paymentData" (ngSubmit)="paymentSubmit(paymentData)" novalidate>
+
+      <ion-row class="payment-row">
+        <span class="payment-title-span">
+          {{ 'name' | translate }}
+        </span>
+      </ion-row>
+
+      <ion-row class="payment-row">
+        <mat-form-field class="example-full-width">
+          <input matInput class="payment-input" disabled type="text" #title="ngModel" [(ngModel)]="payData.name"
+            placeholder="{{ 'your_name' | translate }}" name="name" />
+        </mat-form-field>
+      </ion-row>
+
+      <ion-row class="payment-row">
+        <span class="payment-title-span">
+          {{ 'credit_card_num' | translate }}
+        </span>
+      </ion-row>
+
+      <ion-row class="payment-row">
+        <mat-form-field class="example-full-width">
+          <input matInput class="payment-input" disabled type="text" #title="ngModel" [(ngModel)]="payData.number"
+            placeholder="{{ 'your_name' | translate }}" name="CardNumber" />
+        </mat-form-field>
+      </ion-row>
+
+      <ion-row class="payment-row">
+        <span class="payment-title-span">
+          {{ 'expiry' | translate }}
+        </span>
+      </ion-row>
+
+      <ion-row class="payment-row">
+        <ion-col col-4>
+          <ion-row class="full-height">
+            <mat-form-field>
+              <mat-select [formControl]="selExm" [(ngModel)]="payData.exm" class="expire-select" required
+                placeholder="{{ 'month' | translate }}">
+                <mat-option *ngFor="let list of expireMonth" value="{{list}}">
+                  {{list}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="selExm.hasError('required')">
+                {{ 'month_require' | translate }}
+              </mat-error>
+            </mat-form-field>
+
+          </ion-row>
+        </ion-col>
+        <ion-col col-4>
+          <ion-row class="full-height">
+            <mat-form-field>
+              <mat-select [formControl]="selExy" [(ngModel)]="payData.exy" class="expire-select" required
+                placeholder="{{ 'year' | translate }}">
+                <mat-option *ngFor="let list of expireYear" value="{{list}}">
+                  {{list}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="selExy.hasError('required')">{{ 'year_require' | translate }}</mat-error>
+
+            </mat-form-field>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <button ion-button style="display:none" id="trigersubmit">Triger Submit</button>
+    </form>
+
+    <ion-row class="add-cancel">
+      <ion-col col-1>
+      </ion-col>
+      <ion-col col-5>
+        <ion-row class="button-row">
+          <button ion-button class="button-style1" (click)="submitAddPayment()">
+            {{ 'update' | translate }}
+          </button>
+        </ion-row>
+      </ion-col>
+      <ion-col col-5>
+        <ion-row class="button-row">
+          <button ion-button class="button-style2" (click)="goback()">
+            {{ 'cancel_UP' | translate }}
+          </button>
+        </ion-row>
+      </ion-col>
+      <ion-col col-1>
+      </ion-col>
+    </ion-row>
+  </ion-row>
 </ion-content>

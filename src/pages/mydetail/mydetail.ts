@@ -46,7 +46,7 @@ export class MydetailPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public loading: LoadingProvider,
-    public toasst: ToastProvider,
+    public toast: ToastProvider,
     public translate: TranslateProvider,
     public accountServer: AuthserviceProvider,
     public authservice: AuthserviceProvider,
@@ -117,6 +117,8 @@ export class MydetailPage {
           console.log(error);
           this.loading.hide();
         });
+      } else {
+        this.toast.show(errorBody.Message);
       }
       this.loading.hide();
     });
@@ -286,8 +288,7 @@ export class MydetailPage {
         }, error => {
           this.loading.hide();
         });
-      }
-      else {
+      } else {
         this.loading.hide();
       }
     });

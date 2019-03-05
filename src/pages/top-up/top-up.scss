@@ -1,19 +1,20 @@
 page-top-up {
     .header_class {
-        background-color: white;
+        // background-color: white;
         box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
     }
     .header_row {
         height: 60px !important;
     }
     .header_span {
-        color: black;
+        color: white;
         font-weight: bold;
     }
     .payment_id {
         text-align: center;
         width: 100%;
         margin: auto;
+        color: white;
     }
     .main_row {
         padding-top: 0px !important;

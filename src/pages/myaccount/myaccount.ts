@@ -13,6 +13,7 @@ import { ServiceProvider } from '../../providers/service/service';
 import { LoadingProvider } from '../../providers/loading/loading';
 import { ToastProvider } from '../../providers/toast/toast';
 import { TranslateProvider } from '../../providers/translate/translate';
+import { AccountBalancePage } from '../account-balance/account-balance';
 
 /**
  * Generated class for the MyaccountPage page.
@@ -105,6 +106,8 @@ export class MyaccountPage {
             console.log(error);
             this.loading.hide();
           });
+        } else {
+          this.toast.show(errorBody.Message);
         }
         this.loading.hide();
       });
@@ -149,42 +152,41 @@ export class MyaccountPage {
 
     this.loading.show();
 
-    this.bill_service.get_billList()
+    this.bill_service.get_billList().subscribe(data => {
+      if (data) {
+        this.bill_data.bill_amount = data.Items[0].AmountDue;
+        this.bill_data.bill_date = this.set_date(data.Items[0].DueDate.split("T")[0]);
+        this.bill_data.account_number = data.Items[0].ContactCode;
+        this.bill_data.bill_number = data.Items[0].Number;
+        this.translate.translaterService();
+        if (localStorage.getItem("set_lng") == "en") {
+          this.switch_mode = true;
+        } else {
+          this.switch_mode = false;
+        }
 
-      .subscribe(
-        data => {
-          if (data) {
-            this.bill_data.bill_amount = data.Items[0].AmountDue;
-            this.bill_data.bill_date = this.set_date(data.Items[0].DueDate.split("T")[0]);
-            this.bill_data.account_number = data.Items[0].ContactCode;
-            this.translate.translaterService();
-            if (localStorage.getItem("set_lng") == "en") {
-              this.switch_mode = true;
-            } else {
-              this.switch_mode = false;
-            }
+      }
+      this.loading.hide();
 
+    }, error => {
+      console.log(error);
+      let errorBody = JSON.parse(error._body);
+      console.log(errorBody);
+      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+        this.authservice.createRandomSessionKey().subscribe(result => {
+          if (result) {
+            console.log(result);
+            this.ionicInit();
           }
-          this.loading.hide();
-
-        },
-        error => {
+        }, error => {
           console.log(error);
-          let errorBody = JSON.parse(error._body);
-          console.log(errorBody);
-          if (errorBody.Code.Name == 'InvalidSessionKeyException') {
-            this.authservice.createRandomSessionKey().subscribe(result => {
-              if (result) {
-                console.log(result);
-                this.ionicInit();
-              }
-            }, error => {
-              console.log(error);
-              this.loading.hide();
-            });
-          }
           this.loading.hide();
         });
+      } else {
+        this.toast.show(errorBody.Message);
+      }
+      this.loading.hide();
+    });
   }
 
   downloadPdf(pdfByte, pdfName) {
@@ -234,6 +236,10 @@ export class MyaccountPage {
       byteArrays.push(byteArray);
     }
     return new Blob(byteArrays, { type: contentType });
+  }
+
+  gotoAccountBalance() {
+    this.navCtrl.push(AccountBalancePage);
   }
 
 

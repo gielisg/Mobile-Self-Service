@@ -23,7 +23,7 @@
     </ion-col>
     <ion-col col-3>
       <ion-row class="full_height">
-        <p class="header_span" (click)="goto_newPayment()">
+        <p class="header_span point-cursor" (click)="goto_newPayment()">
           +{{ 'new' | translate }}
         </p>
       </ion-row>
@@ -96,9 +96,17 @@
 
       <ion-col col-4 class="right_col">
         <ion-row class="full_height">
-          <button ion-button class="down_button_class" (click)="deleteItem(i)">
-            {{ 'delete' | translate }}
-          </button>
+          <ion-row>
+            <button ion-button class="down_button_class"
+              (click)="viewAndUpdate(list.payment_id, list.number, list.name)">
+              {{ 'update' | translate }}
+            </button>
+          </ion-row>
+          <ion-row>
+            <button ion-button class="down_button_class" (click)="deleteItem(i)">
+              {{ 'cancel_UP' | translate }}
+            </button>
+          </ion-row>
         </ion-row>
       </ion-col>
     </ion-row>

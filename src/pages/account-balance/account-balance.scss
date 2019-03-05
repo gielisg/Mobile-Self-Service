@@ -1,3 +1,48 @@
 page-account-balance {
-
+    .payment-row {
+        margin-top: 5%;
+        .payment-title-span {
+            width: 100%;
+            font-size: 17px;
+            color: #3982a3;
+            font-weight: bold;
+        }
+        .select-class {
+            width: 100%;
+            max-width: 100%;
+            font-size: 16px;
+        }
+        .error-border {
+            border-bottom: 1px solid #f44336 !important;
+        }
+        .normal-border {
+            border-bottom: 1px solid #ddd;
+        }
+    }
+    .add-cancel {
+        margin-top: 5%;
+        .button-row {
+            width: 100%;
+            color: white;
+            .button-style1 {
+                border-radius: 25px;
+                width: 100%;
+                font-weight: bold;
+                background-color: #3982a3;
+                height: 40px;
+                font-size: 16px;
+            }
+            .button-style2 {
+                border-radius: 25px;
+                width: 100%;
+                font-weight: bold;
+                background-color: #3ba464;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+    }
+    .expire-select {
+        max-width: 100%;
+    }
 }

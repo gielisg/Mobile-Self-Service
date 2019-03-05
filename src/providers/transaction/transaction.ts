@@ -2,12 +2,10 @@ import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { User, APP_CONFIG, IAppConfig } from '../../model';
-import { HttpClient, HttpErrorResponse } from '../../../node_modules/@angular/common/http';
+import { APP_CONFIG, IAppConfig } from '../../model';
+import { HttpClient } from '../../../node_modules/@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
-import { catchError } from 'rxjs/operators';
 
 /*
   Generated class for the TransactionProvider provider.
@@ -33,7 +31,7 @@ export class TransactionProvider {
       "TransactionType": "R",
     };
 
-    return this.http.post(this.config.apiEndpoint + 'Payment.svc/rest/FinancialTransactionListByReceipt', JSON.stringify(param))
+    return this.http.post(this.config.apiEndpoint + 'Financial.svc/rest/FinancialTransactionListByReceipt', JSON.stringify(param))
       .map(token => {
         let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;

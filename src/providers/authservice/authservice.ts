@@ -19,7 +19,11 @@ import { catchError } from 'rxjs/operators';
 export class AuthserviceProvider {
 
 
-  constructor(@Inject(APP_CONFIG) public config: IAppConfig, public http: Http, public httpclient: HttpClient) {
+  constructor(
+    @Inject(APP_CONFIG) public config: IAppConfig,
+    public http: Http,
+    public httpclient: HttpClient,
+  ) {
     console.log('Hello AuthserviceProvider Provider');
   }
 

@@ -67,15 +67,16 @@ export class PaymentProvider {
         "AccountNumber": account_method.number,
         "ExpiryDate": account_method.expireDate,
         "PaymentMethod": {
-          "Code": "MC",
+          "Code": account_method.cardType,
           "Type": {
-            "Code": "C",
+            "Code": account_method.cardCodeType,
           }
         },
         "StartDate": this.startDate,
         "SubscriberOwns": true,
         "Source": "",
         "CreateOption": "NewOnly",
+        "Default": "True",
       }
     };
     return this.http.post(this.config.apiEndpoint + 'Payment.svc/rest/AccountPaymentMethodAdd', JSON.stringify(param))
@@ -91,7 +92,8 @@ export class PaymentProvider {
     let param = {
       "SessionKey": localStorage.getItem("session_key"),
       "Id": parseInt(payment_id),
-      "StartDate": this.startDate,
+      // "StartDate": this.startDate,
+      "Note": 'AccooutPaymentMethodCancel Test',
     };
 
     let headers = new Headers();
@@ -104,7 +106,13 @@ export class PaymentProvider {
 
     return this.http.put(this.config.apiEndpoint + 'Payment.svc/rest/AccountPaymentMethodCancel', JSON.stringify(param), options)
       .map(token => {
-        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        let return_data;
+        if (JSON.stringify(token) == '') {
+          return_data = '';
+        } else {
+          return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        }
+        // let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
       })
       .pipe(
@@ -179,7 +187,7 @@ export class PaymentProvider {
         "AccountNumber": account_method.number,
         "ExpiryDate": account_method.expireDate,
         "Exported": false,
-        "Id": account_method.payment_id,
+        "Id": account_method.paymentId,
         "PaymentMethod": {
           "Code": "MC",
         },

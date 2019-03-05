@@ -1,6 +1,6 @@
 page-my-services {
     .header_class {
-        background-color: white;
+        // background-color: white;
         box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
     }
     .header_row {
@@ -11,7 +11,7 @@ page-my-services {
         text-align: center;
         margin: auto;
         font-size: 1.8rem;
-        color: #3982a3;
+        color: white;
         font-weight: bold;
     }
     .header_icon {
@@ -39,7 +39,7 @@ page-my-services {
     }
     .name_span {
         width: 100%;
-        font-size: 1.7rem;
+        font-size: 17px;
         color: #3982a3;
         font-weight: bold;
     }
@@ -49,7 +49,7 @@ page-my-services {
         margin-top: 5px;
     }
     .change_button {
-        height: 25px;
+        // height: 35px;
         color: white;
         font-weight: bold;
         background-color: #3c82a3;
@@ -90,7 +90,6 @@ page-my-services {
     .bottom_image_row {
         position: relative;
     }
-    .service_iconRow {}
     .serviceDetail_icon {
         padding-top: 15px;
         margin: auto;
@@ -98,6 +97,7 @@ page-my-services {
     }
     .servicespan_rpw {
         padding-top: 8px;
+        cursor: pointer;
     }
     .serviceDetail_span {
         margin: auto;
@@ -105,6 +105,6 @@ page-my-services {
         text-align: center;
         padding-bottom: 12px;
         width: 100%;
-        font-size: 12px;
+        font-size: 13px;
     }
 }

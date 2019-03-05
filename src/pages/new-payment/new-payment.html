@@ -40,11 +40,14 @@
           <mat-form-field>
             <mat-select placeholder="{{ 'select' | translate }}" [formControl]="selType" [(ngModel)]="pay_Data.method"
               class="select_class" required>
-              <mat-option value="Visa">
-                {{ 'visa' | translate }}
+              <mat-option value="credit">
+                {{ 'credit_card' | translate }}
               </mat-option>
-              <mat-option value="Paypal">
-                {{ 'paypal' | translate }}
+              <mat-option value="debit">
+                {{ 'debit_card' | translate }}
+              </mat-option>
+              <mat-option value="master">
+                {{ 'master_card' | translate }}
               </mat-option>
             </mat-select>
             <mat-error *ngIf="selType.hasError('required')">
@@ -103,13 +106,14 @@
         <ion-col col-4>
           <ion-row class="full_height">
             <mat-form-field>
-              <mat-select [formControl]="selExm" [(ngModel)]="pay_Data.exm" class="expire_select" required>
+              <mat-select [formControl]="selExm" [(ngModel)]="pay_Data.exm" class="expire_select" required
+                placeholder="{{ 'month' | translate }}">
                 <mat-option *ngFor="let list of expireMonth" value="{{list}}">
                   {{list}}
                 </mat-option>
               </mat-select>
               <mat-error *ngIf="selExm.hasError('required')">
-                {{ 'choose_type_of_payment' | translate }}
+                {{ 'month_require' | translate }}
               </mat-error>
             </mat-form-field>
 
@@ -123,12 +127,13 @@
         <ion-col col-4>
           <ion-row class="full_height">
             <mat-form-field>
-              <mat-select [formControl]="selExy" [(ngModel)]="pay_Data.exy" class="expire_select" required>
+              <mat-select [formControl]="selExy" [(ngModel)]="pay_Data.exy" class="expire_select" required
+                placeholder="{{ 'year' | translate }}" (ngModelChange)="selectExpireYear()">
                 <mat-option *ngFor="let list of expireYear" value="{{list}}">
                   {{list}}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="selExy.hasError('required')">{{ 'choose_type_of_payment' | translate }}</mat-error>
+              <mat-error *ngIf="selExy.hasError('required')">{{ 'year_require' | translate }}</mat-error>
 
               <!-- <ion-select [(ngModel)]="pay_Data.exy" class="expire_select">
           <ion-option *ngFor="let list of expireYear" value="{{list}}">{{list}}</ion-option>

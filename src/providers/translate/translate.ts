@@ -20,10 +20,19 @@ export class TranslateProvider {
 
     if (typeof (localStorage.getItem("set_lng")) == "undefined" || localStorage.getItem("set_lng") == "" || localStorage.getItem("set_lng") == null) {
       this.translate.use('en');
+      localStorage.setItem('set_lng', 'en');
     } else {
       this.translate.use(localStorage.getItem("set_lng"));
     }
 
+  }
+
+  convertText(value) {
+    return this.translate.get(value);
+  }
+
+  setLang(lang) {
+    this.translate.use(lang);
   }
 
 }

@@ -1,13 +1,13 @@
 page-transaction-history {
     .header_class {
-        background-color: white;
+        // background-color: white;
         box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
     }
     .header_row {
         height: 60px !important;
     }
     .header_span {
-        color: black;
+        color: white;
         font-weight: bold;
     }
     .payment_id {
@@ -55,7 +55,7 @@ page-transaction-history {
         font-weight: bold;
     }
     .receipt_span {
-        text-align: center;
+        text-align: left;
         font-size: 1.5rem;
         font-weight: bold;
         width: 100%;

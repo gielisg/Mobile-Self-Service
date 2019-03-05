@@ -32,6 +32,14 @@ ion-row {
     height: 100%;
 }
 
+.full-height {
+    height: 100%;
+}
+
+.point-cursor {
+    cursor: pointer;
+}
+
 .header_back_icon {
     margin-right: auto;
     margin-top: auto;
@@ -40,6 +48,16 @@ ion-row {
     padding-left: 10px;
     padding-right: 10px;
     font-size: 2.5rem;
+}
+
+// 0cd1e8
+.header_class {
+    background-color: #0cd1e8;
+}
+
+ion-icon {
+    cursor: pointer;
+    color: white;
 }
 
 //////// Menu List
@@ -72,12 +90,14 @@ ion-row {
     height: 25px;
     width: 25px;
     margin: auto;
+    cursor: pointer;
 }
 
 .menu_list {
     font-size: 1.7rem;
     margin-top: auto;
     margin-bottom: auto;
+    cursor: pointer;
 }
 
 .top_menu_content {
@@ -94,7 +114,7 @@ ion-row {
     text-align: center;
     margin: auto;
     font-size: 1.8rem;
-    color: #3982a3;
+    color: white;
     font-weight: bold;
 }
 

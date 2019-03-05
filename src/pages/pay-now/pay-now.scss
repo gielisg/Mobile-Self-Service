@@ -1,11 +1,15 @@
 page-pay-now {
     .header_class {
-        background-color: white;
+        // background-color: white;
         box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
     }
     .header_span {
-        color: black;
+        color: white;
         font-weight: bold;
+    }
+    .header_back_icon {
+        color: white;
+        cursor: pointer;
     }
     .button_row {
         width: 100%;
@@ -30,6 +34,12 @@ page-pay-now {
     }
     .payment_row {
         margin-top: 5%;
+        position: relative;
+    }
+    .error-message {
+        margin-top: -15px;
+        color: #f44336;
+        font-size: 12px;
     }
     .payment_title_span {
         width: 100%;
@@ -47,5 +57,40 @@ page-pay-now {
         font-weight: bold;
         width: 100%;
         font-size: 1.7rem;
+    }
+    .pay-notification {
+        background: rgba(0, 0, 0, 0.7);
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        .main-row {
+            margin: auto;
+            background-color: transparent;
+            padding-top: 0px !important;
+            border: none;
+            width: 90%;
+        }
+        .title-row {
+            height: 60px;
+            background-color: #080808;
+        }
+        .title-span {
+            color: white;
+            margin: auto;
+            font-size: 17px;
+        }
+        .button-row {
+            background: #717171;
+            height: 50px;
+        }
+        .button-class {
+            background: #a7a7a7;
+            box-shadow: unset;
+            width: 40%;
+            margin: auto;
+            color: black;
+            text-transform: initial;
+            height: 30px;
+        }
     }
 }

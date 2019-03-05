@@ -4,6 +4,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TranslateProvider } from '../../providers/translate/translate';
 import { ToastProvider } from '../../providers/toast/toast';
 import { LoadingProvider } from '../../providers/loading/loading';
+import { TransactionProvider } from '../../providers/transaction/transaction';
+import { AuthserviceProvider } from '../../providers/authservice/authservice';
 
 
 /**
@@ -29,8 +31,10 @@ export class TransactionHistoryPage {
     { "tran_num": "3878978", "type": "receipt", "date": "06 / 19", "amount": "0.01", "status": "precessing" }
   ];
 
+  public setDefault: any[];
+
   public transactionList: any[];
-  public show_moreState: boolean;
+  public showMoreState: boolean;
 
   constructor(
     public navCtrl: NavController,
@@ -38,6 +42,8 @@ export class TransactionHistoryPage {
     public loading: LoadingProvider,
     public toast: ToastProvider,
     public translate: TranslateProvider,
+    public tranService: TransactionProvider,
+    public authService: AuthserviceProvider,
   ) {
   }
 
@@ -51,28 +57,89 @@ export class TransactionHistoryPage {
 
   ionicInit() {
     this.transactionList = new Array();
-    this.show_moreState = true;
-    for (let list of this.set_default) {
-      this.transactionList.push(list);
-    }
+    this.setDefault = new Array();
+    this.showMoreState = true;
+
     this.translate.translaterService();
+
+    this.translate.translaterService();
+
+    this.loading.show();
+
+    this.tranService.getTransactionHistory().subscribe((data: any) => {
+      console.log(data);
+      for (let list of data.Items) {
+        this.setDefault.push(list);
+        // console.log(list.Number);
+      }
+      // console.log(this.setDefault);
+      this.add_moreAction();
+      this.loading.hide();
+
+    }, error => {
+      console.log(error);
+      if (Object(error).Code.Name == 'InvalidSessionKeyException') {
+        this.authService.createRandomSessionKey().subscribe(result => {
+          if (result) {
+            console.log(result);
+            // localStorage.setItem('sessionKey', result);
+            this.ionicInit();
+          }
+        }, error => {
+          console.log(error);
+        });
+      }
+      this.loading.hide();
+    });
   }
 
   add_moreAction() {
-    if (this.transactionList.length + this.set_default.length < 25) {
-      for (let list of this.set_default) {
-        this.transactionList.push(list);
+    if (this.transactionList.length < this.setDefault.length) {
+      // for (let list of this.setDefault) {
+      //   this.transactionList.push(list);
+      // }
+      if (this.setDefault.length - this.transactionList.length > 25) {
+        let arrayNum = 0;
+        if (this.transactionList.length == 0) {
+          arrayNum = 0;
+        } else {
+          arrayNum = this.transactionList.length - 1;
+        }
+        for (let i = arrayNum; i <= arrayNum + 25; i++) {
+          let param = { "tranNum": "", "type": "", "date": "12 / 18", "amount": "0.01", "status": "precessing" };
+          param.tranNum = this.setDefault[i].Number;
+          param.type = this.setDefault[i].Type.Name;
+          param.amount = this.setDefault[i].Total;
+          param.status = this.setDefault[i].Status.Name;
+          param.date = this.setDefault[i].Date.split('T')[0].split('-')[1] + ' / ' + this.setDefault[i].Date.split('T')[0].split('-')[2];
+          this.transactionList.push(param);
+        }
+      } else {
+        let arrayNum = 0;
+        if (this.transactionList.length == 0) {
+          arrayNum = 0;
+        } else {
+          arrayNum = this.transactionList.length - 1;
+        }
+        for (let i = arrayNum; i < this.setDefault.length; i++) {
+          let param = { "tranNum": "", "type": "", "date": "12 / 18", "amount": "0.01", "status": "precessing" };
+          param.tranNum = this.setDefault[i].Number;
+          param.type = this.setDefault[i].Type.Name;
+          param.amount = this.setDefault[i].Total;
+          param.status = this.setDefault[i].Status.Name;
+          param.date = this.setDefault[i].Date.split('T')[0].split('-')[1] + ' / ' + this.setDefault[i].Date.split('T')[0].split('-')[2];
+          this.transactionList.push(param);
+        }
       }
-      this.show_moreState = true;
+
+      this.showMoreState = true;
     } else {
-      this.show_moreState = false;
+      this.showMoreState = false;
     }
 
-    if (this.transactionList.length > 25) {
-      this.show_moreState = false;
+    if (this.transactionList.length >= this.setDefault.length) {
+      this.showMoreState = false;
     }
-
-
   }
 
 }
