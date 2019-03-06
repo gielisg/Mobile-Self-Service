@@ -101,7 +101,7 @@ export class PaymentMethodPage {
         array_sam.payment_id = list.Id;
         array_sam.name = list.AccountName;
         array_sam.number = list.AccountNumber;
-        array_sam.type = list.PaymentMethod.Type.Description;
+        array_sam.type = list.PaymentMethod.Description;
         if (list.ExpiryDate != null) {
           array_sam.expiry = this.get_expiryDate(list.ExpiryDate);
         }

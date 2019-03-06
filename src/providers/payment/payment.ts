@@ -18,17 +18,18 @@ export class PaymentProvider {
     @Inject(APP_CONFIG) public config: IAppConfig,
     public http: Http) {
     console.log('Hello PaymentProvider Provider');
-    if (new Date().toISOString().includes(".")) {
-      this.startDate = new Date().toISOString().split(".")[0];
-    } else {
-      this.startDate = new Date().toISOString();
-    }
+    // if (new Date().toISOString().includes(".")) {
+    //   this.startDate = new Date().toISOString().split(".")[0];
+    // } else {
+    //   this.startDate = new Date().toISOString();
+    // }
 
     if (new Date().toISOString().includes(".")) {
       this.startDate = new Date().toISOString().split(".")[0];
     } else {
       this.startDate = new Date().toISOString();
     }
+    // this.startDate = new Date().toISOString().split('T')[0] + 'T00:00:00';
     console.log(this.startDate);
 
   }
@@ -79,6 +80,7 @@ export class PaymentProvider {
         "Default": "false",
       }
     };
+    console.log(param);
     return this.http.post(this.config.apiEndpoint + 'Payment.svc/rest/AccountPaymentMethodAdd', JSON.stringify(param))
       .map((token: any) => {
         // let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
