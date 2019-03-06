@@ -61,6 +61,7 @@ export class HomePage {
   goto_paynow() {
     this.navCtrl.push(PayNowPage, { navParams: this.bill_data.bill_amount });
   }
+
   download_bill() {
 
     const url = "http://localhost/test_php/MyPDF.pdf";
@@ -95,38 +96,34 @@ export class HomePage {
 
     this.loading.show();
 
-    this.bill_service.get_billFile(this.bill_data.billNumber)
-      .subscribe(result => {
-        console.log(result);
-
-        if (Object(result).Content != null && typeof (Object(result).Content) != "undefined") {
-          console.log("here");
-          var pdf = 'data:application/pdf;base64,' + Object(result).Content.$value;
-          let pdfName = Object(result).FileName;
-          this.downloadPdf(pdf, pdfName);
-        } else {
-          this.toast.show('The Bill you trying to download is unavailable at the moment. Sorry for the inconvenience. Please try again later. Please contact Support Team. Error: Bill not available to download yet.');
-        }
-
-        this.loading.hide();
-
-      }, error => {
-        console.log(error);
-        let errorBody = JSON.parse(error._body);
-        console.log(errorBody);
-        if (errorBody.Code.Name == 'InvalidSessionKeyException') {
-          this.authservice.createRandomSessionKey().subscribe(result => {
-            if (result) {
-              console.log(result);
-              this.click_download();
-            }
-          }, error => {
-            console.log(error);
-            this.loading.hide();
-          });
-        }
-        this.loading.hide();
-      });
+    this.bill_service.get_billFile(this.bill_data.billNumber).subscribe(result => {
+      console.log(result);
+      if (Object(result).Content != null && typeof (Object(result).Content) != "undefined") {
+        console.log("here");
+        var pdf = 'data:application/pdf;base64,' + Object(result).Content.$value;
+        let pdfName = Object(result).FileName;
+        this.downloadPdf(pdf, pdfName);
+      } else {
+        this.toast.show('The Bill you trying to download is unavailable at the moment. Sorry for the inconvenience. Please try again later. Please contact Support Team. Error: Bill not available to download yet.');
+      }
+      this.loading.hide();
+    }, error => {
+      console.log(error);
+      let errorBody = JSON.parse(error._body);
+      console.log(errorBody);
+      if (errorBody.Code.Name == 'InvalidSessionKeyException') {
+        this.authservice.createRandomSessionKey().subscribe(result => {
+          if (result) {
+            console.log(result);
+            this.click_download();
+          }
+        }, error => {
+          console.log(error);
+          this.loading.hide();
+        });
+      }
+      this.loading.hide();
+    });
   }
 
   downloadPdf(pdfByte, pdfName) {
@@ -139,6 +136,13 @@ export class HomePage {
       pathDirect = this.file.externalApplicationStorageDirectory;
       pathFile = this.file.externalApplicationStorageDirectory + "Self_Service/";
     } else if (this.plt.is('ios')) {
+      pathDirect = this.file.tempDirectory;
+      pathFile = this.file.tempDirectory + "Self_Service/";
+    } else if (this.plt.is('windows')) {
+      // this.toast.show(this.file.dataDirectory);
+      // setTimeout(() => {
+      //   this.toast.show(this.file.syncedDataDirectory);
+      // }, 3000);
       pathDirect = this.file.tempDirectory;
       pathFile = this.file.tempDirectory + "Self_Service/";
     }
@@ -209,6 +213,8 @@ export class HomePage {
         this.bill_data.bill_date = this.set_date(data.Items[0].DueDate.split("T")[0]);
       }
       this.loading.hide();
+
+      // this.toast.show(this.file.tempDirectory);
 
     }, error => {
       console.log(error);

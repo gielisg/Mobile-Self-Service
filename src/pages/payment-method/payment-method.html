@@ -36,81 +36,83 @@
 <ion-content padding class="bill_content">
 
 
-  <ion-row [ngClass]="{'main_row':i == 0, 'other_row':i != 0}" *ngFor="let list of detail_Data; let i = index">
-    <ion-row class="first_row">
-      <ion-col col-4 class="left_col">
-        <ion-row class="full_height">
-          <span class="name_span">
-            {{ 'name' | translate }}
-          </span>
-          <span class="detail_span">
-            {{list.name}}
-          </span>
-        </ion-row>
-      </ion-col>
-
-      <ion-col col-4>
-        <ion-row class="full_height">
-          <span class="name_span">
-            {{ 'type' | translate }}
-          </span>
-          <span class="detail_span">
-            {{list.type}}
-          </span>
-        </ion-row>
-      </ion-col>
-
-      <ion-col col-4 class="right_col">
-        <ion-row class="full_height">
-          <span class="name_span">
-            {{ 'number' | translate }}
-          </span>
-          <span class="detail_span">
-            {{list.number}}
-          </span>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="bill_second_row">
-      <ion-col col-4 class="left_col">
-        <ion-row class="full_height">
-          <span class="name_span">
-            {{ 'expiry' | translate }}
-          </span>
-          <span class="detail_span">
-            {{list.expiry}}
-          </span>
-        </ion-row>
-      </ion-col>
-      <ion-col col-4>
-        <ion-row class="full_height">
-          <span class="name_span">
-            {{ 'status' | translate }}
-          </span>
-          <span class="detail_span">
-            {{ list.status | translate }}
-          </span>
-        </ion-row>
-      </ion-col>
-
-      <ion-col col-4 class="right_col">
-        <ion-row class="full_height">
-          <ion-row>
-            <button ion-button class="down_button_class"
-              (click)="viewAndUpdate(list.payment_id, list.number, list.name)">
-              {{ 'update' | translate }}
-            </button>
+  <ion-row style="margin-bottom:30px;">
+    <ion-row [ngClass]="{'main_row':i == 0, 'other_row':i != 0}" *ngFor="let list of detail_Data; let i = index">
+      <ion-row class="first_row">
+        <ion-col col-4 class="left_col">
+          <ion-row class="full_height">
+            <span class="name_span">
+              {{ 'name' | translate }}
+            </span>
+            <span class="detail_span">
+              {{list.name}}
+            </span>
           </ion-row>
-          <ion-row>
-            <button ion-button class="down_button_class" (click)="deleteItem(i)">
-              {{ 'cancel_UP' | translate }}
-            </button>
-          </ion-row>
-        </ion-row>
-      </ion-col>
-    </ion-row>
+        </ion-col>
 
+        <ion-col col-4>
+          <ion-row class="full_height">
+            <span class="name_span">
+              {{ 'type' | translate }}
+            </span>
+            <span class="detail_span">
+              {{list.type}}
+            </span>
+          </ion-row>
+        </ion-col>
+
+        <ion-col col-4 class="right_col">
+          <ion-row class="full_height">
+            <span class="name_span">
+              {{ 'number' | translate }}
+            </span>
+            <span class="detail_span">
+              {{list.number}}
+            </span>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="bill_second_row">
+        <ion-col col-4 class="left_col">
+          <ion-row class="full_height">
+            <span class="name_span">
+              {{ 'expiry' | translate }}
+            </span>
+            <span class="detail_span">
+              {{list.expiry}}
+            </span>
+          </ion-row>
+        </ion-col>
+        <ion-col col-4>
+          <ion-row class="full_height">
+            <span class="name_span">
+              {{ 'status' | translate }}
+            </span>
+            <span class="detail_span">
+              {{ list.status | translate }}
+            </span>
+          </ion-row>
+        </ion-col>
+
+        <ion-col col-4 class="right_col">
+          <ion-row class="full_height">
+            <ion-row>
+              <button ion-button class="down_button_class"
+                (click)="viewAndUpdate(list.payment_id, list.number, list.name)">
+                {{ 'update' | translate }}
+              </button>
+            </ion-row>
+            <ion-row>
+              <button ion-button class="down_button_class" (click)="deleteItem(i)">
+                {{ 'cancel_UP' | translate }}
+              </button>
+            </ion-row>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+    </ion-row>
   </ion-row>
 
 </ion-content>

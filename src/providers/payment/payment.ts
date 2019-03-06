@@ -75,13 +75,14 @@ export class PaymentProvider {
         "StartDate": this.startDate,
         "SubscriberOwns": true,
         "Source": "",
-        "CreateOption": "NewOnly",
-        "Default": "True",
+        "CreateOption": "AlwaysCreate",
+        "Default": "false",
       }
     };
     return this.http.post(this.config.apiEndpoint + 'Payment.svc/rest/AccountPaymentMethodAdd', JSON.stringify(param))
-      .map(token => {
-        let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+      .map((token: any) => {
+        // let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        let return_data = token._body;
         return return_data;
       })
       .pipe(
@@ -105,13 +106,15 @@ export class PaymentProvider {
 
 
     return this.http.put(this.config.apiEndpoint + 'Payment.svc/rest/AccountPaymentMethodCancel', JSON.stringify(param), options)
-      .map(token => {
-        let return_data;
-        if (JSON.stringify(token) == '') {
-          return_data = '';
-        } else {
-          return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
-        }
+      .map((token: any) => {
+        console.log(token);
+        console.log(token._body);
+        let return_data = token._body;
+        // if (JSON.stringify(token) == '') {
+        //   return_data = '';
+        // } else {
+        //   return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
+        // }
         // let return_data = JSON.parse((JSON.parse(JSON.stringify(token))._body));
         return return_data;
       })

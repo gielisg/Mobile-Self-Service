@@ -91,24 +91,22 @@ export class SigninPage {
       let status = "login";
       this.user_Data.status = status;
 
-      this.authservice.login(this.user_Data.username, this.user_Data.password)
+      this.authservice.login(this.user_Data.username, this.user_Data.password).subscribe(data => {
+        if (data) {
+          localStorage.setItem("login_infor", JSON.stringify(this.user_Data));
+          this.navCtrl.push(HomePage);
+        }
+        this.loading.hide();
 
-        .subscribe(
-          data => {
-            if (data) {
-              localStorage.setItem("login_infor", JSON.stringify(this.user_Data));
-              this.navCtrl.push(HomePage);
-            }
-            this.loading.hide();
+      }, error => {
 
-          },
-          error => {
-
-            this.user_Data.username = "";
-            this.user_Data.password = "";
-            this.loading.hide();
-          });
-
+        this.user_Data.username = "";
+        this.user_Data.password = "";
+        console.log(error);
+        let errorBody = JSON.parse(error._body);
+        this.toast.show(errorBody.Message);
+        this.loading.hide();
+      });
     }
   }
 

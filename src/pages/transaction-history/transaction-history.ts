@@ -62,8 +62,6 @@ export class TransactionHistoryPage {
 
     this.translate.translaterService();
 
-    this.translate.translaterService();
-
     this.loading.show();
 
     this.tranService.getTransactionHistory().subscribe((data: any) => {
@@ -94,16 +92,18 @@ export class TransactionHistoryPage {
   }
 
   add_moreAction() {
+    this.loading.show();
+    // setTimeout(() => {
     if (this.transactionList.length < this.setDefault.length) {
-      // for (let list of this.setDefault) {
-      //   this.transactionList.push(list);
-      // }
       if (this.setDefault.length - this.transactionList.length > 25) {
         let arrayNum = 0;
         if (this.transactionList.length == 0) {
           arrayNum = 0;
         } else {
           arrayNum = this.transactionList.length - 1;
+          setTimeout(() => {
+            this.loading.hide();
+          }, 1500);
         }
         for (let i = arrayNum; i <= arrayNum + 25; i++) {
           let param = { "tranNum": "", "type": "", "date": "12 / 18", "amount": "0.01", "status": "precessing" };
@@ -120,6 +120,9 @@ export class TransactionHistoryPage {
           arrayNum = 0;
         } else {
           arrayNum = this.transactionList.length - 1;
+          setTimeout(() => {
+            this.loading.hide();
+          }, 1500);
         }
         for (let i = arrayNum; i < this.setDefault.length; i++) {
           let param = { "tranNum": "", "type": "", "date": "12 / 18", "amount": "0.01", "status": "precessing" };
@@ -140,6 +143,8 @@ export class TransactionHistoryPage {
     if (this.transactionList.length >= this.setDefault.length) {
       this.showMoreState = false;
     }
+    // this.loading.hide();
+    // }, 1500);
   }
 
 }

@@ -202,14 +202,23 @@ export class MyaccountPage {
     } else if (this.plt.is('ios')) {
       pathDirect = this.file.tempDirectory;
       pathFile = this.file.tempDirectory + "Self_Service/";
+    } else if (this.plt.is('windows')) {
+      // this.toast.show(this.file.dataDirectory);
+      // setTimeout(() => {
+      //   this.toast.show(this.file.syncedDataDirectory);
+      // }, 3000);
+      // pathDirect = this.file.tempDirectory;
+      // pathFile = this.file.tempDirectory + "Self_Service/";
+      pathDirect = "C://Users/VeeR/Downloads/";
+      pathFile = "C://Users/VeeR/Downloads/" + "Self_Service/";
     }
 
     if (!this.plt.is('desktop')) {
-      this.file.checkDir(pathDirect, 'Self_Service').then((resultCheck) => {
+      this.file.checkDir(pathDirect, '').then((resultCheck) => {
         console.log(resultCheck);
         this.file.writeFile(pathFile, pdfName, this.convertBaseb64ToBlob(pdfByte, 'data:application/pdf;base64'), { replace: true });
       }, (error) => {
-        this.file.createDir(pathDirect, 'Self_Service', false).then((DirectoryEntry) => {
+        this.file.createDir(pathDirect, '', false).then((DirectoryEntry) => {
           this.file.writeFile(pathFile, pdfName, this.convertBaseb64ToBlob(pdfByte, 'data:application/pdf;base64'), { replace: true });
         }, (error) => {
           console.log("Create error");

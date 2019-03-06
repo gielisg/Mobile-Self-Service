@@ -229,6 +229,15 @@ export class BillHistoryPage {
     } else if (this.plt.is('ios')) {
       pathDirect = this.file.tempDirectory;
       pathFile = this.file.tempDirectory + "Self_Service/";
+    } else if (this.plt.is('windows')) {
+      // this.toast.show(this.file.dataDirectory);
+      // setTimeout(() => {
+      //   this.toast.show(this.file.syncedDataDirectory);
+      // }, 3000);
+      pathDirect = this.file.tempDirectory;
+      pathFile = this.file.tempDirectory + "Self_Service/";
+      // pathDirect = "C://Users/VeeR/Downloads/";
+      // pathFile = "C://Users/VeeR/Downloads/" + "Self_Service/";
     }
 
     this.file.checkDir(pathDirect, 'Self_Service').then((result_check) => {
@@ -239,6 +248,8 @@ export class BillHistoryPage {
         this.file.writeFile(pathFile, pdfName, this.convertBaseb64ToBlob(pdf_byte, 'data:application/pdf;base64'), { replace: true });
       }, (error) => {
         console.log("Create error");
+        console.log(error);
+        this.toast.show(error.message);
       });
     });
   }

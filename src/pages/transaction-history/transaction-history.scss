@@ -19,6 +19,7 @@ page-transaction-history {
         background-color: #fafafa;
         .bill-relative {
             position: relative;
+            margin-bottom: 50px;
         }
     }
     .normal-row {
@@ -102,7 +103,7 @@ page-transaction-history {
     }
     .more_button_Row {
         position: absolute;
-        bottom: 10px;
+        bottom: -25px;
         width: 100%;
         margin-left: -16px;
         .more_button {
